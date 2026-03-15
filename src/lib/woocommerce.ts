@@ -16,6 +16,7 @@ import type {
   ProductFilters,
   PaginationMeta,
 } from './types'
+import * as StaticData from './data'
 
 // ─── Config ──────────────────────────────────────────────────────────────────
 
@@ -26,7 +27,7 @@ const CS         = process.env.WC_CONSUMER_SECRET ?? ''
 const API_READY  = Boolean(BASE_URL && CK && CS)
 
 if (!API_READY) {
-  console.warn('[WooCommerce] Missing env vars: WC_BASE_URL, WC_CONSUMER_KEY, or WC_CONSUMER_SECRET — API calls will be skipped.')
+  console.warn('[WooCommerce] API not configured — using static data layer.')
 }
 
 // ─── Core fetch helper ────────────────────────────────────────────────────────
@@ -89,6 +90,10 @@ function parsePagination(headers: Headers, currentPage: number, perPage: number)
 // ─── Categories ───────────────────────────────────────────────────────────────
 
 export async function getCategories(parent?: number): Promise<WCCategory[]> {
+  if (!API_READY) {
+    const cats = StaticData.staticGetCategories()
+    return parent !== undefined ? cats.filter(c => c.parent === parent) : cats
+  }
   const params: Record<string, string | number | boolean> = {
     per_page: 100,
     orderby: 'menu_order',
@@ -104,6 +109,7 @@ export async function getCategories(parent?: number): Promise<WCCategory[]> {
 }
 
 export async function getCategoryBySlug(slug: string): Promise<WCCategory | null> {
+  if (!API_READY) return StaticData.staticGetCategoryBySlug(slug)
   const { data } = await wcFetch<WCCategory[]>('/categories', { slug }, {
     tags: [`category-${slug}`],
   })
@@ -127,6 +133,19 @@ export async function getCategoryTree(): Promise<{ root: WCCategory[]; children:
 export async function getProducts(
   filters: ProductFilters = {},
 ): Promise<{ products: WCProduct[]; pagination: PaginationMeta }> {
+  if (!API_READY) {
+    const result = StaticData.staticGetProducts(filters)
+    return {
+      products: result.products,
+      pagination: {
+        total: result.pagination.total,
+        totalPages: result.pagination.totalPages,
+        currentPage: result.pagination.page ?? 1,
+        perPage: result.pagination.per_page ?? 12,
+      },
+    }
+  }
+
   const {
     category,
     search,
@@ -163,6 +182,7 @@ export async function getProducts(
 }
 
 export async function getProductBySlug(slug: string): Promise<WCProduct | null> {
+  if (!API_READY) return StaticData.staticGetProductBySlug(slug)
   const { data } = await wcFetch<WCProduct[]>(
     '/products',
     { slug, status: 'publish' },
@@ -172,6 +192,7 @@ export async function getProductBySlug(slug: string): Promise<WCProduct | null> 
 }
 
 export async function getFeaturedProducts(limit = 8): Promise<WCProduct[]> {
+  if (!API_READY) return StaticData.staticGetFeaturedProducts(limit)
   const { data } = await wcFetch<WCProduct[]>(
     '/products',
     { featured: true, per_page: limit, status: 'publish' },
@@ -190,6 +211,11 @@ export async function getFeaturedProducts(limit = 8): Promise<WCProduct[]> {
 }
 
 export async function getRelatedProducts(productId: number, limit = 4): Promise<WCProduct[]> {
+  if (!API_READY) {
+    const product = StaticData.PRODUCTS_BY_ID.get(productId)
+    if (!product) return []
+    return StaticData.staticGetRelatedProducts(product, limit)
+  }
   // WooCommerce REST API doesn't expose related IDs directly in the list;
   // fetch the full product first, then its related_ids
   const { data: product } = await wcFetch<WCProduct>(
@@ -222,6 +248,7 @@ export async function getVariations(productId: number): Promise<WCVariation[]> {
 // ─── Search ───────────────────────────────────────────────────────────────────
 
 export async function searchProducts(query: string, limit = 10): Promise<WCProduct[]> {
+  if (!API_READY) return StaticData.staticSearchProducts(query, limit)
   const { data } = await wcFetch<WCProduct[]>(
     '/products',
     { search: query, per_page: limit, status: 'publish' },
@@ -233,6 +260,7 @@ export async function searchProducts(query: string, limit = 10): Promise<WCProdu
 // ─── Sitemap helpers ──────────────────────────────────────────────────────────
 
 export async function getAllProductSlugs(): Promise<string[]> {
+  if (!API_READY) return StaticData.staticGetAllProductSlugs()
   const slugs: string[] = []
   let page = 1
   while (true) {
@@ -250,6 +278,7 @@ export async function getAllProductSlugs(): Promise<string[]> {
 }
 
 export async function getAllCategorySlugs(): Promise<string[]> {
+  if (!API_READY) return StaticData.staticGetAllCategorySlugs()
   const cats = await getCategories()
   return cats.map(c => c.slug)
 }
