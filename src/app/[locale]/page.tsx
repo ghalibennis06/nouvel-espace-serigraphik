@@ -1,10 +1,12 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
-import { getTranslations } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { getFeaturedProducts, getCategoryTree } from '@/lib/woocommerce'
 import ProductCard from '@/components/catalog/ProductCard'
 import { categoryHref, whatsappGeneralLink } from '@/lib/utils'
+
+export const dynamic = 'force-dynamic'
 
 export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
   const t = await getTranslations({ locale: params.locale, namespace: 'site' })
@@ -16,6 +18,7 @@ export async function generateMetadata({ params }: { params: { locale: string } 
 
 export default async function HomePage({ params }: { params: { locale: string } }) {
   const { locale } = params
+  setRequestLocale(locale)
   const [t, th, tc, tt, { root: categories }, featuredProducts] = await Promise.all([
     getTranslations('home'),
     getTranslations('trust'),

@@ -7,10 +7,12 @@ export type Locale   = (typeof locales)[number]
 
 export const defaultLocale: Locale = 'fr'
 
-export default getRequestConfig(async ({ locale }) => {
-  if (!locales.includes(locale as Locale)) notFound()
+export default getRequestConfig(async ({ requestLocale }) => {
+  const locale = await requestLocale
+  if (!locale || !locales.includes(locale as Locale)) notFound()
 
   return {
+    locale,
     messages: (await import(`./dictionaries/${locale}.json`)).default,
     timeZone: 'Africa/Casablanca',
     now: new Date(),

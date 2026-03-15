@@ -1,9 +1,12 @@
 import type { Metadata } from 'next'
+import { setRequestLocale } from 'next-intl/server'
 import { whatsappGeneralLink } from '@/lib/utils'
 
+export const dynamic = 'force-dynamic'
 export const metadata: Metadata = { title: 'Contact & Devis' }
 
 export default function ContactPage({ params }: { params: { locale: string } }) {
+  setRequestLocale(params.locale)
   const phone   = process.env.NEXT_PUBLIC_PHONE   ?? '+212-522-44-80-90'
   const email   = process.env.NEXT_PUBLIC_EMAIL    ?? 'contact@nouvelespaceserigraphik.ma'
   const address = process.env.NEXT_PUBLIC_ADDRESS  ?? 'Bd Mohammed V, Casablanca 20250'

@@ -1,8 +1,11 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
+import { setRequestLocale } from 'next-intl/server'
 import { getCategoryTree } from '@/lib/woocommerce'
 import { categoryHref } from '@/lib/utils'
+
+export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
   title: 'Catalogue — Toutes les catégories',
@@ -11,6 +14,7 @@ export const metadata: Metadata = {
 
 export default async function CatalogIndexPage({ params }: { params: { locale: string } }) {
   const { locale } = params
+  setRequestLocale(locale)
   const { root: categories, children: subCategories } = await getCategoryTree()
 
   return (

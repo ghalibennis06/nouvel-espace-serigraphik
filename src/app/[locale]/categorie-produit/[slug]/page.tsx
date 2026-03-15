@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { getTranslations } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import {
   getCategoryBySlug,
   getProducts,
@@ -56,6 +56,7 @@ export async function generateMetadata({ params }: { params: { locale: string; s
 
 export default async function CategoryPage({ params, searchParams }: PageProps) {
   const { locale, slug } = params
+  setRequestLocale(locale)
   const t = await getTranslations('catalog')
 
   const currentPage = parseInt(searchParams.page ?? '1', 10)

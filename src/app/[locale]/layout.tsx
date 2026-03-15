@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { NextIntlClientProvider } from 'next-intl'
-import { getMessages, getTranslations } from 'next-intl/server'
+import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { locales, type Locale } from '@/i18n'
 import Header from '@/components/layout/Header'
@@ -33,6 +33,9 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   const { locale } = params
 
   if (!locales.includes(locale as Locale)) notFound()
+
+  // Enable static rendering for this locale
+  setRequestLocale(locale)
 
   const [messages, { root: rootCategories, children: subCategories }] = await Promise.all([
     getMessages(),
