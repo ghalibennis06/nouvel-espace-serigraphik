@@ -19,13 +19,14 @@ import type {
 
 // ─── Config ──────────────────────────────────────────────────────────────────
 
-const BASE_URL   = process.env.WC_BASE_URL!
-const CK         = process.env.WC_CONSUMER_KEY!
-const CS         = process.env.WC_CONSUMER_SECRET!
+const BASE_URL   = process.env.WC_BASE_URL ?? ''
+const CK         = process.env.WC_CONSUMER_KEY ?? ''
+const CS         = process.env.WC_CONSUMER_SECRET ?? ''
 
-if (!BASE_URL || !CK || !CS) {
-  // Warn loudly in dev — won't throw at module load time (build still works)
-  console.warn('[WooCommerce] Missing env vars: WC_BASE_URL, WC_CONSUMER_KEY, or WC_CONSUMER_SECRET')
+const API_READY  = Boolean(BASE_URL && CK && CS)
+
+if (!API_READY) {
+  console.warn('[WooCommerce] Missing env vars: WC_BASE_URL, WC_CONSUMER_KEY, or WC_CONSUMER_SECRET — API calls will be skipped.')
 }
 
 // ─── Core fetch helper ────────────────────────────────────────────────────────
@@ -35,11 +36,19 @@ interface FetchOptions {
   tags?: string[]
 }
 
+// Fallback empty Headers for when API is not configured
+const EMPTY_HEADERS = new Headers({ 'X-WP-Total': '0', 'X-WP-TotalPages': '1' })
+
 async function wcFetch<T>(
   endpoint: string,
   params: Record<string, string | number | boolean> = {},
   opts: FetchOptions = {},
 ): Promise<{ data: T; headers: Headers }> {
+  // Skip API call entirely if credentials are not set (e.g. during CI build)
+  if (!API_READY) {
+    return { data: (Array.isArray([]) ? [] : {}) as T, headers: EMPTY_HEADERS }
+  }
+
   const url = new URL(`${BASE_URL}${endpoint}`)
 
   // Auth via query params (basic auth alternative that works on most hosts)

@@ -6,8 +6,8 @@ const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://nouvelespaceserigraphi
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [productSlugs, categorySlugs] = await Promise.all([
-    getAllProductSlugs(),
-    getAllCategorySlugs(),
+    getAllProductSlugs().catch(() => [] as string[]),
+    getAllCategorySlugs().catch(() => [] as string[]),
   ])
 
   const now = new Date()

@@ -23,12 +23,20 @@ interface PageProps {
   }
 }
 
+// Pages not pre-generated at build time will be rendered on first request
+export const dynamicParams = true
+
 export async function generateStaticParams() {
-  const slugs = await getAllCategorySlugs()
-  return slugs.flatMap(slug => [
-    { locale: 'fr', slug },
-    { locale: 'ar', slug },
-  ])
+  try {
+    const slugs = await getAllCategorySlugs()
+    return slugs.flatMap(slug => [
+      { locale: 'fr', slug },
+      { locale: 'ar', slug },
+    ])
+  } catch {
+    // API not available at build time — pages will be rendered on demand
+    return []
+  }
 }
 
 export async function generateMetadata({ params }: { params: { locale: string; slug: string } }): Promise<Metadata> {

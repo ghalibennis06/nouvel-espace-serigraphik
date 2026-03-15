@@ -24,12 +24,18 @@ interface PageProps {
   params: { locale: string; slug: string }
 }
 
+export const dynamicParams = true
+
 export async function generateStaticParams() {
-  const slugs = await getAllProductSlugs()
-  return slugs.flatMap(slug => [
-    { locale: 'fr', slug },
-    { locale: 'ar', slug },
-  ])
+  try {
+    const slugs = await getAllProductSlugs()
+    return slugs.flatMap(slug => [
+      { locale: 'fr', slug },
+      { locale: 'ar', slug },
+    ])
+  } catch {
+    return []
+  }
 }
 
 export async function generateMetadata({ params }: { params: { locale: string; slug: string } }): Promise<Metadata> {
