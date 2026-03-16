@@ -16,15 +16,13 @@
   }
 
   body {
-    @apply font-sans antialiased bg-gray-50 text-navy-900;
+    @apply font-sans antialiased bg-white text-navy-900;
   }
 
-  /* RTL support for Arabic/Darija */
   [dir='rtl'] {
     font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif;
   }
 
-  /* Hide scrollbar for ticker */
   .ticker-wrap {
     overflow: hidden;
     white-space: nowrap;
@@ -32,12 +30,12 @@
 }
 
 @layer components {
-  /* Product card hover ring */
+  /* Product card */
   .product-card {
-    @apply bg-white rounded-xl border border-gray-100 overflow-hidden transition-all duration-200;
+    @apply bg-white rounded-2xl border border-gray-100 overflow-hidden transition-all duration-200 shadow-card;
   }
   .product-card:hover {
-    @apply shadow-card-hover -translate-y-0.5 border-gray-200;
+    @apply shadow-card-hover -translate-y-1 border-gray-200;
   }
 
   /* Pill badges */
@@ -57,25 +55,52 @@
 
   /* CTA buttons */
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-brand-red hover:bg-red-700
-           text-white font-semibold text-sm rounded-lg transition-colors duration-150 cursor-pointer;
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 bg-brand-red hover:bg-red-700
+           text-white font-bold text-sm rounded-xl transition-all duration-150 cursor-pointer
+           shadow-sm hover:shadow-md active:scale-95;
   }
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-navy-900 hover:bg-navy-800
-           text-white font-semibold text-sm rounded-lg transition-colors duration-150 cursor-pointer;
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 bg-navy-900 hover:bg-navy-800
+           text-white font-bold text-sm rounded-xl transition-all duration-150 cursor-pointer
+           shadow-sm hover:shadow-md active:scale-95;
+  }
+  .btn-amber {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 bg-brand-amber hover:bg-yellow-400
+           text-navy-900 font-bold text-sm rounded-xl transition-all duration-150 cursor-pointer
+           shadow-sm hover:shadow-md active:scale-95;
   }
   .btn-outline {
-    @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 border-2 border-navy-900
-           text-navy-900 hover:bg-navy-900 hover:text-white font-semibold text-sm rounded-lg
-           transition-colors duration-150 cursor-pointer;
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 border-2 border-navy-900
+           text-navy-900 hover:bg-navy-900 hover:text-white font-bold text-sm rounded-xl
+           transition-all duration-150 cursor-pointer active:scale-95;
+  }
+  .btn-outline-white {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 border-2 border-white/30
+           text-white hover:border-white hover:bg-white/10 font-bold text-sm rounded-xl
+           transition-all duration-150 cursor-pointer active:scale-95;
   }
   .btn-whatsapp {
-    @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-[#25D366] hover:bg-[#20ba5a]
-           text-white font-semibold text-sm rounded-lg transition-colors duration-150 cursor-pointer;
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#25D366] hover:bg-[#20ba5a]
+           text-white font-bold text-sm rounded-xl transition-all duration-150 cursor-pointer
+           shadow-sm hover:shadow-md active:scale-95;
   }
   .btn-ghost {
     @apply inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium
-           text-gray-600 hover:text-navy-900 hover:bg-gray-100 rounded-lg transition-colors duration-150;
+           text-gray-600 hover:text-navy-900 hover:bg-gray-100 rounded-xl transition-colors duration-150;
+  }
+
+  /* Section label */
+  .section-label {
+    @apply inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-red mb-3;
+  }
+
+  /* Kit card */
+  .kit-card {
+    @apply relative bg-white border-2 border-gray-100 rounded-2xl p-6 flex flex-col
+           transition-all duration-200 hover:-translate-y-1 hover:shadow-card-hover;
+  }
+  .kit-card-popular {
+    @apply border-brand-amber shadow-card-hover;
   }
 }
 
@@ -93,6 +118,19 @@
     overflow: hidden;
   }
 
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-amber to-orange-400;
+  }
+  .gradient-text-red {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-red to-red-400;
+  }
+
+  /* Hero grid pattern */
+  .hero-pattern {
+    background-image: url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.03' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='1'/%3E%3Ccircle cx='13' cy='13' r='1'/%3E%3Ccircle cx='23' cy='23' r='1'/%3E%3C/g%3E%3C/svg%3E");
+  }
+
   /* Ticker animation */
   @keyframes ticker {
     0%   { transform: translateX(0); }
@@ -105,5 +143,15 @@
   }
   .animate-ticker:hover {
     animation-play-state: paused;
+  }
+
+  /* Pulse ring */
+  @keyframes pulseRing {
+    0%   { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(1.5); opacity: 0; }
+  }
+  .pulse-ring::before {
+    content: '';
+    @apply absolute inset-0 rounded-full bg-[#25D366] animate-ping;
   }
 }
