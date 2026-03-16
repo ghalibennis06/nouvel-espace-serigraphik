@@ -212,47 +212,39 @@ export default async function HomePage({ params }: { params: { locale: string } 
               </div>
             </div>
 
-            {/* Right: product visual */}
-            <div className="relative hidden lg:flex items-center justify-center">
-              <div className="relative w-full max-w-md">
-                {/* Main product image */}
-                <div className="relative aspect-square bg-white/5 rounded-3xl border border-white/10 overflow-hidden backdrop-blur-sm">
-                  <Image
-                    src="https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/presse-40x50autoopen-430x430.jpg"
-                    alt="Presse à chaud professionnelle"
-                    fill
-                    className="object-contain p-8"
-                    priority
-                    sizes="(max-width: 1024px) 0px, 400px"
-                  />
-                </div>
-
-                {/* Floating price badge */}
-                <div className="absolute -bottom-4 -left-6 bg-brand-amber text-navy-900 rounded-2xl px-5 py-3 shadow-card-hover">
-                  <div className="text-2xs font-bold uppercase tracking-wide">Kit Pro</div>
-                  <div className="text-xl font-black">5 400 MAD</div>
-                </div>
-
-                {/* Floating trust badge */}
-                <div className="absolute -top-4 -right-4 bg-white rounded-2xl px-4 py-3 shadow-card-hover flex items-center gap-2">
-                  <span className="text-2xl">✅</span>
-                  <div>
-                    <div className="text-xs font-black text-navy-900">Livraison</div>
-                    <div className="text-xs text-gray-500">sous 48h</div>
+            {/* Right: kit cards visual — no external images, always renders */}
+            <div className="hidden lg:flex flex-col gap-4">
+              {/* Kit cards */}
+              {[
+                { emoji: '🖨️', name: 'Kit Sublimation Starter', price: '4 400 MAD', tag: 'Débutant', color: 'bg-white/5 border-white/10' },
+                { emoji: '🎨', name: 'Kit Sérigraphie Pro',      price: '5 400 MAD', tag: '⭐ Populaire', color: 'bg-brand-amber/10 border-brand-amber/30' },
+                { emoji: '🚀', name: 'Kit Impression DTF',       price: '8 400 MAD', tag: 'Production', color: 'bg-white/5 border-white/10' },
+              ].map(kit => (
+                <div key={kit.name} className={`flex items-center gap-4 ${kit.color} border rounded-2xl px-5 py-4`}>
+                  <span className="text-3xl flex-shrink-0">{kit.emoji}</span>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-white font-bold text-sm truncate">{kit.name}</div>
+                    <div className="text-gray-400 text-xs mt-0.5">{kit.tag}</div>
                   </div>
+                  <div className="text-brand-amber font-black text-lg flex-shrink-0">{kit.price}</div>
                 </div>
-
-                {/* Floating rating */}
-                <div className="absolute top-1/2 -right-8 bg-white rounded-xl px-3 py-2 shadow-card-hover">
-                  <div className="flex items-center gap-1 mb-0.5">
-                    {[1,2,3,4,5].map(i => (
-                      <svg key={i} className="w-3 h-3 text-brand-amber" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                      </svg>
-                    ))}
+              ))}
+              {/* Trust badges row */}
+              <div className="grid grid-cols-2 gap-3 mt-2">
+                {[
+                  { icon: '🚚', val: '48h', sub: 'Livraison Maroc' },
+                  { icon: '💬', val: '< 5 min', sub: 'Réponse WhatsApp' },
+                  { icon: '🏭', val: 'Direct', sub: 'Importateur officiel' },
+                  { icon: '🧾', val: 'Pro', sub: 'Facture + devis TVA' },
+                ].map(b => (
+                  <div key={b.sub} className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 flex items-center gap-3">
+                    <span className="text-xl">{b.icon}</span>
+                    <div>
+                      <div className="text-white font-black text-sm">{b.val}</div>
+                      <div className="text-gray-500 text-2xs">{b.sub}</div>
+                    </div>
                   </div>
-                  <div className="text-2xs text-gray-500 font-medium">500+ clients</div>
-                </div>
+                ))}
               </div>
             </div>
           </div>

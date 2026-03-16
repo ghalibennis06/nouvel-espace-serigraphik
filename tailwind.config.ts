@@ -39,7 +39,6 @@ const config: Config = {
       animation: {
         'slide-in-right': 'slideInRight 0.3s ease-out',
         'fade-in': 'fadeIn 0.2s ease-out',
-        'ticker': 'ticker 40s linear infinite',
       },
       keyframes: {
         slideInRight: {
@@ -49,10 +48,6 @@ const config: Config = {
         fadeIn: {
           '0%': { opacity: '0' },
           '100%': { opacity: '1' },
-        },
-        ticker: {
-          '0%': { transform: 'translateX(100%)' },
-          '100%': { transform: 'translateX(-100%)' },
         },
       },
     },
