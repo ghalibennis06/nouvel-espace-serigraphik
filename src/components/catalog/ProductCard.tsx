@@ -49,7 +49,7 @@ export default function ProductCard({ product, locale, priority = false }: Produ
   return (
     <article className="product-card group flex flex-col">
       {/* Image zone */}
-      <div className="relative bg-gray-50 overflow-hidden aspect-square">
+      <div className="relative bg-white overflow-hidden aspect-square">
         <Link href={href} className="block w-full h-full">
           <Image
             src={imageSrc}
