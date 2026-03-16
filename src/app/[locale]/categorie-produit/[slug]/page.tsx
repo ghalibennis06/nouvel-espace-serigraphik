@@ -23,7 +23,6 @@ interface PageProps {
   }
 }
 
-// Pages not pre-generated at build time will be rendered on first request
 export const dynamicParams = true
 
 export async function generateStaticParams() {
@@ -34,7 +33,6 @@ export async function generateStaticParams() {
       { locale: 'ar', slug },
     ])
   } catch {
-    // API not available at build time — pages will be rendered on demand
     return []
   }
 }
@@ -64,7 +62,6 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
   const in_stock    = searchParams.in_stock === 'true'
   const on_sale     = searchParams.on_sale  === 'true'
 
-  // Fetch category + subcategories + products in parallel
   const [category, allSubcategories] = await Promise.all([
     getCategoryBySlug(slug),
     getCategories(),
@@ -93,42 +90,46 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
   ]
 
   return (
-    <div className="bg-gray-50 min-h-screen">
+    <div style={{ background: '#0C0A08', minHeight: '100vh' }}>
       {/* ── Category Header ─────────────────────────────────────────── */}
-      <div className="bg-navy-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+      <div style={{ background: '#1A1612', borderBottom: '1px solid rgba(200,137,31,0.12)', padding: '40px 6% 32px' }}>
+        <div style={{ maxWidth: 1280, margin: '0 auto' }}>
           {/* Breadcrumb */}
-          <nav className="flex items-center gap-1.5 text-xs text-gray-500 mb-4">
-            <Link href={`/${locale}`} className="hover:text-gray-300 transition-colors">Accueil</Link>
-            <span className="text-gray-600">/</span>
-            <Link href={`/${locale}/categorie-produit`} className="hover:text-gray-300 transition-colors">Catalogue</Link>
-            <span className="text-gray-600">/</span>
-            <span className="text-gray-300 font-medium">{category.name}</span>
+          <nav style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12, color: '#B8AA94', marginBottom: 16 }}>
+            <Link href={`/${locale}`} className="link-gold" style={{ color: '#B8AA94', textDecoration: 'none' }}>Accueil</Link>
+            <span style={{ color: 'rgba(245,237,216,0.3)' }}>/</span>
+            <Link href={`/${locale}/categorie-produit`} className="link-gold" style={{ color: '#B8AA94', textDecoration: 'none' }}>Catalogue</Link>
+            <span style={{ color: 'rgba(245,237,216,0.3)' }}>/</span>
+            <span style={{ color: '#F5EDD8', fontWeight: 500 }}>{category.name}</span>
           </nav>
 
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+          <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 20, flexWrap: 'wrap' }}>
             <div>
-              <h1 className="text-2xl sm:text-3xl font-black text-white mb-2">{category.name}</h1>
+              <h1 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 34, fontWeight: 700, color: '#F5EDD8', marginBottom: 8, lineHeight: 1.15 }}>
+                {category.name}
+              </h1>
               {category.description && (
-                <p className="text-sm text-gray-400 max-w-xl leading-relaxed line-clamp-2">
-                  {stripHtml(category.description)}
+                <p style={{ fontSize: 14, color: '#B8AA94', maxWidth: 520, lineHeight: 1.65 }}>
+                  {stripHtml(category.description).slice(0, 150)}
                 </p>
               )}
             </div>
-            <div className="flex items-center gap-3 flex-shrink-0">
-              <div className="text-center">
-                <div className="text-2xl font-black text-brand-amber">{pagination.total}</div>
-                <div className="text-2xs text-gray-500 uppercase tracking-wide">{t('products')}</div>
+            <div style={{ textAlign: 'center', flexShrink: 0 }}>
+              <div style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 32, fontWeight: 700, color: '#C8891F', lineHeight: 1 }}>
+                {pagination.total}
+              </div>
+              <div style={{ fontSize: 10, color: '#B8AA94', letterSpacing: '0.1em', textTransform: 'uppercase', marginTop: 2 }}>
+                {t('products')}
               </div>
             </div>
           </div>
 
           {/* Subcategory chips */}
           {subcategories.length > 0 && (
-            <div className="flex flex-wrap gap-2 mt-5">
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 20 }}>
               <Link
                 href={categoryHref(slug, locale)}
-                className="px-3 py-1 rounded-full text-xs font-semibold bg-white text-navy-900"
+                style={{ padding: '5px 14px', borderRadius: 20, fontSize: 12, fontWeight: 600, background: 'rgba(200,137,31,0.15)', color: '#C8891F', border: '1px solid rgba(200,137,31,0.3)', textDecoration: 'none' }}
               >
                 Tout voir ({category.count})
               </Link>
@@ -136,7 +137,8 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
                 <Link
                   key={sub.id}
                   href={categoryHref(sub.slug, locale)}
-                  className="px-3 py-1 rounded-full text-xs font-medium bg-white/10 text-gray-300 hover:bg-white hover:text-navy-900 transition-colors"
+                  style={{ padding: '5px 14px', borderRadius: 20, fontSize: 12, fontWeight: 500, background: 'rgba(245,237,216,0.06)', color: '#B8AA94', border: '1px solid rgba(245,237,216,0.1)', textDecoration: 'none', transition: 'background .15s, color .15s' }}
+                  className="link-gold"
                 >
                   {sub.name} ({sub.count})
                 </Link>
@@ -147,8 +149,8 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
       </div>
 
       {/* ── Content ─────────────────────────────────────────────────── */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
-        <div className="flex gap-6 items-start">
+      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '36px 6%' }}>
+        <div style={{ display: 'flex', gap: 28, alignItems: 'flex-start' }}>
 
           {/* Sidebar */}
           <FilterSidebar
@@ -159,22 +161,22 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
           />
 
           {/* Product area */}
-          <div className="flex-1 min-w-0">
+          <div style={{ flex: 1, minWidth: 0 }}>
             {/* Toolbar */}
-            <div className="flex items-center justify-between mb-5 flex-wrap gap-3">
-              <p className="text-sm text-gray-500">
-                {t('showing')} <strong className="text-navy-900">{(currentPage - 1) * 12 + 1}–{Math.min(currentPage * 12, pagination.total)}</strong> {t('of')} <strong className="text-navy-900">{pagination.total}</strong> {t('products')}
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20, flexWrap: 'wrap', gap: 12 }}>
+              <p style={{ fontSize: 13, color: '#B8AA94' }}>
+                {t('showing')}{' '}
+                <strong style={{ color: '#F5EDD8' }}>{(currentPage - 1) * 12 + 1}–{Math.min(currentPage * 12, pagination.total)}</strong>
+                {' '}{t('of')}{' '}
+                <strong style={{ color: '#F5EDD8' }}>{pagination.total}</strong>
+                {' '}{t('products')}
               </p>
 
-              <div className="flex items-center gap-3">
-                {/* Mobile filter — rendered inside FilterSidebar */}
+              <div className="hidden lg:flex" style={{ alignItems: 'center', gap: 10 }}>
                 <select
                   defaultValue={orderby}
-                  className="hidden lg:block text-sm border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-brand-red bg-white"
-                  onChange={e => {
-                    // Client-side sort — using a form submit pattern
-                  }}
                   name="orderby"
+                  style={{ fontSize: 13, background: '#1A1612', color: '#F5EDD8', border: '1px solid rgba(245,237,216,0.12)', borderRadius: 6, padding: '7px 12px', outline: 'none', cursor: 'pointer' }}
                 >
                   <option value="">{t('sortDefault')}</option>
                   {sortOptions.map(o => (
@@ -186,7 +188,7 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
 
             {/* Grid */}
             {products.length > 0 ? (
-              <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4">
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 16 }}>
                 {products.map((product, i) => (
                   <ProductCard
                     key={product.id}
@@ -197,20 +199,21 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
                 ))}
               </div>
             ) : (
-              <div className="text-center py-20">
-                <div className="text-5xl mb-4">🔍</div>
-                <h3 className="font-bold text-navy-900 text-lg mb-2">{t('noProducts')}</h3>
-                <p className="text-gray-500 text-sm">{t('noProductsHint')}</p>
+              <div style={{ textAlign: 'center', padding: '80px 20px' }}>
+                <div style={{ fontSize: 48, marginBottom: 16 }}>🔍</div>
+                <h3 style={{ fontWeight: 700, color: '#F5EDD8', fontSize: 18, marginBottom: 8 }}>{t('noProducts')}</h3>
+                <p style={{ fontSize: 14, color: '#B8AA94' }}>{t('noProductsHint')}</p>
               </div>
             )}
 
             {/* Pagination */}
             {pagination.totalPages > 1 && (
-              <div className="flex justify-center gap-2 mt-10">
+              <div style={{ display: 'flex', justifyContent: 'center', gap: 8, marginTop: 40 }}>
                 {currentPage > 1 && (
                   <Link
                     href={`?page=${currentPage - 1}${orderby ? `&orderby=${orderby}` : ''}`}
-                    className="px-4 py-2 border border-gray-200 rounded-lg text-sm hover:border-navy-900 transition-colors bg-white"
+                    style={{ padding: '8px 16px', border: '1px solid rgba(245,237,216,0.12)', borderRadius: 6, fontSize: 13, color: '#B8AA94', textDecoration: 'none', background: '#1A1612', transition: 'border-color .15s' }}
+                    className="link-gold"
                   >
                     ← Précédent
                   </Link>
@@ -219,11 +222,13 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
                   <Link
                     key={p}
                     href={`?page=${p}${orderby ? `&orderby=${orderby}` : ''}`}
-                    className={`w-10 h-10 flex items-center justify-center rounded-lg text-sm font-semibold transition-colors border ${
-                      p === currentPage
-                        ? 'bg-navy-900 text-white border-navy-900'
-                        : 'border-gray-200 text-gray-600 hover:border-navy-900 bg-white'
-                    }`}
+                    style={{
+                      width: 38, height: 38, display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      borderRadius: 6, fontSize: 13, fontWeight: 600, textDecoration: 'none', transition: 'background .15s',
+                      background: p === currentPage ? '#C8891F' : '#1A1612',
+                      color: p === currentPage ? '#0C0A08' : '#B8AA94',
+                      border: `1px solid ${p === currentPage ? '#C8891F' : 'rgba(245,237,216,0.12)'}`,
+                    }}
                   >
                     {p}
                   </Link>
@@ -231,7 +236,8 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
                 {currentPage < pagination.totalPages && (
                   <Link
                     href={`?page=${currentPage + 1}${orderby ? `&orderby=${orderby}` : ''}`}
-                    className="px-4 py-2 border border-gray-200 rounded-lg text-sm hover:border-navy-900 transition-colors bg-white"
+                    style={{ padding: '8px 16px', border: '1px solid rgba(245,237,216,0.12)', borderRadius: 6, fontSize: 13, color: '#B8AA94', textDecoration: 'none', background: '#1A1612', transition: 'border-color .15s' }}
+                    className="link-gold"
                   >
                     Suivant →
                   </Link>

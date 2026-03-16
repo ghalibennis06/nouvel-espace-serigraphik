@@ -12,97 +12,118 @@ export const metadata: Metadata = {
   description: 'Découvrez toutes nos catégories de fournitures professionnelles pour la sérigraphie, la sublimation et l\'impression textile.',
 }
 
+const CAT_EMOJIS: Record<string, string> = {
+  'les-presses-a-chaud': '🔥',
+  'les-consommables-de-serigraphie': '🖨️',
+  'les-produits-sublimables': '👕',
+  'les-machines-dimpression': '⚙️',
+}
+
 export default async function CatalogIndexPage({ params }: { params: { locale: string } }) {
   const { locale } = params
   setRequestLocale(locale)
   const { root: categories, children: subCategories } = await getCategoryTree()
 
   return (
-    <div className="bg-gray-50 min-h-screen">
+    <div style={{ background: '#0C0A08', minHeight: '100vh' }}>
       {/* Header */}
-      <div className="bg-navy-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10">
-          <nav className="text-xs text-gray-500 mb-4">
-            <Link href={`/${locale}`} className="hover:text-gray-300">Accueil</Link>
-            <span className="mx-2">/</span>
-            <span className="text-gray-300">Catalogue</span>
+      <div style={{ background: '#1A1612', borderBottom: '1px solid rgba(200,137,31,0.12)', padding: '48px 6% 36px' }}>
+        <div style={{ maxWidth: 1280, margin: '0 auto' }}>
+          <nav style={{ fontSize: 12, color: '#B8AA94', marginBottom: 16, display: 'flex', alignItems: 'center', gap: 6 }}>
+            <Link href={`/${locale}`} className="link-gold" style={{ color: '#B8AA94', textDecoration: 'none' }}>Accueil</Link>
+            <span style={{ color: 'rgba(245,237,216,0.3)' }}>/</span>
+            <span style={{ color: '#F5EDD8' }}>Catalogue</span>
           </nav>
-          <h1 className="text-2xl sm:text-3xl font-black text-white">Tout notre catalogue</h1>
-          <p className="text-gray-400 text-sm mt-2">Fournitures professionnelles pour la sérigraphie, sublimation et impression textile</p>
+          <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.13em', textTransform: 'uppercase', color: '#C8891F', display: 'block', marginBottom: 10 }}>
+            Fournitures professionnelles
+          </span>
+          <h1 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 38, fontWeight: 700, color: '#F5EDD8', lineHeight: 1.15, marginBottom: 10 }}>
+            Tout notre catalogue
+          </h1>
+          <p style={{ fontSize: 14, color: '#B8AA94', maxWidth: 560 }}>
+            Machines, consommables et produits sublimables pour les professionnels de l&apos;impression textile au Maroc.
+          </p>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 space-y-12">
-        {categories.map(cat => {
-          const subs = subCategories.get(cat.id) ?? []
-          return (
-            <section key={cat.id}>
-              <div className="flex items-center justify-between mb-4">
-                <div>
-                  <h2 className="text-xl font-black text-navy-900">{cat.name}</h2>
-                  <p className="text-sm text-gray-500">{cat.count} produits</p>
-                </div>
-                <Link href={categoryHref(cat.slug, locale)} className="btn-ghost text-sm">
-                  Voir tout →
-                </Link>
-              </div>
-
-              {subs.length > 0 ? (
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3">
-                  {/* Parent card */}
+      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '48px 6%' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 56 }}>
+          {categories.map(cat => {
+            const subs = subCategories.get(cat.id) ?? []
+            const emoji = CAT_EMOJIS[cat.slug] ?? '📦'
+            return (
+              <section key={cat.id}>
+                <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: 20 }}>
+                  <div>
+                    <h2 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 26, fontWeight: 700, color: '#F5EDD8', marginBottom: 4 }}>
+                      {cat.name}
+                    </h2>
+                    <p style={{ fontSize: 13, color: '#B8AA94' }}>{cat.count} produits disponibles</p>
+                  </div>
                   <Link
                     href={categoryHref(cat.slug, locale)}
-                    className="bg-navy-900 rounded-xl p-4 flex flex-col items-start justify-between min-h-[110px] hover:bg-navy-800 transition-colors group"
+                    className="link-gold"
+                    style={{ fontSize: 13, color: '#C8891F', textDecoration: 'none', fontWeight: 600 }}
                   >
-                    <span className="text-2xl">📦</span>
-                    <div>
-                      <div className="text-xs font-bold text-white leading-snug line-clamp-2">{cat.name}</div>
-                      <div className="text-2xs text-gray-400 mt-0.5">{cat.count} produits</div>
-                    </div>
+                    Voir tout →
                   </Link>
+                </div>
 
-                  {/* Subcategory cards */}
-                  {subs.map(sub => (
+                {subs.length > 0 ? (
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))', gap: 12 }}>
+                    {/* Parent card */}
                     <Link
-                      key={sub.id}
-                      href={categoryHref(sub.slug, locale)}
-                      className="bg-white rounded-xl p-4 border border-gray-100 flex flex-col items-start justify-between min-h-[110px] hover:border-navy-900 hover:shadow-card transition-all group"
+                      href={categoryHref(cat.slug, locale)}
+                      style={{ background: 'rgba(200,137,31,0.08)', border: '1px solid rgba(200,137,31,0.2)', borderRadius: 8, padding: '18px 16px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: 110, textDecoration: 'none', transition: 'background .15s, border-color .15s' }}
+                      className="cat-item"
                     >
-                      {sub.image ? (
-                        <div className="relative w-10 h-10 mb-2">
-                          <Image src={sub.image.src} alt={sub.name} fill className="object-contain" sizes="40px" />
-                        </div>
-                      ) : (
-                        <span className="text-2xl mb-2">🔧</span>
-                      )}
+                      <span style={{ fontSize: 24 }}>{emoji}</span>
                       <div>
-                        <div className="text-xs font-semibold text-navy-900 leading-snug line-clamp-2 group-hover:text-brand-red transition-colors">
-                          {sub.name}
-                        </div>
-                        <div className="text-2xs text-gray-400 mt-0.5">{sub.count} produits</div>
+                        <div style={{ fontSize: 12, fontWeight: 700, color: '#F5EDD8', lineHeight: 1.35 }}>{cat.name}</div>
+                        <div style={{ fontSize: 11, color: '#C8891F', marginTop: 2 }}>{cat.count} produits</div>
                       </div>
                     </Link>
-                  ))}
-                </div>
-              ) : (
-                <Link
-                  href={categoryHref(cat.slug, locale)}
-                  className="block bg-white rounded-xl p-5 border border-gray-100 hover:border-navy-900 hover:shadow-card transition-all group"
-                >
-                  <div className="flex items-center justify-between">
+
+                    {subs.map(sub => (
+                      <Link
+                        key={sub.id}
+                        href={categoryHref(sub.slug, locale)}
+                        style={{ background: '#1A1612', border: '1px solid rgba(245,237,216,0.08)', borderRadius: 8, padding: '16px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: 110, textDecoration: 'none', transition: 'border-color .15s, background .15s' }}
+                        className="cat-item"
+                      >
+                        {sub.image ? (
+                          <div style={{ position: 'relative', width: 38, height: 38, marginBottom: 8 }}>
+                            <Image src={sub.image.src} alt={sub.name} fill className="object-contain" sizes="38px" />
+                          </div>
+                        ) : (
+                          <span style={{ fontSize: 22, marginBottom: 8, display: 'block' }}>🔧</span>
+                        )}
+                        <div>
+                          <div style={{ fontSize: 12, fontWeight: 600, color: '#F5EDD8', lineHeight: 1.3 }}>{sub.name}</div>
+                          <div style={{ fontSize: 11, color: '#B8AA94', marginTop: 2 }}>{sub.count} produits</div>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                ) : (
+                  <Link
+                    href={categoryHref(cat.slug, locale)}
+                    style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: '#1A1612', border: '1px solid rgba(245,237,216,0.08)', borderRadius: 8, padding: '18px 20px', textDecoration: 'none', transition: 'border-color .15s' }}
+                    className="cat-item"
+                  >
                     <div>
-                      <div className="font-bold text-navy-900 group-hover:text-brand-red transition-colors">{cat.name}</div>
-                      <div className="text-sm text-gray-500 mt-0.5">{cat.count} produits disponibles</div>
+                      <div style={{ fontWeight: 700, color: '#F5EDD8', fontSize: 14 }}>{cat.name}</div>
+                      <div style={{ fontSize: 12, color: '#B8AA94', marginTop: 3 }}>{cat.count} produits disponibles</div>
                     </div>
-                    <svg className="w-5 h-5 text-gray-300 group-hover:text-brand-red transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg style={{ width: 18, height: 18, color: '#C8891F' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
-                  </div>
-                </Link>
-              )}
-            </section>
-          )
-        })}
+                  </Link>
+                )}
+              </section>
+            )
+          })}
+        </div>
       </div>
     </div>
   )

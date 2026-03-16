@@ -194,5 +194,6 @@
   .link-gold:hover  { color: #C8891F !important; }
   .art-item:hover   { border-color: rgba(200,137,31,0.28) !important; transform: translateX(5px); }
   .cat-item:hover   { background: #1A1612 !important; }
-  .kit-item:hover   { transform: translateY(-7px); border-color: rgba(200,137,31,0.25) !important; }
+  .kit-item:hover        { transform: translateY(-7px); border-color: rgba(200,137,31,0.25) !important; }
+  .card-dark-hover:hover { border-color: rgba(200,137,31,0.22) !important; transform: translateY(-3px); }
 }

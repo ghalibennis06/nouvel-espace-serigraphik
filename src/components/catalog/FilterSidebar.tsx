@@ -31,39 +31,38 @@ export default function FilterSidebar({
     } else {
       next.set(key, value)
     }
-    next.delete('page') // reset to page 1
+    next.delete('page')
     router.push(`${pathname}?${next.toString()}`)
   }
 
   const inStock  = params.get('in_stock') === 'true'
   const onSale   = params.get('on_sale')  === 'true'
 
-  // ── Sidebar body (shared between desktop sidebar and mobile drawer) ──
+  const labelStyle = { fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: '#B8AA94', marginBottom: 10, display: 'block' }
+
   const sidebarContent = (
-    <div className="space-y-5">
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
       {/* Subcategories */}
       {subcategories.length > 0 && (
         <div>
-          <h3 className="text-2xs font-black uppercase tracking-widest text-gray-400 mb-2">
-            {t('category')}
-          </h3>
-          <ul className="space-y-0.5">
+          <span style={labelStyle}>{t('category')}</span>
+          <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 2 }}>
             {subcategories.map(sub => {
               const active = pathname.includes(sub.slug)
               return (
                 <li key={sub.id}>
                   <a
                     href={categoryHref(sub.slug, locale)}
-                    className={`flex items-center justify-between px-2 py-1.5 rounded-lg text-sm transition-colors ${
-                      active
-                        ? 'bg-navy-900 text-white font-semibold'
-                        : 'text-gray-700 hover:bg-gray-100'
-                    }`}
+                    style={{
+                      display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                      padding: '7px 10px', borderRadius: 6, fontSize: 13, textDecoration: 'none', transition: 'background .15s',
+                      background: active ? 'rgba(200,137,31,0.12)' : 'transparent',
+                      color: active ? '#C8891F' : '#B8AA94',
+                      fontWeight: active ? 600 : 400,
+                    }}
                   >
                     <span>{sub.name}</span>
-                    <span className={`text-2xs px-1.5 py-0.5 rounded-full ${
-                      active ? 'bg-white/20 text-white' : 'bg-gray-100 text-gray-400'
-                    }`}>
+                    <span style={{ fontSize: 10, padding: '2px 6px', borderRadius: 10, background: active ? 'rgba(200,137,31,0.2)' : 'rgba(245,237,216,0.06)', color: active ? '#C8891F' : '#B8AA94' }}>
                       {sub.count}
                     </span>
                   </a>
@@ -76,44 +75,36 @@ export default function FilterSidebar({
 
       {/* Availability */}
       <div>
-        <h3 className="text-2xs font-black uppercase tracking-widest text-gray-400 mb-2">
-          {t('availability')}
-        </h3>
-        <div className="space-y-2">
-          <label className="flex items-center gap-2.5 cursor-pointer group">
+        <span style={labelStyle}>{t('availability')}</span>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <label style={{ display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer', fontSize: 13, color: '#B8AA94' }}>
             <input
               type="checkbox"
               checked={inStock}
               onChange={e => updateFilter('in_stock', e.target.checked ? 'true' : null)}
-              className="w-4 h-4 accent-brand-red rounded"
+              style={{ accentColor: '#C8891F', width: 15, height: 15 }}
             />
-            <span className="text-sm text-gray-700 group-hover:text-navy-900">
-              {t('inStock')}
-            </span>
+            {t('inStock')}
           </label>
-          <label className="flex items-center gap-2.5 cursor-pointer group">
+          <label style={{ display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer', fontSize: 13, color: '#B8AA94' }}>
             <input
               type="checkbox"
               checked={onSale}
               onChange={e => updateFilter('on_sale', e.target.checked ? 'true' : null)}
-              className="w-4 h-4 accent-brand-red rounded"
+              style={{ accentColor: '#C8891F', width: 15, height: 15 }}
             />
-            <span className="text-sm text-gray-700 group-hover:text-navy-900">
-              {t('onSale')}
-            </span>
+            {t('onSale')}
           </label>
         </div>
       </div>
 
       {/* Sort (mobile extra) */}
       <div className="md:hidden">
-        <h3 className="text-2xs font-black uppercase tracking-widest text-gray-400 mb-2">
-          Trier par
-        </h3>
+        <span style={labelStyle}>Trier par</span>
         <select
           value={params.get('orderby') ?? ''}
           onChange={e => updateFilter('orderby', e.target.value || null)}
-          className="w-full text-sm border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-brand-red"
+          style={{ width: '100%', fontSize: 13, background: '#0C0A08', color: '#F5EDD8', border: '1px solid rgba(245,237,216,0.12)', borderRadius: 6, padding: '8px 10px', outline: 'none' }}
         >
           <option value="">{t('sortDefault')}</option>
           <option value="popularity">{t('sortPopular')}</option>
@@ -130,7 +121,7 @@ export default function FilterSidebar({
             const next = new URLSearchParams()
             router.push(pathname + (next.toString() ? `?${next}` : ''))
           }}
-          className="w-full text-xs text-gray-500 hover:text-brand-red underline text-left"
+          style={{ fontSize: 12, color: '#C8891F', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', padding: 0, textDecoration: 'underline' }}
         >
           {t('clearFilters')}
         </button>
@@ -141,10 +132,10 @@ export default function FilterSidebar({
   return (
     <>
       {/* ── Desktop sidebar ───────────────────────────────────────────── */}
-      <aside className="hidden lg:block w-56 xl:w-64 flex-shrink-0">
-        <div className="bg-white rounded-xl border border-gray-100 p-5 sticky top-24">
-          <h2 className="text-sm font-black text-navy-900 mb-4 flex items-center gap-2">
-            <svg className="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <aside className="hidden lg:block" style={{ width: 220, flexShrink: 0 }}>
+        <div style={{ background: '#1A1612', border: '1px solid rgba(245,237,216,0.08)', borderRadius: 10, padding: 20, position: 'sticky', top: 88 }}>
+          <h2 style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#F5EDD8', marginBottom: 20, display: 'flex', alignItems: 'center', gap: 7 }}>
+            <svg className="w-4 h-4" style={{ color: '#C8891F' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
             </svg>
             {t('filters')}
@@ -157,14 +148,14 @@ export default function FilterSidebar({
       <div className="lg:hidden">
         <button
           onClick={() => setOpen(true)}
-          className="flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:border-navy-900 transition-colors bg-white"
+          style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 14px', border: '1px solid rgba(245,237,216,0.12)', borderRadius: 6, fontSize: 13, fontWeight: 500, color: '#F5EDD8', background: '#1A1612', cursor: 'pointer' }}
         >
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
           </svg>
           {t('filters')}
           {(inStock || onSale) && (
-            <span className="w-2 h-2 bg-brand-red rounded-full" />
+            <span style={{ width: 8, height: 8, background: '#C8891F', borderRadius: '50%' }} />
           )}
         </button>
       </div>
@@ -173,23 +164,23 @@ export default function FilterSidebar({
       {open && (
         <>
           <div
-            className="fixed inset-0 bg-black/50 z-40"
+            style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.6)', zIndex: 40 }}
             onClick={() => setOpen(false)}
           />
-          <div className="fixed top-0 left-0 bottom-0 w-72 bg-white z-50 overflow-y-auto shadow-2xl animate-slide-in-right">
-            <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100">
-              <h2 className="font-black text-navy-900">{t('filters')}</h2>
-              <button onClick={() => setOpen(false)} className="text-gray-400 hover:text-navy-900">
+          <div style={{ position: 'fixed', top: 0, left: 0, bottom: 0, width: 280, background: '#1A1612', zIndex: 50, overflowY: 'auto', boxShadow: '4px 0 40px rgba(0,0,0,0.5)' }} className="animate-slide-in-right">
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '18px 20px', borderBottom: '1px solid rgba(245,237,216,0.08)' }}>
+              <h2 style={{ fontWeight: 700, color: '#F5EDD8', fontSize: 15 }}>{t('filters')}</h2>
+              <button onClick={() => setOpen(false)} style={{ background: 'none', border: 'none', color: '#B8AA94', cursor: 'pointer' }}>
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
             </div>
-            <div className="p-5">{sidebarContent}</div>
-            <div className="p-5 border-t border-gray-100">
+            <div style={{ padding: 20 }}>{sidebarContent}</div>
+            <div style={{ padding: 20, borderTop: '1px solid rgba(245,237,216,0.08)' }}>
               <button
                 onClick={() => setOpen(false)}
-                className="btn-primary w-full"
+                style={{ width: '100%', background: '#C8891F', color: '#0C0A08', border: 'none', borderRadius: 6, padding: '11px', fontSize: 14, fontWeight: 700, cursor: 'pointer' }}
               >
                 {t('applyFilters')}
               </button>
