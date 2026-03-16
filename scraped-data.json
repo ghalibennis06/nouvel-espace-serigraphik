@@ -1,0 +1,1369 @@
+{
+  "company": {
+    "name": "Nouvel Espace Serigraphik",
+    "logo_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/10/cropped-NOUVEL.png",
+    "logo_alt": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/10/291704612_414239257423985_3775523825241046803_n-removebg-preview.png",
+    "phone": "+212-522448090",
+    "email": "contact@nouvelespaceserigraphik.ma",
+    "address": "Bd Mohammed V, Casablanca 20250",
+    "whatsapp": null,
+    "social": {
+      "facebook": "https://www.facebook.com/N.E.Serigraphik/",
+      "linkedin": "https://www.linkedin.com/company/nouvel-espace-serigraphik/?originalSubdomain=ma"
+    }
+  },
+  "hero_images": [
+    "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/11/press-a-chaud-removebg-preview.png",
+    "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/11/press-a-chaud-2-removebg-preview.png",
+    "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/11/four-3D-removebg-preview.png"
+  ],
+  "categories": [
+    { "name": "LES PRESSES A CHAUD", "url": "https://nouvelespaceserigraphik.ma/categorie-produit/les-presses-a-chaud/" },
+    { "name": "LES CONSOMMABLES DE SERIGRAPHIE", "url": "https://nouvelespaceserigraphik.ma/categorie-produit/les-consommables-de-serigraphie/" },
+    { "name": "LES CONSOMMABLES DE SUBLIMATION", "url": "https://nouvelespaceserigraphik.ma/categorie-produit/les-consommables-de-sublimation/" },
+    { "name": "LES MACHINES D'IMPRESSION", "url": "https://nouvelespaceserigraphik.ma/categorie-produit/les-machines-dimpression/" },
+    { "name": "LES MACHINES DE SERIGRAPHIE", "url": "https://nouvelespaceserigraphik.ma/categorie-produit/les-machines-de-serigraphie/" },
+    { "name": "LES PRODUITS SUBLIMABLES", "url": "https://nouvelespaceserigraphik.ma/categorie-produit/les-produits-sublimables/" }
+  ],
+  "products": {
+    "les_presses_a_chaud": [
+      {
+        "name": "PACK N°1",
+        "price": "4400 MAD",
+        "sale_price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/woocommerce-placeholder-700x700.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/pack-n1/",
+        "description": "Bundle pack",
+        "category": "LES PRESSES A CHAUD",
+        "sku": "29061"
+      },
+      {
+        "name": "PACK N°2",
+        "price": "5400 MAD",
+        "sale_price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/woocommerce-placeholder-700x700.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/pack-n2/",
+        "description": null,
+        "category": "LES PRESSES A CHAUD"
+      },
+      {
+        "name": "PACK N°3",
+        "price": "8400 MAD",
+        "sale_price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/woocommerce-placeholder-700x700.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/pack-n3/",
+        "description": null,
+        "category": "LES PRESSES A CHAUD"
+      },
+      {
+        "name": "PRESSE A CASQUETTE 4 SABOT MANUELLE",
+        "price": null,
+        "sale_price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/WhatsApp-Image-2024-12-10-at-15.25.28-1-430x430.jpeg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/presse-a-casquette-4-sabot-manuelle/",
+        "description": "Multifonctional thermal transfer press designed for printing on curved or complex surfaces",
+        "category": "LES PRESSES A CHAUD"
+      },
+      {
+        "name": "PRESSE A CASQUETTE AUTOMATIQUE",
+        "price": null,
+        "sale_price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/WhatsApp-Image-2024-12-10-at-15.25.28-4-430x430.jpeg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/presse-a-casquette-automatique/",
+        "description": "Automatic cap press for rapid, professional-quality personalized printing",
+        "category": "LES PRESSES A CHAUD"
+      },
+      {
+        "name": "PRESSE A CASQUETTE MANUELLE",
+        "price": null,
+        "sale_price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/10/presse-a-casquette.png",
+        "image_url_hires": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/10/presse-a-casquette.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/presse-a-casquette/",
+        "description": "Specialized thermal transfer press for caps, ideal for personalization and professional projects",
+        "category": "LES PRESSES A CHAUD"
+      },
+      {
+        "name": "PRESSE A CASQUETTE MANUELLE (v2)",
+        "price": null,
+        "sale_price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/WhatsApp-Image-2024-12-10-at-15.25.28-2-430x430.jpeg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/presse-a-casquette-manuelle/",
+        "description": "Specialized thermal transfer press for caps, ideal for personalization and professional projects",
+        "category": "LES PRESSES A CHAUD"
+      },
+      {
+        "name": "PRESSE A CHAUD (40 X 50CM) AVEC OUVERTURE AUTOMATIQUE",
+        "price": null,
+        "sale_price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/presse-40x50autoopen2.png",
+        "additional_images": [
+          "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/presse-40x50autoopen.png"
+        ],
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/presse-a-chaud-40-x-50cm-avec-ouverture-automatique/",
+        "description": "Automatic-opening heat press 40x50cm for rapid, efficient production with precise temperature, pressure and time controls",
+        "category": "LES PRESSES A CHAUD"
+      },
+      {
+        "name": "PRESSE A CHAUD 5 EN 1 (29 X 38CM)",
+        "price": null,
+        "sale_price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/free-sub-8en1-2-removebg-preview-430x517.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/presse-a-chaud-5-en-1-29-x-38cm/",
+        "description": "FREESUB 8100 model with 29x38cm platform and multiple accessory plates",
+        "category": "LES PRESSES A CHAUD"
+      },
+      {
+        "name": "PRESSE A CHAUD 5 EN 1 (38 X 38CM)",
+        "price": null,
+        "sale_price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/presse-a-chaud-5en1-fresub-5-removebg-preview-430x517.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/presse-a-chaud-5-en-1-38-x-38cm/",
+        "description": "FREESUB 8038 model with 38x38cm platform and interchangeable plates",
+        "category": "LES PRESSES A CHAUD"
+      },
+      {
+        "name": "PRESSE A CHAUD JAUNE (40 X 40CM) MANUELLE DE MOYEN TAILLE",
+        "price": null,
+        "sale_price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/jaune-presse-40x40-1-430x444.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/presse-a-chaud-jaune-40-x-40cm-manuelle-de-moyen-taille/",
+        "description": "Professional heat press for thermal transfers on various customizable products",
+        "category": "LES PRESSES A CHAUD"
+      },
+      {
+        "name": "PRESSE A CHAUD JAUNE MANUELLE (60 X 40CM)",
+        "price": null,
+        "sale_price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/40x60j-430x343.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/presse-a-chaud-jaune-manuelle-60-x-40cm/",
+        "description": "Compact 60x40cm manual heat press suitable for small businesses",
+        "category": "LES PRESSES A CHAUD"
+      },
+      {
+        "name": "PRESSE A CHAUD MANUELLE GRAND FORMAT (60 X 80CM)",
+        "price": null,
+        "sale_price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/presse-60x80-2-430x419.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/presse-a-chaud-manuelle-grand-format-60-x-80cm/",
+        "description": null,
+        "category": "LES PRESSES A CHAUD"
+      },
+      {
+        "name": "PRESSE A CHAUD PNEUMATIQUE DOUBLE STATION (120X160CM)",
+        "price": null,
+        "sale_price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/AUTO120X160-430x423.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/presse-a-chaud-pneumatique-double-station-120x160cm/",
+        "description": null,
+        "category": "LES PRESSES A CHAUD"
+      },
+      {
+        "name": "PRESSE A CHAUD PNEUMATIQUE DOUBLE STATION (50X60CM)",
+        "price": null,
+        "sale_price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/60x50pneumatique1-430x442.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/presse-a-chaud-pneumatique-double-station-50x60cm/",
+        "description": null,
+        "category": "LES PRESSES A CHAUD"
+      },
+      {
+        "name": "PRESSE A CHAUD PNEUMATIQUE DOUBLE STATION (60X80CM)",
+        "price": null,
+        "sale_price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/60X80PNEUMATIC-430x434.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/presse-a-chaud-pneumatique-double-station-60x80cm/",
+        "description": null,
+        "category": "LES PRESSES A CHAUD"
+      },
+      {
+        "name": "PRESSE A CHAUD POUR MINI ETIQUETTE LOGO (15 X 15CM)",
+        "price": null,
+        "sale_price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/presse-15x15-1-430x491.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/presse-a-chaud-pour-mini-etiquette-logo15-x-15cm/",
+        "description": null,
+        "category": "LES PRESSES A CHAUD"
+      },
+      {
+        "name": "PRESSE A CHAUD ROTATIVE (40x50CM)",
+        "price": null,
+        "sale_price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/presse40x50-430x393.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/presse-a-chaud-rotative-40x50cm/",
+        "description": null,
+        "category": "LES PRESSES A CHAUD"
+      },
+      {
+        "name": "PRESSE A CHAUD ROUGE (40 X 40 CM) MANUELLE",
+        "price": null,
+        "sale_price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/presse-a-chaud-40x40-1-430x430.webp",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/presse-a-chaud-rouge-40-x-40-cm-manuelle-de-moyen-taille/",
+        "description": null,
+        "category": "LES PRESSES A CHAUD"
+      },
+      {
+        "name": "PRESSE A CHAUD ROUGE MANUELLE (60 X 40CM)",
+        "price": null,
+        "sale_price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/presse-60x40-1-430x394.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/presse-a-chaud-rouge-manuelle-60-x-40cm/",
+        "description": null,
+        "category": "LES PRESSES A CHAUD"
+      },
+      {
+        "name": "PRESSE A MUG SIMPLE BLANC",
+        "price": null,
+        "sale_price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/Presse-a-mug-manuelle-economique-430x430.webp",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/presse-a-mug-simple-blanc/",
+        "description": null,
+        "category": "LES PRESSES A CHAUD"
+      },
+      {
+        "name": "PRESSE A MUG SIMPLE NOIR",
+        "price": null,
+        "sale_price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/10/Mug-Press-Machine-Simple-Heat-Press-Mug-Machine-for-Sublimation-Mugs-110V-and-220V-Available-1-430x430.jpg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/presse-a-mug-simple-noir/",
+        "description": null,
+        "category": "LES PRESSES A CHAUD"
+      },
+      {
+        "name": "PRESSE DOUBLE MUG",
+        "price": null,
+        "sale_price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/presse-double-mug-430x430.webp",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/presse-double-mug/",
+        "description": null,
+        "category": "LES PRESSES A CHAUD"
+      }
+    ],
+    "les_consommables_de_serigraphie": [
+      {
+        "name": "BARRE DE RACLETTE EN ALUMINIUM",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/Raclette-en-alliage-d-aluminium-1M-50cm-x-2-pi-ces-poign-e-impression-sur-soie.jpg_Q90.jpg_-430x430.webp",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/barre-de-raclette-en-aluminium/",
+        "description": "Outil indispensable pour des impressions nettes et uniformes",
+        "category": "LES CONSOMMABLES DE SERIGRAPHIE"
+      },
+      {
+        "name": "BASE AQUEUSE",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/10/su-bazli-sedef-pati-22458581c5f88ab0.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/base-aqueuse/",
+        "description": "Available in XP 10, XP 50, GS600 variants",
+        "category": "LES CONSOMMABLES DE SERIGRAPHIE"
+      },
+      {
+        "name": "BASE AQUEUSE (v2)",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/product-02-430x573.jpg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/base-aqueuse-2/",
+        "description": "Multiple color options including transparent and elastic white",
+        "category": "LES CONSOMMABLES DE SERIGRAPHIE"
+      },
+      {
+        "name": "CADRE ALUMINIUM (40 x 50 CM)",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/61gC992Xr5L-430x430.jpg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/cadre-aluminium-40-x-50-cm/",
+        "description": "Professional and durable aluminum frame",
+        "category": "LES CONSOMMABLES DE SERIGRAPHIE"
+      },
+      {
+        "name": "CADRE ALUMINIUM (50 x 60 CM)",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/telaio_serigrafico_t_shirt-320x320w.jpeg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/cadre-aluminium-50-x-60-cm/",
+        "description": "Professional choice for printing projects",
+        "category": "LES CONSOMMABLES DE SERIGRAPHIE"
+      },
+      {
+        "name": "CADRE ALUMINIUM (80 x 90 CM)",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/ecran-de-serigraphie-430x608.jpg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/cadre-aluminium-80-x-90-cm/",
+        "description": "Professional durable frame for all printing projects",
+        "category": "LES CONSOMMABLES DE SERIGRAPHIE"
+      },
+      {
+        "name": "COLLE DE TRANSFERT POLYESTER 170 MICRONS",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/Hot-Melt-Print-Powder-for-Dtf-Heat-Transfer.jpg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/colle-de-transfert-polyester-170-microns/",
+        "description": "Designed for precise, resistant, high-quality transfers",
+        "category": "LES CONSOMMABLES DE SERIGRAPHIE"
+      },
+      {
+        "name": "COLLE DE TRANSFERT POLYESTER 250 MICRONS",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/Hot-Melt-Print-Powder-for-Dtf-Heat-Transfer.jpg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/colle-de-transfert-polyester-250-microns/",
+        "description": "Designed for highly resistant and precise transfers",
+        "category": "LES CONSOMMABLES DE SERIGRAPHIE"
+      },
+      {
+        "name": "COLLE DE TRANSFERT POLYESTER 80 MICRONS",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/Hot-Melt-Print-Powder-for-Dtf-Heat-Transfer.jpg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/colle-de-transfert-polyester-80-microns/",
+        "description": "Perfect choice for precise and clean transfers",
+        "category": "LES CONSOMMABLES DE SERIGRAPHIE"
+      },
+      {
+        "name": "COLLE DE TRANSFERT POLYURETHANE 170 MICRONS",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/poudre-p-430x430.webp",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/colle-de-transfert-polyurethane-170-microns/",
+        "description": "Designed for robust and durable transfers",
+        "category": "LES CONSOMMABLES DE SERIGRAPHIE"
+      },
+      {
+        "name": "COLLE DE TRANSFERT POLYURETHANE 80 MICRONS",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/poudre-p-430x430.webp",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/colle-de-transfert-polyurethane-80-microns/",
+        "description": "Ideal for precise and durable transfers",
+        "category": "LES CONSOMMABLES DE SERIGRAPHIE"
+      },
+      {
+        "name": "FILM DE TRANSFERT TRANSPARENT A CHAUD",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2025/01/film-430x416.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/film-de-transfert-transparent-a-chaud/",
+        "description": "Perfect for transferring designs professionally on various surfaces",
+        "category": "LES CONSOMMABLES DE SERIGRAPHIE"
+      },
+      {
+        "name": "FILM DE TRANSFERT TRANSPARENT A FROID",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2025/01/transfert-430x424.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/film-de-transfert-transparent-a-froid/",
+        "description": null,
+        "category": "LES CONSOMMABLES DE SERIGRAPHIE"
+      },
+      {
+        "name": "FILM DTF 30CM",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2025/01/60cm-dtf-430x427.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/film-dtf-30cm/",
+        "description": null,
+        "category": "LES CONSOMMABLES DE SERIGRAPHIE"
+      },
+      {
+        "name": "FILM DTF 60CM",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2025/01/60cm-dtf-430x427.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/film-dtf-60cm/",
+        "description": null,
+        "category": "LES CONSOMMABLES DE SERIGRAPHIE"
+      },
+      {
+        "name": "FLOCAGE PAPIER",
+        "price": "0 MAD",
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2025/01/Capture-430x269.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/flocage-papier/",
+        "description": null,
+        "category": "LES CONSOMMABLES DE SERIGRAPHIE"
+      },
+      {
+        "name": "FLOCAGE POLYAMIDE POUDRE",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2025/01/flock-430x383.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/flocage-polyamide-poudre/",
+        "description": null,
+        "category": "LES CONSOMMABLES DE SERIGRAPHIE"
+      },
+      {
+        "name": "FLOCAGE POLYESTER POUDRE",
+        "price": "0 MAD",
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2025/01/start_01.jpg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/flocage-polyester-poudre/",
+        "description": null,
+        "category": "LES CONSOMMABLES DE SERIGRAPHIE"
+      },
+      {
+        "name": "MYLAR",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2025/01/su-bazli-varak-almaz-22458581cd3b6ec9.jpg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/mylar/",
+        "description": null,
+        "category": "LES CONSOMMABLES DE SERIGRAPHIE"
+      },
+      {
+        "name": "PAILLETTE",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2025/01/su-bazli-sim-tutkali-22458581c066d656.jpg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/paillette/",
+        "description": null,
+        "category": "LES CONSOMMABLES DE SERIGRAPHIE"
+      },
+      {
+        "name": "PAPIER DE TRANSFERT CLAIR A3",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2025/01/A3-CLAIR.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/papier-de-transfert-clair-a3/",
+        "description": null,
+        "category": "LES CONSOMMABLES DE SERIGRAPHIE"
+      },
+      {
+        "name": "PAPIER DE TRANSFERT CLAIR A3 (IMPRIMANTE LASER)",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2025/01/a3-f.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/papier-de-transfert-clair-a3-imprimante-laser/",
+        "description": null,
+        "category": "LES CONSOMMABLES DE SERIGRAPHIE"
+      },
+      {
+        "name": "PAPIER DE TRANSFERT CLAIR A4",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2025/01/A4-CLAIR-TRANS-430x441.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/papier-de-transfert-clair-a4/",
+        "description": null,
+        "category": "LES CONSOMMABLES DE SERIGRAPHIE"
+      },
+      {
+        "name": "PAPIER DE TRANSFERT FONCE A3",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2025/01/papier-transfert-dark-a3-430x430.jpg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/papier-de-transfert-fonce-a3/",
+        "description": null,
+        "category": "LES CONSOMMABLES DE SERIGRAPHIE"
+      },
+      {
+        "name": "PAPIER DE TRANSFERT FONCE A3 (IMPRIMANTE LASER)",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2025/01/laser-a3-clair.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/papier-de-transfert-fonce-a3-imprimante-laser/",
+        "description": null,
+        "category": "LES CONSOMMABLES DE SERIGRAPHIE"
+      },
+      {
+        "name": "PAPIER DE TRANSFERT FONCE A4",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2025/01/DARK-A4-430x573.jpg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/papier-de-transfert-fonce-a4/",
+        "description": null,
+        "category": "LES CONSOMMABLES DE SERIGRAPHIE"
+      },
+      {
+        "name": "PLASTISOL (ANTEX)",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/11/plastik-yuksek-kalip-seffaf-22558582148ddadd.jpg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/plastisol-antex/",
+        "description": null,
+        "category": "LES CONSOMMABLES DE SERIGRAPHIE"
+      },
+      {
+        "name": "PLASTISOL",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/portfolio-v-1.jpg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/plastisol/",
+        "description": null,
+        "category": "LES CONSOMMABLES DE SERIGRAPHIE"
+      },
+      {
+        "name": "RACLETTE ROUGE SOUPLE",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/WhatsApp_Image_2022-08-11_at_12.43.41-removebg-preview.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/raclette-rouge-souple/",
+        "description": null,
+        "category": "LES CONSOMMABLES DE SERIGRAPHIE"
+      },
+      {
+        "name": "RACLETTE VERTE ROBUSTE",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/WhatsApp_Image_2022-08-11_at_12.44.32-removebg-preview.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/raclette-verte-robuste/",
+        "description": null,
+        "category": "LES CONSOMMABLES DE SERIGRAPHIE"
+      },
+      {
+        "name": "SOIE POUR SERIGRAPHIE N°15",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/soie-15-430x430.jpg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/soie-pour-serigraphie-n15/",
+        "description": "Essential element for precise, high-quality printing impressions",
+        "category": "LES CONSOMMABLES DE SERIGRAPHIE"
+      },
+      {
+        "name": "SOIE POUR SERIGRAPHIE N°19",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/Hb268b864d3114ebe98a5c8e1bd106b34F-430x430.jpg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/soie-pour-serigraphie-n19/",
+        "description": "Essential element for precise, high-quality printing impressions",
+        "category": "LES CONSOMMABLES DE SERIGRAPHIE"
+      },
+      {
+        "name": "SOIE POUR SERIGRAPHIE N°34",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/soie-43-1-430x430.jpg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/soie-pour-serigraphie-n34/",
+        "description": "Essential element for precise, high-quality printing impressions",
+        "category": "LES CONSOMMABLES DE SERIGRAPHIE"
+      },
+      {
+        "name": "SOIE POUR SERIGRAPHIE N°43",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/soie-43-1-430x430.jpg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/soie-pour-serigraphie-n43/",
+        "description": "Essential element for precise, high-quality printing impressions",
+        "category": "LES CONSOMMABLES DE SERIGRAPHIE"
+      },
+      {
+        "name": "SOIE POUR SERIGRAPHIE N°55",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/soie-55-430x430.webp",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/soie-pour-serigraphie-n55/",
+        "description": "Essential element for precise, high-quality printing impressions",
+        "category": "LES CONSOMMABLES DE SERIGRAPHIE"
+      },
+      {
+        "name": "SOIE POUR SERIGRAPHIE N°62",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/soie-43-1-430x430.jpg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/soie-pour-serigraphie-n62/",
+        "description": "Essential element for precise, high-quality printing impressions",
+        "category": "LES CONSOMMABLES DE SERIGRAPHIE"
+      },
+      {
+        "name": "SOIE POUR SERIGRAPHIE N°77",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/soie-43-1-430x430.jpg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/soie-pour-serigraphie-n77/",
+        "description": "Essential element for precise, high-quality printing impressions",
+        "category": "LES CONSOMMABLES DE SERIGRAPHIE"
+      },
+      {
+        "name": "SOIE POUR SERIGRAPHIE N°90",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/soie-43-430x430.jpg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/soie-pour-serigraphie-n90/",
+        "description": "Essential element for precise, high-quality printing impressions",
+        "category": "LES CONSOMMABLES DE SERIGRAPHIE"
+      },
+      {
+        "name": "SOIE POUR SERIGRAPHIE N°120",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/Hb268b864d3114ebe98a5c8e1bd106b34F-430x430.jpg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/soie-pour-serigraphie-n120/",
+        "description": "Essential element for precise, high-quality printing impressions",
+        "category": "LES CONSOMMABLES DE SERIGRAPHIE"
+      },
+      {
+        "name": "STRASS",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2025/01/81KQJYtGzpL._AC_UL320_.jpg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/strass-pour-sublimation/",
+        "description": "Add elegance and brilliance to creations; perfect for clothing decoration",
+        "category": "LES CONSOMMABLES DE SERIGRAPHIE"
+      }
+    ],
+    "les_consommables_de_sublimation": [
+      {
+        "name": "ENCRE DE SUBLIMATION 100ML",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2025/01/ink-430x430.jpg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/encre-de-sublimation-100ml/",
+        "description": "Special formulation for vibrant, durable impressions",
+        "category": "LES CONSOMMABLES DE SUBLIMATION",
+        "subcategory": "ENCRE DE SUBLIMATION"
+      },
+      {
+        "name": "ENCRE DE SUBLIMATION 1L",
+        "price": null,
+        "colors": ["BLACK", "CYAN", "MAGENTA", "YELLOW"],
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2025/01/INK-BK-430x422.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/encre-de-sublimation-1l/",
+        "description": "Professional-grade 1L inks for brilliant color results",
+        "category": "LES CONSOMMABLES DE SUBLIMATION",
+        "subcategory": "ENCRE DE SUBLIMATION"
+      },
+      {
+        "name": "ENCRE DTF 0.5L",
+        "price": null,
+        "colors": ["BLACK", "CYAN", "MAGENTA", "WHITE", "YELLOW"],
+        "image_url": null,
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/encre-dtf-0-5l/",
+        "description": "Direct-to-Film inks for precise textile printing",
+        "category": "LES CONSOMMABLES DE SUBLIMATION",
+        "subcategory": "ENCRE DE SUBLIMATION"
+      },
+      {
+        "name": "ENCRE DTF 1L",
+        "price": null,
+        "colors": ["BLACK", "CYAN", "MAGENTA", "WHITE", "YELLOW"],
+        "image_url": null,
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/encre-dtf-1l/",
+        "description": "High-quality DTF inks with vibrant colors",
+        "category": "LES CONSOMMABLES DE SUBLIMATION",
+        "subcategory": "ENCRE DE SUBLIMATION"
+      },
+      {
+        "name": "FLEX ATOLL BLEU",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2025/01/ATOLL_BLUE-removebg-preview.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/flex-atoll-bleu/",
+        "description": "Thermal transfer material for textile personalization",
+        "category": "LES CONSOMMABLES DE SUBLIMATION",
+        "subcategory": "FLEX"
+      },
+      {
+        "name": "FLEX BABY PINK",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2025/01/BABY_PINK-removebg-preview.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/flex-baby-pink/",
+        "description": "Heat transfer material for custom designs",
+        "category": "LES CONSOMMABLES DE SUBLIMATION",
+        "subcategory": "FLEX"
+      },
+      {
+        "name": "FLEX BLACK",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2025/01/BLACK-removebg-preview.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/flex-black/",
+        "description": "Professional heat transfer material",
+        "category": "LES CONSOMMABLES DE SUBLIMATION",
+        "subcategory": "FLEX"
+      },
+      {
+        "name": "FLEX BLANC",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2025/01/WHITE.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/flex-blanc/",
+        "description": "White thermal transfer media for textiles",
+        "category": "LES CONSOMMABLES DE SUBLIMATION",
+        "subcategory": "FLEX"
+      },
+      {
+        "name": "FLEX BLEU MARINE",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2025/01/NAVY_BLUE-removebg-preview.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/flex-bleu-marine/",
+        "description": "Navy blue heat transfer material",
+        "category": "LES CONSOMMABLES DE SUBLIMATION",
+        "subcategory": "FLEX"
+      },
+      {
+        "name": "FLEX BLEU ROYAL",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2025/01/BLUE-removebg-preview.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/flex-bleu-royal/",
+        "description": "Royal blue thermal transfer option",
+        "category": "LES CONSOMMABLES DE SUBLIMATION",
+        "subcategory": "FLEX"
+      },
+      {
+        "name": "FLEX DARK GREY",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2025/01/DARK_GREY-removebg-preview.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/flex-dark-grey/",
+        "description": "Dark grey heat transfer material",
+        "category": "LES CONSOMMABLES DE SUBLIMATION",
+        "subcategory": "FLEX"
+      },
+      {
+        "name": "FLEX ELECTRIC RED",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2025/01/ELECTRIC_RED-removebg-preview.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/flex-electric-red/",
+        "description": "Vibrant electric red thermal transfer media",
+        "category": "LES CONSOMMABLES DE SUBLIMATION",
+        "subcategory": "FLEX"
+      },
+      {
+        "name": "FLEX JAUNE CITRON",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2025/01/LEMON_YELLOW-removebg-preview.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/flex-jaune-citron/",
+        "description": null,
+        "category": "LES CONSOMMABLES DE SUBLIMATION",
+        "subcategory": "FLEX"
+      },
+      {
+        "name": "FLEX JAUNE ENSOLEILLE",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2025/01/SUNNY_YELLOW-removebg-preview.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/flex-jaune-ensoleille/",
+        "description": null,
+        "category": "LES CONSOMMABLES DE SUBLIMATION",
+        "subcategory": "FLEX"
+      },
+      {
+        "name": "FLEX JAUNE FLUO",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2025/01/NEON_YELLOW-removebg-preview.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/flex-jaune-fluo/",
+        "description": null,
+        "category": "LES CONSOMMABLES DE SUBLIMATION",
+        "subcategory": "FLEX"
+      },
+      {
+        "name": "FLEX ORANGE",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2025/01/ORANGE-removebg-preview.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/flex-ornage/",
+        "description": null,
+        "category": "LES CONSOMMABLES DE SUBLIMATION",
+        "subcategory": "FLEX"
+      },
+      {
+        "name": "FLEX PASSION RED",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2025/01/PASSION_RED-removebg-preview.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/flex-passion-red/",
+        "description": null,
+        "category": "LES CONSOMMABLES DE SUBLIMATION",
+        "subcategory": "FLEX"
+      },
+      {
+        "name": "FLEX ROSE FLUO",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2025/01/NEON_PINK-removebg-preview.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/flex-fluo-rose/",
+        "description": null,
+        "category": "LES CONSOMMABLES DE SUBLIMATION",
+        "subcategory": "FLEX"
+      },
+      {
+        "name": "FLEX SILVER METALLIC",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2025/01/SILVER-removebg-preview.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/flex-silver-metallic/",
+        "description": null,
+        "category": "LES CONSOMMABLES DE SUBLIMATION",
+        "subcategory": "FLEX"
+      },
+      {
+        "name": "FLEX VERT",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2025/01/GREEN-removebg-preview.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/flex-vert/",
+        "description": null,
+        "category": "LES CONSOMMABLES DE SUBLIMATION",
+        "subcategory": "FLEX"
+      },
+      {
+        "name": "PAPIER DE PROTECTION",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2025/01/papier-de-protection-430x430.jpg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/papier-de-protection/",
+        "description": null,
+        "category": "LES CONSOMMABLES DE SUBLIMATION",
+        "subcategory": "PAPIER DE SUBLIMATION"
+      },
+      {
+        "name": "PAPIER DE SUBLIMATION (1.62CM x 150M / 95G)",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/11/produit-430x322.jpeg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/papier-de-sublimation-1-62cm-x-150m-95g/",
+        "description": null,
+        "category": "LES CONSOMMABLES DE SUBLIMATION",
+        "subcategory": "PAPIER DE SUBLIMATION"
+      },
+      {
+        "name": "PAPIER DE SUBLIMATION (1.62CM x 200M / 62G)",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/11/produit-430x322.jpeg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/papier-de-sublimation-1-62cm-x-200m-62g/",
+        "description": null,
+        "category": "LES CONSOMMABLES DE SUBLIMATION",
+        "subcategory": "PAPIER DE SUBLIMATION"
+      },
+      {
+        "name": "PAPIER DE SUBLIMATION (1.62CM x 300M / 44G)",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/11/produit-430x322.jpeg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/papier-de-sublimation-1-62cm-x-300m-44g/",
+        "description": null,
+        "category": "LES CONSOMMABLES DE SUBLIMATION",
+        "subcategory": "PAPIER DE SUBLIMATION"
+      },
+      {
+        "name": "PAPIER DE SUBLIMATION A3",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/H2265c2e2db62471580a5601403258379q-removebg-preview-430x430.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/papier-de-sublimation-a3/",
+        "description": null,
+        "category": "LES CONSOMMABLES DE SUBLIMATION",
+        "subcategory": "PAPIER DE SUBLIMATION"
+      },
+      {
+        "name": "PAPIER DE SUBLIMATION A4",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/2-removebg-preview-430x430.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/papier-de-sublimation-a4/",
+        "description": null,
+        "category": "LES CONSOMMABLES DE SUBLIMATION",
+        "subcategory": "PAPIER DE SUBLIMATION"
+      },
+      {
+        "name": "SCOTCH THERMIQUE 10MM",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/scotch-thermique-10mm-430x439.jpg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/scotch-thermique-10mm/",
+        "description": null,
+        "category": "LES CONSOMMABLES DE SUBLIMATION"
+      },
+      {
+        "name": "SCOTCH THERMIQUE DE 5MM",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/ruban-thermique-adhesif-10-mm-x-30-metres-430x430.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/scotch-thermique-de-5mm/",
+        "description": null,
+        "category": "LES CONSOMMABLES DE SUBLIMATION"
+      },
+      {
+        "name": "TEFLON BLANC",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/teflon-blanc.jpg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/teflon-blanc/",
+        "description": null,
+        "category": "LES CONSOMMABLES DE SUBLIMATION"
+      },
+      {
+        "name": "TEFLON MARRON",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/0003BFC0-430x375.jpg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/teflon-marron/",
+        "description": null,
+        "category": "LES CONSOMMABLES DE SUBLIMATION"
+      },
+      {
+        "name": "TEFLON MARRON AVEC COLLE",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/912000000000_700-430x430.jpg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/teflon-marron-avec-colle/",
+        "description": null,
+        "category": "LES CONSOMMABLES DE SUBLIMATION"
+      }
+    ],
+    "les_machines_dimpression": [
+      {
+        "name": "EPSON L121",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2025/01/l121-430x405.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/epson-l121/",
+        "description": "Compact and economical printing solution for high-quality prints at home or small office",
+        "category": "LES MACHINES D'IMPRESSION"
+      },
+      {
+        "name": "EPSON L1300",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2025/01/l1300.jpg",
+        "image_url_hires": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2025/01/l1300-1140x800.jpg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/epson-l1300/",
+        "description": "A3+ printer with EcoTank system, ideal for large-format printing at low cost. Up to 5760x1440 dpi, 15ppm BW, supports up to 329x483mm",
+        "category": "LES MACHINES D'IMPRESSION"
+      },
+      {
+        "name": "EPSON L3251",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2025/01/l3251-epson-430x417.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/epson-l3251/",
+        "description": "Ideal solution for printing, scanning, and copying needs with EcoTank technology",
+        "category": "LES MACHINES D'IMPRESSION"
+      },
+      {
+        "name": "FOUR DE SUBLIMATION 3D",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/11/four-3D.jpg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/four-3d/",
+        "description": "3D sublimation oven for high-quality prints on curved/3D objects like mugs, bottles, and phone cases",
+        "category": "LES MACHINES D'IMPRESSION"
+      },
+      {
+        "name": "MACHINE DE MARQUAGE PNEUMATIQUE (10X13CM)",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/WhatsApp-Image-2024-12-11-at-15.51.22-1-430x418.jpeg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/machine-de-marquage-pneumatique/",
+        "description": "High-precision pneumatic marking device model WT-QS90 for industrial and professional applications",
+        "category": "LES MACHINES D'IMPRESSION"
+      },
+      {
+        "name": "MACHINE DE MARQUAGE PNEUMATIQUE (10X18CM)",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/WhatsApp-Image-2024-12-11-at-15.51.23-430x430.jpeg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/machine-de-marquage-pneumatique-10x18cm/",
+        "description": "High-precision pneumatic marking apparatus model WT-QS201 for industrial and professional use",
+        "category": "LES MACHINES D'IMPRESSION"
+      }
+    ],
+    "les_machines_de_serigraphie": [
+      {
+        "name": "CARROUSEL 1 COULEUR 1 STATION",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/VEVOR-imprimante-cran-1-couleur-Kit-d-impression-sur-soie-55x45cm-Machine-d-impression-sur-T.jpg_Q90.jpg_-430x430.webp",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/carrousel-1-couleur-1-station/",
+        "description": "Single-color carousel for high-quality screen printing impressions",
+        "category": "LES MACHINES DE SERIGRAPHIE"
+      },
+      {
+        "name": "CARROUSEL 3 COULEURS 1 STATION AVEC SECHOIR",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/HTB1Xkq7JVXXXXXWXVXXq6xXFXXXH-430x402.jpg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/carrousel-3-couleurs-1-station-avec-sechoir/",
+        "description": "Three-color carousel with built-in dryer for professional printing",
+        "category": "LES MACHINES DE SERIGRAPHIE"
+      },
+      {
+        "name": "CARROUSEL 4 COULEURS 1 STATION",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/Machine-d-impression-d-cran-en-soie-4-couleurs-1-Station-T-Shirt-quipement-carrousel-nouveau-430x430.jpg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/carrousel-4-couleurs-1-station/",
+        "description": "Multicolor carousel for professional high-quality impressions",
+        "category": "LES MACHINES DE SERIGRAPHIE"
+      },
+      {
+        "name": "CARROUSEL 4 COULEURS 2 STATIONS",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/HTB1.Z4kXntYBeNjy1Xdq6xXyVXab-430x430.jpg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/carrousel-4-couleurs-2-stations/",
+        "description": "Enhanced productivity carousel with dual stations and four colors",
+        "category": "LES MACHINES DE SERIGRAPHIE"
+      },
+      {
+        "name": "CARROUSEL 4 COULEURS 4 STATIONS",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/Hf7346dea786b4d9797e41fda5fe34aee2.png_960x960.webp",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/carrousel-4-couleurs-4-stations/",
+        "description": "Manual 4-color 4-station carousel for multicolor professional applications",
+        "category": "LES MACHINES DE SERIGRAPHIE"
+      },
+      {
+        "name": "CARROUSEL 4 COULEURS 4 STATIONS PRO EN ALUMINIUM",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/4-couleurs-4-stations-pro.jpg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/carrousel-4-couleurs-4-stations-pro-en-aluminium/",
+        "description": "Professional aluminum carousel elevating print quality and durability",
+        "category": "LES MACHINES DE SERIGRAPHIE"
+      },
+      {
+        "name": "CARROUSEL 6 COULEURS 6 STATIONS",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/HTB1WuPgXyfrK1RjSspbq6A4pFXaw-430x430.jpg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/carrousel-6-couleurs-6-stations/",
+        "description": "Manual carousel for high productivity and multicolor precision work",
+        "category": "LES MACHINES DE SERIGRAPHIE"
+      },
+      {
+        "name": "CARROUSEL 8 COULEURS 8 STATIONS",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/H8513c757fe764cd79d0c6a85d38d53f57.jpg_960x960-430x430.webp",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/carrousel-8-couleurs-8-stations/",
+        "description": "Eight-color rotative press optimizing professional production capacity",
+        "category": "LES MACHINES DE SERIGRAPHIE"
+      },
+      {
+        "name": "MACHINE D'INSOLATION DE 12 AMPOULES",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/ok.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/machine-dinsolation-de-12-ampoules/",
+        "description": "UV light insolation table for creating stencils on screens",
+        "category": "LES MACHINES DE SERIGRAPHIE"
+      },
+      {
+        "name": "MACHINE DE SERIGRAPHIE CYLINDRIQUE",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/serigr1-430x432.jpg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/machine-de-serigraphie-cylindrique/",
+        "description": "Specialized press for printing on cylindrical items like bottles or glasses",
+        "category": "LES MACHINES DE SERIGRAPHIE"
+      },
+      {
+        "name": "PISTOLET THERMIQUE",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/WhatsApp_Image_2024-12-20_at_12.20.02-removebg-preview-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/sechoir-manuel/",
+        "description": "2000W heat gun tool for versatile drying and professional applications",
+        "category": "LES MACHINES DE SERIGRAPHIE"
+      },
+      {
+        "name": "PISTOLET THERMIQUE DIGITAL",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/WhatsApp_Image_2024-12-20_at_12.20.04-removebg-preview-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/pistolet-thermique-digital/",
+        "description": "Digital 2000W heat tool designed for screen printing professionals",
+        "category": "LES MACHINES DE SERIGRAPHIE"
+      },
+      {
+        "name": "SECHOIR BLEU AUTOMATIQUE INFRAROUGE",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/HLB1p4aHQbvpK1RjSZPiq6zmwXXar.jpg_960x960-430x376.webp",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/sechoir-infrarouge/",
+        "description": null,
+        "category": "LES MACHINES DE SERIGRAPHIE"
+      },
+      {
+        "name": "SECHOIR JAUNE AUTOMATIQUE INFRAROUGE",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/H73fed13b8ba746189060074aad3196ce8.jpg_960x960-430x430.webp",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/sechoir-jaune-infrarouge-automatique/",
+        "description": null,
+        "category": "LES MACHINES DE SERIGRAPHIE"
+      },
+      {
+        "name": "SECHOIR NOIR A RESISTANCE",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/HTB1qNXBXbr1gK0jSZR0q6zP8XXaP.jpg_960x960-430x430.webp",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/sechoir-noir-a-resistance/",
+        "description": null,
+        "category": "LES MACHINES DE SERIGRAPHIE"
+      },
+      {
+        "name": "TENDEUR DE SOIE (60X60CM)",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/H0cf8ec9594b64b50af5aee8ebe0252f0z.jpg_960x960.webp",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/tendeur-de-soie-60x60cm/",
+        "description": null,
+        "category": "LES MACHINES DE SERIGRAPHIE"
+      },
+      {
+        "name": "TENDEUR DE SOIE (60X90CM)",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/HTB12LLjeCSD3KVjSZFKq6z10VXai-430x431.jpg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/tendeur-de-soie-60x90cm/",
+        "description": null,
+        "category": "LES MACHINES DE SERIGRAPHIE"
+      },
+      {
+        "name": "TUNNEL DE SECHAGE",
+        "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/11/HTB1_YiIdW6qK1RjSZFm7600PFXai.png_960x960-1-430x430.webp",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/tunnel-de-sechage/",
+        "description": null,
+        "category": "LES MACHINES DE SERIGRAPHIE"
+      }
+    ],
+    "les_produits_sublimables": [
+      {
+        "name": "CADRE EN MARBRE (SH02)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/SH02-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/cadre-en-marbre-sh02/",
+        "description": "Cadre en marbre sublimable, parfait pour sublimer photos, messages ou designs uniques",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "CADRE EN MARBRE"
+      },
+      {
+        "name": "CADRE EN MARBRE (SH03)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/SH03-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/cadre-en-marbre-sh03/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "CADRE EN MARBRE"
+      },
+      {
+        "name": "CADRE EN MARBRE (SH04)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/SH04-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/cadre-en-marbre-sh04/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "CADRE EN MARBRE"
+      },
+      {
+        "name": "CADRE EN MARBRE (SH05)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/SH05-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/cadre-en-marbre-sh05/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "CADRE EN MARBRE"
+      },
+      {
+        "name": "CADRE EN MARBRE (SH15)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/SH15-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/cadre-en-marbre-sh15/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "CADRE EN MARBRE"
+      },
+      {
+        "name": "CADRE EN MARBRE (SH19)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/SH19-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/cadre-en-marbre-sh19/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "CADRE EN MARBRE"
+      },
+      {
+        "name": "CADRE EN MARBRE (SH25)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/SH25-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/cadre-ne-marbre-sh25/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "CADRE EN MARBRE"
+      },
+      {
+        "name": "CADRE EN MARBRE (SH31)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/SH31-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/cadre-en-marbre-sh31/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "CADRE EN MARBRE"
+      },
+      {
+        "name": "CADRE EN MARBRE (SH39)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/SH39-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/cadre-en-marbre-sh39/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "CADRE EN MARBRE"
+      },
+      {
+        "name": "CADRE EN MARBRE (SH57)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/SH57-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/cadre-en-marbre-sh57/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "CADRE EN MARBRE"
+      },
+      {
+        "name": "CADRE EN MARBRE (SH59)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/SH59-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/cadre-en-marbre-sh59/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "CADRE EN MARBRE"
+      },
+      {
+        "name": "CADRE EN MARBRE (SH60)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/SH60-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/cadre-en-marbre-sh60/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "CADRE EN MARBRE"
+      },
+      {
+        "name": "MONTRE EN MARBRE (SH37)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/SH37-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/montre-en-marbre-sh37/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "CADRE EN MARBRE"
+      },
+      {
+        "name": "CADRE EN VERRE (BL01)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/BL01-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/cadre-en-verre-bl01/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "CADRE EN VERRE"
+      },
+      {
+        "name": "CADRE EN VERRE (BL02)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/BL02-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/cadre-en-verre-bl02/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "CADRE EN VERRE"
+      },
+      {
+        "name": "CADRE EN VERRE (BL03)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/BL03-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/cadre-en-verre-bl03/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "CADRE EN VERRE"
+      },
+      {
+        "name": "CADRE EN VERRE (BL04)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/BL04-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/cadre-en-verre-bl04/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "CADRE EN VERRE"
+      },
+      {
+        "name": "CADRE EN VERRE (BL05)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/BL05-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/cadre-en-verre-bl05/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "CADRE EN VERRE"
+      },
+      {
+        "name": "CADRE EN VERRE (BL09)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/BL09-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/cadre-en-verre-bl09/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "CADRE EN VERRE"
+      },
+      {
+        "name": "CADRE EN VERRE (BL11)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/BL11-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/cadre-en-verre-bl11/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "CADRE EN VERRE"
+      },
+      {
+        "name": "CADRE EN VERRE (BL12)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/BL12-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/cadre-en-verre-bl12/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "CADRE EN VERRE"
+      },
+      {
+        "name": "CADRE EN VERRE (BL14)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/BL14-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/cadre-en-verre-bl14/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "CADRE EN VERRE"
+      },
+      {
+        "name": "CADRE EN VERRE (BL26)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/BL26-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/cadre-en-verre-bl26/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "CADRE EN VERRE"
+      },
+      {
+        "name": "CADRE EN VERRE (BL27)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/BL27-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/cadre-en-verre-bl27/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "CADRE EN VERRE"
+      },
+      {
+        "name": "CADRE EN VERRE (BL28)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/BL28-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/cadre-en-verre-bl28/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "CADRE EN VERRE"
+      },
+      {
+        "name": "CADRE EN VERRE (BL29)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/BL29-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/cadre-en-verre-bl29/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "CADRE EN VERRE"
+      },
+      {
+        "name": "CADRE EN VERRE (BL31)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/BL31-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/cadre-en-verre-bl31/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "CADRE EN VERRE"
+      },
+      {
+        "name": "CADRE EN VERRE (BL25)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/BL25-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/cadre-en-verre-bl25/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "CADRE EN VERRE"
+      },
+      {
+        "name": "MINI BALANCE SUBLIMABLE EN VERRE (BL19)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/BL19-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/mini-balance-sublimable-en-verre-bl19/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "CADRE EN VERRE"
+      },
+      {
+        "name": "PORTE CLE EN CRISTAL (BSK-02)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/BSK-02-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/porte-cle-en-cristal-bsk-02/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "PORT CLE"
+      },
+      {
+        "name": "PORTE CLE EN CRISTAL (BSK-04)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/BSK-04-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/porte-cle-en-cristal-bsk-04/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "PORT CLE"
+      },
+      {
+        "name": "PORTE CLE EN CRISTAL (BSK-05)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/BSK-05-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/porte-cle-en-cristal-bsk-05/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "PORT CLE"
+      },
+      {
+        "name": "PORTE CLE EN CRISTAL (BSK-07)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/BSK-07-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/porte-cle-en-cristal-bsk-07/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "PORT CLE"
+      },
+      {
+        "name": "PORTE CLE EN MDF (A)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/A-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/porte-cle-en-mdf-a/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "PORT CLE"
+      },
+      {
+        "name": "PORTE CLE EN MDF (B)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/B-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/porte-cle-en-mdf-b/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "PORT CLE"
+      },
+      {
+        "name": "PORTE CLE EN MDF (B1)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/B1-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/porte-cle-en-mdf-b1/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "PORT CLE"
+      },
+      {
+        "name": "PORTE CLE EN MDF (D)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/D-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/porte-cle-en-mdf-d/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "PORT CLE"
+      },
+      {
+        "name": "PORTE CLE EN MDF (F)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/F-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/porte-cle-en-mdf-f/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "PORT CLE"
+      },
+      {
+        "name": "PORTE CLE EN MDF (I)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/I-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/porte-cle-en-mdf-i/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "PORT CLE"
+      },
+      {
+        "name": "PORTE CLE EN METAL (YA-01)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/YA-01-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/porte-cle-en-metal-ya01/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "PORT CLE"
+      },
+      {
+        "name": "PORTE CLE EN METAL (YA-03)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/YA-03-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/porte-cle-en-metal-ya-03/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "PORT CLE"
+      },
+      {
+        "name": "PORTE CLE EN METAL (YA-04)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/YA-04-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/porte-cle-en-metal-ya-04/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "PORT CLE"
+      },
+      {
+        "name": "PORTE CLE EN METAL (YA-06)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/YA-06-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/porte-cle-en-metal-ya-06/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "PORT CLE"
+      },
+      {
+        "name": "PORTE CLE EN METAL (YB-12)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/YA-12-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/porte-cle-en-metal-yb-12/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "PORT CLE"
+      },
+      {
+        "name": "PORTE CLE EN METAL (YB-14)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/YA-14-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/porte-cle-en-metal-yb-14/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "PORT CLE"
+      },
+      {
+        "name": "PUZZLE A4 SUBLIMABLE", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/Fabric_jigsaw_blank__45309_zoom__86621_zoom__23264_zoom-430x430.jpg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/puzzle-a4-sublimable/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "PUZZLE"
+      },
+      {
+        "name": "PUZZLE COEUR SUBLIMABLE", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/fre_pl_Puzzle-magnetique-coeur-19-5-x-19-5-cm-75-pieces-Sublimation-Transfert-Thermique-2513_1-430x430.jpg",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/puzzle-coeur-sublimable/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "PUZZLE"
+      },
+      {
+        "name": "TAPIS DE SOURIS SUBLIMABLE", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/10/Ha0be0bfe1c3242e583c3acb6847ff654p.jpg_960x960-430x430.webp",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/tapis-de-souris/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "TAPIS DE SOURIS"
+      },
+      {
+        "name": "TROPHEE EN VERRE (BSJ03A)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/WhatsApp_Image_2024-12-17_at_15.00.48-removebg-preview-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/trophee-en-verre-bsj03a/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "CADRE EN VERRE"
+      },
+      {
+        "name": "TROPHEE EN VERRE (BXP01)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/BXP01-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/trophee-en-verre-bxp01/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "CADRE EN VERRE"
+      },
+      {
+        "name": "TROPHEE EN VERRE (BXP02)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/BXP02-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/trophee-en-verre-bxp02/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "CADRE EN VERRE"
+      },
+      {
+        "name": "TROPHEE EN VERRE (BXP05)", "price": null,
+        "image_url": "https://nouvelespaceserigraphik.ma/wp-content/uploads/2024/12/BXP05-430x573.png",
+        "product_url": "https://nouvelespaceserigraphik.ma/produit/trophee-en-verre-bxp05/",
+        "category": "LES PRODUITS SUBLIMABLES", "subcategory": "CADRE EN VERRE"
+      }
+    ]
+  },
+  "notes": {
+    "pricing": "Most product prices are not publicly visible on the WooCommerce category/listing pages. Only 3 packs have confirmed prices (4400, 5400, 8400 MAD). Prices must be requested directly or require adding to cart.",
+    "product_counts": {
+      "les_presses_a_chaud": "23 total (all captured across 2 pages)",
+      "les_consommables_de_serigraphie": "40 total (captured across 4 pages)",
+      "les_consommables_de_sublimation": "31 total (captured across 3 pages)",
+      "les_machines_dimpression": "6 total (all captured)",
+      "les_machines_de_serigraphie": "18 total (all captured across 2 pages)",
+      "les_produits_sublimables": "52 total (captured across 5 pages)"
+    },
+    "image_note": "All image URLs are WordPress CDN URLs. To get full-resolution version, remove the dimension suffix (e.g. -430x430) from the filename before the extension."
+  }
+}
