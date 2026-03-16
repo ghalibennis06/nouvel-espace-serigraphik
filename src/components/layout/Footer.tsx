@@ -1,152 +1,94 @@
 import Link from 'next/link'
-import { getTranslations } from 'next-intl/server'
-import { getCategoryTree } from '@/lib/woocommerce'
-import { categoryHref, whatsappGeneralLink } from '@/lib/utils'
+import { whatsappGeneralLink } from '@/lib/utils'
 
 export default async function Footer({ locale }: { locale: string }) {
-  const [t, { root }] = await Promise.all([
-    getTranslations('footer'),
-    getCategoryTree(),
-  ])
+  const phone = process.env.NEXT_PUBLIC_PHONE ?? '+212-522-44-80-90'
 
-  const phone   = process.env.NEXT_PUBLIC_PHONE   ?? '+212-522-44-80-90'
-  const address = process.env.NEXT_PUBLIC_ADDRESS  ?? 'Bd Mohammed V, Casablanca 20250'
-  const email   = process.env.NEXT_PUBLIC_EMAIL    ?? 'contact@nouvelespaceserigraphik.ma'
+  const cols = [
+    {
+      title: 'Kits & Packs',
+      links: [
+        { label: 'Pack N°1 — Démarrage',    href: `/${locale}/kits` },
+        { label: 'Pack N°2 — Professionnel', href: `/${locale}/kits` },
+        { label: 'Pack N°3 — Avancé',        href: `/${locale}/kits` },
+        { label: 'Kit Personnalisé',          href: `/${locale}/contact` },
+      ],
+    },
+    {
+      title: 'Catalogue',
+      links: [
+        { label: 'Presses à Chaud',      href: `/${locale}/categorie-produit/les-presses-a-chaud` },
+        { label: 'Consommables',         href: `/${locale}/categorie-produit/les-consommables-de-serigraphie` },
+        { label: 'Produits Sublimables', href: `/${locale}/categorie-produit/les-produits-sublimables` },
+        { label: 'Machines',             href: `/${locale}/categorie-produit/les-machines-dimpression` },
+      ],
+    },
+    {
+      title: 'Académie',
+      links: [
+        { label: 'Guide de démarrage',      href: `/${locale}/academie/lancer-atelier-30-jours` },
+        { label: 'Tutoriels sublimation',   href: `/${locale}/academie/guide-sublimation-debutant` },
+        { label: 'Techniques sérigraphie',  href: `/${locale}/academie/bases-serigraphie` },
+        { label: 'Calculateur rentabilité', href: `/${locale}/academie` },
+        { label: 'Livraison & retours',     href: `/${locale}/livraison` },
+        { label: 'Contact & showroom',      href: `/${locale}/contact` },
+      ],
+    },
+  ]
 
   return (
-    <footer className="bg-navy-900 text-gray-300">
-      {/* Trust strip */}
-      <div className="border-b border-navy-700">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-          {[
-            { icon: '🏭', label: 'Importateur Officiel', sub: 'Antex · Inknovator' },
-            { icon: '🚚', label: 'Livraison 48h',        sub: 'Casablanca & Maroc' },
-            { icon: '📦', label: 'Stock Local',           sub: 'Disponible immédiatement' },
-            { icon: '💬', label: 'Support WhatsApp',      sub: 'Réponse < 5 min' },
-            { icon: '🔄', label: 'Retours 14j',           sub: 'Produits non ouverts' },
-            { icon: '🧾', label: 'Facture Pro',            sub: 'TVA + devis' },
-          ].map(item => (
-            <div key={item.label} className="flex items-start gap-3">
-              <span className="text-2xl flex-shrink-0 mt-0.5">{item.icon}</span>
-              <div>
-                <div className="text-white text-xs font-bold">{item.label}</div>
-                <div className="text-gray-400 text-2xs">{item.sub}</div>
-              </div>
+    <footer style={{ background: '#1A1612', borderTop: '1px solid rgba(200,137,31,0.1)', padding: '64px 6% 32px' }}>
+      <div style={{ maxWidth: 1280, margin: '0 auto' }}>
+
+        {/* Links grid */}
+        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: '3.5rem', marginBottom: 44 }}
+             className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+
+          {/* Brand col */}
+          <div>
+            <div style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 26, fontWeight: 700, color: '#F5EDD8', marginBottom: 12 }}>
+              Nouvel Espace <span style={{ color: '#C8891F' }}>Sérigraphik</span>
             </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Links grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-
-        {/* Brand col */}
-        <div>
-          <div className="font-black text-white text-xl mb-2">
-            Nouvel<span className="text-brand-red">Espace</span>
-            <span className="block text-2xs font-semibold tracking-[3px] text-gray-500 mt-0.5">SERIGRAPHIK</span>
-          </div>
-          <p className="text-sm text-gray-400 leading-relaxed mb-5">{t('description')}</p>
-          <div className="space-y-2 text-sm">
-            <a href={`tel:${phone}`} className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
-              <span className="text-brand-red">📞</span> {phone}
-            </a>
-            <a href={`mailto:${email}`} className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
-              <span className="text-brand-red">✉️</span> {email}
-            </a>
-            <div className="flex items-start gap-2 text-gray-400">
-              <span className="text-brand-red mt-0.5">📍</span> {address}
-            </div>
-          </div>
-          <div className="flex gap-3 mt-5">
-            <a href="https://facebook.com/N.E.Serigraphik" target="_blank" rel="noopener noreferrer"
-               className="w-8 h-8 bg-navy-800 hover:bg-brand-red rounded-lg flex items-center justify-center text-sm transition-colors">
-              f
-            </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"
-               className="w-8 h-8 bg-navy-800 hover:bg-brand-red rounded-lg flex items-center justify-center text-xs font-bold transition-colors">
-              in
-            </a>
-            <a href={whatsappGeneralLink()} target="_blank" rel="noopener noreferrer"
-               className="w-8 h-8 bg-[#25D366] hover:bg-[#20ba5a] rounded-lg flex items-center justify-center text-xs transition-colors">
-              💬
-            </a>
-          </div>
-        </div>
-
-        {/* Categories */}
-        <div>
-          <h4 className="text-white font-bold text-sm mb-4 uppercase tracking-wide">{t('categories')}</h4>
-          <ul className="space-y-2">
-            {root.map(cat => (
-              <li key={cat.id}>
-                <Link
-                  href={categoryHref(cat.slug, locale)}
-                  className="text-sm text-gray-400 hover:text-white transition-colors"
-                >
-                  {cat.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Quick links */}
-        <div>
-          <h4 className="text-white font-bold text-sm mb-4 uppercase tracking-wide">{t('quickLinks')}</h4>
-          <ul className="space-y-2">
-            {[
-              { label: t('about'),        href: `/${locale}/a-propos` },
-              { label: t('deliveryInfo'), href: `/${locale}/livraison` },
-              { label: t('faq'),          href: `/${locale}/faq` },
-              { label: t('terms'),        href: `/${locale}/cgv` },
-              { label: t('privacy'),      href: `/${locale}/confidentialite` },
-            ].map(link => (
-              <li key={link.href}>
-                <Link href={link.href} className="text-sm text-gray-400 hover:text-white transition-colors">
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Support */}
-        <div>
-          <h4 className="text-white font-bold text-sm mb-4 uppercase tracking-wide">{t('support')}</h4>
-          <div className="bg-navy-800 rounded-xl p-4 space-y-3">
-            <p className="text-sm text-gray-400">Besoin d'aide ou d'un devis professionnel ?</p>
+            <p style={{ fontSize: 13, color: '#B8AA94', lineHeight: 1.75, marginBottom: 22 }}>
+              Le fournisseur de référence pour les professionnels de l&apos;impression au Maroc.
+              Machines, consommables et kits complets livrés partout au Maroc en 24–48h depuis 2018.
+            </p>
             <a
               href={whatsappGeneralLink()}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-whatsapp w-full text-sm"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#25D366', color: '#fff', padding: '10px 22px', borderRadius: 6, fontSize: 13, fontWeight: 600, textDecoration: 'none', fontFamily: 'Outfit,sans-serif' }}
             >
-              💬 WhatsApp
+              💬 {phone}
             </a>
-            <Link href={`/${locale}/contact`} className="btn-outline border-gray-600 text-gray-300 hover:bg-gray-700 w-full text-sm">
-              Formulaire de contact
-            </Link>
           </div>
 
-          <div className="mt-5">
-            <h5 className="text-white font-bold text-xs mb-3 uppercase tracking-wide">{t('partners')}</h5>
-            <div className="flex flex-wrap gap-2">
-              {['ANTEX', 'INKNOVATOR', 'FREESUB', 'IPRESS', 'SEF', 'EPSON'].map(brand => (
-                <span key={brand} className="text-2xs font-bold text-gray-500 bg-navy-800 px-2 py-1 rounded">
-                  {brand}
-                </span>
+          {/* Link cols */}
+          {cols.map(col => (
+            <div key={col.title}>
+              <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#F5EDD8', marginBottom: 18 }}>
+                {col.title}
+              </div>
+              {col.links.map(link => (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  className="link-gold"
+                  style={{ display: 'block', fontSize: 13, color: '#B8AA94', marginBottom: 9, textDecoration: 'none', transition: 'color .2s' }}
+                >
+                  {link.label}
+                </Link>
               ))}
             </div>
-          </div>
+          ))}
         </div>
-      </div>
 
-      {/* Bottom bar */}
-      <div className="border-t border-navy-700">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-gray-500">
-          <span>© 2024 Nouvel Espace Serigraphik. {t('rights')}</span>
-          <span>🇲🇦 {t('madeIn')}</span>
+        {/* Bottom bar */}
+        <div style={{ borderTop: '1px solid rgba(245,237,216,0.06)', paddingTop: 22, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8 }}>
+          <span style={{ fontSize: 12, color: '#B8AA94' }}>
+            © 2026 Nouvel Espace Sérigraphik · Casablanca, Maroc 🇲🇦
+          </span>
+          <span style={{ fontSize: 12, color: '#B8AA94' }}>Tous droits réservés</span>
         </div>
       </div>
     </footer>

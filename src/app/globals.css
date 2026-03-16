@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -17,41 +17,48 @@
   from { opacity: 0; }
   to   { opacity: 1; }
 }
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: .5; transform: scale(.6); }
+}
+@keyframes typingDot {
+  0%, 80%, 100% { transform: scale(.6); opacity: .4; }
+  40%            { transform: scale(1); opacity: 1; }
+}
 
 /* ─── Base ───────────────────────────────────────────────────────────────── */
 @layer base {
   html { scroll-behavior: smooth; }
-  body { @apply font-sans antialiased bg-white text-navy-900; }
-  [dir='rtl'] { font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif; }
+  body { @apply font-sans antialiased; background: #0C0A08; color: #F5EDD8; }
+  [dir='rtl'] { font-family: 'Outfit', 'Segoe UI', Tahoma, sans-serif; }
 }
 
 /* ─── Components ─────────────────────────────────────────────────────────── */
 @layer components {
 
-  /* Cards */
-  .product-card {
-    @apply bg-white rounded-2xl border border-gray-100 overflow-hidden
-           transition-all duration-200 shadow-card;
+  /* ── New dark design system buttons ─────────────────────────────────────── */
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3
+           bg-[#C8891F] hover:bg-[#E8A830] text-[#0C0A08] font-semibold text-sm
+           rounded cursor-pointer transition-all duration-150;
   }
-  .product-card:hover {
-    @apply shadow-card-hover -translate-y-1 border-gray-200;
+  .btn-wa-dark {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3
+           bg-[#25D366] hover:bg-[#20ba5a] text-white font-semibold text-sm
+           rounded cursor-pointer transition-all duration-150;
   }
-  .kit-card {
-    @apply relative bg-white border-2 border-gray-100 rounded-2xl p-6 flex flex-col
-           transition-all duration-200 hover:-translate-y-1 hover:shadow-card-hover;
+  .btn-ghost-wa {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3
+           border border-[#25D366] text-[#25D366] hover:bg-[#25D366]/10
+           font-semibold text-sm rounded cursor-pointer transition-all duration-150;
   }
-  .kit-card-popular { @apply border-brand-amber shadow-card-hover; }
+  .btn-outline-cream {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3
+           border border-[#F5EDD8]/20 text-[#B8AA94] hover:border-[#F5EDD8]/40 hover:text-[#F5EDD8]
+           font-medium text-sm rounded cursor-pointer transition-all duration-150;
+  }
 
-  /* Badges */
-  .badge          { @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-2xs font-bold uppercase tracking-wide; }
-  .badge-red      { @apply badge bg-brand-red text-white; }
-  .badge-green    { @apply badge bg-brand-green text-white; }
-  .badge-amber    { @apply badge bg-brand-amber text-navy-900; }
-  .badge-navy     { @apply badge bg-navy-900 text-brand-amber; }
-  .badge-orange   { @apply badge bg-orange-100 text-orange-700 border border-orange-200; }
-  .stock-dot      { @apply inline-block w-2 h-2 rounded-full flex-shrink-0; }
-
-  /* Buttons */
+  /* ── Legacy buttons (inner pages) ────────────────────────────────────────── */
   .btn-primary {
     @apply inline-flex items-center justify-center gap-2 px-6 py-3
            bg-brand-red hover:bg-red-700 text-white font-bold text-sm
@@ -73,14 +80,12 @@
   .btn-outline {
     @apply inline-flex items-center justify-center gap-2 px-6 py-3
            border-2 border-navy-900 text-navy-900 hover:bg-navy-900 hover:text-white
-           font-bold text-sm rounded-xl transition-all duration-150 cursor-pointer
-           active:scale-95;
+           font-bold text-sm rounded-xl transition-all duration-150 cursor-pointer active:scale-95;
   }
   .btn-outline-white {
     @apply inline-flex items-center justify-center gap-2 px-6 py-3
            border-2 border-white/30 text-white hover:border-white hover:bg-white/10
-           font-bold text-sm rounded-xl transition-all duration-150 cursor-pointer
-           active:scale-95;
+           font-bold text-sm rounded-xl transition-all duration-150 cursor-pointer active:scale-95;
   }
   .btn-whatsapp {
     @apply inline-flex items-center justify-center gap-2 px-6 py-3
@@ -90,21 +95,48 @@
   }
   .btn-ghost {
     @apply inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium
-           text-gray-600 hover:text-navy-900 hover:bg-gray-100 rounded-xl
-           transition-colors duration-150;
+           rounded-xl transition-colors duration-150 cursor-pointer;
   }
 
-  /* Section label */
+  /* ── Section helpers ─────────────────────────────────────────────────────── */
   .section-label {
-    @apply inline-flex items-center gap-2 text-xs font-bold uppercase
-           tracking-widest text-brand-red mb-3;
+    @apply inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-red mb-3;
   }
+  .stag {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: #C8891F;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  /* ── Cards — legacy ──────────────────────────────────────────────────────── */
+  .product-card {
+    @apply bg-white rounded-2xl border border-gray-100 overflow-hidden
+           transition-all duration-200 shadow-card;
+  }
+  .product-card:hover { @apply shadow-card-hover -translate-y-1 border-gray-200; }
+  .kit-card {
+    @apply relative bg-white border-2 border-gray-100 rounded-2xl p-6 flex flex-col
+           transition-all duration-200 hover:-translate-y-1 hover:shadow-card-hover;
+  }
+  .kit-card-popular { @apply border-brand-amber shadow-card-hover; }
+
+  /* ── Badges ──────────────────────────────────────────────────────────────── */
+  .badge        { @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-2xs font-bold uppercase tracking-wide; }
+  .badge-red    { @apply badge bg-brand-red text-white; }
+  .badge-green  { @apply badge bg-brand-green text-white; }
+  .badge-amber  { @apply badge bg-brand-amber text-navy-900; }
+  .badge-navy   { @apply badge bg-navy-900 text-brand-amber; }
+  .badge-orange { @apply badge bg-orange-100 text-orange-700 border border-orange-200; }
+  .stock-dot    { @apply inline-block w-2 h-2 rounded-full flex-shrink-0; }
 }
 
 /* ─── Utilities ──────────────────────────────────────────────────────────── */
 @layer utilities {
 
-  /* Line clamp */
   .line-clamp-2 {
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -118,13 +150,14 @@
     overflow: hidden;
   }
 
-  /* Gradient text — direct CSS (not @apply) for cross-browser reliability */
+  /* Gradient text (gold) */
   .gradient-text {
-    background: linear-gradient(to right, #F59E0B, #FB923C);
+    background: linear-gradient(to right, #C8891F, #E8A830);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
+  /* Gradient text (red — legacy inner pages) */
   .gradient-text-red {
     background: linear-gradient(to right, #DC2626, #F87171);
     -webkit-background-clip: text;
@@ -132,28 +165,34 @@
     background-clip: text;
   }
 
-  /* Hero subtle dot grid */
+  /* Hero dot pattern */
   .hero-pattern {
-    background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+    background-image: radial-gradient(circle, rgba(200,137,31,0.06) 1px, transparent 1px);
     background-size: 28px 28px;
   }
 
-  /* Ticker — references root-level @keyframes ticker */
+  /* Ticker */
   .animate-ticker {
-    animation: ticker 40s linear infinite;
+    animation: ticker 30s linear infinite;
     display: inline-flex;
     white-space: nowrap;
     will-change: transform;
   }
-  .animate-ticker:hover {
-    animation-play-state: paused;
-  }
+  .animate-ticker:hover { animation-play-state: paused; }
 
-  /* Slide animations */
-  .animate-slide-in-right {
-    animation: slideInRight 0.3s ease-out;
-  }
-  .animate-fade-in {
-    animation: fadeIn 0.2s ease-out;
-  }
+  /* Slide / fade */
+  .animate-slide-in-right { animation: slideInRight 0.3s ease-out; }
+  .animate-fade-in        { animation: fadeIn 0.2s ease-out; }
+
+  /* Typing dots */
+  .typing-dot { animation: typingDot 1.2s ease-in-out infinite; }
+  .typing-dot:nth-child(2) { animation-delay: .2s; }
+  .typing-dot:nth-child(3) { animation-delay: .4s; }
+
+  /* ── Server-component hover helpers ─────────────────────────────────────── */
+  .hover-ink2:hover { background: #1A1612 !important; }
+  .link-gold:hover  { color: #C8891F !important; }
+  .art-item:hover   { border-color: rgba(200,137,31,0.28) !important; transform: translateX(5px); }
+  .cat-item:hover   { background: #1A1612 !important; }
+  .kit-item:hover   { transform: translateY(-7px); border-color: rgba(200,137,31,0.25) !important; }
 }

@@ -1,22 +1,34 @@
 'use client'
-import { useTranslations } from 'next-intl'
+
+const ITEMS = [
+  '🚚 Livraison 24–48h partout au Maroc',
+  '💬 Support WhatsApp 7j/7',
+  '✓ Garantie 1 an sur toutes nos machines',
+  '🎁 Packs dès 4 400 MAD — Économisez jusqu\'à 2 100 MAD',
+]
 
 export default function AnnouncementBar() {
-  const t = useTranslations('announcement')
-  const items: string[] = t.raw('items') as string[]
-
-  // Duplicate items for seamless loop
-  const doubled = [...items, ...items]
+  const doubled = [...ITEMS, ...ITEMS]
 
   return (
-    <div className="bg-navy-900 text-white text-xs font-medium py-2 overflow-hidden">
-      <div
-        className="animate-ticker"
-        style={{ animationDuration: '40s' }}
-        aria-hidden="true"
-      >
+    <div
+      className="overflow-hidden"
+      style={{ background: '#C8891F', color: '#0C0A08', padding: '9px 0' }}
+      role="marquee"
+      aria-label="Annonces"
+    >
+      <div className="animate-ticker" aria-hidden="true">
         {doubled.map((item, i) => (
-          <span key={i} className="mx-10 inline-block">
+          <span
+            key={i}
+            style={{
+              padding: '0 48px',
+              fontSize: '11px',
+              fontWeight: 700,
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+            }}
+          >
             {item}
           </span>
         ))}

@@ -1,272 +1,274 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import Image from 'next/image'
 import { setRequestLocale } from 'next-intl/server'
 import { getFeaturedProducts, getCategoryTree } from '@/lib/woocommerce'
-import ProductCard from '@/components/catalog/ProductCard'
-import { categoryHref, whatsappGeneralLink } from '@/lib/utils'
+import { categoryHref, whatsappGeneralLink, whatsappProductLink } from '@/lib/utils'
+import RoiCalculator from '@/components/home/RoiCalculator'
+import ProductsSection from '@/components/home/ProductsSection'
 
 export const dynamic = 'force-dynamic'
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Nouvel Espace Serigraphik — Équipement Impression Textile Maroc',
-    description: 'Importateur officiel de machines et consommables pour la sérigraphie, sublimation et DTF au Maroc. Kits clé-en-main, livraison 48h, support WhatsApp.',
+    title: 'Nouvel Espace Sérigraphik — Lancez votre atelier d\'impression en 24h',
+    description: 'Machines professionnelles, kits complets, consommables de qualité. Plus de 2 000 ateliers lancés partout au Maroc — livraison 24–48h, support WhatsApp 7j/7.',
   }
 }
 
-const WA_KITS = (kitName: string) =>
-  whatsappGeneralLink(`Bonjour, je suis intéressé par le ${kitName}. Pouvez-vous me donner plus d'informations ?`)
+// ─── Data ─────────────────────────────────────────────────────────────────────
 
 const KITS = [
   {
-    id: 'starter',
+    id: 'p1',
     badge: null,
-    emoji: '🖨️',
-    name: 'Kit Sublimation Starter',
-    tagline: 'Pour démarrer rapidement',
+    badgeStyle: {},
+    level: 'Pack N°1',
+    levelColor: '#C8891F',
+    name: 'Kit Démarrage',
+    desc: "L'essentiel pour lancer votre activité de personnalisation textile dès aujourd'hui.",
     price: '4 400',
-    priceNum: 4400,
-    monthlyEst: '~220',
-    includes: [
-      'Presse à chaud 38×38cm semi-auto',
-      'Papier sublimation A4 × 100 feuilles',
-      'Encres sublimation CMYK × 4 × 100ml',
-      '10 mugs blancs sublimables',
-      'Scotch thermique + feuille téflon',
-      'Support WhatsApp 1 mois inclus',
+    oldPrice: '5 200',
+    priceColor: '#C8891F',
+    featured: false,
+    items: [
+      'Presse à chaud manuelle 38×38cm',
+      'Papiers transfert A4 × 50 feuilles',
+      'Scotch thermique + téflon inclus',
+      "Guide de démarrage NES offert",
+      '1 mois support WhatsApp',
     ],
-    highlight: 'Idéal pour tester le marché',
-    cta: 'Commander ce kit',
+    conso: '250–400 MAD/mois · Papier transfert + scotch',
+    consoColor: 'rgba(200,137,31,0.05)',
+    consoAccent: '#C8891F',
+    wa: "Bonjour NES, je veux commander le Pack N°1 Kit Démarrage à 4 400 MAD. Disponible ?",
+    btnBg: '#25D366',
   },
   {
-    id: 'pro',
-    badge: '⭐ Le Plus Populaire',
-    emoji: '🎨',
-    name: 'Kit Sérigraphie Pro',
-    tagline: 'Le choix des ateliers sérieux',
+    id: 'p2',
+    badge: '★ Plus populaire',
+    badgeStyle: { background: '#0F9080', color: '#fff' },
+    level: 'Pack N°2',
+    levelColor: '#0F9080',
+    name: 'Kit Professionnel',
+    desc: 'Presse 5en1, sublimation multi-supports. Le kit le plus vendu au Maroc.',
     price: '5 400',
-    priceNum: 5400,
-    monthlyEst: '~270',
-    includes: [
-      'Presse à chaud 40×50cm auto-open',
-      'Cadre aluminium 40×50 × 2 unités',
-      'Base aqueuse Antex XP10 1L × 2',
-      'Films de transfert A3 × 20 feuilles',
-      'Raclette + scotch thermique',
-      'Formation en ligne offerte',
+    oldPrice: '6 800',
+    priceColor: '#C8891F',
+    featured: true,
+    items: [
+      'Presse 5en1 Freesub 38×38cm',
+      'Encres sublimation 4 couleurs 100ml',
+      'Papier sublimation A4 × 100 feuilles',
+      'Mugs sublimables blancs × 12',
+      'Guide vidéo + 1 mois support WA',
     ],
-    highlight: 'ROI en moins de 30 commandes clients',
-    cta: 'Commander ce kit',
+    conso: '400–700 MAD/mois · Encres + papier + mugs',
+    consoColor: 'rgba(15,144,128,0.06)',
+    consoAccent: '#0F9080',
+    wa: "Bonjour NES, je veux commander le Pack N°2 Professionnel à 5 400 MAD. Disponible à livrer dans ma ville ?",
+    btnBg: '#0F9080',
   },
   {
-    id: 'premium',
-    badge: null,
-    emoji: '🚀',
-    name: 'Kit Impression Complète DTF',
-    tagline: 'Production intensive, tous textiles',
+    id: 'p3',
+    badge: 'Atelier Complet',
+    badgeStyle: { background: '#C8891F', color: '#0C0A08' },
+    level: 'Pack N°3',
+    levelColor: '#E06040',
+    name: 'Kit Atelier Avancé',
+    desc: "Sérigraphie + sublimation. L'équipement complet pour un atelier professionnel.",
     price: '8 400',
-    priceNum: 8400,
-    monthlyEst: '~420',
-    includes: [
-      'Imprimante DTF A4 + station poudrage',
-      'Presse à chaud 40×60cm professionnelle',
-      'Kit encres DTF CMYK+W 250ml × 5',
-      'Poudre thermofusible 2kg',
-      'Papier DTF A4 × 100 feuilles',
-      'Support & formation 3 mois inclus',
+    oldPrice: '10 500',
+    priceColor: '#E06040',
+    featured: false,
+    items: [
+      'Presse 40×50cm auto-ouverture',
+      'Carrousel 1 couleur 1 station',
+      'Encres sublimation 1L × 4 couleurs',
+      'Base aqueuse Antex XP50 1kg',
+      'Cadres aluminium 40×50cm × 2',
     ],
-    highlight: 'Le setup complet pour scaler',
-    cta: 'Commander ce kit',
+    conso: '800–1 500 MAD/mois · Encres + bases + soie',
+    consoColor: 'rgba(224,96,64,0.04)',
+    consoAccent: '#E06040',
+    wa: "Bonjour NES, je suis intéressé par le Pack N°3 Atelier Avancé à 8 400 MAD. Pouvez-vous me contacter ?",
+    btnBg: '#D05030',
   },
 ]
 
-const CATEGORIES_CONFIG: Record<string, { icon: string; color: string; desc: string }> = {
-  'les-presses-a-chaud':              { icon: '🔥', color: 'bg-red-50 border-red-100',     desc: 'Sublimation & transfert thermique' },
-  'les-consommables-de-serigraphie':  { icon: '🎨', color: 'bg-blue-50 border-blue-100',   desc: 'Bases, cadres, raclettes, films' },
-  'les-consommables-de-sublimation':  { icon: '💧', color: 'bg-cyan-50 border-cyan-100',   desc: 'Encres, papiers, flex, scotch' },
-  'les-machines-dimpression':         { icon: '⚙️', color: 'bg-purple-50 border-purple-100', desc: 'DTF, UV, traceurs grand format' },
-  'les-machines-de-serigraphie':      { icon: '🖨️', color: 'bg-orange-50 border-orange-100', desc: 'Carrousels, insolation, séchoirs' },
-  'les-produits-sublimables':         { icon: '🛍️', color: 'bg-green-50 border-green-100', desc: 'Mugs, cadres, coussins, textiles' },
-}
+const CATEGORIES = [
+  { emoji: '🔥', name: 'Presses à Chaud',       info: 'Manuelles, auto-ouverture, 5en1, casquette, mug', count: '23', slug: 'les-presses-a-chaud',             recur: false },
+  { emoji: '🧴', name: 'Consommables Sérigraphie',info: 'Antex, Inknovator, cadres alu, soies, raclettes', count: '40', slug: 'les-consommables-de-serigraphie', recur: true  },
+  { emoji: '🖋️', name: 'Consommables Sublimation',info: 'Encres, papiers, flex 14 couleurs, scotch thermique',count: '31', slug: 'les-consommables-de-sublimation', recur: true  },
+  { emoji: '🖨️', name: "Machines d'Impression",  info: 'DTF, UV, traceurs grand format professionnels',  count: '8',  slug: 'les-machines-dimpression',        recur: false },
+  { emoji: '⚙️', name: 'Machines de Sérigraphie', info: 'Carrousels 1C à 4C, insolation, séchoirs tunnel', count: '14', slug: 'les-machines-de-serigraphie',      recur: false },
+  { emoji: '☕', name: 'Produits Sublimables',    info: 'Mugs, cadres marbre, coussins, porte-clés',       count: '52', slug: 'les-produits-sublimables',         recur: false },
+]
+
+const ACADEMY_ARTICLES = [
+  { icon: '🚀', title: 'Lancer son atelier de 0 à 10 000 MAD/mois',          tag: 'Guide complet', meta: '15 min · Débutant',    slug: 'lancer-atelier-30-jours'          },
+  { icon: '☕', title: 'Sublimation sur mug : guide débutant étape par étape', tag: 'Tutoriel',      meta: '10 min · Avec photos', slug: 'guide-sublimation-debutant'       },
+  { icon: '⚖️', title: 'Sérigraphie vs Sublimation : quelle technique choisir ?', tag: 'Comparatif', meta: '8 min · Interactif',  slug: 'sublimation-vs-transfert'         },
+  { icon: '🔍', title: 'Comment choisir sa presse à chaud en 2026 ?',          tag: 'Guide achat',   meta: '12 min · Tableau',     slug: 'choisir-sa-presse-a-chaud'        },
+  { icon: '🎓', title: 'Tout sur les encres de sublimation — choisir et doser', tag: 'Technique',    meta: '18 min · Avec vidéo',  slug: 'guide-sublimation-debutant'       },
+]
 
 const TESTIMONIALS = [
   {
+    initial: 'Y',
+    name: 'Youssef A.',
+    city: 'Marrakech · Atelier personnalisation',
+    text: "J'ai commandé le Pack N°2 et j'ai reçu en 24h à Marrakech. En 2 semaines, j'avais déjà remboursé le kit avec mes premières commandes de mugs personnalisés. Incroyable.",
+  },
+  {
+    initial: 'F',
+    name: 'Fatima Z.',
+    city: 'Casablanca · Sérigraphie textile',
+    text: 'Le support WhatsApp est exceptionnel. À chaque question on me répond en quelques minutes avec des conseils concrets. Une équipe vraiment professionnelle et disponible.',
+  },
+  {
+    initial: 'K',
     name: 'Karim B.',
-    role: 'Gérant — Print Studio Casablanca',
-    text: 'J\'ai démarré avec le Kit Sublimation Starter en janvier. Aujourd\'hui je fais 200+ mugs/semaine. Le support WhatsApp est vraiment réactif, ils m\'ont aidé à calibrer ma presse en 10 minutes.',
-    rating: 5,
-    avatar: 'K',
-  },
-  {
-    name: 'Samira O.',
-    role: 'Créatrice — Atelier Textile Rabat',
-    text: 'Les consommables Antex sont de qualité constante, et la livraison en 48h me permet de ne jamais être en rupture. Je commande chaque semaine. Factures pro disponibles, c\'est essentiel pour ma comptabilité.',
-    rating: 5,
-    avatar: 'S',
-  },
-  {
-    name: 'Youssef M.',
-    role: 'Directeur — ImprimPro Marrakech',
-    text: 'On a équipé tout notre atelier ici. 2 carrousels 6 couleurs, la machine d\'insolation et tous les consommables. Prix imbattables au Maroc, et ils connaissent vraiment leur métier.',
-    rating: 5,
-    avatar: 'Y',
+    city: 'Fès · Atelier complet',
+    text: "Le Pack N°3 m'a permis de faire de la sérigraphie ET de la sublimation. Mon chiffre d'affaires a doublé en 3 mois. Je recommande NES à tous les entrepreneurs sérieux.",
   },
 ]
 
-const ACADEMY_GUIDES = [
-  {
-    emoji: '📖',
-    title: 'Guide Complet Sublimation',
-    desc: 'Températures, temps de pression, supports compatibles. Tout ce qu\'il faut savoir pour imprimer parfaitement dès le premier jour.',
-    tag: 'Débutant',
-    tagColor: 'bg-green-100 text-green-700',
-  },
-  {
-    emoji: '🎯',
-    title: 'Lancer son atelier en 30 jours',
-    desc: 'Business plan, liste d\'équipement, premiers clients, tarifs recommandés. Le plan d\'action complet pour créer votre activité.',
-    tag: 'Business',
-    tagColor: 'bg-blue-100 text-blue-700',
-  },
-  {
-    emoji: '🔬',
-    title: 'Maîtriser la Sérigraphie',
-    desc: 'Insolation, émulsion, expositions, raclage. Les techniques professionnelles expliquées simplement avec les produits Antex.',
-    tag: 'Technique',
-    tagColor: 'bg-purple-100 text-purple-700',
-  },
-]
+// ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default async function HomePage({ params }: { params: { locale: string } }) {
   const { locale } = params
   setRequestLocale(locale)
 
-  const [{ root: categories }, featuredProducts] = await Promise.all([
+  const [{ root: cats }, products] = await Promise.all([
     getCategoryTree(),
-    getFeaturedProducts(8),
+    getFeaturedProducts(12),
   ])
 
-  return (
-    <>
-      {/* ═══════════════════════════════════════════════════════════
-          HERO — Split layout
-      ═══════════════════════════════════════════════════════════ */}
-      <section className="relative bg-navy-900 overflow-hidden hero-pattern">
-        {/* Red accent gradient */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-brand-red/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-brand-amber/5 rounded-full blur-2xl translate-y-1/2 -translate-x-1/2" />
+  const waCalc = whatsappGeneralLink("Bonjour NES, j'ai calculé ma rentabilité et je veux lancer mon atelier. Quel kit me recommandez-vous ?")
+  const waExpert = whatsappGeneralLink("Bonjour NES, je souhaite lancer mon atelier d'impression. Pouvez-vous m'aider à choisir le bon kit ?")
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 py-16 lg:py-24">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+  return (
+    <div style={{ background: '#0C0A08' }}>
+
+      {/* ═══════════════════════════════════════════════════════════
+          HERO
+      ═══════════════════════════════════════════════════════════ */}
+      <section
+        id="hero"
+        style={{
+          minHeight: '91vh',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          padding: '60px 6%',
+          position: 'relative',
+          overflow: 'hidden',
+        }}
+      >
+        {/* Gold glow */}
+        <div style={{ position: 'absolute', top: -300, right: -300, width: 900, height: 900, background: 'radial-gradient(circle, rgba(200,137,31,.06) 0%, transparent 60%)', pointerEvents: 'none' }} />
+
+        <div style={{ maxWidth: 1280, margin: '0 auto', width: '100%' }}>
+          <div className="grid lg:grid-cols-2 gap-16 items-center" style={{ display: 'grid', gap: '5rem', alignItems: 'center' }}>
 
             {/* Left: copy */}
             <div>
-              <div className="inline-flex items-center gap-2 bg-brand-red/15 border border-brand-red/25 rounded-full px-4 py-1.5 text-brand-red text-xs font-bold mb-6">
-                <span className="w-1.5 h-1.5 bg-brand-red rounded-full animate-pulse" />
-                Importateur Officiel · Stock Local · Livraison 48h
+              {/* Badge */}
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, marginBottom: 22 }}>
+                <div style={{ width: 36, height: 1, background: '#C8891F' }} />
+                <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#C8891F' }}>
+                  Leader de l&apos;impression au Maroc depuis 2018
+                </span>
               </div>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-[1.05] tracking-tight mb-5">
-                Équipez votre<br />
-                atelier en<br />
-                <span className="gradient-text">48 heures.</span>
+              <h1 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 'clamp(48px,6vw,82px)', fontWeight: 700, lineHeight: 1.03, color: '#F5EDD8', marginBottom: 22 }}>
+                Lancez votre<br />
+                <em style={{ fontStyle: 'italic', color: '#C8891F' }}>atelier d&apos;impression</em><br />
+                en 24 heures.
               </h1>
 
-              <p className="text-gray-400 text-base sm:text-lg leading-relaxed mb-8 max-w-lg">
-                Machines, consommables et kits clé-en-main pour la sérigraphie, la sublimation et le DTF.
-                Le hub d&apos;équipement N°1 des ateliers d&apos;impression au Maroc.
+              <p style={{ fontSize: 16, color: '#B8AA94', lineHeight: 1.75, marginBottom: 34, maxWidth: 500 }}>
+                Machines professionnelles, kits complets, consommables de qualité.
+                Plus de 2 000 ateliers lancés partout au Maroc — le vôtre commence aujourd&apos;hui.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-3 mb-10">
-                <Link href={`/${locale}/kits`} className="btn-amber text-base px-8 py-4">
-                  Voir les Kits Démarrage →
+              <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 44 }}>
+                <Link
+                  href={`/${locale}/kits`}
+                  className="btn-gold"
+                  style={{ padding: '14px 28px', fontSize: 14, textDecoration: 'none' }}
+                >
+                  Voir les Kits &amp; Packs →
                 </Link>
                 <a
-                  href={whatsappGeneralLink('Bonjour, je veux démarrer une activité d\'impression. Pouvez-vous me conseiller ?')}
+                  href={waExpert}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-whatsapp text-base px-8 py-4"
+                  className="btn-ghost-wa"
+                  style={{ padding: '14px 28px', fontSize: 14 }}
                 >
-                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-                    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.83L0 24l6.341-1.509A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.006-1.366l-.36-.214-3.726.887.926-3.625-.235-.373A9.818 9.818 0 1 1 12 21.818z"/>
-                  </svg>
-                  Parler à un Expert
+                  💬 Parler à un expert
                 </a>
               </div>
 
-              {/* Stats row */}
-              <div className="grid grid-cols-4 gap-4 pt-8 border-t border-white/10">
+              {/* Stats */}
+              <div style={{ display: 'flex', gap: 36, flexWrap: 'wrap' }}>
                 {[
-                  { num: '500+', label: 'Ateliers équipés' },
-                  { num: '10 ans', label: 'D\'expérience' },
-                  { num: '48h',  label: 'Livraison' },
-                  { num: '7j/7', label: 'Support WA' },
-                ].map(s => (
-                  <div key={s.label}>
-                    <div className="text-xl sm:text-2xl font-black text-brand-amber">{s.num}</div>
-                    <div className="text-2xs text-gray-500 leading-tight mt-0.5">{s.label}</div>
+                  { val: '2 000+', lbl: 'ateliers lancés' },
+                  { val: '24h',    lbl: 'délai livraison' },
+                  { val: '80+',    lbl: 'produits en stock' },
+                  { val: '6',      lbl: 'villes au Maroc' },
+                ].map((s, i) => (
+                  <div key={s.lbl} style={{ display: 'flex', alignItems: 'stretch', gap: 36 }}>
+                    {i > 0 && <div style={{ width: 1, background: 'rgba(245,237,216,0.1)' }} />}
+                    <div>
+                      <div style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 34, fontWeight: 700, color: '#F5EDD8', lineHeight: 1 }}>
+                        {s.val}
+                      </div>
+                      <div style={{ fontSize: 11, color: '#B8AA94', marginTop: 2 }}>{s.lbl}</div>
+                    </div>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Right: kit cards visual — no external images, always renders */}
-            <div className="hidden lg:flex flex-col gap-4">
-              {/* Kit cards */}
-              {[
-                { emoji: '🖨️', name: 'Kit Sublimation Starter', price: '4 400 MAD', tag: 'Débutant', color: 'bg-white/5 border-white/10' },
-                { emoji: '🎨', name: 'Kit Sérigraphie Pro',      price: '5 400 MAD', tag: '⭐ Populaire', color: 'bg-brand-amber/10 border-brand-amber/30' },
-                { emoji: '🚀', name: 'Kit Impression DTF',       price: '8 400 MAD', tag: 'Production', color: 'bg-white/5 border-white/10' },
-              ].map(kit => (
-                <div key={kit.name} className={`flex items-center gap-4 ${kit.color} border rounded-2xl px-5 py-4`}>
-                  <span className="text-3xl flex-shrink-0">{kit.emoji}</span>
-                  <div className="flex-1 min-w-0">
-                    <div className="text-white font-bold text-sm truncate">{kit.name}</div>
-                    <div className="text-gray-400 text-xs mt-0.5">{kit.tag}</div>
-                  </div>
-                  <div className="text-brand-amber font-black text-lg flex-shrink-0">{kit.price}</div>
-                </div>
-              ))}
-              {/* Trust badges row */}
-              <div className="grid grid-cols-2 gap-3 mt-2">
-                {[
-                  { icon: '🚚', val: '48h', sub: 'Livraison Maroc' },
-                  { icon: '💬', val: '< 5 min', sub: 'Réponse WhatsApp' },
-                  { icon: '🏭', val: 'Direct', sub: 'Importateur officiel' },
-                  { icon: '🧾', val: 'Pro', sub: 'Facture + devis TVA' },
-                ].map(b => (
-                  <div key={b.sub} className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 flex items-center gap-3">
-                    <span className="text-xl">{b.icon}</span>
-                    <div>
-                      <div className="text-white font-black text-sm">{b.val}</div>
-                      <div className="text-gray-500 text-2xs">{b.sub}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+            {/* Right: ROI Calculator */}
+            <div className="hidden lg:block">
+              <RoiCalculator variant="hero" waLink={waCalc} />
             </div>
           </div>
         </div>
       </section>
 
       {/* ═══════════════════════════════════════════════════════════
-          TRUST BAR
+          TRUST STRIP
       ═══════════════════════════════════════════════════════════ */}
-      <div className="bg-navy-950 border-b border-navy-700">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3.5">
-          <div className="flex flex-wrap justify-center lg:justify-between items-center gap-4 text-center lg:text-left">
+      <div style={{ background: '#1A1612', borderTop: '1px solid rgba(200,137,31,0.1)', borderBottom: '1px solid rgba(200,137,31,0.1)', padding: '22px 6%' }}>
+        <div style={{ maxWidth: 1280, margin: '0 auto' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
             {[
-              { icon: '🏭', text: 'Importateur Direct Officiel' },
-              { icon: '🚚', text: 'Livraison Maroc 48h' },
-              { icon: '📦', text: 'Stock Permanent Local' },
-              { icon: '💬', text: 'Support WhatsApp 7j/7' },
-              { icon: '🧾', text: 'Facture Pro + Devis TVA' },
-            ].map(item => (
-              <div key={item.text} className="flex items-center gap-2">
-                <span className="text-base">{item.icon}</span>
-                <span className="text-xs font-semibold text-gray-300">{item.text}</span>
+              { icon: '🚚', strong: 'Livraison 24–48h', text: ' partout au Maroc' },
+              { icon: '🛡️', strong: 'Garantie 1 an',    text: ' toutes machines' },
+              { icon: '💬', strong: 'Support WhatsApp', text: ' 7 jours / 7' },
+              { icon: '💳', strong: 'Paiement',         text: ' à la livraison' },
+              { icon: '⭐', strong: '+2 000 clients',   text: ' satisfaits' },
+            ].map((item, i) => (
+              <div
+                key={item.strong}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 10,
+                  padding: '12px 28px',
+                  position: 'relative',
+                  ...(i > 0 ? { borderLeft: '1px solid rgba(245,237,216,0.08)' } : {}),
+                }}
+              >
+                <span style={{ fontSize: 18 }}>{item.icon}</span>
+                <span style={{ fontSize: 13, color: '#B8AA94' }}>
+                  <strong style={{ fontWeight: 600, color: '#F5EDD8' }}>{item.strong}</strong>
+                  {item.text}
+                </span>
               </div>
             ))}
           </div>
@@ -274,457 +276,407 @@ export default async function HomePage({ params }: { params: { locale: string } 
       </div>
 
       {/* ═══════════════════════════════════════════════════════════
-          STARTER KITS — THE MONEY SECTION
+          KITS
       ═══════════════════════════════════════════════════════════ */}
-      <section className="bg-gray-50 py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-12">
-            <div className="section-label justify-center">
-              <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd"/>
-              </svg>
-              Kits Clé-en-Main
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-black text-navy-900 mb-3">
-              Lancez votre atelier<br />
-              <span className="gradient-text-red">en moins de 48 heures.</span>
+      <section id="kits" style={{ background: '#0C0A08', padding: '90px 6%' }}>
+        <div style={{ maxWidth: 1280, margin: '0 auto' }}>
+          <div>
+            <span className="stag">Kits &amp; Packs — Démarrage Garanti</span>
+            <h2 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 'clamp(36px,4vw,58px)', fontWeight: 700, lineHeight: 1.08, color: '#F5EDD8', marginBottom: 10 }}>
+              Choisissez votre<br />
+              <em style={{ fontStyle: 'italic', color: '#C8891F' }}>kit de démarrage</em>
             </h2>
-            <p className="text-gray-500 max-w-xl mx-auto text-base">
-              Tout inclus, rien à chercher. Commandez via WhatsApp et recevez votre kit complet,
-              prêt à imprimer dès la livraison.
+            <p style={{ fontSize: 15, color: '#B8AA94', lineHeight: 1.75, maxWidth: 540, marginBottom: 0 }}>
+              Chaque kit est conçu pour se rembourser en moins de 30 jours. Économisez jusqu&apos;à 2 100 MAD vs l&apos;achat séparé. Livraison offerte incluse.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6 items-stretch">
+          {/* Kits grid */}
+          <div
+            className="grid md:grid-cols-3 gap-5"
+            style={{ display: 'grid', gap: 22, marginTop: 52 }}
+          >
             {KITS.map(kit => (
-              <div key={kit.id} className={`kit-card ${kit.badge ? 'kit-card-popular' : ''}`}>
+              <div
+                key={kit.id}
+                style={{
+                  background: '#1A1612',
+                  border: kit.featured ? '1px solid rgba(200,137,31,0.35)' : '1px solid rgba(245,237,216,0.07)',
+                  boxShadow: kit.featured ? '0 0 50px rgba(200,137,31,0.07)' : 'none',
+                  borderRadius: 18,
+                  padding: 30,
+                  position: 'relative',
+                  overflow: 'hidden',
+                }}
+              >
+                {/* Badge */}
                 {kit.badge && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-brand-amber text-navy-900 text-xs font-black px-4 py-1 rounded-full whitespace-nowrap">
+                  <span style={{ position: 'absolute', top: 18, right: 18, padding: '4px 10px', borderRadius: 20, fontSize: 9, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', ...kit.badgeStyle }}>
                     {kit.badge}
-                  </div>
+                  </span>
                 )}
 
-                <div className="text-3xl mb-3">{kit.emoji}</div>
-                <div className="text-2xs font-bold text-gray-400 uppercase tracking-widest mb-1">{kit.tagline}</div>
-                <h3 className="text-lg font-black text-navy-900 mb-4">{kit.name}</h3>
-
-                <div className="flex items-baseline gap-1 mb-1">
-                  <span className="text-3xl font-black text-navy-900">{kit.price}</span>
-                  <span className="text-sm font-bold text-gray-500">MAD HT</span>
+                <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.13em', textTransform: 'uppercase', color: kit.levelColor, marginBottom: 10 }}>
+                  {kit.level}
                 </div>
-                <p className="text-xs text-gray-400 mb-6">≈ {kit.monthlyEst} MAD/mois remboursé en 3 semaines</p>
+                <div style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 27, fontWeight: 700, color: '#F5EDD8', marginBottom: 7 }}>
+                  {kit.name}
+                </div>
+                <p style={{ fontSize: 13, color: '#B8AA94', marginBottom: 22, lineHeight: 1.55 }}>
+                  {kit.desc}
+                </p>
 
-                <ul className="space-y-2.5 mb-6 flex-1">
-                  {kit.includes.map(item => (
-                    <li key={item} className="flex items-start gap-2.5 text-sm text-gray-700">
-                      <svg className="w-4 h-4 text-brand-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/>
-                      </svg>
+                {/* Price */}
+                <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 20 }}>
+                  <span style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 38, fontWeight: 700, color: kit.priceColor }}>
+                    {kit.price}
+                  </span>
+                  <span style={{ fontSize: 13, color: '#B8AA94' }}>MAD</span>
+                  <span style={{ fontSize: 14, color: '#B8AA94', textDecoration: 'line-through' }}>{kit.oldPrice}</span>
+                </div>
+
+                {/* Items */}
+                <ul style={{ listStyle: 'none', marginBottom: 20, display: 'flex', flexDirection: 'column', gap: 7 }}>
+                  {kit.items.map(item => (
+                    <li key={item} style={{ display: 'flex', alignItems: 'flex-start', gap: 8, fontSize: 12, color: '#B8AA94', lineHeight: 1.4 }}>
+                      <span style={{ color: '#C8891F', fontWeight: 800, flexShrink: 0 }}>✓</span>
                       {item}
                     </li>
                   ))}
                 </ul>
 
-                <div className="bg-gray-50 rounded-xl px-4 py-2.5 mb-5 text-xs text-gray-600 font-medium text-center border border-gray-100">
-                  💡 {kit.highlight}
+                {/* Conso */}
+                <div style={{ marginTop: 16, padding: 12, background: kit.consoColor, border: `1px solid ${kit.consoAccent}22`, borderRadius: 8, fontSize: 11, color: '#B8AA94' }}>
+                  <strong style={{ color: kit.consoAccent }}>♻ Conso mensuel estimé :</strong>{' '}{kit.conso}
                 </div>
 
-                <a
-                  href={WA_KITS(kit.name)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`btn-whatsapp w-full ${kit.badge ? 'py-4 text-base' : 'py-3'}`}
-                >
-                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-                    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.83L0 24l6.341-1.509A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.006-1.366l-.36-.214-3.726.887.926-3.625-.235-.373A9.818 9.818 0 1 1 12 21.818z"/>
-                  </svg>
-                  {kit.cta}
-                </a>
+                {/* Buttons */}
+                <div style={{ display: 'flex', gap: 9, marginTop: 22 }}>
+                  <a
+                    href={whatsappGeneralLink(kit.wa)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7, background: kit.btnBg, color: '#fff', padding: '11px 16px', borderRadius: 6, fontSize: 13, fontWeight: 600, cursor: 'pointer', textDecoration: 'none', fontFamily: 'Outfit,sans-serif', transition: 'transform .15s' }}
+                  >
+                    💬 Commander
+                  </a>
+                  <Link
+                    href={`/${locale}/kits`}
+                    style={{ padding: '11px 14px', borderRadius: 6, fontSize: 13, color: '#B8AA94', textDecoration: 'none', border: '1px solid rgba(245,237,216,0.12)', background: 'transparent', fontFamily: 'Outfit,sans-serif', transition: 'border-color .15s, color .15s' }}
+                  >
+                    Détails
+                  </Link>
+                </div>
               </div>
             ))}
           </div>
 
-          <div className="text-center mt-8">
-            <Link href={`/${locale}/kits`} className="text-sm font-semibold text-brand-red hover:underline">
-              Comparer tous nos kits en détail →
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════
-          HOW IT WORKS
-      ═══════════════════════════════════════════════════════════ */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-12">
-            <div className="section-label justify-center">Comment ça marche</div>
-            <h2 className="text-3xl font-black text-navy-900">
-              De zéro à atelier opérationnel<br />en 3 étapes simples.
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8 relative">
-            {/* Connecting line — desktop */}
-            <div className="hidden md:block absolute top-10 left-1/3 right-1/3 h-0.5 bg-gradient-to-r from-brand-amber to-brand-amber/30" />
-
-            {[
-              {
-                step: '01',
-                emoji: '🎯',
-                title: 'Choisissez votre kit',
-                desc: 'Comparez nos 3 kits et sélectionnez celui qui correspond à votre projet et budget. Des experts sont disponibles sur WhatsApp pour vous guider.',
-              },
-              {
-                step: '02',
-                emoji: '💬',
-                title: 'Commandez en 5 min',
-                desc: 'Envoyez-nous un message WhatsApp. Devis instantané, confirmation de commande, paiement flexible. Aucune démarche complexe.',
-              },
-              {
-                step: '03',
-                emoji: '🚀',
-                title: 'Démarrez en 48h',
-                desc: 'Livraison partout au Maroc sous 48h. Kit déballé, machines installées, premier test fait. Vous êtes prêt à prendre vos premières commandes.',
-              },
-            ].map((step, i) => (
-              <div key={i} className="relative flex flex-col items-center text-center md:items-start md:text-left">
-                <div className="relative z-10 w-20 h-20 bg-navy-900 rounded-2xl flex items-center justify-center mb-6 shadow-card-hover">
-                  <span className="text-3xl">{step.emoji}</span>
-                  <div className="absolute -top-2 -right-2 w-7 h-7 bg-brand-amber text-navy-900 rounded-full flex items-center justify-center text-xs font-black">
-                    {step.step}
-                  </div>
-                </div>
-                <h3 className="text-lg font-black text-navy-900 mb-2">{step.title}</h3>
-                <p className="text-sm text-gray-500 leading-relaxed">{step.desc}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-12 text-center">
+          {/* Custom kit CTA */}
+          <div style={{ marginTop: 28, textAlign: 'center', padding: 24, border: '1px dashed rgba(245,237,216,0.11)', borderRadius: 12 }}>
+            <p style={{ fontSize: 14, color: '#B8AA94', marginBottom: 14 }}>
+              Besoin d&apos;un kit sur mesure adapté à votre budget et votre activité&nbsp;?
+            </p>
             <a
-              href={whatsappGeneralLink('Bonjour, j\'ai besoin de conseils pour démarrer mon atelier d\'impression.')}
+              href={whatsappGeneralLink("Bonjour NES, je souhaite un kit personnalisé pour mon atelier. Pouvez-vous m'aider ?")}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-whatsapp inline-flex px-8 py-4 text-base"
+              className="btn-ghost-wa"
+              style={{ display: 'inline-flex', padding: '11px 22px' }}
             >
-              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-                <path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.83L0 24l6.341-1.509A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.006-1.366l-.36-.214-3.726.887.926-3.625-.235-.373A9.818 9.818 0 1 1 12 21.818z"/>
-              </svg>
-              Je veux me lancer — Parler à un expert
+              💬 Configurer mon kit personnalisé
             </a>
           </div>
         </div>
       </section>
 
       {/* ═══════════════════════════════════════════════════════════
-          CATEGORIES — Visual grid
+          PRODUCTS (client component — filter tabs)
       ═══════════════════════════════════════════════════════════ */}
-      <section className="py-20 bg-gray-50 border-t border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="flex items-end justify-between mb-10">
-            <div>
-              <div className="section-label">Catalogue Complet</div>
-              <h2 className="text-3xl font-black text-navy-900">
-                Tout pour votre atelier<br />d&apos;impression.
-              </h2>
-            </div>
-            <Link href={`/${locale}/categorie-produit`} className="hidden sm:flex text-sm font-semibold text-navy-900 hover:text-brand-red transition-colors items-center gap-1">
-              Voir tout →
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {categories.map(cat => {
-              const cfg = CATEGORIES_CONFIG[cat.slug] ?? { icon: '📦', color: 'bg-gray-50 border-gray-100', desc: 'Fournitures professionnelles' }
-              return (
-                <Link
-                  key={cat.id}
-                  href={categoryHref(cat.slug, locale)}
-                  className={`group relative overflow-hidden rounded-2xl border-2 ${cfg.color} p-6 flex flex-col gap-4 transition-all duration-200 hover:-translate-y-1 hover:shadow-card-hover`}
-                >
-                  {cat.image && (
-                    <div className="absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity">
-                      <Image src={cat.image.src} alt={cat.name} fill className="object-cover" sizes="300px" />
-                    </div>
-                  )}
-                  <div className="relative">
-                    <span className="text-4xl">{cfg.icon}</span>
-                  </div>
-                  <div className="relative">
-                    <h3 className="font-black text-navy-900 text-base mb-1">{cat.name}</h3>
-                    <p className="text-xs text-gray-500 mb-3">{cfg.desc}</p>
-                    <div className="flex items-center justify-between">
-                      <span className="text-2xs font-bold text-gray-400 bg-white px-2 py-1 rounded-full border border-gray-100">
-                        {cat.count} produits
-                      </span>
-                      <span className="text-xs font-bold text-navy-900 group-hover:text-brand-red transition-colors">
-                        Voir →
-                      </span>
-                    </div>
-                  </div>
-                </Link>
-              )
-            })}
-          </div>
-        </div>
-      </section>
+      <ProductsSection products={products} />
 
       {/* ═══════════════════════════════════════════════════════════
-          FEATURED PRODUCTS — Bestsellers
+          CATEGORIES
       ═══════════════════════════════════════════════════════════ */}
-      {featuredProducts.length > 0 && (
-        <section className="py-20 bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <div className="flex items-end justify-between mb-10">
-              <div>
-                <div className="section-label">Nos Best-Sellers</div>
-                <h2 className="text-3xl font-black text-navy-900">
-                  Les produits<br />les plus commandés.
-                </h2>
-              </div>
-              <Link href={`/${locale}/categorie-produit`} className="hidden sm:flex text-sm font-semibold text-navy-900 hover:text-brand-red transition-colors items-center gap-1">
-                Tout voir →
-              </Link>
-            </div>
-
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-              {featuredProducts.map((product, i) => (
-                <ProductCard key={product.id} product={product} locale={locale} priority={i < 4} />
-              ))}
-            </div>
-
-            <div className="text-center mt-10 sm:hidden">
-              <Link href={`/${locale}/categorie-produit`} className="btn-outline text-sm">
-                Voir tous les produits
-              </Link>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* ═══════════════════════════════════════════════════════════
-          RECURRING CONSUMABLES — Revenue model
-      ═══════════════════════════════════════════════════════════ */}
-      <section className="py-20 bg-navy-900 relative overflow-hidden">
-        <div className="absolute inset-0 hero-pattern opacity-50" />
-        <div className="absolute right-0 top-0 w-80 h-80 bg-brand-amber/10 rounded-full blur-3xl" />
-
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="inline-flex items-center gap-2 bg-brand-amber/15 border border-brand-amber/25 rounded-full px-4 py-1.5 text-brand-amber text-xs font-bold mb-6">
-                🔄 Approvisionnement Régulier
-              </div>
-              <h2 className="text-3xl sm:text-4xl font-black text-white mb-4">
-                Ne tombez plus jamais<br />
-                <span className="gradient-text">en rupture de stock.</span>
-              </h2>
-              <p className="text-gray-400 leading-relaxed mb-8">
-                Vos clients comptent sur vous. Comptez sur nous. Commandez vos consommables chaque semaine
-                ou chaque mois via WhatsApp, et recevez-les en 48h. Même produit, même qualité,
-                facture pro à chaque livraison.
-              </p>
-              <div className="grid grid-cols-2 gap-4 mb-8">
-                {[
-                  { icon: '⚡', title: 'Commande express', desc: 'Un message WhatsApp suffit' },
-                  { icon: '🏷️', title: 'Tarifs dégressifs', desc: 'Volume = meilleures marges' },
-                  { icon: '🚚', title: 'Livraison 48h', desc: 'Partout au Maroc' },
-                  { icon: '🧾', title: 'Facture mensuelle', desc: 'Groupez vos commandes' },
-                ].map(item => (
-                  <div key={item.title} className="bg-white/5 rounded-xl p-4 border border-white/10">
-                    <div className="text-xl mb-2">{item.icon}</div>
-                    <div className="text-sm font-bold text-white">{item.title}</div>
-                    <div className="text-xs text-gray-400 mt-0.5">{item.desc}</div>
-                  </div>
-                ))}
-              </div>
-              <div className="flex flex-col sm:flex-row gap-3">
-                <a
-                  href={whatsappGeneralLink('Bonjour, je veux configurer une commande régulière de consommables.')}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-whatsapp px-8 py-4"
-                >
-                  Configurer mon approvisionnement
-                </a>
-                <Link href={`/${locale}/categorie-produit/les-consommables-de-serigraphie`} className="btn-outline-white px-8 py-4">
-                  Voir les consommables →
-                </Link>
-              </div>
-            </div>
-
-            <div className="bg-white/5 border border-white/10 rounded-3xl p-8">
-              <h3 className="text-white font-black text-xl mb-6">Exemple d&apos;atelier type</h3>
-              <div className="space-y-4">
-                {[
-                  { label: 'Papier sublimation A4 × 500f', freq: 'mensuel', price: '340 MAD' },
-                  { label: 'Encres sublimation CMYK × 4', freq: 'trimestriel', price: '380 MAD' },
-                  { label: 'Base aqueuse Antex XP10 × 5L', freq: 'mensuel', price: '520 MAD' },
-                  { label: 'Films transfert A3 × 50f', freq: 'mensuel', price: '145 MAD' },
-                  { label: 'Mugs blancs × 50 unités', freq: 'mensuel', price: '1 000 MAD' },
-                ].map(item => (
-                  <div key={item.label} className="flex items-center justify-between py-3 border-b border-white/10">
-                    <div>
-                      <div className="text-sm font-medium text-white">{item.label}</div>
-                      <div className="text-2xs text-gray-400 capitalize">{item.freq}</div>
-                    </div>
-                    <div className="text-sm font-black text-brand-amber">{item.price}</div>
-                  </div>
-                ))}
-              </div>
-              <div className="mt-6 pt-5 border-t border-white/10 flex justify-between items-center">
-                <span className="text-gray-400 text-sm">Budget mensuel estimé</span>
-                <span className="text-2xl font-black text-brand-amber">~2 400 MAD</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════
-          TESTIMONIALS — Social proof
-      ═══════════════════════════════════════════════════════════ */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-12">
-            <div className="section-label justify-center">Témoignages Clients</div>
-            <h2 className="text-3xl font-black text-navy-900">
-              500 ateliers nous font confiance.<br />
-              <span className="text-gray-400 font-normal text-2xl">Voici ce qu&apos;ils disent.</span>
+      <section id="categories" style={{ background: '#0C0A08', padding: '90px 6%' }}>
+        <div style={{ maxWidth: 1280, margin: '0 auto' }}>
+          <div>
+            <span className="stag">6 Univers Produits</span>
+            <h2 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 'clamp(36px,4vw,58px)', fontWeight: 700, lineHeight: 1.08, color: '#F5EDD8' }}>
+              Tout ce dont vous<br />
+              <em style={{ fontStyle: 'italic', color: '#C8891F' }}>avez besoin pour imprimer</em>
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
-            {TESTIMONIALS.map((t, i) => (
-              <div key={i} className="bg-white rounded-2xl p-6 border border-gray-100 shadow-card">
-                <div className="flex items-center gap-1 mb-4">
-                  {[1,2,3,4,5].map(s => (
-                    <svg key={s} className="w-4 h-4 text-brand-amber" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                    </svg>
-                  ))}
+          <div
+            className="grid sm:grid-cols-2 lg:grid-cols-3"
+            style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 1, background: 'rgba(245,237,216,0.05)', border: '1px solid rgba(245,237,216,0.05)', borderRadius: 18, overflow: 'hidden', marginTop: 52 }}
+          >
+            {CATEGORIES.map(cat => (
+              <Link
+                key={cat.slug}
+                href={categoryHref(cat.slug, locale)}
+                className="cat-item"
+                style={{
+                  display: 'block',
+                  background: '#0C0A08',
+                  padding: 34,
+                  textDecoration: 'none',
+                  transition: 'background .2s',
+                  position: 'relative',
+                }}
+              >
+                <span style={{ fontSize: 38, marginBottom: 18, display: 'block' }}>{cat.emoji}</span>
+                <div style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 23, fontWeight: 700, color: '#F5EDD8', marginBottom: 6 }}>
+                  {cat.name}
                 </div>
-                <p className="text-sm text-gray-700 leading-relaxed mb-5 italic">&ldquo;{t.text}&rdquo;</p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-navy-900 rounded-full flex items-center justify-center text-white font-black text-sm flex-shrink-0">
-                    {t.avatar}
-                  </div>
-                  <div>
-                    <div className="text-sm font-black text-navy-900">{t.name}</div>
-                    <div className="text-xs text-gray-400">{t.role}</div>
-                  </div>
+                <div style={{ fontSize: 12, color: '#B8AA94' }}>
+                  {cat.info}
+                  <strong style={{ color: '#C8891F', fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 22, fontWeight: 700, display: 'block', marginTop: 9 }}>
+                    {cat.count} produits
+                  </strong>
                 </div>
-              </div>
+                {cat.recur && (
+                  <div style={{ display: 'inline-flex', alignItems: 'center', gap: 4, marginTop: 11, padding: '3px 9px', background: 'rgba(11,107,94,0.18)', border: '1px solid rgba(11,107,94,0.38)', borderRadius: 4, fontSize: 10, fontWeight: 700, letterSpacing: '0.06em', color: '#0F9080', textTransform: 'uppercase' }}>
+                    ♻ Abonnement mensuel
+                  </div>
+                )}
+              </Link>
             ))}
           </div>
         </div>
       </section>
 
       {/* ═══════════════════════════════════════════════════════════
-          ACADEMY — Education hub teaser
+          ACADÉMIE
       ═══════════════════════════════════════════════════════════ */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <section id="academie" style={{ background: '#1A1612', padding: '90px 6%', position: 'relative', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', top: -300, right: -300, width: 700, height: 700, background: 'radial-gradient(circle, rgba(200,137,31,.04), transparent 65%)', pointerEvents: 'none' }} />
+        <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative' }}>
+
+          <div className="grid lg:grid-cols-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '5rem', alignItems: 'center' }}>
+
+            {/* Articles */}
             <div>
-              <div className="section-label">Académie NES</div>
-              <h2 className="text-3xl font-black text-navy-900 mb-4">
-                Apprenez, imprimez,<br />
-                <span className="gradient-text">développez votre business.</span>
+              <span className="stag">Académie NES — 100% Gratuit</span>
+              <h2 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 'clamp(36px,4vw,58px)', fontWeight: 700, lineHeight: 1.08, color: '#F5EDD8', marginBottom: 10 }}>
+                Apprenez et<br />
+                <em style={{ fontStyle: 'italic', color: '#C8891F' }}>développez votre atelier</em>
               </h2>
-              <p className="text-gray-500 leading-relaxed mb-6">
-                Des guides gratuits rédigés par nos experts pour vous aider à maîtriser
-                la sérigraphie, la sublimation et le DTF. De la théorie aux techniques avancées,
-                pour tous les niveaux.
+              <p style={{ fontSize: 15, color: '#B8AA94', lineHeight: 1.75, maxWidth: 540 }}>
+                Guides pratiques, tutoriels vidéo et outils de calcul pour maîtriser votre métier et maximiser vos profits dès le premier mois.
               </p>
-              <Link href={`/${locale}/academie`} className="btn-secondary inline-flex px-8 py-3.5">
-                Accéder aux guides gratuits →
-              </Link>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 14, marginTop: 34 }}>
+                {ACADEMY_ARTICLES.map(a => (
+                  <Link
+                    key={a.slug}
+                    href={`/${locale}/academie/${a.slug}`}
+                    style={{
+                      background: '#0C0A08',
+                      border: '1px solid rgba(245,237,216,0.06)',
+                      borderRadius: 11,
+                      padding: '16px 18px',
+                      cursor: 'pointer',
+                      textDecoration: 'none',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 14,
+                      transition: 'border-color .2s, transform .2s',
+                    }}
+                    className="art-item"
+                  >
+                    <span style={{ fontSize: 24, flexShrink: 0 }}>{a.icon}</span>
+                    <div>
+                      <div style={{ fontSize: 14, fontWeight: 500, color: '#F5EDD8', marginBottom: 3 }}>{a.title}</div>
+                      <div style={{ fontSize: 11, color: '#B8AA94', display: 'flex', gap: 8, alignItems: 'center' }}>
+                        <span style={{ background: 'rgba(200,137,31,0.11)', color: '#C8891F', padding: '2px 8px', borderRadius: 3, fontSize: 10, fontWeight: 700, letterSpacing: '0.05em' }}>
+                          {a.tag}
+                        </span>
+                        {a.meta}
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
             </div>
 
-            <div className="grid gap-4">
-              {ACADEMY_GUIDES.map((guide, i) => (
-                <div key={i} className="flex gap-4 bg-gray-50 rounded-2xl p-5 border border-gray-100 hover:border-gray-200 hover:shadow-card transition-all group cursor-pointer">
-                  <div className="text-3xl flex-shrink-0">{guide.emoji}</div>
-                  <div className="min-w-0">
-                    <div className="flex items-center gap-2 mb-1">
-                      <h4 className="font-black text-navy-900 text-sm">{guide.title}</h4>
-                      <span className={`text-2xs font-bold px-2 py-0.5 rounded-full ${guide.tagColor}`}>
-                        {guide.tag}
-                      </span>
-                    </div>
-                    <p className="text-xs text-gray-500 leading-relaxed line-clamp-2">{guide.desc}</p>
-                  </div>
-                  <svg className="w-4 h-4 text-gray-300 group-hover:text-navy-900 transition-colors flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </div>
-              ))}
-            </div>
+            {/* Calculator */}
+            <RoiCalculator variant="academie" waLink={whatsappGeneralLink("Bonjour NES, j'ai simulé ma rentabilité et je veux lancer mon atelier. Quel kit me recommandez-vous ?")} />
           </div>
         </div>
       </section>
 
       {/* ═══════════════════════════════════════════════════════════
-          B2B VOLUME — Pro buyers
+          WHATSAPP SECTION
       ═══════════════════════════════════════════════════════════ */}
-      <section className="py-16 bg-gray-50 border-t border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="bg-navy-900 rounded-3xl p-8 lg:p-12 flex flex-col lg:flex-row items-center justify-between gap-8">
+      <section id="whatsapp" style={{ background: '#0C0A08', padding: '90px 6%' }}>
+        <div style={{ maxWidth: 1280, margin: '0 auto' }}>
+          <div className="grid lg:grid-cols-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '5rem', alignItems: 'center' }}>
+
+            {/* Features */}
             <div>
-              <div className="badge-amber mb-4">Acheteurs Professionnels</div>
-              <h2 className="text-2xl lg:text-3xl font-black text-white mb-3">
-                Commandes en volume ?<br />Nous avons vos tarifs.
+              <span className="stag">Commerce WhatsApp — Naturel &amp; Rapide</span>
+              <h2 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 'clamp(36px,4vw,58px)', fontWeight: 700, lineHeight: 1.08, color: '#F5EDD8', marginBottom: 10 }}>
+                Commandez en<br />
+                <em style={{ fontStyle: 'italic', color: '#C8891F' }}>30 secondes</em>
               </h2>
-              <p className="text-gray-400 text-sm max-w-lg leading-relaxed mb-6">
-                Importateur direct, nous proposons des tarifs dégressifs à partir de 5 unités.
-                Devis personnalisé en moins de 2 heures. Facture pro, livraison prioritaire.
+              <p style={{ fontSize: 15, color: '#B8AA94', lineHeight: 1.75, marginBottom: 34 }}>
+                Pas de panier compliqué. Un message WhatsApp suffit. Nos experts vous répondent en moins de 30 minutes, 7 jours sur 7.
               </p>
-              <div className="flex flex-wrap gap-3">
-                {['-5% dès 5 unités', '-10% dès 10 unités', '-15% dès 20 unités', '-20% dès 50 unités'].map(tier => (
-                  <div key={tier} className="bg-white/10 border border-white/15 rounded-lg px-4 py-2 text-xs font-bold text-white">
-                    {tier}
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+                {[
+                  { icon: '💬', title: 'Commande express pré-remplie',    desc: "Chaque bouton « Commander » ouvre un message WhatsApp avec le produit et le prix déjà saisis. Zéro friction." },
+                  { icon: '🚚', title: 'Confirmation & suivi livraison',   desc: "Votre numéro de suivi dans les 2h. Livraison 24–48h partout au Maroc. Paiement à la livraison disponible." },
+                  { icon: '♻️', title: 'Rappel de réapprovisionnement',   desc: "Chaque mois, on vous contacte avant que vos consommables s'épuisent. Un message pour renouveler votre stock." },
+                  { icon: '🎯', title: 'Conseil expert personnalisé',      desc: "Un expert NES vous guide dans le choix de l'équipement idéal selon votre activité et votre budget." },
+                ].map(f => (
+                  <div key={f.title} style={{ display: 'flex', alignItems: 'flex-start', gap: 14 }}>
+                    <div style={{ width: 44, height: 44, borderRadius: 11, background: 'rgba(37,211,102,0.1)', border: '1px solid rgba(37,211,102,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 19, flexShrink: 0 }}>
+                      {f.icon}
+                    </div>
+                    <div>
+                      <div style={{ fontSize: 14, fontWeight: 500, color: '#F5EDD8', marginBottom: 3 }}>{f.title}</div>
+                      <div style={{ fontSize: 12, color: '#B8AA94', lineHeight: 1.55 }}>{f.desc}</div>
+                    </div>
                   </div>
                 ))}
               </div>
             </div>
-            <div className="flex-shrink-0 flex flex-col gap-3 w-full lg:w-auto min-w-[220px]">
-              <a
-                href={whatsappGeneralLink('Bonjour, je souhaite un devis pour une commande en volume professionnelle.')}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-whatsapp w-full py-4 text-base"
-              >
-                💬 Devis express WhatsApp
-              </a>
-              <Link href={`/${locale}/contact`} className="btn-outline-white w-full py-3 text-sm">
-                Formulaire de devis pro
-              </Link>
+
+            {/* Phone mockup */}
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <div style={{ background: '#1A1612', border: '2px solid rgba(245,237,216,0.1)', borderRadius: 30, padding: 22, maxWidth: 310, width: '100%' }}>
+                {/* Header */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10, paddingBottom: 15, borderBottom: '1px solid rgba(245,237,216,0.07)', marginBottom: 15 }}>
+                  <div style={{ width: 40, height: 40, borderRadius: '50%', background: '#C8891F', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 17, fontWeight: 700, color: '#0C0A08', fontFamily: '"Cormorant Garamond",serif', flexShrink: 0 }}>
+                    N
+                  </div>
+                  <div>
+                    <div style={{ fontSize: 13, fontWeight: 600, color: '#F5EDD8' }}>Nouvel Espace Sérigraphik</div>
+                    <div style={{ fontSize: 11, color: '#25D366', display: 'flex', alignItems: 'center', gap: 5 }}>
+                      <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#25D366', display: 'inline-block' }} />
+                      En ligne
+                    </div>
+                  </div>
+                </div>
+
+                {/* Messages */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 11 }}>
+                  <div style={{ maxWidth: '83%', padding: '10px 13px', background: '#2E2820', borderRadius: '3px 13px 13px 13px', fontSize: 12, lineHeight: 1.5, color: '#F5EDD8', alignSelf: 'flex-start' }}>
+                    Bonjour ! Je veux le Pack N°2, disponible à Casablanca ?
+                    <div style={{ fontSize: 10, opacity: .55, marginTop: 4 }}>10:32</div>
+                  </div>
+                  <div style={{ maxWidth: '83%', padding: '10px 13px', background: '#005C4B', borderRadius: '13px 13px 3px 13px', fontSize: 12, lineHeight: 1.5, color: '#F5EDD8', alignSelf: 'flex-end', textAlign: 'right' }}>
+                    Bonjour ! ✅ Pack N°2 en stock. Livraison Casa : 24h. Paiement à la livraison possible 🙌
+                    <div style={{ fontSize: 10, opacity: .55, marginTop: 4 }}>10:34 ✓✓</div>
+                  </div>
+                  <div style={{ maxWidth: '83%', padding: '10px 13px', background: '#2E2820', borderRadius: '3px 13px 13px 13px', fontSize: 12, lineHeight: 1.5, color: '#F5EDD8', alignSelf: 'flex-start' }}>
+                    Parfait ! Je prends aussi des encres supplémentaires ?
+                    <div style={{ fontSize: 10, opacity: .55, marginTop: 4 }}>10:36</div>
+                  </div>
+                  <div style={{ maxWidth: '83%', padding: '10px 13px', background: '#005C4B', borderRadius: '13px 13px 3px 13px', fontSize: 12, lineHeight: 1.5, color: '#F5EDD8', alignSelf: 'flex-end', textAlign: 'right' }}>
+                    Je vous recommande le lot 1L × 4 couleurs — ça dure 3 mois. Je prépare votre commande 📦
+                    <div style={{ fontSize: 10, opacity: .55, marginTop: 4 }}>10:37 ✓✓</div>
+                  </div>
+                  {/* Typing indicator */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 5, padding: '10px 13px', background: '#2E2820', borderRadius: '3px 13px 13px 13px', width: 'fit-content' }}>
+                    <span className="typing-dot" style={{ width: 7, height: 7, borderRadius: '50%', background: '#B8AA94', display: 'inline-block' }} />
+                    <span className="typing-dot" style={{ width: 7, height: 7, borderRadius: '50%', background: '#B8AA94', display: 'inline-block' }} />
+                    <span className="typing-dot" style={{ width: 7, height: 7, borderRadius: '50%', background: '#B8AA94', display: 'inline-block' }} />
+                  </div>
+                </div>
+              </div>
+
+              <div style={{ marginTop: 18 }}>
+                <a
+                  href={whatsappGeneralLink('Bonjour NES, je souhaite passer une commande.')}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-wa-dark"
+                  style={{ display: 'inline-flex', padding: '14px 30px', fontSize: 14 }}
+                >
+                  💬 Ouvrir WhatsApp
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* ═══════════════════════════════════════════════════════════
-          BRANDS
+          TESTIMONIALS
       ═══════════════════════════════════════════════════════════ */}
-      <section className="py-12 bg-white border-t border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <p className="text-2xs font-bold text-center text-gray-400 uppercase tracking-widest mb-8">
-            Marques partenaires officielles
-          </p>
-          <div className="flex flex-wrap justify-center items-center gap-10">
-            {['ANTEX', 'INKNOVATOR', 'FREESUB', 'IPRESS', 'SEF TEXTILE', 'EPSON'].map(brand => (
-              <span key={brand} className="text-sm font-black text-gray-300 tracking-widest hover:text-gray-500 transition-colors">
-                {brand}
-              </span>
+      <section id="testimonials" style={{ background: '#1A1612', padding: '90px 6%' }}>
+        <div style={{ maxWidth: 1280, margin: '0 auto' }}>
+          <div style={{ textAlign: 'center' }}>
+            <span className="stag">2 000+ Ateliers Lancés au Maroc</span>
+            <h2 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 'clamp(36px,4vw,58px)', fontWeight: 700, lineHeight: 1.08, color: '#F5EDD8' }}>
+              Ils ont réussi avec <em style={{ fontStyle: 'italic', color: '#C8891F' }}>NES</em>
+            </h2>
+          </div>
+
+          <div
+            className="grid md:grid-cols-3"
+            style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 22, marginTop: 52 }}
+          >
+            {TESTIMONIALS.map((t, i) => (
+              <div
+                key={i}
+                style={{ background: '#0C0A08', border: '1px solid rgba(245,237,216,0.07)', borderRadius: 15, padding: 26 }}
+              >
+                <div style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 52, color: '#C8891F', opacity: .25, lineHeight: .75, marginBottom: 12 }}>
+                  &ldquo;
+                </div>
+                <p style={{ fontSize: 14, color: '#B8AA94', lineHeight: 1.75, marginBottom: 18, fontStyle: 'italic' }}>
+                  {t.text}
+                </p>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 11 }}>
+                  <div style={{ width: 42, height: 42, borderRadius: '50%', background: '#9B6A10', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 17, fontWeight: 700, color: '#0C0A08', fontFamily: '"Cormorant Garamond",serif', flexShrink: 0 }}>
+                    {t.initial}
+                  </div>
+                  <div>
+                    <div style={{ fontSize: 13, fontWeight: 600, color: '#F5EDD8' }}>{t.name}</div>
+                    <div style={{ fontSize: 11, color: '#B8AA94' }}>{t.city}</div>
+                    <div style={{ color: '#C8891F', fontSize: 12, marginTop: 2 }}>★★★★★</div>
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
-    </>
+
+      {/* ═══════════════════════════════════════════════════════════
+          CTA BAND
+      ═══════════════════════════════════════════════════════════ */}
+      <section id="cta-band" style={{ background: '#C8891F', padding: '72px 6%', textAlign: 'center' }}>
+        <div style={{ maxWidth: 800, margin: '0 auto' }}>
+          <h2 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 'clamp(36px,4.2vw,58px)', fontWeight: 700, color: '#0C0A08', marginBottom: 14 }}>
+            Votre atelier commence aujourd&apos;hui.
+          </h2>
+          <p style={{ fontSize: 16, color: 'rgba(12,10,8,0.7)', marginBottom: 30 }}>
+            Rejoignez 2 000+ entrepreneurs marocains qui ont lancé leur activité avec NES.
+          </p>
+          <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
+            <Link
+              href={`/${locale}/kits`}
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#0C0A08', color: '#F5EDD8', padding: '14px 30px', borderRadius: 4, fontSize: 14, fontWeight: 600, cursor: 'pointer', textDecoration: 'none', fontFamily: 'Outfit,sans-serif', transition: 'transform .15s' }}
+            >
+              Choisir mon kit →
+            </Link>
+            <a
+              href={whatsappGeneralLink("Bonjour NES, je veux lancer mon atelier. Pouvez-vous m'aider à démarrer ?")}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#25D366', color: '#fff', padding: '14px 30px', borderRadius: 4, fontSize: 14, fontWeight: 600, cursor: 'pointer', textDecoration: 'none', fontFamily: 'Outfit,sans-serif', transition: 'transform .15s, box-shadow .15s' }}
+            >
+              💬 Parler à un expert maintenant
+            </a>
+          </div>
+        </div>
+      </section>
+
+    </div>
   )
 }

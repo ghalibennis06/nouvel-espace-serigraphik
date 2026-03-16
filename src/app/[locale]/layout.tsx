@@ -50,7 +50,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body className="min-h-screen flex flex-col bg-gray-50">
+      <body className="min-h-screen flex flex-col" style={{ background: '#0C0A08' }}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <AnnouncementBar />
           <Header
