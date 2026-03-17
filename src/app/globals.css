@@ -4,6 +4,60 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ─── Design Tokens — Dark (default) ────────────────────────────────────── */
+:root {
+  --bg:        #07080F;
+  --surface:   #0D0F1E;
+  --card:      #131524;
+  --card2:     #1A1D2E;
+  --border:    rgba(255,255,255,0.06);
+  --border2:   rgba(255,255,255,0.10);
+  --text:      #E8EAFF;
+  --text2:     #8589A8;
+  --blue:      #4F6EF7;
+  --blueh:     #3A58F0;
+  --bluesoft:  rgba(79,110,247,0.10);
+  --bluesoft2: rgba(79,110,247,0.18);
+  --orange:    #FF6A35;
+  --orangeh:   #E85010;
+  --orangesoft:rgba(255,106,53,0.10);
+  --green:     #22C55E;
+  --greensoft: rgba(34,197,94,0.12);
+  --teal:      #14B8A6;
+  --tealsoft:  rgba(20,184,166,0.10);
+  --overlay:   rgba(7,8,15,0.96);
+  --shadow:    0 4px 28px rgba(0,0,0,0.4);
+  --chat-in:   #1E2235;
+  --chat-out:  #1A3A5C;
+}
+
+/* ─── Design Tokens — Light ─────────────────────────────────────────────── */
+:root.light {
+  --bg:        #F0F2FF;
+  --surface:   #FFFFFF;
+  --card:      #E8ECFF;
+  --card2:     #DDE3FF;
+  --border:    rgba(0,0,0,0.07);
+  --border2:   rgba(0,0,0,0.12);
+  --text:      #07080F;
+  --text2:     #4A4E6E;
+  --blue:      #3A58F0;
+  --blueh:     #2840D8;
+  --bluesoft:  rgba(58,88,240,0.08);
+  --bluesoft2: rgba(58,88,240,0.14);
+  --orange:    #E85010;
+  --orangeh:   #C03A00;
+  --orangesoft:rgba(232,80,16,0.08);
+  --green:     #15A248;
+  --greensoft: rgba(21,162,72,0.10);
+  --teal:      #0D8B7E;
+  --tealsoft:  rgba(13,139,126,0.08);
+  --overlay:   rgba(240,242,255,0.96);
+  --shadow:    0 4px 28px rgba(58,88,240,0.10);
+  --chat-in:   #E8ECFF;
+  --chat-out:  #D0DBFF;
+}
+
 /* ─── Keyframes — must live at root, never inside @layer ─────────────────── */
 @keyframes ticker {
   0%   { transform: translateX(0); }
@@ -29,109 +83,74 @@
 /* ─── Base ───────────────────────────────────────────────────────────────── */
 @layer base {
   html { scroll-behavior: smooth; }
-  body { @apply font-sans antialiased; background: #0C0A08; color: #F5EDD8; }
+  body { @apply font-sans antialiased; background: var(--bg); color: var(--text); }
   [dir='rtl'] { font-family: 'Outfit', 'Segoe UI', Tahoma, sans-serif; }
 }
 
 /* ─── Components ─────────────────────────────────────────────────────────── */
 @layer components {
 
-  /* ── New dark design system buttons ─────────────────────────────────────── */
-  .btn-gold {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3
-           bg-[#C8891F] hover:bg-[#E8A830] text-[#0C0A08] font-semibold text-sm
-           rounded cursor-pointer transition-all duration-150;
-  }
-  .btn-wa-dark {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3
-           bg-[#25D366] hover:bg-[#20ba5a] text-white font-semibold text-sm
-           rounded cursor-pointer transition-all duration-150;
-  }
-  .btn-ghost-wa {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3
-           border border-[#25D366] text-[#25D366] hover:bg-[#25D366]/10
-           font-semibold text-sm rounded cursor-pointer transition-all duration-150;
-  }
-  .btn-outline-cream {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3
-           border border-[#F5EDD8]/20 text-[#B8AA94] hover:border-[#F5EDD8]/40 hover:text-[#F5EDD8]
-           font-medium text-sm rounded cursor-pointer transition-all duration-150;
-  }
-
-  /* ── Legacy buttons (inner pages) ────────────────────────────────────────── */
+  /* ── Buttons ─────────────────────────────────────────────────────────────── */
   .btn-primary {
     @apply inline-flex items-center justify-center gap-2 px-6 py-3
-           bg-brand-red hover:bg-red-700 text-white font-bold text-sm
-           rounded-xl transition-all duration-150 cursor-pointer shadow-sm
-           hover:shadow-md active:scale-95;
+           font-semibold text-sm rounded cursor-pointer transition-all duration-150;
+    background: var(--blue); color: #fff;
   }
+  .btn-primary:hover { background: var(--blueh); }
+
+  .btn-orange {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3
+           font-semibold text-sm rounded cursor-pointer transition-all duration-150;
+    background: var(--orange); color: #fff;
+  }
+  .btn-orange:hover { background: var(--orangeh); }
+
+  .btn-wa-dark {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3
+           font-semibold text-sm rounded cursor-pointer transition-all duration-150;
+    background: var(--green); color: #fff;
+  }
+  .btn-wa-dark:hover { background: #16A34A; }
+
+  .btn-ghost-wa {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3
+           font-semibold text-sm rounded cursor-pointer transition-all duration-150;
+    border: 1px solid var(--green); color: var(--green);
+  }
+  .btn-ghost-wa:hover { background: var(--greensoft); }
+
+  .btn-outline-cream {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3
+           font-medium text-sm rounded cursor-pointer transition-all duration-150;
+    border: 1px solid var(--border2); color: var(--text2);
+  }
+  .btn-outline-cream:hover { border-color: var(--blue); color: var(--text); }
+
+  /* Legacy aliases kept for compatibility */
+  .btn-gold { @apply btn-orange; }
   .btn-secondary {
     @apply inline-flex items-center justify-center gap-2 px-6 py-3
-           bg-navy-900 hover:bg-navy-800 text-white font-bold text-sm
-           rounded-xl transition-all duration-150 cursor-pointer shadow-sm
-           hover:shadow-md active:scale-95;
-  }
-  .btn-amber {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3
-           bg-brand-amber hover:bg-yellow-400 text-navy-900 font-bold text-sm
-           rounded-xl transition-all duration-150 cursor-pointer shadow-sm
-           hover:shadow-md active:scale-95;
-  }
-  .btn-outline {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3
-           border-2 border-navy-900 text-navy-900 hover:bg-navy-900 hover:text-white
-           font-bold text-sm rounded-xl transition-all duration-150 cursor-pointer active:scale-95;
-  }
-  .btn-outline-white {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3
-           border-2 border-white/30 text-white hover:border-white hover:bg-white/10
-           font-bold text-sm rounded-xl transition-all duration-150 cursor-pointer active:scale-95;
-  }
-  .btn-whatsapp {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3
-           bg-[#25D366] hover:bg-[#20ba5a] text-white font-bold text-sm
-           rounded-xl transition-all duration-150 cursor-pointer shadow-sm
-           hover:shadow-md active:scale-95;
+           font-semibold text-sm rounded cursor-pointer transition-all duration-150;
+    background: var(--card2); color: var(--text);
   }
   .btn-ghost {
     @apply inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium
-           rounded-xl transition-colors duration-150 cursor-pointer;
+           rounded transition-colors duration-150 cursor-pointer;
   }
 
   /* ── Section helpers ─────────────────────────────────────────────────────── */
-  .section-label {
-    @apply inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-red mb-3;
-  }
   .stag {
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.13em;
     text-transform: uppercase;
-    color: #C8891F;
+    color: var(--blue);
     margin-bottom: 10px;
     display: block;
   }
 
-  /* ── Cards — legacy ──────────────────────────────────────────────────────── */
-  .product-card {
-    @apply bg-white rounded-2xl border border-gray-100 overflow-hidden
-           transition-all duration-200 shadow-card;
-  }
-  .product-card:hover { @apply shadow-card-hover -translate-y-1 border-gray-200; }
-  .kit-card {
-    @apply relative bg-white border-2 border-gray-100 rounded-2xl p-6 flex flex-col
-           transition-all duration-200 hover:-translate-y-1 hover:shadow-card-hover;
-  }
-  .kit-card-popular { @apply border-brand-amber shadow-card-hover; }
-
   /* ── Badges ──────────────────────────────────────────────────────────────── */
-  .badge        { @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-2xs font-bold uppercase tracking-wide; }
-  .badge-red    { @apply badge bg-brand-red text-white; }
-  .badge-green  { @apply badge bg-brand-green text-white; }
-  .badge-amber  { @apply badge bg-brand-amber text-navy-900; }
-  .badge-navy   { @apply badge bg-navy-900 text-brand-amber; }
-  .badge-orange { @apply badge bg-orange-100 text-orange-700 border border-orange-200; }
-  .stock-dot    { @apply inline-block w-2 h-2 rounded-full flex-shrink-0; }
+  .badge { @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-2xs font-bold uppercase tracking-wide; }
 }
 
 /* ─── Utilities ──────────────────────────────────────────────────────────── */
@@ -150,16 +169,9 @@
     overflow: hidden;
   }
 
-  /* Gradient text (gold) */
+  /* Gradient text (blue) */
   .gradient-text {
-    background: linear-gradient(to right, #C8891F, #E8A830);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  /* Gradient text (red — legacy inner pages) */
-  .gradient-text-red {
-    background: linear-gradient(to right, #DC2626, #F87171);
+    background: linear-gradient(to right, var(--blue), var(--orange));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -167,7 +179,7 @@
 
   /* Hero dot pattern */
   .hero-pattern {
-    background-image: radial-gradient(circle, rgba(200,137,31,0.06) 1px, transparent 1px);
+    background-image: radial-gradient(circle, rgba(79,110,247,0.05) 1px, transparent 1px);
     background-size: 28px 28px;
   }
 
@@ -190,10 +202,11 @@
   .typing-dot:nth-child(3) { animation-delay: .4s; }
 
   /* ── Server-component hover helpers ─────────────────────────────────────── */
-  .hover-ink2:hover { background: #1A1612 !important; }
-  .link-gold:hover  { color: #C8891F !important; }
-  .art-item:hover   { border-color: rgba(200,137,31,0.28) !important; transform: translateX(5px); }
-  .cat-item:hover   { background: #1A1612 !important; }
-  .kit-item:hover        { transform: translateY(-7px); border-color: rgba(200,137,31,0.25) !important; }
-  .card-dark-hover:hover { border-color: rgba(200,137,31,0.22) !important; transform: translateY(-3px); }
+  .hover-ink2:hover  { background: var(--card2) !important; }
+  .link-blue:hover   { color: var(--blue) !important; }
+  .link-gold:hover   { color: var(--blue) !important; }
+  .art-item:hover    { border-color: rgba(79,110,247,0.30) !important; transform: translateX(5px); }
+  .cat-item:hover    { background: var(--card2) !important; }
+  .kit-item:hover    { transform: translateY(-7px); border-color: rgba(79,110,247,0.28) !important; }
+  .card-dark-hover:hover { border-color: rgba(79,110,247,0.22) !important; transform: translateY(-3px); }
 }

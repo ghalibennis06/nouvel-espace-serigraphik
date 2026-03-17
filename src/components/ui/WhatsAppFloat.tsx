@@ -7,7 +7,7 @@ export default function WhatsAppFloat() {
       style={{ position: 'fixed', bottom: 28, right: 28, zIndex: 300, display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer' }}
       className="group"
     >
-      <div style={{ background: '#1A1612', color: '#F5EDD8', padding: '8px 14px', borderRadius: 8, fontSize: 12, fontWeight: 500, border: '1px solid rgba(245,237,216,0.12)', opacity: 0, transform: 'translateX(10px)', transition: 'opacity .2s, transform .2s', pointerEvents: 'none', whiteSpace: 'nowrap' }}
+      <div style={{ background: 'var(--surface)', color: 'var(--text)', padding: '8px 14px', borderRadius: 8, fontSize: 12, fontWeight: 500, border: '1px solid var(--border2)', opacity: 0, transform: 'translateX(10px)', transition: 'opacity .2s, transform .2s', pointerEvents: 'none', whiteSpace: 'nowrap' }}
            className="group-hover:opacity-100 group-hover:translate-x-0">
         Commander via WhatsApp
       </div>
@@ -16,14 +16,14 @@ export default function WhatsAppFloat() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="WhatsApp"
-        style={{ width: 56, height: 56, borderRadius: '50%', background: '#25D366', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 22px rgba(37,211,102,0.35)', transition: 'transform .2s, box-shadow .2s', flexShrink: 0 }}
+        style={{ width: 56, height: 56, borderRadius: '50%', background: 'var(--green)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 22px rgba(34,197,94,0.35)', transition: 'transform .2s, box-shadow .2s', flexShrink: 0 }}
         onMouseEnter={e => {
           ;(e.currentTarget as HTMLElement).style.transform = 'scale(1.08)'
-          ;(e.currentTarget as HTMLElement).style.boxShadow = '0 6px 32px rgba(37,211,102,0.5)'
+          ;(e.currentTarget as HTMLElement).style.boxShadow = '0 6px 32px rgba(34,197,94,0.5)'
         }}
         onMouseLeave={e => {
           ;(e.currentTarget as HTMLElement).style.transform = 'none'
-          ;(e.currentTarget as HTMLElement).style.boxShadow = '0 4px 22px rgba(37,211,102,0.35)'
+          ;(e.currentTarget as HTMLElement).style.boxShadow = '0 4px 22px rgba(34,197,94,0.35)'
         }}
       >
         <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor">

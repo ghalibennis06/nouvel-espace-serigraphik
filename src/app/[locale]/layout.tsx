@@ -7,6 +7,7 @@ import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import AnnouncementBar from '@/components/layout/AnnouncementBar'
 import WhatsAppFloat from '@/components/ui/WhatsAppFloat'
+import ThemeProvider from '@/components/ThemeProvider'
 import { getCategoryTree } from '@/lib/woocommerce'
 
 interface LocaleLayoutProps {
@@ -34,7 +35,6 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
 
   if (!locales.includes(locale as Locale)) notFound()
 
-  // Enable static rendering for this locale
   setRequestLocale(locale)
 
   const [messages, { root: rootCategories, children: subCategories }] = await Promise.all([
@@ -49,21 +49,25 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* FOUC prevention: apply saved theme before first paint */}
+        <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem('nes-theme');if(t==='light')document.documentElement.classList.add('light');}catch(e){}})();` }} />
       </head>
-      <body className="min-h-screen flex flex-col" style={{ background: '#0C0A08' }}>
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          <AnnouncementBar />
-          <Header
-            locale={locale}
-            rootCategories={rootCategories}
-            subCategories={subCategories}
-          />
-          <main className="flex-1">
-            {children}
-          </main>
-          <Footer locale={locale} />
-          <WhatsAppFloat />
-        </NextIntlClientProvider>
+      <body className="min-h-screen flex flex-col" style={{ background: 'var(--bg)' }}>
+        <ThemeProvider>
+          <NextIntlClientProvider locale={locale} messages={messages}>
+            <AnnouncementBar />
+            <Header
+              locale={locale}
+              rootCategories={rootCategories}
+              subCategories={subCategories}
+            />
+            <main className="flex-1">
+              {children}
+            </main>
+            <Footer locale={locale} />
+            <WhatsAppFloat />
+          </NextIntlClientProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

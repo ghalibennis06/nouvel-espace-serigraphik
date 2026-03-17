@@ -122,28 +122,28 @@ export default function KitsPage({ params }: { params: { locale: string } }) {
   setRequestLocale(locale)
 
   return (
-    <div style={{ background: '#0C0A08', minHeight: '100vh' }}>
+    <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
 
       {/* ── HERO ──────────────────────────────────────────────────────────── */}
-      <div style={{ background: '#1A1612', borderBottom: '1px solid rgba(200,137,31,0.12)', padding: '72px 6% 56px' }}>
+      <div style={{ background: 'var(--surface)', borderBottom: '1px solid var(--border)', padding: '72px 6% 56px' }}>
         <div style={{ maxWidth: 900, margin: '0 auto', textAlign: 'center' }}>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(200,137,31,0.1)', border: '1px solid rgba(200,137,31,0.25)', borderRadius: 20, padding: '6px 16px', marginBottom: 24 }}>
-            <svg style={{ width: 14, height: 14, color: '#C8891F' }} fill="currentColor" viewBox="0 0 20 20">
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'var(--bluesoft)', border: '1px solid var(--bluesoft2)', borderRadius: 20, padding: '6px 16px', marginBottom: 24 }}>
+            <svg style={{ width: 14, height: 14, color: 'var(--blue)' }} fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd"/>
             </svg>
-            <span style={{ fontSize: 11, fontWeight: 700, color: '#C8891F', letterSpacing: '0.08em' }}>KITS CLÉ-EN-MAIN — LIVRAISON 48H</span>
+            <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--blue)', letterSpacing: '0.08em' }}>KITS CLÉ-EN-MAIN — LIVRAISON 48H</span>
           </div>
-          <h1 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 'clamp(36px,5vw,60px)', fontWeight: 700, color: '#F5EDD8', lineHeight: 1.1, marginBottom: 20 }}>
+          <h1 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 'clamp(36px,5vw,60px)', fontWeight: 700, color: 'var(--text)', lineHeight: 1.1, marginBottom: 20 }}>
             Tout pour démarrer.<br />
-            <span style={{ color: '#C8891F' }}>Rien à chercher.</span>
+            <span style={{ color: 'var(--blue)' }}>Rien à chercher.</span>
           </h1>
-          <p style={{ fontSize: 17, color: '#B8AA94', lineHeight: 1.7, maxWidth: 600, margin: '0 auto 32px' }}>
+          <p style={{ fontSize: 17, color: 'var(--text2)', lineHeight: 1.7, maxWidth: 600, margin: '0 auto 32px' }}>
             Choisissez votre kit, commandez via WhatsApp, démarrez votre atelier en 48h.
             Support expert inclus, formation offerte, rentabilisé en moins d&apos;un mois.
           </p>
           <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '10px 28px' }}>
             {['✅ Livraison 48h au Maroc', '✅ Support WhatsApp inclus', '✅ Formation en ligne offerte', '✅ Facture pro + devis'].map(t => (
-              <span key={t} style={{ fontSize: 13, color: '#B8AA94', fontWeight: 500 }}>{t}</span>
+              <span key={t} style={{ fontSize: 13, color: 'var(--text2)', fontWeight: 500 }}>{t}</span>
             ))}
           </div>
         </div>
@@ -156,19 +156,19 @@ export default function KitsPage({ params }: { params: { locale: string } }) {
             <div
               key={kit.id}
               style={{
-                background: '#1A1612',
-                border: `1px solid ${kit.popular ? '#C8891F' : 'rgba(245,237,216,0.08)'}`,
+                background: 'var(--card)',
+                border: `1px solid ${kit.popular ? 'var(--blue)' : 'var(--border)'}`,
                 borderRadius: 14,
                 display: 'flex',
                 flexDirection: 'column',
                 overflow: 'hidden',
                 position: 'relative',
-                boxShadow: kit.popular ? '0 0 40px rgba(200,137,31,0.12)' : 'none',
+                boxShadow: kit.popular ? '0 0 40px var(--bluesoft)' : 'none',
               }}
             >
               {/* Popular banner */}
               {kit.popular && (
-                <div style={{ background: '#C8891F', color: '#0C0A08', fontSize: 12, fontWeight: 800, textAlign: 'center', padding: '10px 16px', letterSpacing: '0.05em' }}>
+                <div style={{ background: 'var(--blue)', color: '#fff', fontSize: 12, fontWeight: 800, textAlign: 'center', padding: '10px 16px', letterSpacing: '0.05em' }}>
                   ⭐ LE PLUS POPULAIRE
                 </div>
               )}
@@ -177,39 +177,39 @@ export default function KitsPage({ params }: { params: { locale: string } }) {
                 {/* Header */}
                 <div style={{ marginBottom: 24 }}>
                   <span style={{ fontSize: 36, display: 'block', marginBottom: 12 }}>{kit.icon}</span>
-                  <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#C8891F', display: 'block', marginBottom: 6 }}>{kit.tag}</span>
-                  <h2 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 26, fontWeight: 700, color: '#F5EDD8', marginBottom: 5, lineHeight: 1.2 }}>{kit.name}</h2>
-                  <p style={{ fontSize: 13, color: '#B8AA94' }}>{kit.subtitle}</p>
+                  <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--blue)', display: 'block', marginBottom: 6 }}>{kit.tag}</span>
+                  <h2 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 26, fontWeight: 700, color: 'var(--text)', marginBottom: 5, lineHeight: 1.2 }}>{kit.name}</h2>
+                  <p style={{ fontSize: 13, color: 'var(--text2)' }}>{kit.subtitle}</p>
                 </div>
 
                 {/* Price */}
-                <div style={{ paddingBottom: 22, marginBottom: 22, borderBottom: '1px solid rgba(245,237,216,0.07)' }}>
+                <div style={{ paddingBottom: 22, marginBottom: 22, borderBottom: '1px solid var(--border)' }}>
                   <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, marginBottom: 10 }}>
-                    <span style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 44, fontWeight: 700, color: '#F5EDD8', lineHeight: 1 }}>{kit.price}</span>
-                    <span style={{ fontSize: 14, fontWeight: 600, color: '#B8AA94' }}>MAD HT</span>
+                    <span style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 44, fontWeight: 700, color: 'var(--text)', lineHeight: 1 }}>{kit.price}</span>
+                    <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--text2)' }}>MAD HT</span>
                     {kit.oldPrice && (
-                      <span style={{ fontSize: 14, color: '#B8AA94', textDecoration: 'line-through' }}>{kit.oldPrice} MAD</span>
+                      <span style={{ fontSize: 14, color: 'var(--text2)', textDecoration: 'line-through' }}>{kit.oldPrice} MAD</span>
                     )}
                   </div>
                   <div style={{ display: 'flex', gap: 20 }}>
-                    <span style={{ fontSize: 12, color: '#B8AA94' }}>⏱ <strong style={{ color: '#F5EDD8' }}>Setup :</strong> {kit.setupTime}</span>
-                    <span style={{ fontSize: 12, color: '#B8AA94' }}>💰 <strong style={{ color: '#F5EDD8' }}>ROI :</strong> {kit.roi}</span>
+                    <span style={{ fontSize: 12, color: 'var(--text2)' }}>⏱ <strong style={{ color: 'var(--text)' }}>Setup :</strong> {kit.setupTime}</span>
+                    <span style={{ fontSize: 12, color: 'var(--text2)' }}>💰 <strong style={{ color: 'var(--text)' }}>ROI :</strong> {kit.roi}</span>
                   </div>
-                  <div style={{ marginTop: 6, fontSize: 12, color: '#B8AA94' }}>👤 Pour : {kit.target}</div>
+                  <div style={{ marginTop: 6, fontSize: 12, color: 'var(--text2)' }}>👤 Pour : {kit.target}</div>
                 </div>
 
                 {/* Includes */}
                 <div style={{ marginBottom: 24 }}>
-                  <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#B8AA94', display: 'block', marginBottom: 14 }}>Ce qui est inclus</span>
+                  <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text2)', display: 'block', marginBottom: 14 }}>Ce qui est inclus</span>
                   <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 11 }}>
                     {kit.includes.map(inc => (
                       <li key={inc.item} style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
-                        <svg style={{ width: 16, height: 16, color: '#0F9080', flexShrink: 0, marginTop: 2 }} fill="currentColor" viewBox="0 0 20 20">
+                        <svg style={{ width: 16, height: 16, color: 'var(--teal)', flexShrink: 0, marginTop: 2 }} fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/>
                         </svg>
                         <div>
-                          <div style={{ fontSize: 13, fontWeight: 600, color: '#F5EDD8', lineHeight: 1.3 }}>{inc.item}</div>
-                          <div style={{ fontSize: 11, color: '#B8AA94', marginTop: 1 }}>{inc.detail}</div>
+                          <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', lineHeight: 1.3 }}>{inc.item}</div>
+                          <div style={{ fontSize: 11, color: 'var(--text2)', marginTop: 1 }}>{inc.detail}</div>
                         </div>
                       </li>
                     ))}
@@ -223,27 +223,27 @@ export default function KitsPage({ params }: { params: { locale: string } }) {
                   href={WA(kit.ctaMsg)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, width: '100%', padding: '15px', background: '#25D366', color: '#fff', borderRadius: 8, fontSize: 15, fontWeight: 700, textDecoration: 'none', marginBottom: 10, boxSizing: 'border-box' }}
+                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, width: '100%', padding: '15px', background: 'var(--green)', color: '#fff', borderRadius: 8, fontSize: 15, fontWeight: 700, textDecoration: 'none', marginBottom: 10, boxSizing: 'border-box' }}
                 >
                   {WA_SVG}
                   Commander ce kit
                 </a>
                 <Link
                   href={`/${locale}/contact`}
-                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '11px', border: '1px solid rgba(200,137,31,0.25)', color: '#C8891F', borderRadius: 8, fontSize: 13, fontWeight: 600, textDecoration: 'none' }}
-                  className="link-gold"
+                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '11px', border: '1px solid var(--bluesoft2)', color: 'var(--blue)', borderRadius: 8, fontSize: 13, fontWeight: 600, textDecoration: 'none' }}
+                  className="link-blue"
                 >
                   Demander un devis personnalisé
                 </Link>
 
                 {/* FAQs */}
-                <div style={{ marginTop: 24, paddingTop: 20, borderTop: '1px solid rgba(245,237,216,0.06)' }}>
-                  <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#B8AA94', display: 'block', marginBottom: 14 }}>Questions fréquentes</span>
+                <div style={{ marginTop: 24, paddingTop: 20, borderTop: '1px solid var(--border)' }}>
+                  <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text2)', display: 'block', marginBottom: 14 }}>Questions fréquentes</span>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                     {kit.faqs.map(faq => (
                       <div key={faq.q}>
-                        <div style={{ fontSize: 12, fontWeight: 700, color: '#F5EDD8', marginBottom: 3 }}>❓ {faq.q}</div>
-                        <div style={{ fontSize: 12, color: '#B8AA94', lineHeight: 1.6 }}>{faq.a}</div>
+                        <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--text)', marginBottom: 3 }}>❓ {faq.q}</div>
+                        <div style={{ fontSize: 12, color: 'var(--text2)', lineHeight: 1.6 }}>{faq.a}</div>
                       </div>
                     ))}
                   </div>
@@ -255,30 +255,30 @@ export default function KitsPage({ params }: { params: { locale: string } }) {
       </div>
 
       {/* ── COMPARISON TABLE ─────────────────────────────────────────────── */}
-      <div style={{ background: '#1A1612', borderTop: '1px solid rgba(245,237,216,0.06)', borderBottom: '1px solid rgba(245,237,216,0.06)', padding: '64px 6%' }}>
+      <div style={{ background: 'var(--surface)', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)', padding: '64px 6%' }}>
         <div style={{ maxWidth: 860, margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: 40 }}>
-            <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.13em', textTransform: 'uppercase', color: '#C8891F', display: 'block', marginBottom: 10 }}>Tableau Comparatif</span>
-            <h2 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 34, fontWeight: 700, color: '#F5EDD8' }}>Comparez les kits en détail</h2>
+            <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.13em', textTransform: 'uppercase', color: 'var(--blue)', display: 'block', marginBottom: 10 }}>Tableau Comparatif</span>
+            <h2 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 34, fontWeight: 700, color: 'var(--text)' }}>Comparez les kits en détail</h2>
           </div>
 
-          <div style={{ overflowX: 'auto', borderRadius: 12, border: '1px solid rgba(245,237,216,0.08)' }}>
+          <div style={{ overflowX: 'auto', borderRadius: 12, border: '1px solid var(--border)' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
               <thead>
-                <tr style={{ borderBottom: '1px solid rgba(245,237,216,0.08)' }}>
-                  <th style={{ textAlign: 'left', padding: '16px 20px', fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#B8AA94' }}>Caractéristique</th>
-                  <th style={{ textAlign: 'center', padding: '16px 20px', fontSize: 13, fontWeight: 700, color: '#F5EDD8' }}>🖨️ Starter<br /><span style={{ color: '#C8891F', fontSize: 13 }}>4 400 MAD</span></th>
-                  <th style={{ textAlign: 'center', padding: '16px 20px', fontSize: 13, fontWeight: 700, color: '#F5EDD8', background: 'rgba(200,137,31,0.07)', borderLeft: '1px solid rgba(200,137,31,0.15)', borderRight: '1px solid rgba(200,137,31,0.15)' }}>🎨 Pro<br /><span style={{ color: '#C8891F', fontSize: 13 }}>5 400 MAD</span></th>
-                  <th style={{ textAlign: 'center', padding: '16px 20px', fontSize: 13, fontWeight: 700, color: '#F5EDD8' }}>🚀 DTF<br /><span style={{ color: '#C8891F', fontSize: 13 }}>8 400 MAD</span></th>
+                <tr style={{ borderBottom: '1px solid var(--border)' }}>
+                  <th style={{ textAlign: 'left', padding: '16px 20px', fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text2)' }}>Caractéristique</th>
+                  <th style={{ textAlign: 'center', padding: '16px 20px', fontSize: 13, fontWeight: 700, color: 'var(--text)' }}>🖨️ Starter<br /><span style={{ color: 'var(--blue)', fontSize: 13 }}>4 400 MAD</span></th>
+                  <th style={{ textAlign: 'center', padding: '16px 20px', fontSize: 13, fontWeight: 700, color: 'var(--text)', background: 'var(--bluesoft)', borderLeft: '1px solid var(--bluesoft2)', borderRight: '1px solid var(--bluesoft2)' }}>🎨 Pro<br /><span style={{ color: 'var(--blue)', fontSize: 13 }}>5 400 MAD</span></th>
+                  <th style={{ textAlign: 'center', padding: '16px 20px', fontSize: 13, fontWeight: 700, color: 'var(--text)' }}>🚀 DTF<br /><span style={{ color: 'var(--blue)', fontSize: 13 }}>8 400 MAD</span></th>
                 </tr>
               </thead>
               <tbody>
                 {COMPARISON.map((row, i) => (
-                  <tr key={row.feature} style={{ borderBottom: '1px solid rgba(245,237,216,0.04)', background: i % 2 !== 0 ? 'rgba(245,237,216,0.02)' : 'transparent' }}>
-                    <td style={{ padding: '13px 20px', fontSize: 13, fontWeight: 600, color: '#B8AA94' }}>{row.feature}</td>
-                    <td style={{ padding: '13px 20px', fontSize: 13, textAlign: 'center', color: '#F5EDD8' }}>{row.starter}</td>
-                    <td style={{ padding: '13px 20px', fontSize: 13, textAlign: 'center', color: '#F5EDD8', background: 'rgba(200,137,31,0.05)', borderLeft: '1px solid rgba(200,137,31,0.1)', borderRight: '1px solid rgba(200,137,31,0.1)', fontWeight: 600 }}>{row.pro}</td>
-                    <td style={{ padding: '13px 20px', fontSize: 13, textAlign: 'center', color: '#F5EDD8' }}>{row.premium}</td>
+                  <tr key={row.feature} style={{ borderBottom: '1px solid var(--border)', background: i % 2 !== 0 ? 'var(--border)' : 'transparent' }}>
+                    <td style={{ padding: '13px 20px', fontSize: 13, fontWeight: 600, color: 'var(--text2)' }}>{row.feature}</td>
+                    <td style={{ padding: '13px 20px', fontSize: 13, textAlign: 'center', color: 'var(--text)' }}>{row.starter}</td>
+                    <td style={{ padding: '13px 20px', fontSize: 13, textAlign: 'center', color: 'var(--text)', background: 'var(--bluesoft)', borderLeft: '1px solid var(--bluesoft2)', borderRight: '1px solid var(--bluesoft2)', fontWeight: 600 }}>{row.pro}</td>
+                    <td style={{ padding: '13px 20px', fontSize: 13, textAlign: 'center', color: 'var(--text)' }}>{row.premium}</td>
                   </tr>
                 ))}
               </tbody>
@@ -290,13 +290,13 @@ export default function KitsPage({ params }: { params: { locale: string } }) {
       {/* ── BOTTOM CTA ───────────────────────────────────────────────────── */}
       <div style={{ padding: '80px 6%', textAlign: 'center' }}>
         <div style={{ maxWidth: 640, margin: '0 auto' }}>
-          <div style={{ width: 56, height: 56, borderRadius: '50%', background: 'rgba(37,211,102,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 24px' }}>
+          <div style={{ width: 56, height: 56, borderRadius: '50%', background: 'var(--greensoft)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 24px', color: 'var(--green)' }}>
             {WA_SVG}
           </div>
-          <h2 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 36, fontWeight: 700, color: '#F5EDD8', marginBottom: 14, lineHeight: 1.2 }}>
+          <h2 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 36, fontWeight: 700, color: 'var(--text)', marginBottom: 14, lineHeight: 1.2 }}>
             Vous ne savez pas lequel choisir ?
           </h2>
-          <p style={{ fontSize: 15, color: '#B8AA94', lineHeight: 1.7, marginBottom: 32 }}>
+          <p style={{ fontSize: 15, color: 'var(--text2)', lineHeight: 1.7, marginBottom: 32 }}>
             Décrivez votre projet en 2 lignes sur WhatsApp. Nos experts vous répondent
             en moins de 5 minutes et vous recommandent le kit le plus adapté.
           </p>
@@ -304,12 +304,12 @@ export default function KitsPage({ params }: { params: { locale: string } }) {
             href={WA('Bonjour, j\'hésite entre plusieurs kits et j\'ai besoin de conseils pour choisir celui qui correspond à mon projet.')}
             target="_blank"
             rel="noopener noreferrer"
-            style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 12, padding: '16px 36px', background: '#25D366', color: '#fff', borderRadius: 8, fontSize: 16, fontWeight: 700, textDecoration: 'none', marginBottom: 14 }}
+            style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 12, padding: '16px 36px', background: 'var(--green)', color: '#fff', borderRadius: 8, fontSize: 16, fontWeight: 700, textDecoration: 'none', marginBottom: 14 }}
           >
             {WA_SVG}
             Conseils gratuits — réponse en 5 min
           </a>
-          <p style={{ fontSize: 13, color: '#B8AA94' }}>Aucun engagement · 100% gratuit · Lun–Sam 9h–18h</p>
+          <p style={{ fontSize: 13, color: 'var(--text2)' }}>Aucun engagement · 100% gratuit · Lun–Sam 9h–18h</p>
         </div>
       </div>
 

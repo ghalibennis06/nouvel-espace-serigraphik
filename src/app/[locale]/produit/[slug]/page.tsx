@@ -81,31 +81,31 @@ export default async function ProductPage({ params }: PageProps) {
   const discountPct = getDiscountPercent(regular_price, sale_price)
 
   const stockStyles = {
-    green: { bg: 'rgba(15,144,128,0.12)', color: '#0F9080', dot: '#0F9080' },
-    amber: { bg: 'rgba(200,137,31,0.12)', color: '#C8891F', dot: '#C8891F' },
-    red:   { bg: 'rgba(220,38,38,0.12)', color: '#ef4444', dot: '#ef4444' },
+    green: { bg: 'var(--tealsoft)', color: 'var(--teal)', dot: 'var(--teal)' },
+    amber: { bg: 'var(--orangesoft)', color: 'var(--orange)', dot: 'var(--orange)' },
+    red:   { bg: 'rgba(220,38,38,0.10)', color: '#ef4444', dot: '#ef4444' },
   }
   const ss = stockStyles[stockColor]
 
   const whatsappUrl = whatsappProductLink(name)
 
   return (
-    <div style={{ background: '#0C0A08', minHeight: '100vh' }}>
+    <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
       {/* ── Breadcrumb ────────────────────────────────────────────────── */}
-      <div style={{ background: '#1A1612', borderBottom: '1px solid rgba(245,237,216,0.06)', padding: '12px 6%' }}>
+      <div style={{ background: 'var(--surface)', borderBottom: '1px solid var(--border)', padding: '12px 6%' }}>
         <div style={{ maxWidth: 1280, margin: '0 auto' }}>
-          <nav style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12, color: '#B8AA94' }}>
-            <Link href={`/${locale}`} className="link-gold" style={{ color: '#B8AA94', textDecoration: 'none' }}>Accueil</Link>
+          <nav style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12, color: 'var(--text2)' }}>
+            <Link href={`/${locale}`} className="link-blue" style={{ color: 'var(--text2)', textDecoration: 'none' }}>Accueil</Link>
             {categories[0] && (
               <>
-                <span style={{ color: 'rgba(245,237,216,0.3)' }}>/</span>
-                <Link href={categoryHref(categories[0].slug, locale)} className="link-gold" style={{ color: '#B8AA94', textDecoration: 'none' }}>
+                <span style={{ color: 'var(--border2)' }}>/</span>
+                <Link href={categoryHref(categories[0].slug, locale)} className="link-blue" style={{ color: 'var(--text2)', textDecoration: 'none' }}>
                   {categories[0].name}
                 </Link>
               </>
             )}
-            <span style={{ color: 'rgba(245,237,216,0.3)' }}>/</span>
-            <span style={{ color: '#F5EDD8', fontWeight: 500, maxWidth: 220, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{name}</span>
+            <span style={{ color: 'var(--border2)' }}>/</span>
+            <span style={{ color: 'var(--text)', fontWeight: 500, maxWidth: 220, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{name}</span>
           </nav>
         </div>
       </div>
@@ -115,7 +115,7 @@ export default async function ProductPage({ params }: PageProps) {
 
           {/* ── Gallery ─────────────────────────────────────────────── */}
           <div>
-            <div style={{ position: 'relative', background: '#1A1612', borderRadius: 12, overflow: 'hidden', border: '1px solid rgba(245,237,216,0.08)', aspectRatio: '1/1', marginBottom: 12 }}>
+            <div style={{ position: 'relative', background: 'var(--card)', borderRadius: 12, overflow: 'hidden', border: '1px solid var(--border)', aspectRatio: '1/1', marginBottom: 12 }}>
               {images[0] ? (
                 <Image
                   src={images[0].src}
@@ -126,14 +126,14 @@ export default async function ProductPage({ params }: PageProps) {
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
               ) : (
-                <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#B8AA94' }}>
+                <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text2)' }}>
                   <svg style={{ width: 64, height: 64 }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
                 </div>
               )}
               {on_sale && discountPct > 0 && (
-                <div style={{ position: 'absolute', top: 14, left: 14, background: '#C8891F', color: '#0C0A08', fontSize: 12, fontWeight: 700, padding: '4px 10px', borderRadius: 5 }}>
+                <div style={{ position: 'absolute', top: 14, left: 14, background: 'var(--orange)', color: '#fff', fontSize: 12, fontWeight: 700, padding: '4px 10px', borderRadius: 5 }}>
                   -{discountPct}%
                 </div>
               )}
@@ -144,8 +144,8 @@ export default async function ProductPage({ params }: PageProps) {
                 {images.slice(0, 6).map((img, i) => (
                   <div key={i} style={{
                     position: 'relative', flexShrink: 0, width: 62, height: 62, borderRadius: 8, overflow: 'hidden', cursor: 'pointer',
-                    border: `2px solid ${i === 0 ? '#C8891F' : 'rgba(245,237,216,0.1)'}`,
-                    background: '#1A1612',
+                    border: `2px solid ${i === 0 ? 'var(--blue)' : 'var(--border)'}`,
+                    background: 'var(--card)',
                   }}>
                     <Image src={img.src} alt={img.alt || name} fill className="object-contain p-1" sizes="62px" />
                   </div>
@@ -160,15 +160,15 @@ export default async function ProductPage({ params }: PageProps) {
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 12 }}>
               {categories.map(cat => (
                 <Link key={cat.id} href={categoryHref(cat.slug, locale)}
-                  style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#C8891F', textDecoration: 'none' }}
-                  className="link-gold">
+                  style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--blue)', textDecoration: 'none' }}
+                  className="link-blue">
                   {cat.name}
                 </Link>
               ))}
             </div>
 
             {/* Name */}
-            <h1 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 32, fontWeight: 700, color: '#F5EDD8', lineHeight: 1.2, marginBottom: 14 }}>
+            <h1 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 32, fontWeight: 700, color: 'var(--text)', lineHeight: 1.2, marginBottom: 14 }}>
               {name}
             </h1>
 
@@ -177,40 +177,40 @@ export default async function ProductPage({ params }: PageProps) {
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
                 <div style={{ display: 'flex' }}>
                   {[1,2,3,4,5].map(i => (
-                    <svg key={i} style={{ width: 16, height: 16, color: i <= Math.round(Number(average_rating)) ? '#C8891F' : 'rgba(245,237,216,0.15)' }} fill="currentColor" viewBox="0 0 20 20">
+                    <svg key={i} style={{ width: 16, height: 16, color: i <= Math.round(Number(average_rating)) ? 'var(--orange)' : 'var(--border2)' }} fill="currentColor" viewBox="0 0 20 20">
                       <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
                     </svg>
                   ))}
                 </div>
-                <span style={{ fontSize: 13, color: '#B8AA94' }}>({rating_count} {t('reviews')})</span>
+                <span style={{ fontSize: 13, color: 'var(--text2)' }}>({rating_count} {t('reviews')})</span>
               </div>
             )}
 
             {/* Short description */}
             {short_description && (
               <div
-                style={{ fontSize: 14, color: '#B8AA94', lineHeight: 1.7, marginBottom: 20 }}
+                style={{ fontSize: 14, color: 'var(--text2)', lineHeight: 1.7, marginBottom: 20 }}
                 dangerouslySetInnerHTML={{ __html: short_description }}
               />
             )}
 
             {/* Price */}
-            <div style={{ background: '#1A1612', border: '1px solid rgba(245,237,216,0.08)', borderRadius: 10, padding: '16px 20px', marginBottom: 18 }}>
+            <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 10, padding: '16px 20px', marginBottom: 18 }}>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, marginBottom: 4 }}>
                 {on_sale && sale_price ? (
                   <>
-                    <span style={{ fontSize: 30, fontWeight: 800, color: '#F5EDD8' }}>{formatPrice(sale_price)}</span>
-                    <span style={{ fontSize: 18, color: '#B8AA94', textDecoration: 'line-through' }}>{formatPrice(regular_price)}</span>
-                    <span style={{ fontSize: 11, fontWeight: 700, background: '#C8891F', color: '#0C0A08', padding: '2px 7px', borderRadius: 4 }}>-{discountPct}%</span>
+                    <span style={{ fontSize: 30, fontWeight: 800, color: 'var(--text)' }}>{formatPrice(sale_price)}</span>
+                    <span style={{ fontSize: 18, color: 'var(--text2)', textDecoration: 'line-through' }}>{formatPrice(regular_price)}</span>
+                    <span style={{ fontSize: 11, fontWeight: 700, background: 'var(--orange)', color: '#fff', padding: '2px 7px', borderRadius: 4 }}>-{discountPct}%</span>
                   </>
                 ) : price && price !== '0' ? (
-                  <span style={{ fontSize: 30, fontWeight: 800, color: '#F5EDD8' }}>{formatPrice(price)}</span>
+                  <span style={{ fontSize: 30, fontWeight: 800, color: 'var(--text)' }}>{formatPrice(price)}</span>
                 ) : (
-                  <span style={{ fontSize: 15, fontWeight: 700, color: '#C8891F' }}>Prix sur demande — Contactez-nous</span>
+                  <span style={{ fontSize: 15, fontWeight: 700, color: 'var(--blue)' }}>Prix sur demande — Contactez-nous</span>
                 )}
               </div>
               {sku && (
-                <p style={{ fontSize: 11, color: '#B8AA94' }}>{t('sku')} : <span style={{ fontFamily: 'monospace' }}>{sku}</span></p>
+                <p style={{ fontSize: 11, color: 'var(--text2)' }}>{t('sku')} : <span style={{ fontFamily: 'monospace' }}>{sku}</span></p>
               )}
             </div>
 
@@ -223,7 +223,7 @@ export default async function ProductPage({ params }: PageProps) {
             {/* Variations */}
             {variations.length > 0 && (
               <div style={{ marginBottom: 20 }}>
-                <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#B8AA94', display: 'block', marginBottom: 10 }}>
+                <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text2)', display: 'block', marginBottom: 10 }}>
                   {t('selectVariant')}
                 </span>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
@@ -236,9 +236,9 @@ export default async function ProductPage({ params }: PageProps) {
                         disabled={isOut}
                         style={{
                           padding: '6px 14px', borderRadius: 6, fontSize: 12, fontWeight: 600, cursor: isOut ? 'not-allowed' : 'pointer', transition: 'border-color .15s',
-                          background: isOut ? 'transparent' : '#1A1612',
-                          color: isOut ? 'rgba(245,237,216,0.25)' : '#F5EDD8',
-                          border: `1px solid ${isOut ? 'rgba(245,237,216,0.06)' : 'rgba(245,237,216,0.15)'}`,
+                          background: isOut ? 'transparent' : 'var(--card)',
+                          color: isOut ? 'var(--border2)' : 'var(--text)',
+                          border: `1px solid ${isOut ? 'var(--border)' : 'var(--border2)'}`,
                         }}
                       >
                         {label}{isOut && ' (N/A)'}
@@ -255,30 +255,30 @@ export default async function ProductPage({ params }: PageProps) {
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, padding: '14px', background: '#25D366', color: '#fff', borderRadius: 8, fontSize: 15, fontWeight: 700, textDecoration: 'none', transition: 'background .15s' }}
+                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, padding: '14px', background: 'var(--green)', color: '#fff', borderRadius: 8, fontSize: 15, fontWeight: 700, textDecoration: 'none', transition: 'background .15s' }}
               >
                 {WA_SVG}
                 {t('contactWhatsApp')}
               </a>
               <Link
                 href={`/${locale}/contact?product=${encodeURIComponent(name)}`}
-                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, padding: '12px', border: '1px solid rgba(200,137,31,0.3)', color: '#C8891F', borderRadius: 8, fontSize: 14, fontWeight: 600, textDecoration: 'none', transition: 'border-color .15s, background .15s' }}
-                className="link-gold"
+                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, padding: '12px', border: '1px solid var(--bluesoft2)', color: 'var(--blue)', borderRadius: 8, fontSize: 14, fontWeight: 600, textDecoration: 'none', transition: 'border-color .15s, background .15s' }}
+                className="link-blue"
               >
                 📋 {t('quoteRequest')}
               </Link>
               <a
                 href={`tel:${process.env.NEXT_PUBLIC_PHONE ?? '+212522448090'}`}
-                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, padding: '10px', border: '1px solid rgba(245,237,216,0.08)', color: '#B8AA94', borderRadius: 8, fontSize: 13, textDecoration: 'none', transition: 'border-color .15s' }}
+                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, padding: '10px', border: '1px solid var(--border)', color: 'var(--text2)', borderRadius: 8, fontSize: 13, textDecoration: 'none', transition: 'border-color .15s' }}
               >
                 📞 Appeler pour commander
               </a>
             </div>
 
             {/* Micro-trust */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14, marginTop: 20, paddingTop: 20, borderTop: '1px solid rgba(245,237,216,0.06)' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14, marginTop: 20, paddingTop: 20, borderTop: '1px solid var(--border)' }}>
               {['🚚 Livraison 48h', '📦 Stock local', '🧾 Facture pro', '🔄 Retour 14j'].map(item => (
-                <span key={item} style={{ fontSize: 12, color: '#B8AA94' }}>{item}</span>
+                <span key={item} style={{ fontSize: 12, color: 'var(--text2)' }}>{item}</span>
               ))}
             </div>
           </div>
@@ -287,27 +287,27 @@ export default async function ProductPage({ params }: PageProps) {
         {/* ── Description & Attributes ───────────────────────────────── */}
         <div style={{ display: 'grid', gridTemplateColumns: attributes.length > 0 ? '2fr 1fr' : '1fr', gap: 20, marginBottom: 56 }} className="lg:grid-cols-3">
           {/* Description */}
-          <div style={{ background: '#1A1612', border: '1px solid rgba(245,237,216,0.08)', borderRadius: 12, padding: 28, gridColumn: attributes.length > 0 ? '1 / 3' : undefined }} className={attributes.length > 0 ? 'lg:col-span-2' : ''}>
-            <h2 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 22, fontWeight: 700, color: '#F5EDD8', marginBottom: 16 }}>
+          <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 12, padding: 28, gridColumn: attributes.length > 0 ? '1 / 3' : undefined }} className={attributes.length > 0 ? 'lg:col-span-2' : ''}>
+            <h2 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 22, fontWeight: 700, color: 'var(--text)', marginBottom: 16 }}>
               {t('description')}
             </h2>
             <div
-              style={{ fontSize: 14, color: '#B8AA94', lineHeight: 1.75 }}
+              style={{ fontSize: 14, color: 'var(--text2)', lineHeight: 1.75 }}
               dangerouslySetInnerHTML={{ __html: description || '<p>Aucune description disponible.</p>' }}
             />
           </div>
 
           {/* Specifications */}
           {attributes.length > 0 && (
-            <div style={{ background: '#1A1612', border: '1px solid rgba(245,237,216,0.08)', borderRadius: 12, padding: 28 }}>
-              <h2 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 22, fontWeight: 700, color: '#F5EDD8', marginBottom: 16 }}>
+            <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 12, padding: 28 }}>
+              <h2 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 22, fontWeight: 700, color: 'var(--text)', marginBottom: 16 }}>
                 {t('specifications')}
               </h2>
               <dl style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
                 {attributes.map(attr => (
                   <div key={attr.id}>
-                    <dt style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#B8AA94', marginBottom: 3 }}>{attr.name}</dt>
-                    <dd style={{ fontSize: 14, color: '#F5EDD8', fontWeight: 500 }}>{attr.options.join(', ')}</dd>
+                    <dt style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text2)', marginBottom: 3 }}>{attr.name}</dt>
+                    <dd style={{ fontSize: 14, color: 'var(--text)', fontWeight: 500 }}>{attr.options.join(', ')}</dd>
                   </div>
                 ))}
               </dl>
@@ -318,7 +318,7 @@ export default async function ProductPage({ params }: PageProps) {
         {/* ── Related Products ───────────────────────────────────────── */}
         {relatedProducts.length > 0 && (
           <div>
-            <h2 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 26, fontWeight: 700, color: '#F5EDD8', marginBottom: 24 }}>
+            <h2 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 26, fontWeight: 700, color: 'var(--text)', marginBottom: 24 }}>
               {t('relatedProducts')}
             </h2>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 16 }}>
@@ -331,10 +331,10 @@ export default async function ProductPage({ params }: PageProps) {
       </div>
 
       {/* ── Sticky mobile CTA ──────────────────────────────────────────── */}
-      <div className="sm:hidden" style={{ position: 'fixed', bottom: 0, left: 0, right: 0, background: '#1A1612', borderTop: '1px solid rgba(245,237,216,0.08)', padding: '12px 16px', display: 'flex', gap: 10, zIndex: 40, paddingBottom: 'max(12px, env(safe-area-inset-bottom))' }}>
+      <div className="sm:hidden" style={{ position: 'fixed', bottom: 0, left: 0, right: 0, background: 'var(--surface)', borderTop: '1px solid var(--border)', padding: '12px 16px', display: 'flex', gap: 10, zIndex: 40, paddingBottom: 'max(12px, env(safe-area-inset-bottom))' }}>
         <Link
           href={`/${locale}/contact?product=${encodeURIComponent(name)}`}
-          style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '11px', border: '1px solid rgba(200,137,31,0.3)', color: '#C8891F', borderRadius: 8, fontSize: 14, fontWeight: 600, textDecoration: 'none' }}
+          style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '11px', border: '1px solid var(--bluesoft2)', color: 'var(--blue)', borderRadius: 8, fontSize: 14, fontWeight: 600, textDecoration: 'none' }}
         >
           Devis
         </Link>
@@ -342,7 +342,7 @@ export default async function ProductPage({ params }: PageProps) {
           href={whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
-          style={{ flex: 2, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, padding: '11px', background: '#25D366', color: '#fff', borderRadius: 8, fontSize: 14, fontWeight: 700, textDecoration: 'none' }}
+          style={{ flex: 2, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, padding: '11px', background: 'var(--green)', color: '#fff', borderRadius: 8, fontSize: 14, fontWeight: 700, textDecoration: 'none' }}
         >
           💬 Commander
         </a>

@@ -54,16 +54,16 @@ export default function ProductsSection({ products }: { products: WCProduct[] })
   return (
     <section
       id="products"
-      style={{ background: 'linear-gradient(180deg,#1A1612 0%,#0C0A08 100%)', padding: '80px 6%' }}
+      style={{ background: 'var(--bg)', padding: '80px 6%' }}
     >
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
 
         {/* Header */}
         <div>
           <span className="stag">Catalogue Complet — 80+ Produits</span>
-          <h2 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 'clamp(34px,3.5vw,52px)', fontWeight: 700, color: '#F5EDD8', lineHeight: 1.08, marginBottom: 0 }}>
+          <h2 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 'clamp(34px,3.5vw,52px)', fontWeight: 700, color: 'var(--text)', lineHeight: 1.08, marginBottom: 0 }}>
             Nos meilleures<br />
-            <em style={{ fontStyle: 'italic', color: '#C8891F' }}>ventes du moment</em>
+            <em style={{ fontStyle: 'italic', color: 'var(--blue)' }}>ventes du moment</em>
           </h2>
         </div>
 
@@ -81,9 +81,9 @@ export default function ProductsSection({ products }: { products: WCProduct[] })
                 cursor: 'pointer',
                 fontFamily: 'Outfit, sans-serif',
                 transition: 'all .2s',
-                background:   active === key ? '#C8891F' : 'transparent',
-                color:        active === key ? '#0C0A08' : '#B8AA94',
-                border:       active === key ? '1px solid #C8891F' : '1px solid rgba(245,237,216,0.12)',
+                background: active === key ? 'var(--blue)' : 'transparent',
+                color:      active === key ? '#fff' : 'var(--text2)',
+                border:     active === key ? '1px solid var(--blue)' : '1px solid var(--border2)',
               }}
             >
               {label}
@@ -110,8 +110,8 @@ export default function ProductsSection({ products }: { products: WCProduct[] })
                 rel="noopener noreferrer"
                 style={{
                   display: 'block',
-                  background: '#1A1612',
-                  border: '1px solid rgba(245,237,216,0.06)',
+                  background: 'var(--card)',
+                  border: '1px solid var(--border)',
                   borderRadius: 13,
                   overflow: 'hidden',
                   cursor: 'pointer',
@@ -120,40 +120,40 @@ export default function ProductsSection({ products }: { products: WCProduct[] })
                 }}
                 onMouseEnter={e => {
                   ;(e.currentTarget as HTMLElement).style.transform = 'translateY(-5px)'
-                  ;(e.currentTarget as HTMLElement).style.borderColor = 'rgba(200,137,31,0.24)'
+                  ;(e.currentTarget as HTMLElement).style.borderColor = 'rgba(79,110,247,0.30)'
                 }}
                 onMouseLeave={e => {
                   ;(e.currentTarget as HTMLElement).style.transform = 'none'
-                  ;(e.currentTarget as HTMLElement).style.borderColor = 'rgba(245,237,216,0.06)'
+                  ;(e.currentTarget as HTMLElement).style.borderColor = 'var(--border)'
                 }}
               >
-                <div style={{ aspectRatio: '1', background: 'linear-gradient(135deg,#2E2820,#1A1612)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 52, position: 'relative' }}>
+                <div style={{ aspectRatio: '1', background: 'var(--card2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 52, position: 'relative' }}>
                   {discount > 0 && (
-                    <div style={{ position: 'absolute', top: 9, left: 9, background: '#C8891F', color: '#0C0A08', padding: '3px 8px', borderRadius: 4, fontSize: 10, fontWeight: 800 }}>
+                    <div style={{ position: 'absolute', top: 9, left: 9, background: 'var(--orange)', color: '#fff', padding: '3px 8px', borderRadius: 4, fontSize: 10, fontWeight: 800 }}>
                       -{discount}%
                     </div>
                   )}
                   {CAT_EMOJI[cat] ?? '📦'}
                 </div>
                 <div style={{ padding: 14 }}>
-                  <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.09em', textTransform: 'uppercase', color: '#C8891F', marginBottom: 4 }}>
+                  <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.09em', textTransform: 'uppercase', color: 'var(--blue)', marginBottom: 4 }}>
                     {CAT_LABELS[cat]}
                   </div>
-                  <div style={{ fontSize: 13, fontWeight: 500, color: '#F5EDD8', lineHeight: 1.35, marginBottom: 9 }} className="line-clamp-2">
+                  <div style={{ fontSize: 13, fontWeight: 500, color: 'var(--text)', lineHeight: 1.35, marginBottom: 9 }} className="line-clamp-2">
                     {p.name}
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                     <div style={{ display: 'flex', alignItems: 'baseline', gap: 5 }}>
-                      <span style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 21, fontWeight: 700, color: '#C8891F' }}>
+                      <span style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 21, fontWeight: 700, color: 'var(--blue)' }}>
                         {finalP > 0 ? `${Math.round(finalP)} MAD` : 'Sur devis'}
                       </span>
                       {isOnSale && regP > 0 && (
-                        <span style={{ fontSize: 12, color: '#B8AA94', textDecoration: 'line-through' }}>
+                        <span style={{ fontSize: 12, color: 'var(--text2)', textDecoration: 'line-through' }}>
                           {Math.round(regP)}
                         </span>
                       )}
                     </div>
-                    <span style={{ width: 32, height: 32, borderRadius: '50%', background: '#25D366', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14, flexShrink: 0 }}>
+                    <span style={{ width: 32, height: 32, borderRadius: '50%', background: 'var(--green)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14, flexShrink: 0 }}>
                       💬
                     </span>
                   </div>
@@ -169,7 +169,7 @@ export default function ProductsSection({ products }: { products: WCProduct[] })
             href={`https://wa.me/212522448090?text=${encodeURIComponent('Bonjour NES, je veux consulter votre catalogue complet de 80+ produits.')}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-gold"
+            className="btn-primary"
             style={{ display: 'inline-flex', padding: '14px 28px' }}
           >
             Voir le catalogue complet (80+ produits) →

@@ -37,7 +37,7 @@ export default async function Footer({ locale }: { locale: string }) {
   ]
 
   return (
-    <footer style={{ background: '#1A1612', borderTop: '1px solid rgba(200,137,31,0.1)', padding: '64px 6% 32px' }}>
+    <footer style={{ background: 'var(--surface)', borderTop: '1px solid var(--border)', padding: '64px 6% 32px' }}>
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
 
         {/* Links grid */}
@@ -46,10 +46,10 @@ export default async function Footer({ locale }: { locale: string }) {
 
           {/* Brand col */}
           <div>
-            <div style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 26, fontWeight: 700, color: '#F5EDD8', marginBottom: 12 }}>
-              Nouvel Espace <span style={{ color: '#C8891F' }}>Sérigraphik</span>
+            <div style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 26, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>
+              Nouvel Espace <span style={{ color: 'var(--blue)' }}>Sérigraphik</span>
             </div>
-            <p style={{ fontSize: 13, color: '#B8AA94', lineHeight: 1.75, marginBottom: 22 }}>
+            <p style={{ fontSize: 13, color: 'var(--text2)', lineHeight: 1.75, marginBottom: 22 }}>
               Le fournisseur de référence pour les professionnels de l&apos;impression au Maroc.
               Machines, consommables et kits complets livrés partout au Maroc en 24–48h depuis 2018.
             </p>
@@ -57,7 +57,7 @@ export default async function Footer({ locale }: { locale: string }) {
               href={whatsappGeneralLink()}
               target="_blank"
               rel="noopener noreferrer"
-              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#25D366', color: '#fff', padding: '10px 22px', borderRadius: 6, fontSize: 13, fontWeight: 600, textDecoration: 'none', fontFamily: 'Outfit,sans-serif' }}
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'var(--green)', color: '#fff', padding: '10px 22px', borderRadius: 6, fontSize: 13, fontWeight: 600, textDecoration: 'none', fontFamily: 'Outfit,sans-serif' }}
             >
               💬 {phone}
             </a>
@@ -66,15 +66,15 @@ export default async function Footer({ locale }: { locale: string }) {
           {/* Link cols */}
           {cols.map(col => (
             <div key={col.title}>
-              <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#F5EDD8', marginBottom: 18 }}>
+              <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text)', marginBottom: 18 }}>
                 {col.title}
               </div>
               {col.links.map(link => (
                 <Link
                   key={link.label}
                   href={link.href}
-                  className="link-gold"
-                  style={{ display: 'block', fontSize: 13, color: '#B8AA94', marginBottom: 9, textDecoration: 'none', transition: 'color .2s' }}
+                  className="link-blue"
+                  style={{ display: 'block', fontSize: 13, color: 'var(--text2)', marginBottom: 9, textDecoration: 'none', transition: 'color .2s' }}
                 >
                   {link.label}
                 </Link>
@@ -84,11 +84,11 @@ export default async function Footer({ locale }: { locale: string }) {
         </div>
 
         {/* Bottom bar */}
-        <div style={{ borderTop: '1px solid rgba(245,237,216,0.06)', paddingTop: 22, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8 }}>
-          <span style={{ fontSize: 12, color: '#B8AA94' }}>
+        <div style={{ borderTop: '1px solid var(--border)', paddingTop: 22, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8 }}>
+          <span style={{ fontSize: 12, color: 'var(--text2)' }}>
             © 2026 Nouvel Espace Sérigraphik · Casablanca, Maroc 🇲🇦
           </span>
-          <span style={{ fontSize: 12, color: '#B8AA94' }}>Tous droits réservés</span>
+          <span style={{ fontSize: 12, color: 'var(--text2)' }}>Tous droits réservés</span>
         </div>
       </div>
     </footer>

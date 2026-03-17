@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import type { WCCategory } from '@/lib/types'
 import { categoryHref, whatsappGeneralLink } from '@/lib/utils'
+import { useTheme } from '@/components/ThemeProvider'
 
 interface HeaderProps {
   locale: string
@@ -18,19 +19,32 @@ const WA_ICON = (
   </svg>
 )
 
+function SunIcon() {
+  return (
+    <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+      <circle cx="12" cy="12" r="5" />
+      <path strokeLinecap="round" d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+    </svg>
+  )
+}
+function MoonIcon() {
+  return (
+    <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+    </svg>
+  )
+}
+
 export default function Header({ locale, rootCategories, subCategories }: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false)
-  const [megaOpen, setMegaOpen] = useState<string | null>(null)
   const pathname = usePathname()
-
-  // Close menu on route change
-  const prevPath = pathname
+  const { theme, toggle } = useTheme()
 
   const navLinks = [
-    { label: 'Kits & Packs',  href: `/${locale}/kits`,                  highlight: true },
-    { label: 'Catalogue',     href: `/${locale}/categorie-produit`,      highlight: false },
-    { label: 'Académie',      href: `/${locale}/academie`,               highlight: false },
-    { label: 'Avis',          href: `#testimonials`,                     highlight: false },
+    { label: 'Kits & Packs',  href: `/${locale}/kits`,             highlight: true },
+    { label: 'Catalogue',     href: `/${locale}/categorie-produit`, highlight: false },
+    { label: 'Académie',      href: `/${locale}/academie`,          highlight: false },
+    { label: 'Avis',          href: `#testimonials`,                highlight: false },
   ]
 
   return (
@@ -41,9 +55,9 @@ export default function Header({ locale, rootCategories, subCategories }: Header
           position: 'sticky',
           top: 0,
           zIndex: 200,
-          background: 'rgba(12,10,8,0.96)',
+          background: 'var(--overlay)',
           backdropFilter: 'blur(20px)',
-          borderBottom: '1px solid rgba(200,137,31,0.14)',
+          borderBottom: '1px solid var(--border)',
           padding: '0 6%',
           display: 'flex',
           alignItems: 'center',
@@ -58,13 +72,13 @@ export default function Header({ locale, rootCategories, subCategories }: Header
             fontFamily: '"Cormorant Garamond",Georgia,serif',
             fontSize: 24,
             fontWeight: 700,
-            color: '#F5EDD8',
+            color: 'var(--text)',
             textDecoration: 'none',
             letterSpacing: '0.02em',
             flexShrink: 0,
           }}
         >
-          NES<span style={{ color: '#C8891F' }}>.</span>
+          NES<span style={{ color: 'var(--blue)' }}>.</span>
         </Link>
 
         {/* Desktop links */}
@@ -76,22 +90,53 @@ export default function Header({ locale, rootCategories, subCategories }: Header
               style={{
                 padding: '8px 15px',
                 fontSize: 13,
-                color: link.highlight ? '#C8891F' : '#B8AA94',
+                color: link.highlight ? 'var(--orange)' : 'var(--text2)',
                 textDecoration: 'none',
                 fontFamily: 'Outfit, sans-serif',
                 fontWeight: link.highlight ? 600 : 400,
                 transition: 'color .2s',
               }}
-              onMouseEnter={e => (e.currentTarget.style.color = '#F5EDD8')}
-              onMouseLeave={e => (e.currentTarget.style.color = link.highlight ? '#C8891F' : '#B8AA94')}
+              onMouseEnter={e => (e.currentTarget.style.color = 'var(--text)')}
+              onMouseLeave={e => (e.currentTarget.style.color = link.highlight ? 'var(--orange)' : 'var(--text2)')}
             >
               {link.label}
             </Link>
           ))}
         </div>
 
-        {/* WhatsApp CTA + burger */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+        {/* Right: theme toggle + WhatsApp CTA + burger */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+
+          {/* Theme toggle */}
+          <button
+            onClick={toggle}
+            aria-label="Changer de thème"
+            style={{
+              width: 36,
+              height: 36,
+              borderRadius: '50%',
+              border: '1px solid var(--border2)',
+              background: 'var(--card)',
+              color: 'var(--text2)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              transition: 'border-color .2s, color .2s',
+              flexShrink: 0,
+            }}
+            onMouseEnter={e => {
+              ;(e.currentTarget as HTMLElement).style.borderColor = 'var(--blue)'
+              ;(e.currentTarget as HTMLElement).style.color = 'var(--blue)'
+            }}
+            onMouseLeave={e => {
+              ;(e.currentTarget as HTMLElement).style.borderColor = 'var(--border2)'
+              ;(e.currentTarget as HTMLElement).style.color = 'var(--text2)'
+            }}
+          >
+            {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
+          </button>
+
           <a
             href={whatsappGeneralLink('Bonjour NES, je souhaite des informations sur vos produits.')}
             target="_blank"
@@ -100,7 +145,7 @@ export default function Header({ locale, rootCategories, subCategories }: Header
             style={{
               alignItems: 'center',
               gap: 8,
-              background: '#25D366',
+              background: 'var(--green)',
               color: '#fff',
               padding: '9px 20px',
               borderRadius: 24,
@@ -113,7 +158,7 @@ export default function Header({ locale, rootCategories, subCategories }: Header
             }}
             onMouseEnter={e => {
               ;(e.currentTarget as HTMLElement).style.transform = 'translateY(-1px)'
-              ;(e.currentTarget as HTMLElement).style.boxShadow = '0 6px 24px rgba(37,211,102,.3)'
+              ;(e.currentTarget as HTMLElement).style.boxShadow = '0 6px 24px rgba(34,197,94,.3)'
             }}
             onMouseLeave={e => {
               ;(e.currentTarget as HTMLElement).style.transform = 'none'
@@ -128,7 +173,7 @@ export default function Header({ locale, rootCategories, subCategories }: Header
           <button
             className="md:hidden"
             onClick={() => setMenuOpen(v => !v)}
-            style={{ background: 'none', border: 'none', color: '#F5EDD8', cursor: 'pointer', padding: 4 }}
+            style={{ background: 'none', border: 'none', color: 'var(--text)', cursor: 'pointer', padding: 4 }}
           >
             {menuOpen ? (
               <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -148,7 +193,7 @@ export default function Header({ locale, rootCategories, subCategories }: Header
         <>
           <div
             className="fixed inset-0 md:hidden"
-            style={{ background: 'rgba(0,0,0,0.7)', zIndex: 40, backdropFilter: 'blur(4px)' }}
+            style={{ background: 'rgba(0,0,0,0.6)', zIndex: 40, backdropFilter: 'blur(4px)' }}
             onClick={() => setMenuOpen(false)}
           />
           <div
@@ -156,18 +201,18 @@ export default function Header({ locale, rootCategories, subCategories }: Header
             style={{
               width: 300,
               maxWidth: '90vw',
-              background: '#1A1612',
+              background: 'var(--surface)',
               zIndex: 50,
               overflowY: 'auto',
-              borderRight: '1px solid rgba(200,137,31,0.1)',
+              borderRight: '1px solid var(--border)',
             }}
           >
             {/* Drawer header */}
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '18px 20px', borderBottom: '1px solid rgba(245,237,216,0.07)' }}>
-              <span style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 22, fontWeight: 700, color: '#F5EDD8' }}>
-                NES<span style={{ color: '#C8891F' }}>.</span>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '18px 20px', borderBottom: '1px solid var(--border)' }}>
+              <span style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 22, fontWeight: 700, color: 'var(--text)' }}>
+                NES<span style={{ color: 'var(--blue)' }}>.</span>
               </span>
-              <button onClick={() => setMenuOpen(false)} style={{ background: 'none', border: 'none', color: '#B8AA94', cursor: 'pointer' }}>
+              <button onClick={() => setMenuOpen(false)} style={{ background: 'none', border: 'none', color: 'var(--text2)', cursor: 'pointer' }}>
                 <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
@@ -187,16 +232,15 @@ export default function Header({ locale, rootCategories, subCategories }: Header
                     padding: '14px 20px',
                     fontSize: 14,
                     fontWeight: link.highlight ? 600 : 400,
-                    color: link.highlight ? '#C8891F' : '#F5EDD8',
+                    color: link.highlight ? 'var(--orange)' : 'var(--text)',
                     textDecoration: 'none',
-                    borderBottom: '1px solid rgba(245,237,216,0.04)',
+                    borderBottom: '1px solid var(--border)',
                   }}
                 >
                   {link.label}
                 </Link>
               ))}
 
-              {/* Category links */}
               {rootCategories.map(cat => (
                 <Link
                   key={cat.id}
@@ -208,13 +252,13 @@ export default function Header({ locale, rootCategories, subCategories }: Header
                     justifyContent: 'space-between',
                     padding: '12px 20px',
                     fontSize: 13,
-                    color: '#B8AA94',
+                    color: 'var(--text2)',
                     textDecoration: 'none',
-                    borderBottom: '1px solid rgba(245,237,216,0.04)',
+                    borderBottom: '1px solid var(--border)',
                   }}
                 >
                   <span>{cat.name}</span>
-                  <span style={{ fontSize: 10, color: '#C8891F', background: 'rgba(200,137,31,0.1)', padding: '2px 6px', borderRadius: 3 }}>
+                  <span style={{ fontSize: 10, color: 'var(--blue)', background: 'var(--bluesoft)', padding: '2px 6px', borderRadius: 3 }}>
                     {cat.count}
                   </span>
                 </Link>
@@ -222,7 +266,7 @@ export default function Header({ locale, rootCategories, subCategories }: Header
             </nav>
 
             {/* Bottom CTA */}
-            <div style={{ padding: 20, borderTop: '1px solid rgba(245,237,216,0.07)' }}>
+            <div style={{ padding: 20, borderTop: '1px solid var(--border)' }}>
               <a
                 href={whatsappGeneralLink()}
                 target="_blank"

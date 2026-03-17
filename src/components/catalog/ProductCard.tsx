@@ -40,22 +40,22 @@ export default function ProductCard({ product, locale, priority = false }: Produ
   const inStock      = stock_status === 'instock'
 
   const badge = on_sale && discountPct > 0
-    ? { text: `-${discountPct}%`, bg: '#C8891F', color: '#0C0A08' }
+    ? { text: `-${discountPct}%`, bg: 'var(--orange)', color: '#fff' }
     : isBestseller
-    ? { text: '⭐ Best-seller', bg: '#0C0A08', color: '#C8891F' }
+    ? { text: '⭐ Best-seller', bg: 'var(--bluesoft)', color: 'var(--blue)' }
     : isNew
-    ? { text: 'Nouveau', bg: '#0F9080', color: '#fff' }
+    ? { text: 'Nouveau', bg: 'var(--teal)', color: '#fff' }
     : featured
-    ? { text: 'PRO', bg: '#C8891F', color: '#0C0A08' }
+    ? { text: 'PRO', bg: 'var(--blue)', color: '#fff' }
     : null
 
   return (
     <article
       className="group flex flex-col card-dark-hover"
-      style={{ background: '#1A1612', border: '1px solid rgba(245,237,216,0.08)', borderRadius: 10, overflow: 'hidden', transition: 'border-color .2s, transform .2s' }}
+      style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 10, overflow: 'hidden', transition: 'border-color .2s, transform .2s' }}
     >
       {/* ── Image zone ─────────────────────────────────────────── */}
-      <div style={{ position: 'relative', background: '#0C0A08', aspectRatio: '1/1', overflow: 'hidden' }}>
+      <div style={{ position: 'relative', background: 'var(--bg)', aspectRatio: '1/1', overflow: 'hidden' }}>
         <Link href={href} className="block w-full h-full">
           <Image
             src={imageSrc}
@@ -74,8 +74,8 @@ export default function ProductCard({ product, locale, priority = false }: Produ
         )}
 
         {!inStock && (
-          <div style={{ position: 'absolute', inset: 0, background: 'rgba(12,10,8,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <span style={{ fontSize: 11, fontWeight: 700, color: '#B8AA94', background: '#1A1612', border: '1px solid rgba(245,237,216,0.12)', padding: '4px 12px', borderRadius: 20 }}>
+          <div style={{ position: 'absolute', inset: 0, background: 'rgba(7,8,15,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--text2)', background: 'var(--card)', border: '1px solid var(--border2)', padding: '4px 12px', borderRadius: 20 }}>
               Rupture de stock
             </span>
           </div>
@@ -87,7 +87,7 @@ export default function ProductCard({ product, locale, priority = false }: Produ
             href={whatsappProductLink(name)}
             target="_blank"
             rel="noopener noreferrer"
-            style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, padding: '10px', background: '#25D366', color: '#fff', fontSize: 12, fontWeight: 600, textDecoration: 'none' }}
+            style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, padding: '10px', background: 'var(--green)', color: '#fff', fontSize: 12, fontWeight: 600, textDecoration: 'none' }}
           >
             {WA_ICON}
             Commander via WhatsApp
@@ -99,21 +99,21 @@ export default function ProductCard({ product, locale, priority = false }: Produ
       <div style={{ padding: '14px 16px', display: 'flex', flexDirection: 'column', flex: 1 }}>
 
         {categories[0] && (
-          <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#C8891F', marginBottom: 5 }}>
+          <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--blue)', marginBottom: 5 }}>
             {categories[0].name}
           </span>
         )}
 
         <Link
           href={href}
-          className="link-gold"
-          style={{ fontWeight: 700, fontSize: 13, color: '#F5EDD8', lineHeight: 1.35, marginBottom: 8, textDecoration: 'none', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}
+          className="link-blue"
+          style={{ fontWeight: 700, fontSize: 13, color: 'var(--text)', lineHeight: 1.35, marginBottom: 8, textDecoration: 'none', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}
         >
           {name}
         </Link>
 
         {descText && (
-          <p style={{ fontSize: 12, color: '#B8AA94', lineHeight: 1.6, marginBottom: 12, flex: 1, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+          <p style={{ fontSize: 12, color: 'var(--text2)', lineHeight: 1.6, marginBottom: 12, flex: 1, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
             {descText}
           </p>
         )}
@@ -123,18 +123,18 @@ export default function ProductCard({ product, locale, priority = false }: Produ
           <div>
             {on_sale && sale_price ? (
               <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
-                <span style={{ fontSize: 17, fontWeight: 800, color: '#F5EDD8' }}>{formatPrice(sale_price)}</span>
-                <span style={{ fontSize: 12, color: '#B8AA94', textDecoration: 'line-through' }}>{formatPrice(regular_price)}</span>
+                <span style={{ fontSize: 17, fontWeight: 800, color: 'var(--text)' }}>{formatPrice(sale_price)}</span>
+                <span style={{ fontSize: 12, color: 'var(--text2)', textDecoration: 'line-through' }}>{formatPrice(regular_price)}</span>
               </div>
             ) : price && price !== '0' ? (
-              <span style={{ fontSize: 17, fontWeight: 800, color: '#F5EDD8' }}>{formatPrice(price)}</span>
+              <span style={{ fontSize: 17, fontWeight: 800, color: 'var(--text)' }}>{formatPrice(price)}</span>
             ) : (
-              <span style={{ fontSize: 12, fontWeight: 700, color: '#C8891F' }}>Sur devis</span>
+              <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--blue)' }}>Sur devis</span>
             )}
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 11, fontWeight: 600, color: inStock ? '#0F9080' : '#B8AA94' }}>
-            <span style={{ width: 6, height: 6, borderRadius: '50%', background: inStock ? '#0F9080' : '#B8AA94', flexShrink: 0 }} />
+          <div style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 11, fontWeight: 600, color: inStock ? 'var(--teal)' : 'var(--text2)' }}>
+            <span style={{ width: 6, height: 6, borderRadius: '50%', background: inStock ? 'var(--teal)' : 'var(--text2)', flexShrink: 0 }} />
             {inStock ? 'En stock' : 'Indisponible'}
           </div>
         </div>
@@ -143,8 +143,8 @@ export default function ProductCard({ product, locale, priority = false }: Produ
         <div style={{ display: 'flex', gap: 8 }}>
           <Link
             href={href}
-            style={{ flex: 1, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', padding: '8px 10px', border: '1px solid rgba(245,237,216,0.15)', color: '#F5EDD8', fontSize: 12, fontWeight: 600, borderRadius: 6, textDecoration: 'none', transition: 'border-color .2s, color .2s' }}
-            className="link-gold"
+            style={{ flex: 1, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', padding: '8px 10px', border: '1px solid var(--border2)', color: 'var(--text)', fontSize: 12, fontWeight: 600, borderRadius: 6, textDecoration: 'none', transition: 'border-color .2s, color .2s' }}
+            className="link-blue"
           >
             Voir le produit
           </Link>
@@ -152,7 +152,7 @@ export default function ProductCard({ product, locale, priority = false }: Produ
             href={whatsappProductLink(name)}
             target="_blank"
             rel="noopener noreferrer"
-            style={{ width: 38, height: 38, background: '#25D366', color: '#fff', borderRadius: 6, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, textDecoration: 'none' }}
+            style={{ width: 38, height: 38, background: 'var(--green)', color: '#fff', borderRadius: 6, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, textDecoration: 'none' }}
             aria-label="Commander via WhatsApp"
           >
             {WA_ICON}
