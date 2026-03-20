@@ -11,7 +11,52 @@ import {
 import type { ProductFilters } from '@/lib/types'
 import ProductCard from '@/components/catalog/ProductCard'
 import FilterSidebar from '@/components/catalog/FilterSidebar'
-import { categoryHref, stripHtml } from '@/lib/utils'
+import { categoryHref, stripHtml, whatsappGeneralLink } from '@/lib/utils'
+
+// ─── Category educational context ─────────────────────────────────────────────
+const CAT_CONTEXT: Record<string, {
+  who: string
+  entry: string
+  budget: string
+  use: string[]
+}> = {
+  'les-presses-a-chaud': {
+    who: 'Entrepreneurs en démarrage, ateliers de personnalisation textile, photographes proposant des cadeaux personnalisés.',
+    entry: 'Commencez par la presse 38×38cm pour tester la sublimation, puis montez en gamme vers le 40×50 auto-ouverture.',
+    budget: 'Budget démarrage : 1 800–2 500 MAD. Budget pro : 3 200–8 000 MAD.',
+    use: ['Sublimation sur t-shirts polyester', 'Transfert flex sur coton', 'Personnalisation mugs et objets rigides', 'Sérigraphie thermique'],
+  },
+  'les-consommables-de-serigraphie': {
+    who: 'Ateliers de sérigraphie en production, imprimeurs textiles, designers faisant leurs propres runs.',
+    entry: 'Commencez avec la base aqueuse Antex XP10 et des cadres 40×50cm. Prévoyez 3–5 cadres pour produire efficacement.',
+    budget: 'Budget mensuel typique : 400–1 500 MAD selon volume de production.',
+    use: ['Impression sur t-shirts coton', 'Séries associatifs & clubs sportifs', 'Personnalisation sweats et tote bags', 'Production en plusieurs couleurs'],
+  },
+  'les-consommables-de-sublimation': {
+    who: 'Ateliers de sublimation, side-business mugs et cadeaux, photographes, boutiques cadeaux personnalisés.',
+    entry: 'Commencez par les encres + papier A4. Une bouteille 100ml encre CMYK = environ 200 impressions A4.',
+    budget: 'Budget mensuel typique : 250–700 MAD selon production.',
+    use: ['Mugs, cadres, coussins sublimés', 'T-shirts polyester plein couleur', 'Cadeaux personnalisés', 'Objets rigides avec revêtement sublimable'],
+  },
+  'les-machines-dimpression': {
+    who: 'Ateliers cherchant la production intensive, sous-traitants textile, revendeurs DTF.',
+    entry: "Commencez par l'imprimante DTF A4 (la plus accessible). Vérifiez que vous avez une station poudrage et un tunnel séchage.",
+    budget: 'Investissement machine seule : 6 000–15 000 MAD. Kit complet recommandé.',
+    use: ['DTF tous textiles', 'Production 100+ transferts/heure', 'Sous-traitance pour autres ateliers', 'Impression photo sur textile'],
+  },
+  'les-machines-de-serigraphie': {
+    who: "Ateliers en croissance cherchant à automatiser, producteurs de t-shirts en grande série, ateliers B2B.",
+    entry: 'Commencez par un carrousel 1 couleur 1 station, puis évoluez vers le 4 couleurs selon votre volume.',
+    budget: 'Carrousel entrée de gamme : 4 000–8 000 MAD. Insolation : 2 000–5 000 MAD.',
+    use: ['Production sérigraphie à grande échelle', 'Insolation de cadres professionnelle', 'Séchage tunnel encres', 'Atelier complet professionnel'],
+  },
+  'les-produits-sublimables': {
+    who: "Ateliers de sublimation cherchant à diversifier leur offre, boutiques cadeaux, e-commerçants.",
+    entry: 'Les mugs blancs 11oz sont le produit de démarrage le plus rentable. Ajoutez les coussins et cadres pour diversifier.',
+    budget: 'Coût unitaire : 5–30 MAD selon support. Marge nette : 200–500%.',
+    use: ['Mugs personnalisés entreprises & particuliers', 'Coussins photo', 'Cadres marbre & aluminium', 'Porte-clés et accessoires'],
+  },
+}
 
 interface PageProps {
   params: { locale: string; slug: string }
@@ -56,6 +101,7 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
   const { locale, slug } = params
   setRequestLocale(locale)
   const t = await getTranslations('catalog')
+  const catCtx = CAT_CONTEXT[slug] ?? null
 
   const currentPage = parseInt(searchParams.page ?? '1', 10)
   const orderby     = (searchParams.orderby as ProductFilters['orderby']) ?? 'date'
@@ -147,6 +193,44 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
           )}
         </div>
       </div>
+
+      {/* ── Category educational context ─────────────────────────── */}
+      {catCtx && (
+        <div style={{ background: 'var(--bg)', padding: '32px 6%', borderBottom: '1px solid var(--border)' }}>
+          <div style={{ maxWidth: 1280, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16 }}>
+            <div style={{ padding: '18px', background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 10 }}>
+              <div style={{ fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--blue)', marginBottom: 8 }}>Pour qui ?</div>
+              <p style={{ fontSize: 12, color: 'var(--text2)', lineHeight: 1.6 }}>{catCtx.who}</p>
+            </div>
+            <div style={{ padding: '18px', background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 10 }}>
+              <div style={{ fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--teal)', marginBottom: 8 }}>Par où commencer ?</div>
+              <p style={{ fontSize: 12, color: 'var(--text2)', lineHeight: 1.6 }}>{catCtx.entry}</p>
+            </div>
+            <div style={{ padding: '18px', background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 10 }}>
+              <div style={{ fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--orange)', marginBottom: 8 }}>Budget orientatif</div>
+              <p style={{ fontSize: 12, color: 'var(--text2)', lineHeight: 1.6, marginBottom: 8 }}>{catCtx.budget}</p>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
+                {catCtx.use.map(u => (
+                  <span key={u} style={{ fontSize: 10, padding: '2px 8px', background: 'var(--orangesoft)', color: 'var(--orange)', borderRadius: 4, fontWeight: 600 }}>{u}</span>
+                ))}
+              </div>
+            </div>
+            <div style={{ padding: '18px', background: 'var(--greensoft)', border: '1px solid var(--green)', borderRadius: 10, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+              <div>
+                <div style={{ fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--green)', marginBottom: 8 }}>Besoin d&apos;aide ?</div>
+                <p style={{ fontSize: 12, color: 'var(--text2)', lineHeight: 1.6 }}>Nos experts vous conseillent le bon produit selon votre budget et votre activité.</p>
+              </div>
+              <a
+                href={whatsappGeneralLink(`Bonjour NES, j'ai une question sur vos ${category.name}. Pouvez-vous m'aider à choisir ?`)}
+                target="_blank" rel="noopener noreferrer"
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 6, marginTop: 12, padding: '9px 14px', background: 'var(--green)', color: '#fff', borderRadius: 7, fontSize: 12, fontWeight: 700, textDecoration: 'none' }}
+              >
+                💬 Demander par WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* ── Content ─────────────────────────────────────────────────── */}
       <div style={{ maxWidth: 1280, margin: '0 auto', padding: '36px 6%' }}>

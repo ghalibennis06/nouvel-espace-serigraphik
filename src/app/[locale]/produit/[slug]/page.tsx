@@ -315,12 +315,61 @@ export default async function ProductPage({ params }: PageProps) {
           )}
         </div>
 
+        {/* ── Who is this for + Trust signals ───────────────────────── */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16, marginBottom: 40 }}>
+          <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 12, padding: 22 }}>
+            <h3 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 18, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>
+              Ce produit est fait pour vous si…
+            </h3>
+            {categories.length > 0 && (() => {
+              const catSlug = categories[0]?.slug ?? ''
+              const hints: Record<string, string[]> = {
+                'les-presses-a-chaud':           ['Vous lancez un atelier de sublimation ou sérigraphie', 'Vous cherchez à améliorer votre cadence de production', 'Vous avez besoin d\'un équipement fiable et durable'],
+                'les-consommables-de-serigraphie':['Vous avez déjà une presse et cherchez à renouveler vos bases', 'Vous recherchez des consommables pro à prix compétitifs', 'Vous préparez une commande en série'],
+                'les-consommables-de-sublimation':['Vous faites de la sublimation et avez besoin de réapprovisionner', 'Vous cherchez des encres de qualité pour des couleurs vives', 'Vous démarrez et cherchez le bon consommable de départ'],
+                'les-machines-dimpression':       ['Vous ciblez une production intensive (100+ pièces/jour)', 'Vous voulez imprimer sur tous types de textiles', 'Vous cherchez à monter un atelier complet DTF'],
+                'les-machines-de-serigraphie':    ['Vous avez besoin d\'automatiser votre production', 'Vous faites des commandes B2B régulières', 'Vous voulez passer à la sérigraphie semi-industrielle'],
+                'les-produits-sublimables':       ['Vous cherchez des supports à personnaliser', 'Vous vendez des cadeaux ou articles personnalisés', 'Vous cherchez à diversifier votre gamme de produits'],
+              }
+              const lines = hints[catSlug] ?? ['Vous êtes professionnel de l\'impression textile', 'Vous cherchez du matériel de qualité au Maroc', 'Vous avez besoin d\'un équipement fiable avec support local']
+              return lines.map(l => (
+                <div key={l} style={{ display: 'flex', gap: 8, marginBottom: 7, fontSize: 13, color: 'var(--text2)', lineHeight: 1.4 }}>
+                  <span style={{ color: 'var(--teal)', fontWeight: 700, flexShrink: 0 }}>✓</span>{l}
+                </div>
+              ))
+            })()}
+          </div>
+
+          <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 12, padding: 22 }}>
+            <h3 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 18, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>
+              Garanties &amp; Service
+            </h3>
+            {[
+              { icon: '🛡️', label: 'Garantie 1 an', desc: 'Toutes les machines — SAV local' },
+              { icon: '🚚', label: 'Livraison 48h', desc: 'Partout au Maroc depuis Casablanca' },
+              { icon: '💬', label: 'Support WhatsApp', desc: 'Réponse < 5 min · Lun–Sam 9h–18h' },
+              { icon: '🧾', label: 'Facture professionnelle', desc: 'Devis sur demande pour B2B' },
+            ].map(g => (
+              <div key={g.label} style={{ display: 'flex', gap: 12, marginBottom: 12 }}>
+                <span style={{ fontSize: 18, flexShrink: 0 }}>{g.icon}</span>
+                <div>
+                  <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>{g.label}</div>
+                  <div style={{ fontSize: 11, color: 'var(--text2)' }}>{g.desc}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* ── Related Products ───────────────────────────────────────── */}
         {relatedProducts.length > 0 && (
           <div>
-            <h2 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 26, fontWeight: 700, color: 'var(--text)', marginBottom: 24 }}>
+            <h2 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 26, fontWeight: 700, color: 'var(--text)', marginBottom: 16 }}>
               {t('relatedProducts')}
             </h2>
+            <p style={{ fontSize: 13, color: 'var(--text2)', marginBottom: 20 }}>
+              Les clients qui ont consulté ce produit ont aussi regardé :
+            </p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 16 }}>
               {relatedProducts.map(p => (
                 <ProductCard key={p.id} product={p} locale={locale} />

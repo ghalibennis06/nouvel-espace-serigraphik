@@ -2,14 +2,15 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { setRequestLocale } from 'next-intl/server'
-import { getCategoryTree } from '@/lib/woocommerce'
-import { categoryHref } from '@/lib/utils'
+import { getCategoryTree, getProducts } from '@/lib/woocommerce'
+import { categoryHref, whatsappGeneralLink } from '@/lib/utils'
+import ProductCard from '@/components/catalog/ProductCard'
 
 export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
   title: 'Catalogue — Toutes les catégories',
-  description: 'Découvrez toutes nos catégories de fournitures professionnelles pour la sérigraphie, la sublimation et l\'impression textile.',
+  description: "Découvrez toutes nos catégories de fournitures professionnelles pour la sérigraphie, la sublimation et l'impression textile.",
 }
 
 const CAT_EMOJIS: Record<string, string> = {
@@ -19,10 +20,27 @@ const CAT_EMOJIS: Record<string, string> = {
   'les-machines-dimpression': '⚙️',
 }
 
-export default async function CatalogIndexPage({ params }: { params: { locale: string } }) {
+export default async function CatalogIndexPage({
+  params,
+  searchParams,
+}: {
+  params: { locale: string }
+  searchParams?: { search?: string }
+}) {
   const { locale } = params
+  const searchQuery = searchParams?.search?.trim() ?? ''
   setRequestLocale(locale)
-  const { root: categories, children: subCategories } = await getCategoryTree()
+
+  const [{ root: categories, children: subCategories }, searchResults] = await Promise.all([
+    getCategoryTree(),
+    searchQuery
+      ? getProducts({ search: searchQuery, per_page: 20 }).then(r => r.products)
+      : Promise.resolve(null),
+  ])
+
+  const waSearch = searchQuery
+    ? whatsappGeneralLink(`Bonjour NES, je recherche "${searchQuery}" dans votre catalogue. Pouvez-vous m'aider ?`)
+    : ''
 
   return (
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
@@ -38,15 +56,54 @@ export default async function CatalogIndexPage({ params }: { params: { locale: s
             Fournitures professionnelles
           </span>
           <h1 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 38, fontWeight: 700, color: 'var(--text)', lineHeight: 1.15, marginBottom: 10 }}>
-            Tout notre catalogue
+            {searchQuery ? `Résultats pour « ${searchQuery} »` : 'Tout notre catalogue'}
           </h1>
           <p style={{ fontSize: 14, color: 'var(--text2)', maxWidth: 560 }}>
-            Machines, consommables et produits sublimables pour les professionnels de l&apos;impression textile au Maroc.
+            {searchQuery
+              ? `${searchResults?.length ?? 0} produit(s) trouvé(s)`
+              : "Machines, consommables et produits sublimables pour les professionnels de l'impression textile au Maroc."}
           </p>
         </div>
       </div>
 
-      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '48px 6%' }}>
+      {/* Search results */}
+      {searchQuery && (
+        <div style={{ maxWidth: 1280, margin: '0 auto', padding: '36px 6%' }}>
+          {searchResults && searchResults.length > 0 ? (
+            <>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 16 }}>
+                {searchResults.map(p => (
+                  <ProductCard key={p.id} product={p} locale={locale} />
+                ))}
+              </div>
+              <div style={{ marginTop: 28, textAlign: 'center', padding: '18px', background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 10 }}>
+                <p style={{ fontSize: 13, color: 'var(--text2)', marginBottom: 12 }}>
+                  Vous ne trouvez pas ce que vous cherchez ? Contactez nos experts.
+                </p>
+                <a href={waSearch} target="_blank" rel="noopener noreferrer"
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '10px 20px', background: 'var(--green)', color: '#fff', borderRadius: 7, fontSize: 13, fontWeight: 700, textDecoration: 'none' }}>
+                  💬 Demander par WhatsApp
+                </a>
+              </div>
+            </>
+          ) : (
+            <div style={{ textAlign: 'center', padding: '60px 20px' }}>
+              <div style={{ fontSize: 48, marginBottom: 16 }}>🔍</div>
+              <h2 style={{ fontSize: 20, fontWeight: 700, color: 'var(--text)', marginBottom: 10 }}>Aucun résultat pour « {searchQuery} »</h2>
+              <p style={{ fontSize: 14, color: 'var(--text2)', marginBottom: 24 }}>Essayez un autre terme ou parcourez nos catégories ci-dessous.</p>
+              <a href={waSearch} target="_blank" rel="noopener noreferrer"
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '12px 24px', background: 'var(--green)', color: '#fff', borderRadius: 8, fontSize: 14, fontWeight: 700, textDecoration: 'none' }}>
+                💬 Demander à un expert
+              </a>
+            </div>
+          )}
+          <h2 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 26, fontWeight: 700, color: 'var(--text)', margin: '52px 0 24px' }}>
+            Ou parcourez nos catégories
+          </h2>
+        </div>
+      )}
+
+      <div style={{ maxWidth: 1280, margin: '0 auto', padding: searchQuery ? '0 6% 48px' : '48px 6%' }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 56 }}>
           {categories.map(cat => {
             const subs = subCategories.get(cat.id) ?? []

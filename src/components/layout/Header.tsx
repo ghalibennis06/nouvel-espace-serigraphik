@@ -1,7 +1,7 @@
 'use client'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import type { WCCategory } from '@/lib/types'
 import { categoryHref, whatsappGeneralLink } from '@/lib/utils'
 import { useTheme } from '@/components/ThemeProvider'
@@ -35,20 +35,75 @@ function MoonIcon() {
   )
 }
 
+function SearchIcon() {
+  return (
+    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+      <circle cx="11" cy="11" r="8" />
+      <path strokeLinecap="round" d="M21 21l-4.35-4.35" />
+    </svg>
+  )
+}
+
 export default function Header({ locale, rootCategories, subCategories }: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [searchOpen, setSearchOpen] = useState(false)
+  const [searchQuery, setSearchQuery] = useState('')
+  const searchRef = useRef<HTMLInputElement>(null)
   const pathname = usePathname()
+  const router = useRouter()
   const { theme, toggle } = useTheme()
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault()
+    const q = searchQuery.trim()
+    if (!q) return
+    router.push(`/${locale}/categorie-produit?search=${encodeURIComponent(q)}`)
+    setSearchOpen(false)
+    setSearchQuery('')
+  }
 
   const navLinks = [
     { label: 'Kits & Packs',  href: `/${locale}/kits`,             highlight: true },
     { label: 'Catalogue',     href: `/${locale}/categorie-produit`, highlight: false },
     { label: 'Académie',      href: `/${locale}/academie`,          highlight: false },
+    { label: 'Devis Pro',     href: `/${locale}/devis-pro`,         highlight: false },
     { label: 'Avis',          href: `#testimonials`,                highlight: false },
   ]
 
   return (
     <>
+      {/* ── Search overlay ───────────────────────────────────────── */}
+      {searchOpen && (
+        <>
+          <div
+            style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.55)', zIndex: 300, backdropFilter: 'blur(6px)' }}
+            onClick={() => setSearchOpen(false)}
+          />
+          <div style={{ position: 'fixed', top: 80, left: '50%', transform: 'translateX(-50%)', width: '100%', maxWidth: 600, padding: '0 16px', zIndex: 301 }}>
+            <form onSubmit={handleSearch}>
+              <div style={{ display: 'flex', alignItems: 'center', background: 'var(--surface)', border: '1px solid var(--blue)', borderRadius: 12, overflow: 'hidden', boxShadow: '0 20px 60px rgba(0,0,0,0.5)' }}>
+                <span style={{ padding: '0 14px', color: 'var(--blue)' }}><SearchIcon /></span>
+                <input
+                  ref={searchRef}
+                  type="text"
+                  value={searchQuery}
+                  onChange={e => setSearchQuery(e.target.value)}
+                  placeholder="Rechercher un produit, une technique..."
+                  onKeyDown={e => e.key === 'Escape' && setSearchOpen(false)}
+                  style={{ flex: 1, background: 'transparent', border: 'none', outline: 'none', padding: '16px 0', fontSize: 15, color: 'var(--text)', fontFamily: 'Outfit,sans-serif' }}
+                />
+                <button type="submit" style={{ padding: '12px 20px', background: 'var(--blue)', color: '#fff', border: 'none', cursor: 'pointer', fontSize: 13, fontWeight: 700, fontFamily: 'Outfit,sans-serif' }}>
+                  Rechercher
+                </button>
+              </div>
+              <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', marginTop: 10, textAlign: 'center' }}>
+                Appuyez sur Entrée ou cliquez pour rechercher · Échap pour fermer
+              </p>
+            </form>
+          </div>
+        </>
+      )}
+
       {/* ── Main nav ─────────────────────────────────────────────── */}
       <nav
         style={{
@@ -104,8 +159,19 @@ export default function Header({ locale, rootCategories, subCategories }: Header
           ))}
         </div>
 
-        {/* Right: theme toggle + WhatsApp CTA + burger */}
+        {/* Right: search + theme toggle + WhatsApp CTA + burger */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+
+          {/* Search button */}
+          <button
+            onClick={() => { setSearchOpen(v => !v); setTimeout(() => searchRef.current?.focus(), 80) }}
+            aria-label="Rechercher"
+            style={{ width: 36, height: 36, borderRadius: '50%', border: '1px solid var(--border2)', background: 'var(--card)', color: 'var(--text2)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', transition: 'border-color .2s, color .2s', flexShrink: 0 }}
+            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--blue)'; (e.currentTarget as HTMLElement).style.color = 'var(--blue)' }}
+            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--border2)'; (e.currentTarget as HTMLElement).style.color = 'var(--text2)' }}
+          >
+            <SearchIcon />
+          </button>
 
           {/* Theme toggle */}
           <button

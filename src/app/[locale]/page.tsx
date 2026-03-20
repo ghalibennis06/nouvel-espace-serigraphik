@@ -2,9 +2,10 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { setRequestLocale } from 'next-intl/server'
 import { getFeaturedProducts, getCategoryTree } from '@/lib/woocommerce'
-import { categoryHref, whatsappGeneralLink, whatsappProductLink } from '@/lib/utils'
+import { categoryHref, whatsappGeneralLink } from '@/lib/utils'
 import RoiCalculator from '@/components/home/RoiCalculator'
 import ProductsSection from '@/components/home/ProductsSection'
+import { KITS as KITS_DATA } from '@/lib/data/kits'
 
 export const dynamic = 'force-dynamic'
 
@@ -17,83 +18,8 @@ export async function generateMetadata(): Promise<Metadata> {
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
-const KITS = [
-  {
-    id: 'p1',
-    badge: null,
-    badgeStyle: {},
-    level: 'Pack N°1',
-    levelColor: 'var(--blue)',
-    name: 'Kit Démarrage',
-    desc: "L'essentiel pour lancer votre activité de personnalisation textile dès aujourd'hui.",
-    price: '4 400',
-    oldPrice: '5 200',
-    priceColor: 'var(--blue)',
-    featured: false,
-    items: [
-      'Presse à chaud manuelle 38×38cm',
-      'Papiers transfert A4 × 50 feuilles',
-      'Scotch thermique + téflon inclus',
-      "Guide de démarrage NES offert",
-      '1 mois support WhatsApp',
-    ],
-    conso: '250–400 MAD/mois · Papier transfert + scotch',
-    consoColor: 'var(--bluesoft)',
-    consoAccent: 'var(--blue)',
-    wa: "Bonjour NES, je veux commander le Pack N°1 Kit Démarrage à 4 400 MAD. Disponible ?",
-    btnBg: 'var(--green)',
-  },
-  {
-    id: 'p2',
-    badge: '★ Plus populaire',
-    badgeStyle: { background: 'var(--teal)', color: '#fff' },
-    level: 'Pack N°2',
-    levelColor: 'var(--teal)',
-    name: 'Kit Professionnel',
-    desc: 'Presse 5en1, sublimation multi-supports. Le kit le plus vendu au Maroc.',
-    price: '5 400',
-    oldPrice: '6 800',
-    priceColor: 'var(--blue)',
-    featured: true,
-    items: [
-      'Presse 5en1 Freesub 38×38cm',
-      'Encres sublimation 4 couleurs 100ml',
-      'Papier sublimation A4 × 100 feuilles',
-      'Mugs sublimables blancs × 12',
-      'Guide vidéo + 1 mois support WA',
-    ],
-    conso: '400–700 MAD/mois · Encres + papier + mugs',
-    consoColor: 'var(--tealsoft)',
-    consoAccent: 'var(--teal)',
-    wa: "Bonjour NES, je veux commander le Pack N°2 Professionnel à 5 400 MAD. Disponible à livrer dans ma ville ?",
-    btnBg: 'var(--teal)',
-  },
-  {
-    id: 'p3',
-    badge: 'Atelier Complet',
-    badgeStyle: { background: 'var(--orange)', color: '#fff' },
-    level: 'Pack N°3',
-    levelColor: 'var(--orange)',
-    name: 'Kit Atelier Avancé',
-    desc: "Sérigraphie + sublimation. L'équipement complet pour un atelier professionnel.",
-    price: '8 400',
-    oldPrice: '10 500',
-    priceColor: 'var(--orange)',
-    featured: false,
-    items: [
-      'Presse 40×50cm auto-ouverture',
-      'Carrousel 1 couleur 1 station',
-      'Encres sublimation 1L × 4 couleurs',
-      'Base aqueuse Antex XP50 1kg',
-      'Cadres aluminium 40×50cm × 2',
-    ],
-    conso: '800–1 500 MAD/mois · Encres + bases + soie',
-    consoColor: 'var(--orangesoft)',
-    consoAccent: 'var(--orange)',
-    wa: "Bonjour NES, je suis intéressé par le Pack N°3 Atelier Avancé à 8 400 MAD. Pouvez-vous me contacter ?",
-    btnBg: 'var(--orange)',
-  },
-]
+// Kit data from shared source — no duplication
+const KITS = KITS_DATA
 
 const CATEGORIES = [
   { emoji: '🔥', name: 'Presses à Chaud',       info: 'Manuelles, auto-ouverture, 5en1, casquette, mug', count: '23', slug: 'les-presses-a-chaud',             recur: false },
@@ -117,19 +43,49 @@ const TESTIMONIALS = [
     initial: 'Y',
     name: 'Youssef A.',
     city: 'Marrakech · Atelier personnalisation',
-    text: "J'ai commandé le Pack N°2 et j'ai reçu en 24h à Marrakech. En 2 semaines, j'avais déjà remboursé le kit avec mes premières commandes de mugs personnalisés. Incroyable.",
+    kit: 'Kit Sublimation Starter',
+    rating: 5,
+    text: "J'ai commandé le Kit Sublimation et reçu en 24h à Marrakech. En 2 semaines j'avais déjà remboursé mon investissement avec les mugs personnalisés. Service et qualité au top.",
   },
   {
     initial: 'F',
     name: 'Fatima Z.',
     city: 'Casablanca · Sérigraphie textile',
+    kit: 'Kit Sérigraphie Pro',
+    rating: 5,
     text: 'Le support WhatsApp est exceptionnel. À chaque question on me répond en quelques minutes avec des conseils concrets. Une équipe vraiment professionnelle et disponible.',
   },
   {
     initial: 'K',
     name: 'Karim B.',
     city: 'Fès · Atelier complet',
-    text: "Le Pack N°3 m'a permis de faire de la sérigraphie ET de la sublimation. Mon chiffre d'affaires a doublé en 3 mois. Je recommande NES à tous les entrepreneurs sérieux.",
+    kit: 'Kit DTF Complet',
+    rating: 5,
+    text: "Le Kit DTF m'a permis d'imprimer sur coton, polyester ET cuir. Mon CA a doublé en 3 mois. Je recommande NES à tous les entrepreneurs sérieux du secteur.",
+  },
+  {
+    initial: 'S',
+    name: 'Sara M.',
+    city: 'Rabat · Boutique cadeaux',
+    kit: 'Kit Sublimation Starter',
+    rating: 5,
+    text: "J'ai démarré avec 4 400 MAD et aujourd'hui je produis 80 mugs/jour. La presse est robuste, les encres sont de qualité et l'équipe NES m'a tout appris par WhatsApp.",
+  },
+  {
+    initial: 'A',
+    name: 'Amine O.',
+    city: 'Agadir · Impression T-shirts',
+    kit: 'Kit Sérigraphie Pro',
+    rating: 5,
+    text: "Meilleur investissement de ma carrière. J'imprime des séries de 50 t-shirts pour les associations locales. Rentabilisé en 4 semaines, comme promis.",
+  },
+  {
+    initial: 'H',
+    name: 'Houda L.',
+    city: 'Tanger · Atelier textile',
+    kit: 'Kit DTF Complet',
+    rating: 5,
+    text: "Le Kit DTF vaut chaque dirham. La formation incluse est complète et l'équipe technique NES répond même le week-end. Mon atelier produit maintenant 200 pièces/jour.",
   },
 ]
 
@@ -144,7 +100,6 @@ export default async function HomePage({ params }: { params: { locale: string } 
     getFeaturedProducts(12),
   ])
 
-  const waCalc = whatsappGeneralLink("Bonjour NES, j'ai calculé ma rentabilité et je veux lancer mon atelier. Quel kit me recommandez-vous ?")
   const waExpert = whatsappGeneralLink("Bonjour NES, je souhaite lancer mon atelier d'impression. Pouvez-vous m'aider à choisir le bon kit ?")
 
   return (
@@ -232,9 +187,9 @@ export default async function HomePage({ params }: { params: { locale: string } 
               </div>
             </div>
 
-            {/* Right: ROI Calculator */}
+            {/* Right: ROI Calculator — desktop */}
             <div className="hidden lg:block">
-              <RoiCalculator variant="hero" waLink={waCalc} />
+              <RoiCalculator variant="hero" />
             </div>
           </div>
         </div>
@@ -276,6 +231,49 @@ export default async function HomePage({ params }: { params: { locale: string } 
       </div>
 
       {/* ═══════════════════════════════════════════════════════════
+          MOBILE ROI CALCULATOR (hidden on lg+ — shown there in hero)
+      ═══════════════════════════════════════════════════════════ */}
+      <section className="lg:hidden" style={{ background: 'var(--surface)', padding: '52px 6%', borderBottom: '1px solid var(--border)' }}>
+        <div style={{ maxWidth: 520, margin: '0 auto' }}>
+          <RoiCalculator variant="academie" />
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════
+          BUYER JOURNEY — par où commencer ?
+      ═══════════════════════════════════════════════════════════ */}
+      <section style={{ background: 'var(--surface)', padding: '72px 6%', borderBottom: '1px solid var(--border)' }}>
+        <div style={{ maxWidth: 1280, margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: 40 }}>
+            <span className="stag">Votre point de départ</span>
+            <h2 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 'clamp(28px,3.5vw,46px)', fontWeight: 700, color: 'var(--text)', lineHeight: 1.1 }}>
+              Quel est votre <em style={{ fontStyle: 'italic', color: 'var(--blue)' }}>profil ?</em>
+            </h2>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 14 }}>
+            {[
+              { icon: '🚀', title: 'Je démarre de zéro', desc: 'Aucune expérience, budget serré. Je veux lancer rapidement.', cta: 'Kit Sublimation Starter', href: `/${locale}/kits`, color: 'var(--blue)' },
+              { icon: '🎨', title: 'J\'ai déjà du matériel', desc: 'J\'ai une presse mais j\'ai besoin de consommables ou d\'un upgrade.', cta: 'Explorer le catalogue', href: `/${locale}/categorie-produit`, color: 'var(--teal)' },
+              { icon: '🏭', title: 'Je veux produire en volume', desc: 'Atelier DTF, production intensive, sous-traitance textile.', cta: 'Kit DTF Complet', href: `/${locale}/kits`, color: 'var(--orange)' },
+              { icon: '🏢', title: 'Achat B2B / École / Agence', desc: 'Commande pro, devis, facture, livraison entreprise.', cta: 'Demander un devis', href: `/${locale}/contact`, color: 'var(--green)' },
+            ].map(p => (
+              <Link key={p.title} href={p.href}
+                style={{ display: 'flex', flexDirection: 'column', gap: 10, padding: '22px', background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 12, textDecoration: 'none', transition: 'border-color .2s, transform .2s' }}
+                className="art-item"
+              >
+                <span style={{ fontSize: 28 }}>{p.icon}</span>
+                <strong style={{ fontSize: 14, color: 'var(--text)', fontWeight: 700 }}>{p.title}</strong>
+                <span style={{ fontSize: 12, color: 'var(--text2)', lineHeight: 1.55, flex: 1 }}>{p.desc}</span>
+                <span style={{ fontSize: 12, fontWeight: 700, color: p.color }}>
+                  {p.cta} →
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════
           KITS
       ═══════════════════════════════════════════════════════════ */}
       <section id="kits" style={{ background: 'var(--bg)', padding: '90px 6%' }}>
@@ -301,8 +299,8 @@ export default async function HomePage({ params }: { params: { locale: string } 
                 key={kit.id}
                 style={{
                   background: 'var(--card)',
-                  border: kit.featured ? '1px solid var(--bluesoft2)' : '1px solid var(--border)',
-                  boxShadow: kit.featured ? '0 0 50px var(--bluesoft)' : 'none',
+                  border: kit.featured ? `1px solid ${kit.accent}` : '1px solid var(--border)',
+                  boxShadow: kit.featured ? `0 0 50px ${kit.accentSoft}` : 'none',
                   borderRadius: 18,
                   padding: 30,
                   position: 'relative',
@@ -311,13 +309,13 @@ export default async function HomePage({ params }: { params: { locale: string } 
               >
                 {/* Badge */}
                 {kit.badge && (
-                  <span style={{ position: 'absolute', top: 18, right: 18, padding: '4px 10px', borderRadius: 20, fontSize: 9, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', ...kit.badgeStyle }}>
+                  <span style={{ position: 'absolute', top: 18, right: 18, padding: '4px 10px', borderRadius: 20, fontSize: 9, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', background: kit.accent, color: '#fff' }}>
                     {kit.badge}
                   </span>
                 )}
 
-                <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.13em', textTransform: 'uppercase', color: kit.levelColor, marginBottom: 10 }}>
-                  {kit.level}
+                <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.13em', textTransform: 'uppercase', color: kit.accent, marginBottom: 10 }}>
+                  {kit.packNum}
                 </div>
                 <div style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 27, fontWeight: 700, color: 'var(--text)', marginBottom: 7 }}>
                   {kit.name}
@@ -328,8 +326,8 @@ export default async function HomePage({ params }: { params: { locale: string } 
 
                 {/* Price */}
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 20 }}>
-                  <span style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 38, fontWeight: 700, color: kit.priceColor }}>
-                    {kit.price}
+                  <span style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 38, fontWeight: 700, color: kit.accent }}>
+                    {kit.priceDisplay}
                   </span>
                   <span style={{ fontSize: 13, color: 'var(--text2)' }}>MAD</span>
                   <span style={{ fontSize: 14, color: 'var(--text2)', textDecoration: 'line-through' }}>{kit.oldPrice}</span>
@@ -339,21 +337,26 @@ export default async function HomePage({ params }: { params: { locale: string } 
                 <ul style={{ listStyle: 'none', marginBottom: 20, display: 'flex', flexDirection: 'column', gap: 7 }}>
                   {kit.items.map(item => (
                     <li key={item} style={{ display: 'flex', alignItems: 'flex-start', gap: 8, fontSize: 12, color: 'var(--text2)', lineHeight: 1.4 }}>
-                      <span style={{ color: 'var(--blue)', fontWeight: 800, flexShrink: 0 }}>✓</span>
+                      <span style={{ color: kit.accent, fontWeight: 800, flexShrink: 0 }}>✓</span>
                       {item}
                     </li>
                   ))}
                 </ul>
 
                 {/* Conso */}
-                <div style={{ marginTop: 16, padding: 12, background: kit.consoColor, border: `1px solid var(--border)`, borderRadius: 8, fontSize: 11, color: 'var(--text2)' }}>
-                  <strong style={{ color: kit.consoAccent }}>♻ Conso mensuel estimé :</strong>{' '}{kit.conso}
+                <div style={{ marginTop: 16, padding: 12, background: kit.accentSoft, border: `1px solid var(--border)`, borderRadius: 8, fontSize: 11, color: 'var(--text2)' }}>
+                  <strong style={{ color: kit.accent }}>♻ Conso mensuel estimé :</strong>{' '}{kit.conso}
+                </div>
+
+                {/* ROI badge */}
+                <div style={{ marginTop: 10, fontSize: 11, color: 'var(--text2)' }}>
+                  ⏱ Setup {kit.setupTime} · 💰 ROI estimé {kit.roi}
                 </div>
 
                 {/* Buttons */}
-                <div style={{ display: 'flex', gap: 9, marginTop: 22 }}>
+                <div style={{ display: 'flex', gap: 9, marginTop: 18 }}>
                   <a
-                    href={whatsappGeneralLink(kit.wa)}
+                    href={whatsappGeneralLink(kit.ctaMsg)}
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7, background: kit.btnBg, color: '#fff', padding: '11px 16px', borderRadius: 6, fontSize: 13, fontWeight: 600, cursor: 'pointer', textDecoration: 'none', fontFamily: 'Outfit,sans-serif', transition: 'transform .15s' }}
@@ -501,7 +504,7 @@ export default async function HomePage({ params }: { params: { locale: string } 
             </div>
 
             {/* Calculator */}
-            <RoiCalculator variant="academie" waLink={whatsappGeneralLink("Bonjour NES, j'ai simulé ma rentabilité et je veux lancer mon atelier. Quel kit me recommandez-vous ?")} />
+            <RoiCalculator variant="academie" />
           </div>
         </div>
       </section>
@@ -617,28 +620,28 @@ export default async function HomePage({ params }: { params: { locale: string } 
           </div>
 
           <div
-            className="grid md:grid-cols-3"
-            style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 22, marginTop: 52 }}
+            style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 20, marginTop: 52 }}
           >
             {TESTIMONIALS.map((t, i) => (
               <div
                 key={i}
                 style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 15, padding: 26 }}
               >
-                <div style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 52, color: 'var(--blue)', opacity: .25, lineHeight: .75, marginBottom: 12 }}>
-                  &ldquo;
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 12 }}>
+                  <div style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 48, color: 'var(--blue)', opacity: .2, lineHeight: .75 }}>&ldquo;</div>
+                  <span style={{ fontSize: 10, fontWeight: 700, padding: '3px 8px', background: 'var(--bluesoft)', color: 'var(--blue)', borderRadius: 4, letterSpacing: '0.04em' }}>{t.kit}</span>
                 </div>
-                <p style={{ fontSize: 14, color: 'var(--text2)', lineHeight: 1.75, marginBottom: 18, fontStyle: 'italic' }}>
+                <p style={{ fontSize: 13, color: 'var(--text2)', lineHeight: 1.75, marginBottom: 18, fontStyle: 'italic' }}>
                   {t.text}
                 </p>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 11 }}>
-                  <div style={{ width: 42, height: 42, borderRadius: '50%', background: 'var(--blue)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 17, fontWeight: 700, color: '#fff', fontFamily: '"Cormorant Garamond",serif', flexShrink: 0 }}>
+                  <div style={{ width: 38, height: 38, borderRadius: '50%', background: 'var(--blue)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 15, fontWeight: 700, color: '#fff', fontFamily: '"Cormorant Garamond",serif', flexShrink: 0 }}>
                     {t.initial}
                   </div>
                   <div>
                     <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>{t.name}</div>
                     <div style={{ fontSize: 11, color: 'var(--text2)' }}>{t.city}</div>
-                    <div style={{ color: 'var(--orange)', fontSize: 12, marginTop: 2 }}>★★★★★</div>
+                    <div style={{ color: 'var(--orange)', fontSize: 11, marginTop: 2 }}>{'★'.repeat(t.rating)}</div>
                   </div>
                 </div>
               </div>

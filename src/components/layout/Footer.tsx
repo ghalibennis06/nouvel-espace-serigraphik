@@ -30,6 +30,13 @@ export default async function Footer({ locale }: { locale: string }) {
         { label: 'Tutoriels sublimation',   href: `/${locale}/academie/guide-sublimation-debutant` },
         { label: 'Techniques sérigraphie',  href: `/${locale}/academie/bases-serigraphie` },
         { label: 'Calculateur rentabilité', href: `/${locale}/academie` },
+      ],
+    },
+    {
+      title: 'B2B & Services',
+      links: [
+        { label: 'Devis Pro & Tarifs Gros', href: `/${locale}/devis-pro` },
+        { label: 'Kit Personnalisé',        href: `/${locale}/contact` },
         { label: 'Livraison & retours',     href: `/${locale}/livraison` },
         { label: 'Contact & showroom',      href: `/${locale}/contact` },
       ],
@@ -41,8 +48,8 @@ export default async function Footer({ locale }: { locale: string }) {
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
 
         {/* Links grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: '3.5rem', marginBottom: 44 }}
-             className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr', gap: '3rem', marginBottom: 44 }}
+             className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-5">
 
           {/* Brand col */}
           <div>
