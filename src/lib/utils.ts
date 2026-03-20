@@ -50,7 +50,7 @@ export function truncate(text: string, length: number): string {
 
 // ─── WooCommerce image fallback ───────────────────────────────────────────────
 export function getProductImage(product: WCProduct): string {
-  return product.images?.[0]?.src ?? '/images/placeholder.png'
+  return product.images?.[0]?.src ?? '/images/placeholder.svg'
 }
 
 // ─── Slug utilities ───────────────────────────────────────────────────────────

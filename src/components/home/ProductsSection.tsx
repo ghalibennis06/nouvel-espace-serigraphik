@@ -1,7 +1,9 @@
 'use client'
 import { useState } from 'react'
+import Link from 'next/link'
 import type { WCProduct } from '@/lib/types'
-import { whatsappProductLink } from '@/lib/utils'
+import { getProductImage, productHref, whatsappProductLink } from '@/lib/utils'
+import ImageWithFallback from '@/components/ui/ImageWithFallback'
 
 const CAT_MAP: Record<string, string> = {
   'les-presses-a-chaud':             'presses',
@@ -20,14 +22,6 @@ const CAT_LABELS: Record<string, string> = {
   other:   'Fournitures',
 }
 
-const CAT_EMOJI: Record<string, string> = {
-  presses: '🔥',
-  conso:   '🧴',
-  sub:     '☕',
-  mach:    '⚙️',
-  other:   '📦',
-}
-
 const FILTERS = [
   { key: 'all',     label: 'Tout voir' },
   { key: 'presses', label: 'Presses' },
@@ -44,7 +38,13 @@ function getCat(product: WCProduct): string {
   return 'other'
 }
 
-export default function ProductsSection({ products }: { products: WCProduct[] }) {
+export default function ProductsSection({
+  products,
+  locale = 'fr',
+}: {
+  products: WCProduct[]
+  locale?: string
+}) {
   const [active, setActive] = useState('all')
 
   const visible = active === 'all'
@@ -52,10 +52,7 @@ export default function ProductsSection({ products }: { products: WCProduct[] })
     : products.filter(p => getCat(p) === active).slice(0, 8)
 
   return (
-    <section
-      id="products"
-      style={{ background: 'var(--bg)', padding: '80px 6%' }}
-    >
+    <section id="products" style={{ background: 'var(--bg)', padding: '80px 6%' }}>
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
 
         {/* Header */}
@@ -95,19 +92,18 @@ export default function ProductsSection({ products }: { products: WCProduct[] })
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 17 }}>
           {visible.map(p => {
             const cat      = getCat(p)
-            const saleP    = parseFloat(p.sale_price  || '0')
+            const saleP    = parseFloat(p.sale_price    || '0')
             const regP     = parseFloat(p.regular_price || '0')
-            const dispP    = parseFloat(p.price || '0')
+            const dispP    = parseFloat(p.price         || '0')
             const isOnSale = p.on_sale && saleP > 0
             const discount = isOnSale && regP > 0 ? Math.round((1 - saleP / regP) * 100) : 0
             const finalP   = isOnSale ? saleP : dispP
+            const imgSrc   = getProductImage(p)
 
             return (
-              <a
+              <Link
                 key={p.id}
-                href={whatsappProductLink(p.name)}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={productHref(p.slug, locale)}
                 style={{
                   display: 'block',
                   background: 'var(--card)',
@@ -127,14 +123,49 @@ export default function ProductsSection({ products }: { products: WCProduct[] })
                   ;(e.currentTarget as HTMLElement).style.borderColor = 'var(--border)'
                 }}
               >
-                <div style={{ aspectRatio: '1', background: 'var(--card2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 52, position: 'relative' }}>
+                {/* Image area */}
+                <div style={{ aspectRatio: '1', background: 'var(--card2)', position: 'relative', overflow: 'hidden' }}>
                   {discount > 0 && (
-                    <div style={{ position: 'absolute', top: 9, left: 9, background: 'var(--orange)', color: '#fff', padding: '3px 8px', borderRadius: 4, fontSize: 10, fontWeight: 800 }}>
+                    <div style={{ position: 'absolute', top: 9, left: 9, zIndex: 2, background: 'var(--orange)', color: '#fff', padding: '3px 8px', borderRadius: 4, fontSize: 10, fontWeight: 800 }}>
                       -{discount}%
                     </div>
                   )}
-                  {CAT_EMOJI[cat] ?? '📦'}
+                  <ImageWithFallback
+                    src={imgSrc}
+                    alt={p.name}
+                    fill
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 200px"
+                    style={{ objectFit: 'cover' }}
+                  />
+                  {/* WhatsApp quick-order overlay */}
+                  <a
+                    href={whatsappProductLink(p.name)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={e => e.stopPropagation()}
+                    aria-label="Commander via WhatsApp"
+                    style={{
+                      position: 'absolute',
+                      bottom: 8,
+                      right: 8,
+                      zIndex: 3,
+                      width: 34,
+                      height: 34,
+                      borderRadius: '50%',
+                      background: 'var(--green)',
+                      color: '#fff',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontSize: 16,
+                      textDecoration: 'none',
+                    }}
+                  >
+                    💬
+                  </a>
                 </div>
+
+                {/* Info */}
                 <div style={{ padding: 14 }}>
                   <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.09em', textTransform: 'uppercase', color: 'var(--blue)', marginBottom: 4 }}>
                     {CAT_LABELS[cat]}
@@ -142,38 +173,31 @@ export default function ProductsSection({ products }: { products: WCProduct[] })
                   <div style={{ fontSize: 13, fontWeight: 500, color: 'var(--text)', lineHeight: 1.35, marginBottom: 9 }} className="line-clamp-2">
                     {p.name}
                   </div>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <div style={{ display: 'flex', alignItems: 'baseline', gap: 5 }}>
-                      <span style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 21, fontWeight: 700, color: 'var(--blue)' }}>
-                        {finalP > 0 ? `${Math.round(finalP)} MAD` : 'Sur devis'}
-                      </span>
-                      {isOnSale && regP > 0 && (
-                        <span style={{ fontSize: 12, color: 'var(--text2)', textDecoration: 'line-through' }}>
-                          {Math.round(regP)}
-                        </span>
-                      )}
-                    </div>
-                    <span style={{ width: 32, height: 32, borderRadius: '50%', background: 'var(--green)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14, flexShrink: 0 }}>
-                      💬
+                  <div style={{ display: 'flex', alignItems: 'baseline', gap: 5 }}>
+                    <span style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 21, fontWeight: 700, color: 'var(--blue)' }}>
+                      {finalP > 0 ? `${Math.round(finalP)} MAD` : 'Sur devis'}
                     </span>
+                    {isOnSale && regP > 0 && (
+                      <span style={{ fontSize: 12, color: 'var(--text2)', textDecoration: 'line-through' }}>
+                        {Math.round(regP)}
+                      </span>
+                    )}
                   </div>
                 </div>
-              </a>
+              </Link>
             )
           })}
         </div>
 
         {/* CTA */}
         <div style={{ textAlign: 'center', marginTop: 28 }}>
-          <a
-            href={`https://wa.me/212522448090?text=${encodeURIComponent('Bonjour NES, je veux consulter votre catalogue complet de 80+ produits.')}`}
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href={`/${locale}/categorie-produit`}
             className="btn-primary"
             style={{ display: 'inline-flex', padding: '14px 28px' }}
           >
             Voir le catalogue complet (80+ produits) →
-          </a>
+          </Link>
         </div>
       </div>
     </section>

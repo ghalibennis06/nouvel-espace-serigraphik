@@ -395,7 +395,7 @@ export default async function HomePage({ params }: { params: { locale: string } 
       {/* ═══════════════════════════════════════════════════════════
           PRODUCTS (client component — filter tabs)
       ═══════════════════════════════════════════════════════════ */}
-      <ProductsSection products={products} />
+      <ProductsSection products={products} locale={locale} />
 
       {/* ═══════════════════════════════════════════════════════════
           CATEGORIES
