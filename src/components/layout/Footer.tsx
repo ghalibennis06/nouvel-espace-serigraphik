@@ -53,8 +53,8 @@ export default async function Footer({ locale }: { locale: string }) {
 
           {/* Brand col */}
           <div>
-            <div style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 26, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>
-              Nouvel Espace <span style={{ color: 'var(--blue)' }}>Sérigraphik</span>
+            <div style={{ fontSize: 22, fontWeight: 900, color: 'var(--text)', marginBottom: 12, letterSpacing: '-0.03em' }}>
+              NES<span style={{ display: 'inline-block', width: 7, height: 7, borderRadius: '50%', background: 'var(--orange)', marginLeft: 2, verticalAlign: 'middle', marginBottom: 3 }} />
             </div>
             <p style={{ fontSize: 13, color: 'var(--text2)', lineHeight: 1.75, marginBottom: 22 }}>
               Le fournisseur de référence pour les professionnels de l&apos;impression au Maroc.
@@ -64,7 +64,7 @@ export default async function Footer({ locale }: { locale: string }) {
               href={whatsappGeneralLink()}
               target="_blank"
               rel="noopener noreferrer"
-              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'var(--green)', color: '#fff', padding: '10px 22px', borderRadius: 6, fontSize: 13, fontWeight: 600, textDecoration: 'none', fontFamily: 'Outfit,sans-serif' }}
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'var(--green)', color: '#fff', padding: '10px 22px', borderRadius: 8, fontSize: 13, fontWeight: 600, textDecoration: 'none' }}
             >
               💬 {phone}
             </a>

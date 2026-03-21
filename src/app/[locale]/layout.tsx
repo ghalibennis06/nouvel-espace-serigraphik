@@ -50,7 +50,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         {/* FOUC prevention: apply saved theme before first paint */}
-        <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem('nes-theme');if(t==='light')document.documentElement.classList.add('light');}catch(e){}})();` }} />
+        <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem('nes-theme');if(t==='dark')document.documentElement.classList.add('dark');}catch(e){}})();` }} />
       </head>
       <body className="min-h-screen flex flex-col" style={{ background: 'var(--bg)' }}>
         <ThemeProvider>

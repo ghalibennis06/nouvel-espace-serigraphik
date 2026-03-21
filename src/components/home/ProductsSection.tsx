@@ -52,15 +52,14 @@ export default function ProductsSection({
     : products.filter(p => getCat(p) === active).slice(0, 8)
 
   return (
-    <section id="products" style={{ background: 'var(--bg)', padding: '80px 6%' }}>
-      <div style={{ maxWidth: 1280, margin: '0 auto' }}>
+    <section id="products" style={{ background: 'var(--bg)', padding: '80px 5%', borderTop: '1px solid var(--border)' }}>
+      <div style={{ maxWidth: 1240, margin: '0 auto' }}>
 
         {/* Header */}
-        <div>
-          <span className="stag">Catalogue Complet — 80+ Produits</span>
-          <h2 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 'clamp(34px,3.5vw,52px)', fontWeight: 700, color: 'var(--text)', lineHeight: 1.08, marginBottom: 0 }}>
-            Nos meilleures<br />
-            <em style={{ fontStyle: 'italic', color: 'var(--blue)' }}>ventes du moment</em>
+        <div style={{ marginBottom: 28 }}>
+          <span className="stag">Meilleures ventes</span>
+          <h2 style={{ fontSize: 'clamp(26px,3vw,40px)', fontWeight: 800, color: 'var(--text)', letterSpacing: '-0.025em', lineHeight: 1.1 }}>
+            Nos produits les plus vendus
           </h2>
         </div>
 
@@ -71,16 +70,17 @@ export default function ProductsSection({
               key={key}
               onClick={() => setActive(key)}
               style={{
-                padding: '8px 18px',
-                borderRadius: 24,
+                padding: '7px 16px',
+                borderRadius: 8,
                 fontSize: 12,
-                fontWeight: 500,
+                fontWeight: 600,
                 cursor: 'pointer',
-                fontFamily: 'Outfit, sans-serif',
-                transition: 'all .2s',
-                background: active === key ? 'var(--blue)' : 'transparent',
+                fontFamily: 'Inter, sans-serif',
+                transition: 'all .15s',
+                background: active === key ? 'var(--orange)' : 'var(--card)',
                 color:      active === key ? '#fff' : 'var(--text2)',
-                border:     active === key ? '1px solid var(--blue)' : '1px solid var(--border2)',
+                border:     active === key ? '1px solid var(--orange)' : '1px solid var(--border2)',
+                boxShadow:  active === key ? '0 2px 8px rgba(242,99,22,0.25)' : 'none',
               }}
             >
               {label}
@@ -89,7 +89,7 @@ export default function ProductsSection({
         </div>
 
         {/* Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 17 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 14, marginTop: 4 }}>
           {visible.map(p => {
             const cat      = getCat(p)
             const saleP    = parseFloat(p.sale_price    || '0')
@@ -108,11 +108,12 @@ export default function ProductsSection({
                   display: 'block',
                   background: 'var(--card)',
                   border: '1px solid var(--border)',
-                  borderRadius: 13,
+                  borderRadius: 12,
                   overflow: 'hidden',
                   cursor: 'pointer',
-                  transition: 'transform .2s, border-color .2s',
+                  transition: 'all .2s',
                   textDecoration: 'none',
+                  boxShadow: 'var(--shadow)',
                 }}
                 onMouseEnter={e => {
                   ;(e.currentTarget as HTMLElement).style.transform = 'translateY(-5px)'
@@ -167,14 +168,14 @@ export default function ProductsSection({
 
                 {/* Info */}
                 <div style={{ padding: 14 }}>
-                  <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.09em', textTransform: 'uppercase', color: 'var(--blue)', marginBottom: 4 }}>
+                  <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.09em', textTransform: 'uppercase', color: 'var(--orange)', marginBottom: 4 }}>
                     {CAT_LABELS[cat]}
                   </div>
                   <div style={{ fontSize: 13, fontWeight: 500, color: 'var(--text)', lineHeight: 1.35, marginBottom: 9 }} className="line-clamp-2">
                     {p.name}
                   </div>
                   <div style={{ display: 'flex', alignItems: 'baseline', gap: 5 }}>
-                    <span style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 21, fontWeight: 700, color: 'var(--blue)' }}>
+                    <span style={{ fontSize: 18, fontWeight: 800, color: 'var(--orange)', letterSpacing: '-0.02em' }}>
                       {finalP > 0 ? `${Math.round(finalP)} MAD` : 'Sur devis'}
                     </span>
                     {isOnSale && regP > 0 && (
@@ -193,10 +194,10 @@ export default function ProductsSection({
         <div style={{ textAlign: 'center', marginTop: 28 }}>
           <Link
             href={`/${locale}/categorie-produit`}
-            className="btn-primary"
-            style={{ display: 'inline-flex', padding: '14px 28px' }}
+            className="btn-outline"
+            style={{ display: 'inline-flex', padding: '13px 28px', fontSize: 14, fontWeight: 700 }}
           >
-            Voir le catalogue complet (80+ produits) →
+            Voir tout le catalogue (80+ produits) →
           </Link>
         </div>
       </div>

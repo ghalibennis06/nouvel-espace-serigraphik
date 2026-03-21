@@ -1,27 +1,27 @@
 'use client'
 import { createContext, useContext, useEffect, useState } from 'react'
 
-type Theme = 'dark' | 'light'
-const ThemeCtx = createContext<{ theme: Theme; toggle: () => void }>({ theme: 'dark', toggle: () => {} })
+type Theme = 'light' | 'dark'
+const ThemeCtx = createContext<{ theme: Theme; toggle: () => void }>({ theme: 'light', toggle: () => {} })
 
 export function useTheme() { return useContext(ThemeCtx) }
 
 export default function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>('dark')
+  const [theme, setTheme] = useState<Theme>('light')
 
   useEffect(() => {
     const saved = localStorage.getItem('nes-theme') as Theme | null
-    if (saved === 'light') {
-      setTheme('light')
-      document.documentElement.classList.add('light')
+    if (saved === 'dark') {
+      setTheme('dark')
+      document.documentElement.classList.add('dark')
     }
   }, [])
 
   const toggle = () => {
     setTheme(prev => {
-      const next = prev === 'dark' ? 'light' : 'dark'
+      const next = prev === 'light' ? 'dark' : 'light'
       localStorage.setItem('nes-theme', next)
-      document.documentElement.classList.toggle('light', next === 'light')
+      document.documentElement.classList.toggle('dark', next === 'dark')
       return next
     })
   }

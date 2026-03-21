@@ -13,7 +13,7 @@ export default function AnnouncementBar() {
   return (
     <div
       className="overflow-hidden"
-      style={{ background: 'var(--blue)', color: '#fff', padding: '9px 0' }}
+      style={{ background: 'var(--orange)', color: '#fff', padding: '8px 0' }}
       role="marquee"
       aria-label="Annonces"
     >
