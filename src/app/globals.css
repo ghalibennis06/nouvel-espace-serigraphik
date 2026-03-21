@@ -209,4 +209,7 @@
   .cat-item:hover    { background: var(--card2) !important; }
   .kit-item:hover    { transform: translateY(-7px); border-color: rgba(79,110,247,0.28) !important; }
   .card-dark-hover:hover { border-color: rgba(79,110,247,0.22) !important; transform: translateY(-3px); }
+  .cat-item:hover { transform: translateY(-4px); border-color: rgba(79,110,247,0.30) !important; }
+  .link-admin-footer { font-size: 11px; color: var(--text2); text-decoration: none; opacity: 0.45; transition: opacity .2s; }
+  .link-admin-footer:hover { opacity: 1; }
 }

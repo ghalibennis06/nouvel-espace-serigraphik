@@ -95,7 +95,12 @@ export default async function Footer({ locale }: { locale: string }) {
           <span style={{ fontSize: 12, color: 'var(--text2)' }}>
             © 2026 Nouvel Espace Sérigraphik · Casablanca, Maroc 🇲🇦
           </span>
-          <span style={{ fontSize: 12, color: 'var(--text2)' }}>Tous droits réservés</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
+            <span style={{ fontSize: 12, color: 'var(--text2)' }}>Tous droits réservés</span>
+            <Link href="/admin" className="link-admin-footer">
+              ⚙ Admin
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

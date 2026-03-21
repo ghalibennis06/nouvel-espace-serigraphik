@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { setRequestLocale } from 'next-intl/server'
 import { getFeaturedProducts, getCategoryTree } from '@/lib/woocommerce'
 import { categoryHref, whatsappGeneralLink } from '@/lib/utils'
@@ -22,12 +23,12 @@ export async function generateMetadata(): Promise<Metadata> {
 const KITS = KITS_DATA
 
 const CATEGORIES = [
-  { emoji: '🔥', name: 'Presses à Chaud',       info: 'Manuelles, auto-ouverture, 5en1, casquette, mug', count: '23', slug: 'les-presses-a-chaud',             recur: false },
-  { emoji: '🧴', name: 'Consommables Sérigraphie',info: 'Antex, Inknovator, cadres alu, soies, raclettes', count: '40', slug: 'les-consommables-de-serigraphie', recur: true  },
-  { emoji: '🖋️', name: 'Consommables Sublimation',info: 'Encres, papiers, flex 14 couleurs, scotch thermique',count: '31', slug: 'les-consommables-de-sublimation', recur: true  },
-  { emoji: '🖨️', name: "Machines d'Impression",  info: 'DTF, UV, traceurs grand format professionnels',  count: '8',  slug: 'les-machines-dimpression',        recur: false },
-  { emoji: '⚙️', name: 'Machines de Sérigraphie', info: 'Carrousels 1C à 4C, insolation, séchoirs tunnel', count: '14', slug: 'les-machines-de-serigraphie',      recur: false },
-  { emoji: '☕', name: 'Produits Sublimables',    info: 'Mugs, cadres marbre, coussins, porte-clés',       count: '52', slug: 'les-produits-sublimables',         recur: false },
+  { img: '/api/img?u=https%3A%2F%2Fnouvelespaceserigraphik.ma%2Fwp-content%2Fuploads%2F2024%2F12%2Fpresse-40x50autoopen.jpg', name: 'Presses à Chaud',        info: 'Manuelles, auto-ouverture, 5en1, casquette, mug', count: '23', slug: 'les-presses-a-chaud',             recur: false },
+  { img: '/api/img?u=https%3A%2F%2Fnouvelespaceserigraphik.ma%2Fwp-content%2Fuploads%2F2024%2F12%2F61gC992Xr5L.jpg',          name: 'Consommables Sérigraphie', info: 'Antex, Inknovator, cadres alu, soies, raclettes',   count: '40', slug: 'les-consommables-de-serigraphie', recur: true  },
+  { img: '/api/img?u=https%3A%2F%2Fnouvelespaceserigraphik.ma%2Fwp-content%2Fuploads%2F2025%2F01%2FINK-C.png',               name: 'Consommables Sublimation', info: 'Encres, papiers, flex 14 couleurs, scotch thermique', count: '31', slug: 'les-consommables-de-sublimation', recur: true  },
+  { img: null,                                                                                                                  name: "Machines d'Impression",   info: 'DTF, UV, traceurs grand format professionnels',     count: '8',  slug: 'les-machines-dimpression',        recur: false },
+  { img: '/api/img?u=https%3A%2F%2Fnouvelespaceserigraphik.ma%2Fwp-content%2Fuploads%2F2024%2F12%2F4-couleurs-4-stations-pro.jpg', name: 'Machines de Sérigraphie', info: 'Carrousels 1C à 4C, insolation, séchoirs tunnel',  count: '14', slug: 'les-machines-de-serigraphie',      recur: false },
+  { img: '/api/img?u=https%3A%2F%2Fnouvelespaceserigraphik.ma%2Fwp-content%2Fuploads%2F2024%2F12%2FSH02.png',                name: 'Produits Sublimables',     info: 'Mugs, cadres marbre, coussins, porte-clés',          count: '52', slug: 'les-produits-sublimables',         recur: false },
 ]
 
 const ACADEMY_ARTICLES = [
@@ -38,56 +39,6 @@ const ACADEMY_ARTICLES = [
   { icon: '🎓', title: 'Tout sur les encres de sublimation — choisir et doser', tag: 'Technique',    meta: '18 min · Avec vidéo',  slug: 'guide-sublimation-debutant'       },
 ]
 
-const TESTIMONIALS = [
-  {
-    initial: 'Y',
-    name: 'Youssef A.',
-    city: 'Marrakech · Atelier personnalisation',
-    kit: 'Kit Sublimation Starter',
-    rating: 5,
-    text: "J'ai commandé le Kit Sublimation et reçu en 24h à Marrakech. En 2 semaines j'avais déjà remboursé mon investissement avec les mugs personnalisés. Service et qualité au top.",
-  },
-  {
-    initial: 'F',
-    name: 'Fatima Z.',
-    city: 'Casablanca · Sérigraphie textile',
-    kit: 'Kit Sérigraphie Pro',
-    rating: 5,
-    text: 'Le support WhatsApp est exceptionnel. À chaque question on me répond en quelques minutes avec des conseils concrets. Une équipe vraiment professionnelle et disponible.',
-  },
-  {
-    initial: 'K',
-    name: 'Karim B.',
-    city: 'Fès · Atelier complet',
-    kit: 'Kit DTF Complet',
-    rating: 5,
-    text: "Le Kit DTF m'a permis d'imprimer sur coton, polyester ET cuir. Mon CA a doublé en 3 mois. Je recommande NES à tous les entrepreneurs sérieux du secteur.",
-  },
-  {
-    initial: 'S',
-    name: 'Sara M.',
-    city: 'Rabat · Boutique cadeaux',
-    kit: 'Kit Sublimation Starter',
-    rating: 5,
-    text: "J'ai démarré avec 4 400 MAD et aujourd'hui je produis 80 mugs/jour. La presse est robuste, les encres sont de qualité et l'équipe NES m'a tout appris par WhatsApp.",
-  },
-  {
-    initial: 'A',
-    name: 'Amine O.',
-    city: 'Agadir · Impression T-shirts',
-    kit: 'Kit Sérigraphie Pro',
-    rating: 5,
-    text: "Meilleur investissement de ma carrière. J'imprime des séries de 50 t-shirts pour les associations locales. Rentabilisé en 4 semaines, comme promis.",
-  },
-  {
-    initial: 'H',
-    name: 'Houda L.',
-    city: 'Tanger · Atelier textile',
-    kit: 'Kit DTF Complet',
-    rating: 5,
-    text: "Le Kit DTF vaut chaque dirham. La formation incluse est complète et l'équipe technique NES répond même le week-end. Mon atelier produit maintenant 200 pièces/jour.",
-  },
-]
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
@@ -412,7 +363,7 @@ export default async function HomePage({ params }: { params: { locale: string } 
 
           <div
             className="grid sm:grid-cols-2 lg:grid-cols-3"
-            style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 1, background: 'var(--border)', border: '1px solid var(--border)', borderRadius: 18, overflow: 'hidden', marginTop: 52 }}
+            style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18, marginTop: 52 }}
           >
             {CATEGORIES.map(cat => (
               <Link
@@ -421,28 +372,46 @@ export default async function HomePage({ params }: { params: { locale: string } 
                 className="cat-item"
                 style={{
                   display: 'block',
-                  background: 'var(--bg)',
-                  padding: 34,
+                  background: 'var(--card)',
+                  border: '1px solid var(--border)',
+                  borderRadius: 14,
                   textDecoration: 'none',
-                  transition: 'background .2s',
+                  transition: 'transform .2s, border-color .2s',
+                  overflow: 'hidden',
                   position: 'relative',
                 }}
               >
-                <span style={{ fontSize: 38, marginBottom: 18, display: 'block' }}>{cat.emoji}</span>
-                <div style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 23, fontWeight: 700, color: 'var(--text)', marginBottom: 6 }}>
-                  {cat.name}
+                {/* Photo */}
+                <div style={{ aspectRatio: '16/9', background: 'var(--card2)', position: 'relative', overflow: 'hidden' }}>
+                  {cat.img ? (
+                    <Image
+                      src={cat.img}
+                      alt={cat.name}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      style={{ objectFit: 'cover' }}
+                    />
+                  ) : (
+                    <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 42 }}>🖨️</div>
+                  )}
+                  {cat.recur && (
+                    <div style={{ position: 'absolute', top: 10, right: 10, display: 'inline-flex', alignItems: 'center', gap: 4, padding: '3px 9px', background: 'var(--teal)', borderRadius: 4, fontSize: 10, fontWeight: 700, letterSpacing: '0.06em', color: '#fff', textTransform: 'uppercase' }}>
+                      ♻ Mensuel
+                    </div>
+                  )}
                 </div>
-                <div style={{ fontSize: 12, color: 'var(--text2)' }}>
-                  {cat.info}
-                  <strong style={{ color: 'var(--blue)', fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 22, fontWeight: 700, display: 'block', marginTop: 9 }}>
-                    {cat.count} produits
+                {/* Info */}
+                <div style={{ padding: '18px 20px 20px' }}>
+                  <div style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 21, fontWeight: 700, color: 'var(--text)', marginBottom: 4 }}>
+                    {cat.name}
+                  </div>
+                  <div style={{ fontSize: 12, color: 'var(--text2)', marginBottom: 8 }}>
+                    {cat.info}
+                  </div>
+                  <strong style={{ color: 'var(--blue)', fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 20, fontWeight: 700 }}>
+                    {cat.count} produits →
                   </strong>
                 </div>
-                {cat.recur && (
-                  <div style={{ display: 'inline-flex', alignItems: 'center', gap: 4, marginTop: 11, padding: '3px 9px', background: 'var(--tealsoft)', border: '1px solid var(--teal)', borderRadius: 4, fontSize: 10, fontWeight: 700, letterSpacing: '0.06em', color: 'var(--teal)', textTransform: 'uppercase' }}>
-                    ♻ Abonnement mensuel
-                  </div>
-                )}
               </Link>
             ))}
           </div>
@@ -607,48 +576,6 @@ export default async function HomePage({ params }: { params: { locale: string } 
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════════════
-          TESTIMONIALS
-      ═══════════════════════════════════════════════════════════ */}
-      <section id="testimonials" style={{ background: 'var(--surface)', padding: '90px 6%' }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center' }}>
-            <span className="stag">2 000+ Ateliers Lancés au Maroc</span>
-            <h2 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 'clamp(36px,4vw,58px)', fontWeight: 700, lineHeight: 1.08, color: 'var(--text)' }}>
-              Ils ont réussi avec <em style={{ fontStyle: 'italic', color: 'var(--blue)' }}>NES</em>
-            </h2>
-          </div>
-
-          <div
-            style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 20, marginTop: 52 }}
-          >
-            {TESTIMONIALS.map((t, i) => (
-              <div
-                key={i}
-                style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 15, padding: 26 }}
-              >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 12 }}>
-                  <div style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 48, color: 'var(--blue)', opacity: .2, lineHeight: .75 }}>&ldquo;</div>
-                  <span style={{ fontSize: 10, fontWeight: 700, padding: '3px 8px', background: 'var(--bluesoft)', color: 'var(--blue)', borderRadius: 4, letterSpacing: '0.04em' }}>{t.kit}</span>
-                </div>
-                <p style={{ fontSize: 13, color: 'var(--text2)', lineHeight: 1.75, marginBottom: 18, fontStyle: 'italic' }}>
-                  {t.text}
-                </p>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 11 }}>
-                  <div style={{ width: 38, height: 38, borderRadius: '50%', background: 'var(--blue)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 15, fontWeight: 700, color: '#fff', fontFamily: '"Cormorant Garamond",serif', flexShrink: 0 }}>
-                    {t.initial}
-                  </div>
-                  <div>
-                    <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>{t.name}</div>
-                    <div style={{ fontSize: 11, color: 'var(--text2)' }}>{t.city}</div>
-                    <div style={{ color: 'var(--orange)', fontSize: 11, marginTop: 2 }}>{'★'.repeat(t.rating)}</div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* ═══════════════════════════════════════════════════════════
           CTA BAND

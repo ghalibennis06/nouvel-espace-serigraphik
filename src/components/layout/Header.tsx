@@ -67,7 +67,7 @@ export default function Header({ locale, rootCategories, subCategories }: Header
     { label: 'Catalogue',     href: `/${locale}/categorie-produit`, highlight: false },
     { label: 'Académie',      href: `/${locale}/academie`,          highlight: false },
     { label: 'Devis Pro',     href: `/${locale}/devis-pro`,         highlight: false },
-    { label: 'Avis',          href: `#testimonials`,                highlight: false },
+    { label: 'Contact',       href: `/${locale}/contact`,           highlight: false },
   ]
 
   return (
@@ -202,6 +202,38 @@ export default function Header({ locale, rootCategories, subCategories }: Header
           >
             {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
           </button>
+
+          {/* Admin button — desktop only */}
+          <Link
+            href="/admin"
+            className="hidden md:flex"
+            style={{
+              alignItems: 'center',
+              gap: 6,
+              padding: '7px 14px',
+              borderRadius: 8,
+              fontSize: 11,
+              fontWeight: 700,
+              letterSpacing: '0.06em',
+              textTransform: 'uppercase',
+              color: 'var(--text2)',
+              border: '1px solid var(--border2)',
+              background: 'var(--card)',
+              textDecoration: 'none',
+              transition: 'border-color .2s, color .2s',
+              flexShrink: 0,
+            }}
+            onMouseEnter={e => {
+              ;(e.currentTarget as HTMLElement).style.borderColor = 'var(--blue)'
+              ;(e.currentTarget as HTMLElement).style.color = 'var(--blue)'
+            }}
+            onMouseLeave={e => {
+              ;(e.currentTarget as HTMLElement).style.borderColor = 'var(--border2)'
+              ;(e.currentTarget as HTMLElement).style.color = 'var(--text2)'
+            }}
+          >
+            ⚙ Admin
+          </Link>
 
           <a
             href={whatsappGeneralLink('Bonjour NES, je souhaite des informations sur vos produits.')}
