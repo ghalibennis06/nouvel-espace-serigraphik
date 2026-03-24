@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import dynamicImport from 'next/dynamic'
 import Link from 'next/link'
 import Image from 'next/image'
 import { setRequestLocale } from 'next-intl/server'
@@ -6,6 +7,8 @@ import { getFeaturedProducts, getCategoryTree } from '@/lib/woocommerce'
 import { categoryHref, whatsappGeneralLink } from '@/lib/utils'
 import ProductsSection from '@/components/home/ProductsSection'
 import { KITS as KITS_DATA } from '@/lib/data/kits'
+
+const ShaderAnimation = dynamicImport(() => import('@/components/ui/shader-animation'), { ssr: false })
 
 export const dynamic = 'force-dynamic'
 
@@ -56,7 +59,12 @@ export default async function HomePage({ params }: { params: { locale: string } 
       {/* ══════════════════════════════════════════════════════
           HERO
       ══════════════════════════════════════════════════════ */}
-      <section style={{ background: 'var(--bg)', padding: '72px 5% 80px', borderBottom: '1px solid var(--border)' }}>
+      <ShaderAnimation
+        overlayOpacity={0.91}
+        overlayColor="rgba(255,255,255,1)"
+        style={{ borderBottom: '1px solid var(--border)' }}
+      >
+      <section style={{ padding: '72px 5% 80px' }}>
         <div style={{ maxWidth: 1240, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6rem', alignItems: 'center' }}
              className="grid-cols-1 lg:grid-cols-2">
 
@@ -129,6 +137,7 @@ export default async function HomePage({ params }: { params: { locale: string } 
           </div>
         </div>
       </section>
+      </ShaderAnimation>
 
       {/* ══════════════════════════════════════════════════════
           TRUST STRIP
