@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import dynamicImport from 'next/dynamic'
 import Link from 'next/link'
 import Image from 'next/image'
 import { setRequestLocale } from 'next-intl/server'
@@ -7,9 +6,8 @@ import { getFeaturedProducts, getCategoryTree } from '@/lib/woocommerce'
 import { categoryHref, whatsappGeneralLink } from '@/lib/utils'
 import ProductsSection from '@/components/home/ProductsSection'
 import { KITS as KITS_DATA } from '@/lib/data/kits'
-
-const ShaderAnimation   = dynamicImport(() => import('@/components/ui/shader-animation'),     { ssr: false })
-const DevisExpressButton = dynamicImport(() => import('@/components/ui/devis-express-button'), { ssr: false })
+import ShaderAnimation from '@/components/ui/shader-animation'
+import DevisExpressButton from '@/components/ui/devis-express-button'
 
 export const dynamic = 'force-dynamic'
 
