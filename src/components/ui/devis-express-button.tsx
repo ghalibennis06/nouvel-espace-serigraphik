@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react'
 import { X, Check, ArrowRight, Truck, HeadphonesIcon } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { MeshGradient } from '@paper-design/shaders-react'
 
 type FormStep = 'idle' | 'submitting' | 'success' | 'error'
 
@@ -116,24 +115,19 @@ export default function DevisExpressButton() {
                 background: '#D94F0A',
               }}
             >
-              {/* Mesh gradient BG */}
+              {/* CSS animated gradient BG */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.35 }}
-                style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}
-              >
-                <MeshGradient
-                  speed={0.5}
-                  colors={['#F26316', '#D94F0A', '#7C2D12', '#C2410C']}
-                  distortion={0.7}
-                  swirl={0.1}
-                  grainMixer={0.12}
-                  grainOverlay={0}
-                  style={{ height: '100%', width: '100%' }}
-                />
-              </motion.div>
+                style={{
+                  position: 'absolute', inset: 0, pointerEvents: 'none',
+                  background: 'linear-gradient(135deg, #F26316 0%, #D94F0A 40%, #C2410C 70%, #F59E0B 100%)',
+                  backgroundSize: '300% 300%',
+                  animation: 'gradientShift 6s ease infinite',
+                }}
+              />
 
               {/* Close */}
               <motion.button
