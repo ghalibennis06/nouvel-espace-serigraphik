@@ -8,7 +8,8 @@ import { categoryHref, whatsappGeneralLink } from '@/lib/utils'
 import ProductsSection from '@/components/home/ProductsSection'
 import { KITS as KITS_DATA } from '@/lib/data/kits'
 
-const ShaderAnimation = dynamicImport(() => import('@/components/ui/shader-animation'), { ssr: false })
+const ShaderAnimation   = dynamicImport(() => import('@/components/ui/shader-animation'),     { ssr: false })
+const DevisExpressButton = dynamicImport(() => import('@/components/ui/devis-express-button'), { ssr: false })
 
 export const dynamic = 'force-dynamic'
 
@@ -51,8 +52,6 @@ export default async function HomePage({ params }: { params: { locale: string } 
     getFeaturedProducts(12),
   ])
 
-  const waExpert = whatsappGeneralLink("Bonjour NES, je souhaite lancer mon atelier. Pouvez-vous m'aider à choisir le bon kit ?")
-
   return (
     <div style={{ background: 'var(--bg)' }}>
 
@@ -88,13 +87,11 @@ export default async function HomePage({ params }: { params: { locale: string } 
               Livrés partout au Maroc sous 24–48h.
             </p>
 
-            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 44 }}>
+            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 44, alignItems: 'center' }}>
               <Link href={`/${locale}/kits`} className="btn-orange" style={{ padding: '14px 28px', fontSize: 15, fontWeight: 700 }}>
                 Voir les Kits & Packs →
               </Link>
-              <a href={waExpert} target="_blank" rel="noopener noreferrer" className="btn-ghost-wa" style={{ padding: '14px 28px', fontSize: 15 }}>
-                💬 Parler à un expert
-              </a>
+              <DevisExpressButton />
             </div>
 
             {/* Stats */}
