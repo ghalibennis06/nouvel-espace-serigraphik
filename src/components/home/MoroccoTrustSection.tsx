@@ -7,7 +7,7 @@ type MoroccoTrustSectionProps = {
 const TRUST_POINTS = [
   {
     title: 'Stock et livraison au Maroc',
-    text: 'NES doit rassurer sur la disponibilité, la livraison et la proximité commerciale, pas seulement afficher des produits.',
+    text: 'NES rassure sur la disponibilité, la livraison et la proximité commerciale, avec une promesse claire dès l’entrée.',
   },
   {
     title: 'Accompagnement pour choisir',
@@ -15,7 +15,7 @@ const TRUST_POINTS = [
   },
   {
     title: 'Business launch + réassort',
-    text: 'Le site doit servir à la fois les débutants qui veulent démarrer et les ateliers qui ont besoin de se réapprovisionner vite.',
+    text: 'Le site sert à la fois les débutants qui veulent démarrer et les ateliers qui ont besoin de se réapprovisionner vite.',
   },
 ] as const
 
@@ -35,11 +35,11 @@ export default function MoroccoTrustSection({ locale }: MoroccoTrustSectionProps
             Plus qu’un catalogue, un partenaire pour démarrer, produire et tenir votre atelier.
           </h2>
           <p style={{ fontSize: 15, color: 'var(--text2)', lineHeight: 1.75, marginTop: 14, maxWidth: 640 }}>
-            Le bon site NES doit inspirer confiance, clarifier les techniques, et faire gagner du temps au client marocain qui cherche soit à lancer une activité, soit à acheter le bon matériel sans perdre des semaines.
+            NES inspire confiance, clarifie les techniques, et fait gagner du temps au client marocain qui cherche soit à lancer une activité, soit à acheter le bon matériel sans perdre des semaines.
           </p>
 
           <div style={{ marginTop: 18, background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 16, padding: '16px 18px', maxWidth: 640 }}>
-            <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--orange)', marginBottom: 8 }}>Ce que le site fait déjà bien</div>
+            <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--orange)', marginBottom: 8 }}>Points forts du parcours NES</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
               {TRUST_SIGNALS.map((item) => (
                 <div key={item} style={{ display: 'flex', gap: 8, fontSize: 12, color: 'var(--text2)', lineHeight: 1.55 }}>

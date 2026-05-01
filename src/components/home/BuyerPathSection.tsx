@@ -92,7 +92,7 @@ export default function BuyerPathSection({ locale }: BuyerPathSectionProps) {
               </ul>
 
               <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 12, padding: '12px 14px' }}>
-                <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--orange)', marginBottom: 6 }}>Pourquoi ce parcours</div>
+                <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--orange)', marginBottom: 6 }}>Ce parcours vous aide si…</div>
                 <p style={{ fontSize: 12, color: 'var(--text2)', lineHeight: 1.6 }}>{path.proof}</p>
               </div>
 

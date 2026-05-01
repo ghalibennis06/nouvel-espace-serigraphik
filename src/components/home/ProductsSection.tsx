@@ -56,11 +56,14 @@ export default function ProductsSection({
       <div style={{ maxWidth: 1240, margin: '0 auto' }}>
 
         {/* Header */}
-        <div style={{ marginBottom: 28 }}>
-          <span className="stag">Meilleures ventes</span>
+        <div style={{ marginBottom: 28, maxWidth: 780 }}>
+          <span className="stag">Réassort et best-sellers</span>
           <h2 style={{ fontSize: 'clamp(26px,3vw,40px)', fontWeight: 800, color: 'var(--text)', letterSpacing: '-0.025em', lineHeight: 1.1 }}>
-            Nos produits les plus vendus
+            Les produits les plus demandés pour produire vite et bien.
           </h2>
+          <p style={{ fontSize: 14, color: 'var(--text2)', lineHeight: 1.7, marginTop: 10 }}>
+            Retrouvez rapidement les références qui tournent le plus, sans vous perdre dans tout le catalogue.
+          </p>
         </div>
 
         {/* Filter tabs */}
@@ -197,7 +200,7 @@ export default function ProductsSection({
             className="btn-outline"
             style={{ display: 'inline-flex', padding: '13px 28px', fontSize: 14, fontWeight: 700 }}
           >
-            Voir tout le catalogue (80+ produits) →
+            Voir le catalogue complet et les catégories →
           </Link>
         </div>
       </div>

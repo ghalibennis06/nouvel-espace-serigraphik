@@ -134,7 +134,7 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
     ? {
         badge: 'Parcours démarrage',
         title: 'Commencez avec la bonne base pour éviter les mauvais achats.',
-        text: 'Cette catégorie doit surtout aider un acheteur débutant à comprendre quoi choisir en premier, avec quel budget et pour quel type de produits à vendre.',
+        text: 'Cette catégorie aide un acheteur débutant à comprendre quoi choisir en premier, avec quel budget et pour quel type de produits à vendre.',
         cta: 'Voir aussi les kits de démarrage',
         href: `/${locale}/kits`,
       }
@@ -142,7 +142,7 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
       ? {
           badge: 'Parcours atelier',
           title: 'Équipez votre atelier avec une logique de production claire.',
-          text: 'Ici, le rôle commercial est d’aider un atelier à monter en gamme, gagner en cadence et choisir le bon matériel sans perdre du temps.',
+          text: 'Ici, un atelier peut monter en gamme, gagner en cadence et choisir le bon matériel sans perdre du temps.',
           cta: 'Demander un devis atelier',
           href: `/${locale}/devis-pro`,
         }
@@ -150,7 +150,7 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
         ? {
             badge: 'Parcours réassort',
             title: 'Retrouvez rapidement les bonnes références pour continuer à produire.',
-            text: 'Cette catégorie doit servir au réapprovisionnement rapide, avec des repères simples sur les produits qui tournent réellement dans un atelier.',
+            text: 'Cette catégorie sert au réapprovisionnement rapide, avec des repères simples sur les produits qui tournent réellement dans un atelier.',
             cta: 'Voir le catalogue complet',
             href: `/${locale}/categorie-produit`,
           }

@@ -41,12 +41,12 @@ const CAT_LANES: Record<string, { badge: string; title: string; text: string }> 
   'les-machines-dimpression': {
     badge: 'Montée en gamme atelier',
     title: 'Choisissez la machine d’impression qui correspond à votre vraie ambition de production.',
-    text: 'Ici, le site doit orienter un atelier vers la bonne capacité de production, pas juste montrer des machines sans explication.',
+    text: 'Ici, un atelier doit pouvoir comprendre quelle capacité de production correspond vraiment à son besoin, avec un cadre de choix clair.',
   },
   'les-machines-de-serigraphie': {
     badge: 'Atelier pro',
     title: 'Passez d’un atelier artisanal à une vraie logique de production sérigraphique.',
-    text: 'Cette famille doit rassurer les professionnels qui veulent automatiser, structurer et produire plus sérieusement.',
+    text: 'Cette famille parle aux professionnels qui veulent automatiser, structurer et produire plus sérieusement.',
   },
   'les-produits-sublimables': {
     badge: 'Produits à vendre',
@@ -96,7 +96,7 @@ export default async function CatalogIndexPage({
           <p style={{ fontSize: 14, color: 'var(--text2)', maxWidth: 760, lineHeight: 1.7 }}>
             {searchQuery
               ? `${searchResults?.length ?? 0} produit(s) trouvé(s)`
-              : "Le catalogue NES doit aider trois types d’acheteurs, ceux qui veulent démarrer, ceux qui veulent équiper leur atelier, et ceux qui veulent se réapprovisionner vite en consommables au Maroc."}
+              : "Le catalogue NES aide trois grands profils, ceux qui veulent démarrer, ceux qui veulent équiper leur atelier, et ceux qui veulent se réapprovisionner vite en consommables au Maroc."}
           </p>
 
           {!searchQuery && (

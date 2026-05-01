@@ -26,7 +26,7 @@ const STARTER_STEPS = [
   },
   {
     title: '2. Validez votre budget réel',
-    text: 'Le bon kit n’est pas seulement le moins cher, c’est celui que vous pouvez lancer et rentabiliser correctement.',
+    text: 'Le bon kit est celui que vous pouvez vraiment lancer, utiliser correctement et rentabiliser vite selon votre projet.',
   },
   {
     title: '3. Faites confirmer votre choix',
@@ -64,7 +64,7 @@ export default function KitsPage({ params }: { params: { locale: string } }) {
             <span style={{ color: 'var(--blue)' }}> sans acheter au hasard.</span>
           </h1>
           <p style={{ fontSize: 17, color: 'var(--text2)', lineHeight: 1.7, maxWidth: 720, margin: '0 auto 32px' }}>
-            Cette page doit aider un débutant marocain à comprendre avec quel budget démarrer, quelle technique choisir, et quel kit commander selon son vrai projet.
+            Comprenez avec quel budget démarrer, quelle technique choisir, et quel kit commander selon votre vrai projet au Maroc.
           </p>
           <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '10px 28px', marginBottom: 28 }}>
             {['✅ Livraison 48h au Maroc', '✅ Support WhatsApp inclus', '✅ Formation en ligne offerte', '✅ Facture pro + devis'].map(t => (

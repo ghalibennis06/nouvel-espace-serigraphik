@@ -95,7 +95,7 @@ export default function ContactPage({ params }: { params: { locale: string } }) 
           <div style={{ fontSize: 10, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--orange)', marginBottom: 10 }}>Orientation contact</div>
           <h2 style={{ fontSize: 22, fontWeight: 800, color: 'var(--text)', letterSpacing: '-0.02em', marginBottom: 8 }}>Dites-nous pourquoi vous contactez NES.</h2>
           <p style={{ fontSize: 14, color: 'var(--text2)', lineHeight: 1.7, maxWidth: 760, marginBottom: 16 }}>
-            Cette page doit capter un vrai besoin commercial ou technique, pas seulement un message vague. Cela aide l’équipe à répondre plus vite et mieux.
+            Choisissez le bon motif de contact pour que l’équipe NES comprenne plus vite votre besoin et vous réponde avec une vraie orientation utile.
           </p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
             {CONTACT_INTENTS.map((item) => (

@@ -44,7 +44,7 @@ const INTAKE_STEPS = [
   },
   {
     title: '3. Vous recevez une proposition exploitable',
-    text: 'Prix, délai, options, facturation et prochaines étapes. L’objectif est de vous faire avancer, pas juste de répondre vaguement.',
+    text: 'Prix, délai, options, facturation et prochaines étapes. Vous recevez une réponse exploitable pour avancer réellement.',
   },
 ]
 
@@ -85,7 +85,7 @@ export default function DevisProPage({ params }: { params: { locale: string } })
             <span style={{ color: 'var(--blue)' }}>Devis en moins de 2h.</span>
           </h1>
           <p style={{ fontSize: 16, color: 'var(--text2)', lineHeight: 1.75, maxWidth: 700, marginBottom: 36 }}>
-            Cette page doit rassurer les entreprises, écoles, associations et ateliers qui ont besoin d’un vrai interlocuteur, d’un devis clair et d’une exécution sérieuse au Maroc, pas seulement d’un prix affiché sans contexte.
+            Cette page rassure les entreprises, écoles, associations et ateliers qui ont besoin d’un vrai interlocuteur, d’un devis clair et d’une exécution sérieuse au Maroc.
           </p>
 
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
@@ -132,7 +132,7 @@ export default function DevisProPage({ params }: { params: { locale: string } })
               },
               {
                 title: 'Je veux une relation récurrente',
-                text: 'Vous cherchez un partenaire de réassort ou de commandes répétées, pas juste un achat ponctuel.',
+                text: 'Vous cherchez un partenaire de réassort ou de commandes répétées, avec une relation commerciale suivie.',
               },
             ].map((item) => (
               <div key={item.title} style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 12, padding: 18, boxShadow: 'var(--shadow)' }}>
