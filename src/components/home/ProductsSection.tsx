@@ -66,8 +66,22 @@ export default function ProductsSection({
           </p>
         </div>
 
+        <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: 18, alignItems: 'start', marginTop: 28, marginBottom: 24 }} className="grid lg:grid-cols-2 gap-4">
+          <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 14, padding: '16px 18px' }}>
+            <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--orange)', marginBottom: 8 }}>Repères rapides</div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 10 }} className="grid md:grid-cols-3 gap-3">
+              {[
+                'Les références les plus regardées sont déjà mises en avant ici',
+                'Utilisez les filtres pour aller plus vite vers la bonne famille',
+                'Si vous hésitez, ouvrez le produit puis contactez NES sur WhatsApp',
+              ].map((item) => (
+                <div key={item} style={{ fontSize: 12, color: 'var(--text2)', lineHeight: 1.55 }}>{item}</div>
+              ))}
+            </div>
+          </div>
+          <div>
         {/* Filter tabs */}
-        <div style={{ display: 'flex', gap: 9, flexWrap: 'wrap', marginTop: 36, marginBottom: 24 }}>
+        <div style={{ display: 'flex', gap: 9, flexWrap: 'wrap', marginTop: 0, marginBottom: 0, justifyContent: 'flex-start' }}>
           {FILTERS.map(({ key, label }) => (
             <button
               key={key}
@@ -89,6 +103,8 @@ export default function ProductsSection({
               {label}
             </button>
           ))}
+        </div>
+          </div>
         </div>
 
         {/* Grid */}

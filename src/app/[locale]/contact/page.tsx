@@ -120,6 +120,13 @@ export default function ContactPage({ params }: { params: { locale: string } }) 
           </div>
         </div>
 
+        <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 14, padding: '14px 16px', marginBottom: 18 }}>
+          <div style={{ fontSize: 10, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--orange)', marginBottom: 8 }}>Conseil rapide</div>
+          <p style={{ fontSize: 13, color: 'var(--text2)', lineHeight: 1.65 }}>
+            Si votre besoin est urgent, commencez par WhatsApp. Si votre demande est plus structurée, utilisez le formulaire avec votre intent, votre ville et votre besoin précis.
+          </p>
+        </div>
+
         {/* 3 action cards */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18, marginBottom: 40 }}>
 
