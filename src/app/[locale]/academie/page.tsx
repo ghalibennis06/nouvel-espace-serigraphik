@@ -93,6 +93,36 @@ export default function AcademiePage({ params }: { params: { locale: string } })
             la sublimation, la sérigraphie et le DTF. De débutant à expert, à votre rythme.
           </p>
 
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 14, margin: '0 auto 34px', maxWidth: 960 }} className="grid md:grid-cols-3 gap-4">
+            {[
+              {
+                title: 'Je veux démarrer',
+                text: 'Commencez par les guides débutants, puis basculez vers les kits et presses adaptées.',
+                href: `/${locale}/kits`,
+                cta: 'Voir les kits de départ',
+              },
+              {
+                title: 'Je veux mieux produire',
+                text: 'Utilisez les contenus techniques pour choisir la bonne machine, la bonne méthode et les bons réglages.',
+                href: `/${locale}/categorie-produit`,
+                cta: 'Explorer le catalogue',
+              },
+              {
+                title: 'Je veux parler à NES',
+                text: 'Si vous avez déjà une vraie question atelier, demandez un conseil ou un devis directement.',
+                href: `/${locale}/contact`,
+                cta: 'Contacter NES',
+              },
+            ].map((item) => (
+              <div key={item.title} style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 12, padding: 18, textAlign: 'left' }}>
+                <div style={{ fontSize: 10, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--orange)', marginBottom: 8 }}>Parcours utile</div>
+                <h3 style={{ fontSize: 16, fontWeight: 700, color: 'var(--text)', marginBottom: 8 }}>{item.title}</h3>
+                <p style={{ fontSize: 13, color: 'var(--text2)', lineHeight: 1.6, marginBottom: 12 }}>{item.text}</p>
+                <Link href={item.href} style={{ fontSize: 13, fontWeight: 700, color: 'var(--blue)', textDecoration: 'none' }}>{item.cta} →</Link>
+              </div>
+            ))}
+          </div>
+
           {/* Stats */}
           <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '12px 40px' }}>
             {STATS.map(s => (
@@ -169,7 +199,7 @@ export default function AcademiePage({ params }: { params: { locale: string } })
           </h2>
           <p style={{ fontSize: 15, color: 'var(--text2)', lineHeight: 1.7, marginBottom: 36 }}>
             Nos techniciens répondent sur WhatsApp en moins de 5 minutes.
-            Calibration, réglage de presse, choix de consommables — posez-nous tout.
+            Calibration, réglage de presse, choix de consommables, orientation d’achat ou besoin atelier, posez-nous une vraie question métier.
           </p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, justifyContent: 'center' }}>
             <a

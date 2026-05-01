@@ -3,12 +3,21 @@ import { useState, FormEvent } from 'react'
 import Image from 'next/image'
 import { whatsappGeneralLink } from '@/lib/utils'
 
+const CONTACT_INTENTS = [
+  { value: 'starter', label: 'Je veux démarrer une activité' },
+  { value: 'workshop', label: 'Je veux équiper un atelier' },
+  { value: 'restock', label: 'Je veux me réapprovisionner' },
+  { value: 'b2b', label: 'Je représente une entreprise / école / association' },
+  { value: 'support', label: 'J’ai une question technique / support' },
+] as const
+
 export default function ContactPage({ params }: { params: { locale: string } }) {
   const phone = process.env.NEXT_PUBLIC_PHONE ?? '+212-522-44-80-90'
   const email = process.env.NEXT_PUBLIC_EMAIL ?? 'contact@nouvelespaceserigraphik.ma'
 
   const [showForm, setShowForm] = useState(false)
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
+  const [intent, setIntent] = useState<(typeof CONTACT_INTENTS)[number]['value']>('starter')
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -24,7 +33,7 @@ export default function ContactPage({ params }: { params: { locale: string } }) 
           phone:   fd.get('phone'),
           email:   fd.get('email'),
           message: fd.get('message'),
-          source:  'contact',
+          source:  `contact:${fd.get('intent') || 'general'}`,
         }),
       })
       if (res.ok) { setStatus('sent'); setShowForm(false) }
@@ -63,7 +72,7 @@ export default function ContactPage({ params }: { params: { locale: string } }) 
         <div style={{ position: 'relative', zIndex: 1, height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '0 6% 40px', maxWidth: 1280, margin: '0 auto' }}>
           <span className="stag" style={{ marginBottom: 10 }}>Showroom Casablanca · Réponse en moins de 2h</span>
           <h1 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 'clamp(36px,5vw,62px)', fontWeight: 700, color: 'var(--text)', lineHeight: 1.05, margin: 0 }}>
-            Parlons de votre <em style={{ color: 'var(--blue)', fontStyle: 'italic' }}>projet</em>
+            Entrez par le bon <em style={{ color: 'var(--blue)', fontStyle: 'italic' }}>besoin</em>
           </h1>
         </div>
       </div>
@@ -82,12 +91,51 @@ export default function ContactPage({ params }: { params: { locale: string } }) 
           </div>
         )}
 
+        <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 16, padding: '22px 24px', marginBottom: 28 }}>
+          <div style={{ fontSize: 10, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--orange)', marginBottom: 10 }}>Orientation contact</div>
+          <h2 style={{ fontSize: 22, fontWeight: 800, color: 'var(--text)', letterSpacing: '-0.02em', marginBottom: 8 }}>Dites-nous pourquoi vous contactez NES.</h2>
+          <p style={{ fontSize: 14, color: 'var(--text2)', lineHeight: 1.7, maxWidth: 760, marginBottom: 16 }}>
+            Cette page doit capter un vrai besoin commercial ou technique, pas seulement un message vague. Cela aide l’équipe à répondre plus vite et mieux.
+          </p>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
+            {CONTACT_INTENTS.map((item) => (
+              <button
+                key={item.value}
+                type="button"
+                onClick={() => { setIntent(item.value); setShowForm(true) }}
+                style={{
+                  padding: '10px 14px',
+                  borderRadius: 999,
+                  border: `1px solid ${intent === item.value ? 'var(--blue)' : 'var(--border)'}`,
+                  background: intent === item.value ? 'var(--bluesoft)' : 'var(--surface)',
+                  color: intent === item.value ? 'var(--blue)' : 'var(--text2)',
+                  fontSize: 12,
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                }}
+              >
+                {item.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
         {/* 3 action cards */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18, marginBottom: 40 }}>
 
           {/* WhatsApp — primary */}
           <a
-            href={whatsappGeneralLink('Bonjour NES, je souhaite obtenir des informations / un devis.')}
+            href={whatsappGeneralLink(
+              intent === 'starter'
+                ? 'Bonjour NES, je veux démarrer une activité et j’ai besoin de votre orientation.'
+                : intent === 'workshop'
+                  ? 'Bonjour NES, je veux équiper mon atelier et j’ai besoin d’un conseil ou d’un devis.'
+                  : intent === 'restock'
+                    ? 'Bonjour NES, je veux me réapprovisionner rapidement en consommables.'
+                    : intent === 'b2b'
+                      ? 'Bonjour NES, je représente une entreprise, une école ou une association et je souhaite un devis.'
+                      : 'Bonjour NES, j’ai une question technique ou besoin de support sur un produit.'
+            )}
             target="_blank"
             rel="noopener noreferrer"
             style={{ textDecoration: 'none', display: 'block' }}
@@ -159,10 +207,14 @@ export default function ContactPage({ params }: { params: { locale: string } }) 
         {/* ── Collapsible form ── */}
         {showForm && (
           <div style={{ background: 'var(--card)', border: '1px solid var(--blue)', borderRadius: 18, padding: '36px 40px', marginBottom: 40 }}>
-            <div style={{ fontSize: 17, fontWeight: 700, color: 'var(--text)', marginBottom: 24 }}>
-              Demande de devis — nous vous répondons sous 2h
+            <div style={{ fontSize: 17, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>
+              Demande NES — nous vous répondons sous 2h
+            </div>
+            <div style={{ fontSize: 13, color: 'var(--text2)', lineHeight: 1.6, marginBottom: 20 }}>
+              Intent sélectionné : <strong style={{ color: 'var(--text)' }}>{CONTACT_INTENTS.find((x) => x.value === intent)?.label}</strong>
             </div>
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+              <input type="hidden" name="intent" value={intent} />
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
                 <div>
                   <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text2)', marginBottom: 6 }}>Nom *</div>
@@ -185,7 +237,7 @@ export default function ContactPage({ params }: { params: { locale: string } }) 
               </div>
               <div>
                 <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text2)', marginBottom: 6 }}>Votre demande *</div>
-                <textarea name="message" required rows={3} style={{ ...inputStyle, resize: 'none' }} placeholder="Ex: Presse 40×50 × 2, encres sublimation, livraison Marrakech…" />
+                <textarea name="message" required rows={3} style={{ ...inputStyle, resize: 'none' }} placeholder={intent === 'starter' ? 'Ex: je veux démarrer une activité de mugs ou t-shirts, quel kit me conseillez-vous ?' : intent === 'workshop' ? 'Ex: je veux équiper mon atelier avec une presse ou une machine plus adaptée à ma production…' : intent === 'restock' ? 'Ex: je cherche encres, bases, films ou consommables pour réassort…' : intent === 'b2b' ? 'Ex: nous sommes une entreprise / école / association et nous avons besoin d’un devis sur volume…' : 'Ex: j’ai une question technique sur une machine, une presse ou un consommable…'} />
               </div>
               {status === 'error' && (
                 <div style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.3)', borderRadius: 8, padding: '10px 14px', fontSize: 13, color: '#ef4444' }}>

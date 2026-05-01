@@ -64,7 +64,7 @@ export function productHref(slug: string, locale: string): string {
 
 // ─── WhatsApp helpers ─────────────────────────────────────────────────────────
 export function whatsappProductLink(productName: string): string {
-  const msg = encodeURIComponent(`Bonjour, je suis intéressé par : ${productName}. Pouvez-vous me donner plus d'informations ?`)
+  const msg = encodeURIComponent(`Bonjour NES, je suis intéressé par : ${productName}. Pouvez-vous me donner plus d'informations ?`)
   const num = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '212522448090'
   return `https://wa.me/${num}?text=${msg}`
 }

@@ -16,8 +16,43 @@ export const metadata: Metadata = {
 const CAT_EMOJIS: Record<string, string> = {
   'les-presses-a-chaud': '🔥',
   'les-consommables-de-serigraphie': '🖨️',
+  'les-consommables-de-sublimation': '🧪',
   'les-produits-sublimables': '👕',
   'les-machines-dimpression': '⚙️',
+  'les-machines-de-serigraphie': '🏭',
+}
+
+const CAT_LANES: Record<string, { badge: string; title: string; text: string }> = {
+  'les-presses-a-chaud': {
+    badge: 'Démarrage et équipement',
+    title: 'Trouvez la bonne presse selon votre budget, votre technique et votre cadence.',
+    text: 'Cette famille sert à la fois aux débutants qui veulent se lancer et aux ateliers qui veulent améliorer leur production textile ou sublimation.',
+  },
+  'les-consommables-de-serigraphie': {
+    badge: 'Réassort atelier',
+    title: 'Réapprovisionnez votre atelier en bases, cadres, soies et accessoires essentiels.',
+    text: 'Cette zone doit permettre à un acheteur déjà actif de retrouver rapidement les bons consommables pour continuer à produire sans rupture.',
+  },
+  'les-consommables-de-sublimation': {
+    badge: 'Réassort sublimation',
+    title: 'Retrouvez les encres, papiers, flex et accessoires pour continuer à imprimer sans vous bloquer.',
+    text: 'Cette famille parle surtout aux ateliers et vendeurs qui veulent un stock clair et rapide à commander.',
+  },
+  'les-machines-dimpression': {
+    badge: 'Montée en gamme atelier',
+    title: 'Choisissez la machine d’impression qui correspond à votre vraie ambition de production.',
+    text: 'Ici, le site doit orienter un atelier vers la bonne capacité de production, pas juste montrer des machines sans explication.',
+  },
+  'les-machines-de-serigraphie': {
+    badge: 'Atelier pro',
+    title: 'Passez d’un atelier artisanal à une vraie logique de production sérigraphique.',
+    text: 'Cette famille doit rassurer les professionnels qui veulent automatiser, structurer et produire plus sérieusement.',
+  },
+  'les-produits-sublimables': {
+    badge: 'Produits à vendre',
+    title: 'Choisissez les supports les plus utiles pour lancer ou élargir votre offre commerciale.',
+    text: 'Ces produits servent surtout à ceux qui veulent vendre des objets personnalisés avec de bonnes marges et une logique simple.',
+  },
 }
 
 export default async function CatalogIndexPage({
@@ -53,16 +88,48 @@ export default async function CatalogIndexPage({
             <span style={{ color: 'var(--text)' }}>Catalogue</span>
           </nav>
           <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.13em', textTransform: 'uppercase', color: 'var(--blue)', display: 'block', marginBottom: 10 }}>
-            Fournitures professionnelles
+            Catalogue NES · Maroc
           </span>
           <h1 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 38, fontWeight: 700, color: 'var(--text)', lineHeight: 1.15, marginBottom: 10 }}>
-            {searchQuery ? `Résultats pour « ${searchQuery} »` : 'Tout notre catalogue'}
+            {searchQuery ? `Résultats pour « ${searchQuery} »` : 'Explorez le catalogue selon votre vrai besoin'}
           </h1>
-          <p style={{ fontSize: 14, color: 'var(--text2)', maxWidth: 560 }}>
+          <p style={{ fontSize: 14, color: 'var(--text2)', maxWidth: 760, lineHeight: 1.7 }}>
             {searchQuery
               ? `${searchResults?.length ?? 0} produit(s) trouvé(s)`
-              : "Machines, consommables et produits sublimables pour les professionnels de l'impression textile au Maroc."}
+              : "Le catalogue NES doit aider trois types d’acheteurs, ceux qui veulent démarrer, ceux qui veulent équiper leur atelier, et ceux qui veulent se réapprovisionner vite en consommables au Maroc."}
           </p>
+
+          {!searchQuery && (
+            <div style={{ marginTop: 24, display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 14 }} className="grid md:grid-cols-3 gap-4">
+              {[
+                {
+                  title: 'Je veux démarrer',
+                  text: 'Passez d’abord par les kits, les presses et les produits sublimables.',
+                  href: `/${locale}/kits`,
+                  cta: 'Voir les kits',
+                },
+                {
+                  title: 'Je veux équiper mon atelier',
+                  text: 'Orientez-vous vers les machines, presses pro et demandes de devis atelier.',
+                  href: `/${locale}/devis-pro`,
+                  cta: 'Voir le parcours pro',
+                },
+                {
+                  title: 'Je veux me réapprovisionner',
+                  text: 'Retrouvez rapidement les bonnes familles de consommables et leurs sous-catégories.',
+                  href: `/${locale}/categorie-produit/les-consommables-de-serigraphie`,
+                  cta: 'Voir les consommables',
+                },
+              ].map((item) => (
+                <div key={item.title} style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 12, padding: 18, boxShadow: 'var(--shadow)' }}>
+                  <div style={{ fontSize: 10, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--orange)', marginBottom: 8 }}>Parcours</div>
+                  <h3 style={{ fontSize: 16, fontWeight: 700, color: 'var(--text)', marginBottom: 8 }}>{item.title}</h3>
+                  <p style={{ fontSize: 13, color: 'var(--text2)', lineHeight: 1.6, marginBottom: 12 }}>{item.text}</p>
+                  <Link href={item.href} className="link-blue" style={{ fontSize: 13, fontWeight: 700, color: 'var(--blue)', textDecoration: 'none' }}>{item.cta} →</Link>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
@@ -110,12 +177,16 @@ export default async function CatalogIndexPage({
             const emoji = CAT_EMOJIS[cat.slug] ?? '📦'
             return (
               <section key={cat.id}>
-                <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: 20 }}>
-                  <div>
+                <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: 20, gap: 16, flexWrap: 'wrap' }}>
+                  <div style={{ maxWidth: 760 }}>
+                    <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--orange)', marginBottom: 6 }}>
+                      {CAT_LANES[cat.slug]?.badge ?? 'Catalogue NES'}
+                    </div>
                     <h2 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 26, fontWeight: 700, color: 'var(--text)', marginBottom: 4 }}>
                       {cat.name}
                     </h2>
-                    <p style={{ fontSize: 13, color: 'var(--text2)' }}>{cat.count} produits disponibles</p>
+                    <p style={{ fontSize: 13, color: 'var(--text2)', lineHeight: 1.65, marginBottom: 6 }}>{cat.count} produits disponibles</p>
+                    <p style={{ fontSize: 13, color: 'var(--text2)', lineHeight: 1.65 }}>{CAT_LANES[cat.slug]?.text}</p>
                   </div>
                   <Link
                     href={categoryHref(cat.slug, locale)}
