@@ -5,6 +5,7 @@ const NAV = [
   { href: '/admin', label: '📊 Dashboard' },
   { href: '/admin/leads', label: '📩 Pipeline leads' },
   { href: '/admin/produits', label: '📦 Produits' },
+  { href: '/admin/merchandising', label: '🧭 Merchandising' },
 ]
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
