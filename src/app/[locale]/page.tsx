@@ -5,6 +5,8 @@ import { setRequestLocale } from 'next-intl/server'
 import { getFeaturedProducts, getCategoryTree } from '@/lib/woocommerce'
 import { categoryHref, whatsappGeneralLink } from '@/lib/utils'
 import ProductsSection from '@/components/home/ProductsSection'
+import BuyerPathSection from '@/components/home/BuyerPathSection'
+import MoroccoTrustSection from '@/components/home/MoroccoTrustSection'
 import { KITS as KITS_DATA } from '@/lib/data/kits'
 import ShaderAnimation from '@/components/ui/shader-animation'
 import DevisExpressButton from '@/components/ui/devis-express-button'
@@ -141,10 +143,10 @@ export default async function HomePage({ params }: { params: { locale: string } 
         <div style={{ maxWidth: 1240, margin: '0 auto', display: 'flex', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap', gap: 0 }}>
           {[
             { icon: '🚚', label: 'Livraison 24–48h', sub: 'partout au Maroc' },
-            { icon: '🛡️', label: 'Garantie 1 an',    sub: 'toutes machines' },
-            { icon: '💬', label: 'Support WhatsApp', sub: '7 jours / 7' },
-            { icon: '💳', label: 'Paiement livraison', sub: 'disponible' },
-            { icon: '⭐', label: '2 000+ clients',   sub: 'satisfaits' },
+            { icon: '🛡️', label: 'Support local', sub: 'avant et après achat' },
+            { icon: '💬', label: 'Support WhatsApp', sub: 'rapide et direct' },
+            { icon: '🎯', label: 'Packs de démarrage', sub: 'pour lancer votre activité' },
+            { icon: '🏭', label: 'Pour débutants et ateliers', sub: 'du premier achat au réassort' },
           ].map((item, i) => (
             <div key={item.label} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 28px', borderLeft: i > 0 ? '1px solid var(--border)' : 'none' }}>
               <span style={{ fontSize: 18 }}>{item.icon}</span>
@@ -156,6 +158,8 @@ export default async function HomePage({ params }: { params: { locale: string } 
           ))}
         </div>
       </div>
+
+      <BuyerPathSection locale={locale} />
 
       {/* ══════════════════════════════════════════════════════
           CATEGORIES
@@ -200,6 +204,8 @@ export default async function HomePage({ params }: { params: { locale: string } 
           </div>
         </div>
       </section>
+
+      <MoroccoTrustSection locale={locale} />
 
       {/* ══════════════════════════════════════════════════════
           BEST SELLERS (avec filtres)
@@ -319,7 +325,7 @@ export default async function HomePage({ params }: { params: { locale: string } 
           <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.75)', marginBottom: 32 }}>
             Rejoignez les entrepreneurs marocains qui impriment et vendent chaque jour avec NES.
           </p>
-          <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap', marginBottom: 18 }}>
             <Link
               href={`/${locale}/kits`}
               style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#fff', color: 'var(--orange)', padding: '14px 30px', borderRadius: 8, fontSize: 15, fontWeight: 800, textDecoration: 'none', transition: 'transform .15s' }}
@@ -334,6 +340,19 @@ export default async function HomePage({ params }: { params: { locale: string } 
             >
               💬 Parler à un expert
             </a>
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 12, maxWidth: 760, width: '100%' }} className="grid md:grid-cols-3 gap-3">
+              {[
+                'Choisissez une technique adaptée à votre projet',
+                'Validez votre budget de départ avec NES',
+                'Démarrez avec un kit ou un devis vraiment cohérent',
+              ].map((item) => (
+                <div key={item} style={{ background: 'rgba(255,255,255,0.14)', border: '1px solid rgba(255,255,255,0.24)', borderRadius: 12, padding: '12px 14px', fontSize: 12, color: 'rgba(255,255,255,0.92)', lineHeight: 1.5 }}>
+                  {item}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
