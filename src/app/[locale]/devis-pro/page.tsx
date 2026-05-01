@@ -85,7 +85,7 @@ export default function DevisProPage({ params }: { params: { locale: string } })
             <span style={{ color: 'var(--blue)' }}>Devis en moins de 2h.</span>
           </h1>
           <p style={{ fontSize: 16, color: 'var(--text2)', lineHeight: 1.75, maxWidth: 700, marginBottom: 36 }}>
-            Cette page rassure les entreprises, écoles, associations et ateliers qui ont besoin d’un vrai interlocuteur, d’un devis clair et d’une exécution sérieuse au Maroc.
+            Entreprises, écoles, associations et ateliers peuvent ici demander un devis clair, avec un vrai interlocuteur et une exécution sérieuse au Maroc.
           </p>
 
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>

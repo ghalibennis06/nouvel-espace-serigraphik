@@ -50,7 +50,7 @@ export default function BuyerPathSection({ locale }: BuyerPathSectionProps) {
             NES vous aide à acheter selon votre vrai besoin, pas au hasard.
           </h2>
           <p style={{ fontSize: 15, color: 'var(--text2)', lineHeight: 1.7, marginTop: 12, maxWidth: 680 }}>
-            Que vous soyez au début, en train d’équiper un atelier, ou simplement en réassort, le site doit vous amener plus vite vers le bon choix.
+            Que vous soyez au début, en train d’équiper un atelier, ou simplement en réassort, vous arrivez plus vite vers le bon choix.
           </p>
         </div>
 

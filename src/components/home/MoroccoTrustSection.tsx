@@ -11,7 +11,7 @@ const TRUST_POINTS = [
   },
   {
     title: 'Accompagnement pour choisir',
-    text: 'Le marché est confus pour beaucoup de clients entre sublimation, sérigraphie, DTF, UV et consommables. NES doit simplifier la décision.',
+    text: 'Le marché est confus pour beaucoup de clients entre sublimation, sérigraphie, DTF, UV et consommables. NES simplifie la décision avec des parcours plus clairs.',
   },
   {
     title: 'Business launch + réassort',
