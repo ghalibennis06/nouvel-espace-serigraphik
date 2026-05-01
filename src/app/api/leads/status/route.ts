@@ -12,6 +12,10 @@ export async function PATCH(req: NextRequest) {
     assignee?: string | null
     next_follow_up_at?: string | null
     notes?: string | null
+    quote_status?: string | null
+    quote_amount?: string | null
+    last_contact_at?: string | null
+    result_reason?: string | null
   }
   try {
     body = await req.json()
@@ -19,7 +23,7 @@ export async function PATCH(req: NextRequest) {
     return NextResponse.json({ error: 'invalid body' }, { status: 400 })
   }
 
-  const { id, status, priority, assignee, next_follow_up_at, notes } = body
+  const { id, status, priority, assignee, next_follow_up_at, notes, quote_status, quote_amount, last_contact_at, result_reason } = body
   if (!id) {
     return NextResponse.json({ error: 'invalid id' }, { status: 400 })
   }
@@ -36,6 +40,10 @@ export async function PATCH(req: NextRequest) {
   if (typeof assignee !== 'undefined') payload.assignee = assignee || null
   if (typeof next_follow_up_at !== 'undefined') payload.next_follow_up_at = next_follow_up_at || null
   if (typeof notes !== 'undefined') payload.notes = notes || null
+  if (typeof quote_status !== 'undefined') payload.quote_status = quote_status || null
+  if (typeof quote_amount !== 'undefined') payload.quote_amount = quote_amount || null
+  if (typeof last_contact_at !== 'undefined') payload.last_contact_at = last_contact_at || null
+  if (typeof result_reason !== 'undefined') payload.result_reason = result_reason || null
 
   if (Object.keys(payload).length === 0) {
     return NextResponse.json({ error: 'nothing to update' }, { status: 400 })

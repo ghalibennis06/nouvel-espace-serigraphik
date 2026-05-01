@@ -21,10 +21,15 @@ type Lead = {
   category_interest?: string | null
   product_interest?: string | null
   budget_range?: string | null
+  quote_status?: string | null
+  quote_amount?: string | null
+  last_contact_at?: string | null
+  result_reason?: string | null
 }
 
 const STATUS_OPTIONS = ['new', 'qualified', 'contacted', 'quoted', 'won', 'lost', 'closed', 'spam']
 const PRIORITY_OPTIONS = ['low', 'normal', 'high', 'urgent']
+const QUOTE_OPTIONS = ['none', 'needed', 'drafting', 'sent', 'won', 'lost']
 
 const STATUS_COLORS: Record<string, { bg: string; color: string }> = {
   new: { bg: 'rgba(79,110,247,0.15)', color: 'var(--blue)' },
@@ -42,6 +47,15 @@ const PRIORITY_COLORS: Record<string, { bg: string; color: string }> = {
   normal: { bg: 'rgba(79,110,247,0.12)', color: 'var(--blue)' },
   high: { bg: 'rgba(251,146,60,0.15)', color: 'var(--orange)' },
   urgent: { bg: 'rgba(239,68,68,0.15)', color: '#ef4444' },
+}
+
+const QUOTE_COLORS: Record<string, { bg: string; color: string }> = {
+  none: { bg: 'rgba(255,255,255,0.08)', color: 'var(--text2)' },
+  needed: { bg: 'rgba(79,110,247,0.12)', color: 'var(--blue)' },
+  drafting: { bg: 'rgba(124,58,237,0.15)', color: '#7c3aed' },
+  sent: { bg: 'rgba(251,146,60,0.15)', color: 'var(--orange)' },
+  won: { bg: 'rgba(34,197,94,0.15)', color: '#16a34a' },
+  lost: { bg: 'rgba(239,68,68,0.15)', color: '#ef4444' },
 }
 
 async function updateLead(id: string, payload: Record<string, string | null>) {
@@ -67,13 +81,15 @@ export default function LeadsTable({ leads: initial }: { leads: Lead[] }) {
     all: leads.length,
     overdue: leads.filter((lead) => isOverdue(lead.next_follow_up_at) && !['won', 'closed', 'lost', 'spam'].includes(lead.status)).length,
     today: leads.filter((lead) => !!lead.next_follow_up_at && new Date(lead.next_follow_up_at).toDateString() === new Date().toDateString()).length,
-    quoted: leads.filter((lead) => lead.status === 'quoted').length,
+    quoted: leads.filter((lead) => lead.status === 'quoted' || lead.quote_status === 'sent').length,
+    quoteQueue: leads.filter((lead) => ['needed', 'drafting', 'sent'].includes(lead.quote_status || 'none')).length,
   }), [leads])
 
   const visible = useMemo(() => {
     if (filter === 'all') return leads
     if (filter === 'overdue') return leads.filter((lead) => isOverdue(lead.next_follow_up_at) && !['won', 'closed', 'lost', 'spam'].includes(lead.status))
     if (filter === 'today') return leads.filter((lead) => !!lead.next_follow_up_at && new Date(lead.next_follow_up_at).toDateString() === new Date().toDateString())
+    if (filter === 'quoteQueue') return leads.filter((lead) => ['needed', 'drafting', 'sent'].includes(lead.quote_status || 'none'))
     return leads.filter((lead) => lead.status === filter)
   }, [filter, leads])
 
@@ -91,6 +107,7 @@ export default function LeadsTable({ leads: initial }: { leads: Lead[] }) {
           { key: 'all', label: 'Toutes', count: counts.all },
           { key: 'overdue', label: 'En retard', count: counts.overdue },
           { key: 'today', label: 'À faire aujourd’hui', count: counts.today },
+          { key: 'quoteQueue', label: 'Queue devis', count: counts.quoteQueue },
           { key: 'quoted', label: 'Devis envoyés', count: counts.quoted },
           ...STATUS_OPTIONS.map((s) => ({ key: s, label: s, count: leads.filter((l) => l.status === s).length })),
         ].map((item) => (
@@ -118,7 +135,7 @@ export default function LeadsTable({ leads: initial }: { leads: Lead[] }) {
         <table style={{ width: '100%', borderCollapse: 'collapse' }}>
           <thead>
             <tr style={{ background: 'var(--surface)' }}>
-              {['Lead', 'Segment', 'Priorité', 'Suivi', 'Statut', 'Actions'].map((h) => (
+              {['Lead', 'Segment', 'Priorité', 'Devis', 'Suivi', 'Statut', 'Actions'].map((h) => (
                 <th key={h} style={{ padding: '10px 16px', textAlign: 'left', fontSize: 11, fontWeight: 700, letterSpacing: '0.07em', textTransform: 'uppercase', color: 'var(--text2)' }}>{h}</th>
               ))}
             </tr>
@@ -127,6 +144,7 @@ export default function LeadsTable({ leads: initial }: { leads: Lead[] }) {
             {visible.map((lead, i) => {
               const sc = STATUS_COLORS[lead.status] ?? STATUS_COLORS.new
               const pc = PRIORITY_COLORS[lead.priority || 'normal'] ?? PRIORITY_COLORS.normal
+              const qc = QUOTE_COLORS[lead.quote_status || 'none'] ?? QUOTE_COLORS.none
               const overdue = isOverdue(lead.next_follow_up_at)
               return (
                 <>
@@ -152,6 +170,16 @@ export default function LeadsTable({ leads: initial }: { leads: Lead[] }) {
                         style={{ padding: '4px 8px', borderRadius: 8, fontSize: 11, fontWeight: 700, background: pc.bg, color: pc.color, border: 'none', cursor: 'pointer', fontFamily: 'Outfit, sans-serif' }}
                       >
                         {PRIORITY_OPTIONS.map((p) => <option key={p} value={p}>{p}</option>)}
+                      </select>
+                    </td>
+                    <td style={{ padding: '12px 16px' }}>
+                      <select
+                        value={lead.quote_status || 'none'}
+                        onClick={(e) => e.stopPropagation()}
+                        onChange={(e) => patchLead(lead.id, { quote_status: e.target.value })}
+                        style={{ padding: '4px 8px', borderRadius: 8, fontSize: 11, fontWeight: 700, background: qc.bg, color: qc.color, border: 'none', cursor: 'pointer', fontFamily: 'Outfit, sans-serif' }}
+                      >
+                        {QUOTE_OPTIONS.map((q) => <option key={q} value={q}>{q}</option>)}
                       </select>
                     </td>
                     <td style={{ padding: '12px 16px' }}>
@@ -190,14 +218,14 @@ export default function LeadsTable({ leads: initial }: { leads: Lead[] }) {
                   </tr>
                   {expanded === lead.id && (
                     <tr key={`${lead.id}-exp`} style={{ borderTop: 'none', background: 'var(--card2)' }}>
-                      <td colSpan={6} style={{ padding: '18px 24px' }}>
-                        <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: 18 }} className="grid md:grid-cols-[1.1fr_0.9fr] gap-4">
+                      <td colSpan={7} style={{ padding: '18px 24px' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: '1.05fr 0.95fr', gap: 18 }} className="grid md:grid-cols-[1.05fr_0.95fr] gap-4">
                           <div>
                             <div style={{ fontSize: 13, color: 'var(--text)', lineHeight: 1.7, marginBottom: 14 }}>
                               <strong>Message complet :</strong><br />
                               {lead.message ?? '—'}
                             </div>
-                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 10 }} className="grid md:grid-cols-2 gap-3">
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 10, marginBottom: 12 }} className="grid md:grid-cols-2 gap-3">
                               {[
                                 ['Ville', lead.city || '—'],
                                 ['Budget', lead.budget_range || '—'],
@@ -209,6 +237,28 @@ export default function LeadsTable({ leads: initial }: { leads: Lead[] }) {
                                   <div style={{ fontSize: 13, color: 'var(--text)' }}>{value}</div>
                                 </div>
                               ))}
+                            </div>
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 10 }} className="grid md:grid-cols-2 gap-3">
+                              <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 10, padding: '12px 14px' }}>
+                                <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text2)', marginBottom: 4 }}>Montant devis</div>
+                                <input
+                                  defaultValue={lead.quote_amount || ''}
+                                  onClick={(e) => e.stopPropagation()}
+                                  onBlur={(e) => patchLead(lead.id, { quote_amount: e.target.value || null })}
+                                  placeholder="ex: 12500 MAD"
+                                  style={{ width: '100%', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 8, padding: '9px 10px', fontSize: 13, color: 'var(--text)' }}
+                                />
+                              </div>
+                              <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 10, padding: '12px 14px' }}>
+                                <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text2)', marginBottom: 4 }}>Dernier contact</div>
+                                <input
+                                  type="date"
+                                  defaultValue={lead.last_contact_at ? new Date(lead.last_contact_at).toISOString().slice(0, 10) : ''}
+                                  onClick={(e) => e.stopPropagation()}
+                                  onBlur={(e) => patchLead(lead.id, { last_contact_at: e.target.value ? new Date(`${e.target.value}T09:00:00`).toISOString() : null })}
+                                  style={{ width: '100%', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 8, padding: '9px 10px', fontSize: 13, color: 'var(--text)' }}
+                                />
+                              </div>
                             </div>
                           </div>
 
@@ -234,6 +284,16 @@ export default function LeadsTable({ leads: initial }: { leads: Lead[] }) {
                               />
                             </div>
                             <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 10, padding: '12px 14px' }}>
+                              <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text2)', marginBottom: 6 }}>Raison résultat / blocage</div>
+                              <input
+                                defaultValue={lead.result_reason || ''}
+                                onClick={(e) => e.stopPropagation()}
+                                onBlur={(e) => patchLead(lead.id, { result_reason: e.target.value || null })}
+                                placeholder="budget, délai, no response…"
+                                style={{ width: '100%', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 8, padding: '9px 10px', fontSize: 13, color: 'var(--text)' }}
+                              />
+                            </div>
+                            <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 10, padding: '12px 14px' }}>
                               <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text2)', marginBottom: 6 }}>Notes internes</div>
                               <textarea
                                 defaultValue={lead.notes || ''}
@@ -254,7 +314,7 @@ export default function LeadsTable({ leads: initial }: { leads: Lead[] }) {
             })}
             {visible.length === 0 && (
               <tr>
-                <td colSpan={6} style={{ padding: '28px 16px', textAlign: 'center', fontSize: 13, color: 'var(--text2)' }}>
+                <td colSpan={7} style={{ padding: '28px 16px', textAlign: 'center', fontSize: 13, color: 'var(--text2)' }}>
                   Aucune demande pour ce filtre.
                 </td>
               </tr>
