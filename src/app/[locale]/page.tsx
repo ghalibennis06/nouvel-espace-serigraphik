@@ -11,6 +11,7 @@ import { KITS as KITS_DATA } from '@/lib/data/kits'
 import ShaderAnimation from '@/components/ui/shader-animation'
 import DevisExpressButton from '@/components/ui/devis-express-button'
 import RoiCalculator from '@/components/home/RoiCalculator'
+import VoidCategoryShowcase from '@/components/home/VoidCategoryShowcase'
 
 export const dynamic = 'force-dynamic'
 
@@ -189,49 +190,7 @@ export default async function HomePage({ params }: { params: { locale: string } 
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════
-          CATEGORIES
-      ══════════════════════════════════════════════════════ */}
-      <section style={{ background: 'var(--bg)', padding: '80px 5%' }}>
-        <div style={{ maxWidth: 1240, margin: '0 auto' }}>
-          <div style={{ marginBottom: 36 }}>
-            <span className="stag">6 univers produits</span>
-            <h2 style={{ fontSize: 'clamp(28px,3.5vw,44px)', fontWeight: 800, color: 'var(--text)', letterSpacing: '-0.025em', lineHeight: 1.1 }}>
-              Tout ce qu&apos;il faut pour imprimer
-            </h2>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
-            {CATEGORIES.map(cat => (
-              <Link
-                key={cat.slug}
-                href={categoryHref(cat.slug, locale)}
-                className="cat-item"
-                style={{ display: 'block', background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 14, overflow: 'hidden', textDecoration: 'none', transition: 'all .2s', boxShadow: 'var(--shadow)' }}
-              >
-                {/* Photo */}
-                <div style={{ aspectRatio: '16/9', background: 'var(--surface)', position: 'relative' }}>
-                  {cat.img
-                    ? <Image src={cat.img} alt={cat.name} fill sizes="(max-width:640px) 100vw, 33vw" style={{ objectFit: 'cover' }} />
-                    : <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 42 }}>🖨️</div>
-                  }
-                  {cat.recur && (
-                    <div style={{ position: 'absolute', top: 10, right: 10, background: 'var(--orange)', color: '#fff', fontSize: 9, fontWeight: 800, padding: '3px 8px', borderRadius: 4, letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-                      ♻ Mensuel
-                    </div>
-                  )}
-                </div>
-                {/* Info */}
-                <div style={{ padding: '16px 18px 18px' }}>
-                  <div style={{ fontSize: 16, fontWeight: 700, color: 'var(--text)', marginBottom: 3 }}>{cat.name}</div>
-                  <div style={{ fontSize: 12, color: 'var(--text2)', marginBottom: 8 }}>{cat.info}</div>
-                  <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--orange)' }}>{cat.count} produits →</div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+      <VoidCategoryShowcase locale={locale} categories={CATEGORIES} />
 
       <MoroccoTrustSection locale={locale} />
 
