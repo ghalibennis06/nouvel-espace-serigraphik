@@ -1,11 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase'
+import { supabase, isSupabaseConfigured } from '@/lib/supabase'
 import { DEFAULT_HOMEPAGE_CONTROL, normalizeHomepageControlState } from '@/lib/admin-homepage'
 
 const TABLE = 'nes_admin_settings'
 const KEY = 'homepage'
 
 export async function GET() {
+  if (!isSupabaseConfigured()) {
+    return NextResponse.json({ ok: true, settings: DEFAULT_HOMEPAGE_CONTROL, fallback: true, disconnected: true })
+  }
+
   const { data, error } = await supabase
     .from(TABLE)
     .select('key, value')
@@ -25,6 +29,10 @@ export async function GET() {
 }
 
 export async function PATCH(req: NextRequest) {
+  if (!isSupabaseConfigured()) {
+    return NextResponse.json({ error: 'supabase not configured' }, { status: 503 })
+  }
+
   let body: Record<string, unknown>
   try {
     body = await req.json()

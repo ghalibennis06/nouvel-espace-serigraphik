@@ -1,10 +1,14 @@
-import { supabase } from '@/lib/supabase'
+import { supabase, isSupabaseConfigured } from '@/lib/supabase'
 import { DEFAULT_HOMEPAGE_CONTROL, normalizeHomepageControlState, type HomepageControlState } from '@/lib/admin-homepage'
 
 const TABLE = 'nes_admin_settings'
 const KEY = 'homepage'
 
 export async function getHomepageControlState(): Promise<HomepageControlState> {
+  if (!isSupabaseConfigured()) {
+    return DEFAULT_HOMEPAGE_CONTROL
+  }
+
   const { data, error } = await supabase
     .from(TABLE)
     .select('value')
