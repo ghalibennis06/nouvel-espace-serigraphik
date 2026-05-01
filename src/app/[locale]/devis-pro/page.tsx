@@ -33,6 +33,30 @@ const ADVANTAGES = [
   { icon: '🔄', title: 'Commandes récurrentes', desc: 'Programme de réapprovisionnement mensuel pour les consommables.' },
 ]
 
+const INTAKE_STEPS = [
+  {
+    title: '1. Vous envoyez votre besoin',
+    text: 'Quantité, produit, délai, ville de livraison, logo ou contraintes techniques. Plus la demande est claire, plus le devis est rapide.',
+  },
+  {
+    title: '2. NES qualifie la demande',
+    text: 'Nous vérifions le produit, la technique, la quantité, les fichiers et le niveau de priorité avant de chiffrer.',
+  },
+  {
+    title: '3. Vous recevez une proposition exploitable',
+    text: 'Prix, délai, options, facturation et prochaines étapes. L’objectif est de vous faire avancer, pas juste de répondre vaguement.',
+  },
+]
+
+const REQUEST_CHECKLIST = [
+  'quantité estimée',
+  'produit ou famille de produit',
+  'ville de livraison',
+  'date limite ou urgence',
+  'logo, visuel ou besoin de personnalisation',
+  'si possible, budget cible ou niveau de gamme',
+]
+
 export default function DevisProPage({ params }: { params: { locale: string } }) {
   const { locale } = params
   setRequestLocale(locale)
@@ -60,9 +84,8 @@ export default function DevisProPage({ params }: { params: { locale: string } })
             Prix entreprise.<br />
             <span style={{ color: 'var(--blue)' }}>Devis en moins de 2h.</span>
           </h1>
-          <p style={{ fontSize: 16, color: 'var(--text2)', lineHeight: 1.75, maxWidth: 620, marginBottom: 36 }}>
-            Écoles, associations, hôtels, entreprises — nous proposons des tarifs dégressifs sur volume,
-            facturation professionnelle et un suivi dédié pour toutes vos commandes B2B.
+          <p style={{ fontSize: 16, color: 'var(--text2)', lineHeight: 1.75, maxWidth: 700, marginBottom: 36 }}>
+            Cette page doit rassurer les entreprises, écoles, associations et ateliers qui ont besoin d’un vrai interlocuteur, d’un devis clair et d’une exécution sérieuse au Maroc, pas seulement d’un prix affiché sans contexte.
           </p>
 
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
@@ -72,8 +95,23 @@ export default function DevisProPage({ params }: { params: { locale: string } })
             </a>
             <Link href={`/${locale}/contact`}
               style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '14px 28px', border: '1px solid var(--bluesoft2)', color: 'var(--blue)', borderRadius: 8, fontSize: 14, fontWeight: 600, textDecoration: 'none' }}>
-              📋 Formulaire de contact →
+              📋 Passer par le formulaire NES →
             </Link>
+          </div>
+
+          <div style={{ marginTop: 22, background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 14, padding: '18px 20px', maxWidth: 720 }}>
+            <div style={{ fontSize: 10, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--orange)', marginBottom: 8 }}>Pour aller vite</div>
+            <p style={{ fontSize: 13, color: 'var(--text2)', lineHeight: 1.65, marginBottom: 12 }}>
+              Si vous voulez un devis exploitable rapidement, envoyez directement ces éléments dans votre message.
+            </p>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 8 }} className="grid md:grid-cols-2 gap-2">
+              {REQUEST_CHECKLIST.map((item) => (
+                <div key={item} style={{ display: 'flex', gap: 8, fontSize: 12, color: 'var(--text2)', lineHeight: 1.5 }}>
+                  <span style={{ color: 'var(--teal)', fontWeight: 700, flexShrink: 0 }}>✓</span>
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
           </div>
 
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px 28px', marginTop: 28 }}>
@@ -81,6 +119,40 @@ export default function DevisProPage({ params }: { params: { locale: string } })
               <span key={t} style={{ fontSize: 13, color: 'var(--text2)', fontWeight: 500 }}>{t}</span>
             ))}
           </div>
+
+          <div style={{ marginTop: 26, display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 14 }} className="grid md:grid-cols-3 gap-4">
+            {[
+              {
+                title: 'Je veux commander pour mon organisation',
+                text: 'Vous avez un besoin clair en quantité, en délai et en facturation.',
+              },
+              {
+                title: 'Je veux comparer plusieurs solutions',
+                text: 'Vous hésitez entre plusieurs produits, techniques ou budgets et vous avez besoin d’un vrai échange.',
+              },
+              {
+                title: 'Je veux une relation récurrente',
+                text: 'Vous cherchez un partenaire de réassort ou de commandes répétées, pas juste un achat ponctuel.',
+              },
+            ].map((item) => (
+              <div key={item.title} style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 12, padding: 18, boxShadow: 'var(--shadow)' }}>
+                <div style={{ fontSize: 10, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--blue)', marginBottom: 8 }}>Parcours devis</div>
+                <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 8 }}>{item.title}</h3>
+                <p style={{ fontSize: 13, color: 'var(--text2)', lineHeight: 1.6 }}>{item.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div style={{ maxWidth: 1100, margin: '0 auto', padding: '56px 6% 12px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 16 }} className="grid md:grid-cols-3 gap-4">
+          {INTAKE_STEPS.map((step) => (
+            <div key={step.title} style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 14, padding: 20 }}>
+              <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 8 }}>{step.title}</div>
+              <p style={{ fontSize: 13, color: 'var(--text2)', lineHeight: 1.65 }}>{step.text}</p>
+            </div>
+          ))}
         </div>
       </div>
 
@@ -89,7 +161,7 @@ export default function DevisProPage({ params }: { params: { locale: string } })
         <div style={{ textAlign: 'center', marginBottom: 44 }}>
           <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.13em', textTransform: 'uppercase', color: 'var(--blue)' }}>Qui fait appel à NES B2B ?</span>
           <h2 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 34, fontWeight: 700, color: 'var(--text)', marginTop: 10 }}>
-            Nous travaillons avec tous les secteurs
+            Nous traitons des demandes concrètes, secteur par secteur
           </h2>
         </div>
 
