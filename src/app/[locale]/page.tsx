@@ -15,6 +15,7 @@ import RoiCalculator from '@/components/home/RoiCalculator'
 import VoidCategoryShowcase from '@/components/home/VoidCategoryShowcase'
 import FluidKitShowcase from '@/components/home/FluidKitShowcase'
 import HeroIndustrialPanel from '@/components/home/HeroIndustrialPanel'
+import ClosingDecisionStation from '@/components/home/ClosingDecisionStation'
 
 export const dynamic = 'force-dynamic'
 
@@ -135,51 +136,7 @@ export default async function HomePage({ params }: { params: { locale: string } 
 
       <FluidKitShowcase locale={locale} kits={KITS} />
 
-      {/* ══════════════════════════════════════════════════════
-          CTA BAND
-      ══════════════════════════════════════════════════════ */}
-      <section style={{ background: 'var(--orange)', padding: '72px 5%', textAlign: 'center' }}>
-        <div style={{ maxWidth: 720, margin: '0 auto' }}>
-          <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.65)', marginBottom: 16 }}>
-            2 000+ ateliers lancés au Maroc
-          </div>
-          <h2 style={{ fontSize: 'clamp(32px,4.5vw,56px)', fontWeight: 900, color: '#fff', letterSpacing: '-0.03em', lineHeight: 1.08, marginBottom: 16 }}>
-            Votre atelier commence aujourd&apos;hui.
-          </h2>
-          <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.75)', marginBottom: 32 }}>
-            Rejoignez les entrepreneurs marocains qui impriment et vendent chaque jour avec NES.
-          </p>
-          <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap', marginBottom: 18 }}>
-            <Link
-              href={`/${locale}/kits`}
-              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#fff', color: 'var(--orange)', padding: '14px 30px', borderRadius: 8, fontSize: 15, fontWeight: 800, textDecoration: 'none', transition: 'transform .15s' }}
-            >
-              Choisir mon kit →
-            </Link>
-            <a
-              href={whatsappGeneralLink("Bonjour NES, je veux lancer mon atelier. Pouvez-vous m'aider ?")}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(0,0,0,0.18)', color: '#fff', padding: '14px 30px', borderRadius: 8, fontSize: 15, fontWeight: 600, textDecoration: 'none', border: '1.5px solid rgba(255,255,255,0.35)', transition: 'background .15s' }}
-            >
-              💬 Parler à un expert
-            </a>
-          </div>
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 12, maxWidth: 760, width: '100%' }} className="grid md:grid-cols-3 gap-3">
-              {[
-                'Choisissez une technique adaptée à votre projet',
-                'Validez votre budget de départ avec NES',
-                'Démarrez avec un kit ou un devis vraiment cohérent',
-              ].map((item) => (
-                <div key={item} style={{ background: 'rgba(255,255,255,0.14)', border: '1px solid rgba(255,255,255,0.24)', borderRadius: 12, padding: '12px 14px', fontSize: 12, color: 'rgba(255,255,255,0.92)', lineHeight: 1.5 }}>
-                  {item}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      <ClosingDecisionStation locale={locale} />
 
     </div>
   )
