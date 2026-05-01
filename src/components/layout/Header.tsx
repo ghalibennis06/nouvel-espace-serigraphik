@@ -38,11 +38,11 @@ export default function Header({ locale, rootCategories, subCategories }: Header
   }
 
   const navLinks = [
-    { label: 'Kits & Packs',  href: `/${locale}/kits` },
-    { label: 'Catalogue',     href: `/${locale}/categorie-produit` },
-    { label: 'Académie',      href: `/${locale}/academie` },
-    { label: 'Devis Pro',     href: `/${locale}/devis-pro` },
-    { label: 'Contact',       href: `/${locale}/contact` },
+    { label: 'Kits pour démarrer', href: `/${locale}/kits`, hint: 'Premier achat' },
+    { label: 'Machines & catalogue', href: `/${locale}/categorie-produit`, hint: 'Atelier et matériel' },
+    { label: 'Guide d’achat', href: `/${locale}/academie`, hint: 'Apprendre avant achat' },
+    { label: 'Devis Pro', href: `/${locale}/devis-pro`, hint: 'Commandes volume' },
+    { label: 'Contact', href: `/${locale}/contact`, hint: 'Parler à NES' },
   ]
 
   const isActive = (href: string) =>
@@ -109,18 +109,22 @@ export default function Header({ locale, rootCategories, subCategories }: Header
                 padding: '0 14px',
                 height: 64,
                 display: 'flex',
-                alignItems: 'center',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'flex-start',
                 fontSize: 13,
                 fontWeight: 500,
                 color: isActive(link.href) ? 'var(--orange)' : 'var(--text2)',
                 textDecoration: 'none',
                 borderBottom: isActive(link.href) ? '2px solid var(--orange)' : '2px solid transparent',
                 transition: 'color .15s',
+                lineHeight: 1.15,
               }}
               onMouseEnter={e => (e.currentTarget.style.color = 'var(--text)')}
               onMouseLeave={e => (e.currentTarget.style.color = isActive(link.href) ? 'var(--orange)' : 'var(--text2)')}
             >
-              {link.label}
+              <span>{link.label}</span>
+              <span style={{ fontSize: 10, color: isActive(link.href) ? 'var(--orange)' : 'var(--text3)', marginTop: 3 }}>{link.hint}</span>
             </Link>
           ))}
         </div>
@@ -212,7 +216,8 @@ export default function Header({ locale, rootCategories, subCategories }: Header
                   onClick={() => setMenuOpen(false)}
                   style={{ display: 'block', padding: '13px 20px', fontSize: 14, fontWeight: 500, color: isActive(link.href) ? 'var(--orange)' : 'var(--text)', textDecoration: 'none', borderBottom: '1px solid var(--border)' }}
                 >
-                  {link.label}
+                  <div style={{ fontSize: 14, fontWeight: 600 }}>{link.label}</div>
+                  <div style={{ fontSize: 11, color: 'var(--text3)', marginTop: 4 }}>{link.hint}</div>
                 </Link>
               ))}
             </nav>
