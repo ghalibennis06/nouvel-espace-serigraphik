@@ -19,6 +19,30 @@ const WA_SVG = (
 
 // KITS and COMPARISON imported from shared data source
 
+const STARTER_STEPS = [
+  {
+    title: '1. Choisissez votre technique',
+    text: 'Sublimation pour démarrer vite, sérigraphie pour le textile régulier, DTF pour plus de polyvalence.',
+  },
+  {
+    title: '2. Validez votre budget réel',
+    text: 'Le bon kit n’est pas seulement le moins cher, c’est celui que vous pouvez lancer et rentabiliser correctement.',
+  },
+  {
+    title: '3. Faites confirmer votre choix',
+    text: 'NES doit pouvoir vous orienter avant achat selon vos produits, vos clients visés et votre cadence.',
+  },
+]
+
+const STARTER_CHECKLIST = [
+  'ce que vous voulez vendre en premier',
+  'votre budget de départ',
+  'si vous visez mugs, textile, ou plusieurs supports',
+  'si vous travaillez depuis la maison ou un atelier',
+  'si vous avez déjà des clients ou si vous démarrez de zéro',
+  'la ville où vous voulez être livré',
+]
+
 export default function KitsPage({ params }: { params: { locale: string } }) {
   const { locale } = params
   setRequestLocale(locale)
@@ -28,7 +52,7 @@ export default function KitsPage({ params }: { params: { locale: string } }) {
 
       {/* ── HERO ──────────────────────────────────────────────────────────── */}
       <div style={{ background: 'var(--surface)', borderBottom: '1px solid var(--border)', padding: '72px 6% 56px' }}>
-        <div style={{ maxWidth: 900, margin: '0 auto', textAlign: 'center' }}>
+        <div style={{ maxWidth: 980, margin: '0 auto', textAlign: 'center' }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'var(--bluesoft)', border: '1px solid var(--bluesoft2)', borderRadius: 20, padding: '6px 16px', marginBottom: 24 }}>
             <svg style={{ width: 14, height: 14, color: 'var(--blue)' }} fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd"/>
@@ -36,18 +60,66 @@ export default function KitsPage({ params }: { params: { locale: string } }) {
             <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--blue)', letterSpacing: '0.08em' }}>KITS CLÉ-EN-MAIN — LIVRAISON 48H</span>
           </div>
           <h1 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 'clamp(36px,5vw,60px)', fontWeight: 700, color: 'var(--text)', lineHeight: 1.1, marginBottom: 20 }}>
-            Tout pour démarrer.<br />
-            <span style={{ color: 'var(--blue)' }}>Rien à chercher.</span>
+            Choisissez le bon kit pour lancer votre activité,
+            <span style={{ color: 'var(--blue)' }}> sans acheter au hasard.</span>
           </h1>
-          <p style={{ fontSize: 17, color: 'var(--text2)', lineHeight: 1.7, maxWidth: 600, margin: '0 auto 32px' }}>
-            Choisissez votre kit, commandez via WhatsApp, démarrez votre atelier en 48h.
-            Support expert inclus, formation offerte, rentabilisé en moins d&apos;un mois.
+          <p style={{ fontSize: 17, color: 'var(--text2)', lineHeight: 1.7, maxWidth: 720, margin: '0 auto 32px' }}>
+            Cette page doit aider un débutant marocain à comprendre avec quel budget démarrer, quelle technique choisir, et quel kit commander selon son vrai projet.
           </p>
-          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '10px 28px' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '10px 28px', marginBottom: 28 }}>
             {['✅ Livraison 48h au Maroc', '✅ Support WhatsApp inclus', '✅ Formation en ligne offerte', '✅ Facture pro + devis'].map(t => (
               <span key={t} style={{ fontSize: 13, color: 'var(--text2)', fontWeight: 500 }}>{t}</span>
             ))}
           </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 14, textAlign: 'left', marginBottom: 18 }} className="grid md:grid-cols-3 gap-4">
+            {[
+              {
+                title: 'Je veux commencer petit',
+                text: 'Commencez par la sublimation si vous voulez tester vite avec mugs, cadeaux et textile polyester.',
+              },
+              {
+                title: 'Je veux produire du textile',
+                text: 'La sérigraphie est plus adaptée si votre cible est le t-shirt, le sweat et la production plus régulière.',
+              },
+              {
+                title: 'Je veux plus de polyvalence',
+                text: 'Le DTF devient le bon choix si vous voulez toucher plus de textiles et monter plus vite en production.',
+              },
+            ].map((item) => (
+              <div key={item.title} style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 12, padding: 18, boxShadow: 'var(--shadow)' }}>
+                <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--blue)', marginBottom: 8 }}>Guide de choix</div>
+                <h3 style={{ fontSize: 16, fontWeight: 700, color: 'var(--text)', marginBottom: 8 }}>{item.title}</h3>
+                <p style={{ fontSize: 13, color: 'var(--text2)', lineHeight: 1.6 }}>{item.text}</p>
+              </div>
+            ))}
+          </div>
+
+          <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 14, padding: '18px 20px', textAlign: 'left', maxWidth: 860, margin: '0 auto' }}>
+            <div style={{ fontSize: 10, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--orange)', marginBottom: 8 }}>Avant de choisir</div>
+            <p style={{ fontSize: 13, color: 'var(--text2)', lineHeight: 1.65, marginBottom: 12 }}>
+              Si vous hésitez encore, envoyez ces informations à NES et nous pourrons vous orienter plus vite vers le bon kit.
+            </p>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 8 }} className="grid md:grid-cols-2 gap-2">
+              {STARTER_CHECKLIST.map((item) => (
+                <div key={item} style={{ display: 'flex', gap: 8, fontSize: 12, color: 'var(--text2)', lineHeight: 1.5 }}>
+                  <span style={{ color: 'var(--teal)', fontWeight: 700, flexShrink: 0 }}>✓</span>
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style={{ maxWidth: 1100, margin: '0 auto', padding: '56px 6% 12px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 16 }} className="grid md:grid-cols-3 gap-4">
+          {STARTER_STEPS.map((step) => (
+            <div key={step.title} style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 14, padding: 20 }}>
+              <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 8 }}>{step.title}</div>
+              <p style={{ fontSize: 13, color: 'var(--text2)', lineHeight: 1.65 }}>{step.text}</p>
+            </div>
+          ))}
         </div>
       </div>
 
@@ -150,7 +222,7 @@ export default function KitsPage({ params }: { params: { locale: string } }) {
                   style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '11px', border: '1px solid var(--bluesoft2)', color: 'var(--blue)', borderRadius: 8, fontSize: 13, fontWeight: 600, textDecoration: 'none' }}
                   className="link-blue"
                 >
-                  Demander un devis personnalisé
+                  Faire confirmer ce choix par NES
                 </Link>
 
                 {/* FAQs */}
@@ -168,6 +240,43 @@ export default function KitsPage({ params }: { params: { locale: string } }) {
               </div>
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* ── DECISION HELP ─────────────────────────────────────────────── */}
+      <div style={{ maxWidth: 1080, margin: '0 auto', padding: '0 6% 56px' }}>
+        <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 16, padding: 24, boxShadow: 'var(--shadow)' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', gap: 18, flexWrap: 'wrap', alignItems: 'center', marginBottom: 18 }}>
+            <div>
+              <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--orange)', marginBottom: 6 }}>Besoin d’un raccourci ?</div>
+              <h2 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 30, fontWeight: 700, color: 'var(--text)' }}>
+                Quel kit choisir selon votre objectif ?
+              </h2>
+            </div>
+            <a
+              href={WA('Bonjour NES, je veux lancer mon activité mais je ne sais pas encore quel kit choisir. Pouvez-vous me guider selon mon budget ?')}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '13px 20px', background: 'var(--green)', color: '#fff', borderRadius: 8, fontSize: 14, fontWeight: 700, textDecoration: 'none' }}
+            >
+              {WA_SVG}
+              Être guidé sur WhatsApp
+            </a>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 14 }} className="grid md:grid-cols-3 gap-4">
+            {[
+              { title: 'Petit budget · démarrage rapide', pick: 'Kit Sublimation Starter', why: 'Le plus accessible pour tester un marché, commencer depuis chez soi et vendre des objets personnalisés.' },
+              { title: 'Textile et production régulière', pick: 'Kit Sérigraphie Pro', why: 'Le meilleur point d’entrée si vous visez t-shirts, sweats, tote bags et commandes locales récurrentes.' },
+              { title: 'Polyvalence et montée en gamme', pick: 'Kit Impression DTF Complet', why: 'Le bon choix si vous voulez imprimer sur plus de supports et monter plus vite en cadence.' },
+            ].map((item) => (
+              <div key={item.title} style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 12, padding: 18 }}>
+                <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text2)', marginBottom: 8 }}>{item.title}</div>
+                <div style={{ fontSize: 16, fontWeight: 700, color: 'var(--text)', marginBottom: 8 }}>{item.pick}</div>
+                <p style={{ fontSize: 13, color: 'var(--text2)', lineHeight: 1.6 }}>{item.why}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
