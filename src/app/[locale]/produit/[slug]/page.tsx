@@ -51,36 +51,54 @@ export async function generateMetadata({ params }: { params: { locale: string; s
   }
 }
 
-const PRODUCT_USE_CASES: Record<string, { lane: string; summary: string; whatsapp: string }> = {
+const PRODUCT_USE_CASES: Record<string, { lane: string; summary: string; whatsapp: string; buyerTitle: string; buyerPoints: string[]; nextStep: string }> = {
   'les-presses-a-chaud': {
     lane: 'Démarrage / équipement',
     summary: 'Ce type de produit sert surtout à aider un client à lancer ou structurer son activité de personnalisation textile et sublimation.',
     whatsapp: 'Bonjour NES, je regarde cette presse et je veux savoir si elle correspond à mon activité et à mon budget.',
+    buyerTitle: 'Ce produit est surtout pertinent si…',
+    buyerPoints: ['vous lancez une activité de personnalisation textile ou sublimation', 'vous voulez une machine adaptée à votre volume réel, pas juste la moins chère', 'vous cherchez un équipement avec accompagnement local au Maroc'],
+    nextStep: 'Demandez à NES quelle taille, quelle pression et quel niveau de production correspondent à votre atelier.',
   },
   'les-consommables-de-serigraphie': {
     lane: 'Réassort atelier',
     summary: 'Ce type de produit sert surtout à maintenir un atelier en production avec les bonnes bases, cadres et références compatibles.',
     whatsapp: 'Bonjour NES, je regarde ce consommable de sérigraphie et je veux vérifier qu’il correspond bien à mon usage.',
+    buyerTitle: 'Ce produit est surtout pertinent si…',
+    buyerPoints: ['vous avez déjà un atelier actif et vous devez éviter les ruptures', 'vous voulez confirmer la compatibilité avant de commander en quantité', 'vous cherchez un réassort rapide pour continuer à livrer vos clients'],
+    nextStep: 'Envoyez votre besoin atelier à NES pour vérifier la bonne référence, la compatibilité et le volume conseillé.',
   },
   'les-consommables-de-sublimation': {
     lane: 'Réassort sublimation',
     summary: 'Ce type de produit aide surtout les ateliers et revendeurs à continuer à imprimer sans rupture sur les consommables critiques.',
     whatsapp: 'Bonjour NES, je regarde ce consommable de sublimation et je veux confirmer qu’il convient à mon activité.',
+    buyerTitle: 'Ce produit est surtout pertinent si…',
+    buyerPoints: ['vous faites déjà de la sublimation et vous avez besoin de recharger votre stock', 'vous voulez éviter les mauvais choix de papier, encre ou support', 'vous cherchez à sécuriser une qualité plus régulière sur vos impressions'],
+    nextStep: 'Parlez à NES de votre machine, de vos supports et de votre cadence pour valider le bon consommable.',
   },
   'les-machines-dimpression': {
     lane: 'Montée en gamme atelier',
     summary: 'Ce type de produit correspond à une logique d’atelier qui veut produire plus, plus vite, et sur davantage de supports.',
     whatsapp: 'Bonjour NES, je regarde cette machine et je veux savoir si elle correspond à mon niveau de production.',
+    buyerTitle: 'Ce produit est surtout pertinent si…',
+    buyerPoints: ['vous êtes en phase de montée en capacité', 'vous comparez plusieurs investissements machines pour votre atelier', 'vous avez besoin d’aide pour arbitrer entre budget, cadence et types de supports'],
+    nextStep: 'Demandez à NES une orientation atelier avec votre volume visé, vos supports et votre budget réel.',
   },
   'les-machines-de-serigraphie': {
     lane: 'Atelier pro',
     summary: 'Ce type de produit s’adresse aux ateliers qui veulent structurer ou faire évoluer leur production sérigraphique.',
     whatsapp: 'Bonjour NES, je regarde cette machine de sérigraphie et je veux être sûr qu’elle correspond à mon atelier.',
+    buyerTitle: 'Ce produit est surtout pertinent si…',
+    buyerPoints: ['vous voulez professionnaliser votre atelier de sérigraphie', 'vous cherchez un meilleur rythme de production sur des commandes régulières', 'vous avez besoin d’un équipement plus sérieux qu’un montage artisanal'],
+    nextStep: 'Contactez NES avec votre type de production, vos formats et votre fréquence de commande pour être orienté correctement.',
   },
   'les-produits-sublimables': {
     lane: 'Produits à vendre',
     summary: 'Ce type de produit est surtout utile pour ceux qui veulent proposer ou élargir une offre commerciale de produits personnalisés.',
     whatsapp: 'Bonjour NES, je regarde ce support sublimable et je veux savoir s’il est intéressant pour mon activité.',
+    buyerTitle: 'Ce produit est surtout pertinent si…',
+    buyerPoints: ['vous cherchez des supports faciles à vendre en personnalisation', 'vous voulez tester ou élargir votre offre commerciale', 'vous avez besoin de savoir quels supports tournent le mieux selon votre activité'],
+    nextStep: 'Demandez à NES quels supports se vendent le mieux selon votre cible, vos marges et votre méthode d’impression.',
   },
 }
 
@@ -293,6 +311,26 @@ export default async function ProductPage({ params }: PageProps) {
               </div>
             )}
 
+            {useCase && (
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 14, marginBottom: 20 }}>
+                <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 12, padding: '18px 20px' }}>
+                  <h3 style={{ fontSize: 16, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>{useCase.buyerTitle}</h3>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                    {useCase.buyerPoints.map((point) => (
+                      <div key={point} style={{ display: 'flex', gap: 8, fontSize: 13, color: 'var(--text2)', lineHeight: 1.6 }}>
+                        <span style={{ color: 'var(--teal)', fontWeight: 700, flexShrink: 0 }}>✓</span>
+                        <span>{point}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 12, padding: '16px 18px' }}>
+                  <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--orange)', marginBottom: 6 }}>Prochaine étape recommandée</div>
+                  <p style={{ fontSize: 13, color: 'var(--text2)', lineHeight: 1.65 }}>{useCase.nextStep}</p>
+                </div>
+              </div>
+            )}
+
             {/* CTA Block */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               <a
@@ -309,7 +347,7 @@ export default async function ProductPage({ params }: PageProps) {
                 style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, padding: '12px', border: '1px solid var(--bluesoft2)', color: 'var(--blue)', borderRadius: 8, fontSize: 14, fontWeight: 600, textDecoration: 'none', transition: 'border-color .15s, background .15s' }}
                 className="link-blue"
               >
-                📋 {t('quoteRequest')}
+                📋 Demander un devis vraiment adapté
               </Link>
               <a
                 href={`tel:${process.env.NEXT_PUBLIC_PHONE ?? '+212522448090'}`}
