@@ -16,14 +16,17 @@ export default async function AdminDashboard() {
 
   const { data: recentLeads } = await supabase
     .from('nes_leads')
-    .select('id, name, phone, message, status, created_at')
+    .select('id, name, phone, message, status, created_at, priority, next_follow_up_at, segment')
     .order('created_at', { ascending: false })
-    .limit(5)
+    .limit(8)
+
+  const overdueLeads = (recentLeads ?? []).filter((lead) => lead.next_follow_up_at && new Date(lead.next_follow_up_at).getTime() < Date.now() && !['won', 'closed', 'lost', 'spam'].includes(lead.status)).length
 
   const stats = [
-    { label: 'Demandes totales',    value: totalLeads   ?? 0, color: 'var(--blue)',   href: '/admin/leads' },
-    { label: 'Nouvelles demandes',  value: newLeads     ?? 0, color: 'var(--orange)', href: '/admin/leads' },
-    { label: 'Produits en base',    value: totalProducts ?? 0, color: 'var(--teal)',  href: '/admin/produits' },
+    { label: 'Demandes totales', value: totalLeads ?? 0, color: 'var(--blue)', href: '/admin/leads' },
+    { label: 'Nouvelles demandes', value: newLeads ?? 0, color: 'var(--orange)', href: '/admin/leads' },
+    { label: 'Suivis en retard', value: overdueLeads, color: '#ef4444', href: '/admin/leads' },
+    { label: 'Produits en base', value: totalProducts ?? 0, color: 'var(--teal)', href: '/admin/produits' },
   ]
 
   return (
@@ -36,7 +39,7 @@ export default async function AdminDashboard() {
       </p>
 
       {/* Stats */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18, marginBottom: 36 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 18, marginBottom: 36 }}>
         {stats.map(s => (
           <Link key={s.label} href={s.href} style={{ textDecoration: 'none' }}>
             <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 12, padding: '22px 24px', transition: 'border-color .2s' }}>
@@ -58,7 +61,7 @@ export default async function AdminDashboard() {
         <table style={{ width: '100%', borderCollapse: 'collapse' }}>
           <thead>
             <tr style={{ background: 'var(--surface)' }}>
-              {['Nom', 'Téléphone', 'Message', 'Statut', 'Date'].map(h => (
+              {['Nom', 'Segment', 'Priorité', 'Statut', 'Suivi', 'Date'].map(h => (
                 <th key={h} style={{ padding: '10px 16px', textAlign: 'left', fontSize: 11, fontWeight: 700, letterSpacing: '0.07em', textTransform: 'uppercase', color: 'var(--text2)' }}>{h}</th>
               ))}
             </tr>
@@ -67,11 +70,9 @@ export default async function AdminDashboard() {
             {(recentLeads ?? []).map((lead, i) => (
               <tr key={lead.id} style={{ borderTop: '1px solid var(--border)', background: i % 2 === 0 ? 'transparent' : 'var(--surface)' }}>
                 <td style={{ padding: '12px 16px', fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>{lead.name}</td>
-                <td style={{ padding: '12px 16px', fontSize: 13, color: 'var(--text2)' }}>{lead.phone ?? '—'}</td>
-                <td style={{ padding: '12px 16px', fontSize: 13, color: 'var(--text2)', maxWidth: 240 }}>
-                  <span style={{ display: 'block', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                    {lead.message ?? '—'}
-                  </span>
+                <td style={{ padding: '12px 16px', fontSize: 13, color: 'var(--text2)' }}>{lead.segment ?? 'general'}</td>
+                <td style={{ padding: '12px 16px', fontSize: 12, color: lead.priority === 'urgent' ? '#ef4444' : lead.priority === 'high' ? 'var(--orange)' : 'var(--text2)', fontWeight: 700 }}>
+                  {lead.priority ?? 'normal'}
                 </td>
                 <td style={{ padding: '12px 16px' }}>
                   <span style={{
@@ -80,11 +81,14 @@ export default async function AdminDashboard() {
                     borderRadius: 12,
                     fontSize: 11,
                     fontWeight: 700,
-                    background: lead.status === 'new' ? 'rgba(79,110,247,0.15)' : 'rgba(255,255,255,0.07)',
-                    color: lead.status === 'new' ? 'var(--blue)' : 'var(--text2)',
+                    background: lead.status === 'new' ? 'rgba(79,110,247,0.15)' : lead.status === 'quoted' ? 'rgba(251,146,60,0.15)' : 'rgba(255,255,255,0.07)',
+                    color: lead.status === 'new' ? 'var(--blue)' : lead.status === 'quoted' ? 'var(--orange)' : 'var(--text2)',
                   }}>
                     {lead.status}
                   </span>
+                </td>
+                <td style={{ padding: '12px 16px', fontSize: 12, color: lead.next_follow_up_at && new Date(lead.next_follow_up_at).getTime() < Date.now() ? '#ef4444' : 'var(--text2)' }}>
+                  {lead.next_follow_up_at ? new Date(lead.next_follow_up_at).toLocaleDateString('fr-MA') : '—'}
                 </td>
                 <td style={{ padding: '12px 16px', fontSize: 12, color: 'var(--text2)' }}>
                   {new Date(lead.created_at).toLocaleDateString('fr-MA')}
@@ -93,7 +97,7 @@ export default async function AdminDashboard() {
             ))}
             {(!recentLeads || recentLeads.length === 0) && (
               <tr>
-                <td colSpan={5} style={{ padding: '24px 16px', textAlign: 'center', fontSize: 13, color: 'var(--text2)' }}>
+                <td colSpan={6} style={{ padding: '24px 16px', textAlign: 'center', fontSize: 13, color: 'var(--text2)' }}>
                   Aucune demande pour l&apos;instant.
                 </td>
               </tr>

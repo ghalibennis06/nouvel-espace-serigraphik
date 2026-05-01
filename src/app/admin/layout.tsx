@@ -2,8 +2,8 @@ import Link from 'next/link'
 import type { ReactNode } from 'react'
 
 const NAV = [
-  { href: '/admin',          label: '📊 Dashboard' },
-  { href: '/admin/leads',    label: '📩 Demandes' },
+  { href: '/admin', label: '📊 Dashboard' },
+  { href: '/admin/leads', label: '📩 Pipeline leads' },
   { href: '/admin/produits', label: '📦 Produits' },
 ]
 
@@ -24,6 +24,9 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
       }}>
         <div style={{ padding: '0 22px 24px', fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 18, fontWeight: 700, color: 'var(--text)', borderBottom: '1px solid var(--border)' }}>
           NES <span style={{ color: 'var(--blue)' }}>Admin</span>
+          <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: 11, fontWeight: 500, color: 'var(--text2)', marginTop: 6 }}>
+            Contrôle commercial · leads · merchandising
+          </div>
         </div>
         <div style={{ marginTop: 16 }}>
           {NAV.map(({ href, label }) => (
