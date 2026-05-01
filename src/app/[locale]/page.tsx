@@ -9,8 +9,8 @@ import BuyerPathSection from '@/components/home/BuyerPathSection'
 import MoroccoTrustSection from '@/components/home/MoroccoTrustSection'
 import ProofFieldSection from '@/components/home/ProofFieldSection'
 import { KITS as KITS_DATA } from '@/lib/data/kits'
+import { getHomepageControlState } from '@/lib/homepage-settings'
 import ShaderAnimation from '@/components/ui/shader-animation'
-import DevisExpressButton from '@/components/ui/devis-express-button'
 import RoiCalculator from '@/components/home/RoiCalculator'
 import VoidCategoryShowcase from '@/components/home/VoidCategoryShowcase'
 import FluidKitShowcase from '@/components/home/FluidKitShowcase'
@@ -53,10 +53,29 @@ export default async function HomePage({ params }: { params: { locale: string } 
   const { locale } = params
   setRequestLocale(locale)
 
-  const [, products] = await Promise.all([
+  const [homepageControl, , products] = await Promise.all([
+    getHomepageControlState(),
     getCategoryTree(),
     getFeaturedProducts(12),
   ])
+
+  const categoriesBySlug = new Map(CATEGORIES.map((category) => [category.slug, category]))
+  const spotlightCategories = homepageControl.spotlightCategorySlugs
+    .map((slug) => categoriesBySlug.get(slug))
+    .filter((category): category is (typeof CATEGORIES)[number] => Boolean(category))
+  const visibleCategories = spotlightCategories.length > 0 ? spotlightCategories : CATEGORIES
+
+  const productsBySlug = new Map(products.map((product) => [product.slug, product]))
+  const spotlightProducts = homepageControl.spotlightProductSlugs
+    .map((slug) => productsBySlug.get(slug))
+    .filter((product): product is (typeof products)[number] => Boolean(product))
+  const visibleProducts = spotlightProducts.length > 0 ? spotlightProducts : products
+
+  const kitsById = new Map(KITS.map((kit) => [kit.id, kit]))
+  const spotlightKits = homepageControl.spotlightKitIds
+    .map((id) => kitsById.get(id))
+    .filter((kit): kit is (typeof KITS)[number] => Boolean(kit))
+  const visibleKits = spotlightKits.length > 0 ? spotlightKits : KITS
 
   return (
     <div style={{ background: 'var(--bg)' }}>
@@ -69,7 +88,17 @@ export default async function HomePage({ params }: { params: { locale: string } 
         overlayColor="rgba(255,255,255,1)"
         style={{ borderBottom: '1px solid var(--border)' }}
       >
-        <HeroIndustrialPanel locale={locale} photos={HERO_PHOTOS} />
+        <HeroIndustrialPanel
+          locale={locale}
+          photos={HERO_PHOTOS}
+          title={homepageControl.heroTitle}
+          subtitle={homepageControl.heroSubtitle}
+          primaryCtaLabel={homepageControl.heroPrimaryCtaLabel}
+          primaryCtaHref={homepageControl.heroPrimaryCtaHref}
+          secondaryCtaLabel={homepageControl.heroSecondaryCtaLabel}
+          secondaryCtaHref={homepageControl.heroSecondaryCtaHref}
+          trustBullets={homepageControl.trustBullets}
+        />
       </ShaderAnimation>
 
       {/* ══════════════════════════════════════════════════════
@@ -124,7 +153,7 @@ export default async function HomePage({ params }: { params: { locale: string } 
         </div>
       </section>
 
-      <VoidCategoryShowcase locale={locale} categories={CATEGORIES} />
+      <VoidCategoryShowcase locale={locale} categories={visibleCategories} />
 
       <MoroccoTrustSection locale={locale} />
       <ProofFieldSection locale={locale} />
@@ -132,9 +161,9 @@ export default async function HomePage({ params }: { params: { locale: string } 
       {/* ══════════════════════════════════════════════════════
           BEST SELLERS (avec filtres)
       ══════════════════════════════════════════════════════ */}
-      <ProductsSection products={products} locale={locale} />
+      <ProductsSection products={visibleProducts} locale={locale} />
 
-      <FluidKitShowcase locale={locale} kits={KITS} />
+      <FluidKitShowcase locale={locale} kits={visibleKits} />
 
       <ClosingDecisionStation locale={locale} />
 

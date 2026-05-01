@@ -7,9 +7,23 @@ import DevisExpressButton from '@/components/ui/devis-express-button'
 export default function HeroIndustrialPanel({
   locale,
   photos,
+  title,
+  subtitle,
+  primaryCtaLabel,
+  primaryCtaHref,
+  secondaryCtaLabel,
+  secondaryCtaHref,
+  trustBullets,
 }: {
   locale: string
   photos: { src: string; alt: string }[]
+  title?: string
+  subtitle?: string
+  primaryCtaLabel?: string
+  primaryCtaHref?: string
+  secondaryCtaLabel?: string
+  secondaryCtaHref?: string
+  trustBullets?: string[]
 }) {
   return (
     <section style={{ padding: '78px 5% 92px' }}>
@@ -23,13 +37,11 @@ export default function HeroIndustrialPanel({
           </div>
 
           <h1 style={{ fontSize: 'clamp(44px,5.8vw,82px)', fontWeight: 950, color: 'var(--text)', lineHeight: 0.98, letterSpacing: '-0.05em', marginBottom: 18 }}>
-            Construisez un
-            <span style={{ display: 'block', color: 'var(--orange)' }}>vrai business</span>
-            d’impression.
+            {title || 'Construisez un vrai business d’impression.'}
           </h1>
 
           <p style={{ fontSize: 17, color: 'var(--text2)', lineHeight: 1.75, marginBottom: 28, maxWidth: 560 }}>
-            NES vous aide à démarrer, équiper ou réapprovisionner votre atelier avec les bonnes machines, les bons kits et un accompagnement commercial clair.
+            {subtitle || 'NES vous aide à démarrer, équiper ou réapprovisionner votre atelier avec les bonnes machines, les bons kits et un accompagnement commercial clair.'}
           </p>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 12, marginBottom: 26 }} className="grid md:grid-cols-3 gap-3">
@@ -46,10 +58,16 @@ export default function HeroIndustrialPanel({
           </div>
 
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 34, alignItems: 'center' }}>
-            <Link href={`/${locale}/kits`} className="btn-orange" style={{ padding: '14px 28px', fontSize: 15, fontWeight: 800 }}>
-              Voir les Kits & Packs →
+            <Link href={primaryCtaHref || `/${locale}/kits`} className="btn-orange" style={{ padding: '14px 28px', fontSize: 15, fontWeight: 800 }}>
+              {primaryCtaLabel || 'Voir les Kits & Packs'} →
             </Link>
-            <DevisExpressButton />
+            {secondaryCtaHref ? (
+              <Link href={secondaryCtaHref} style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', padding: '14px 22px', borderRadius: 14, background: 'var(--card)', color: 'var(--text)', fontSize: 14, fontWeight: 800, textDecoration: 'none', border: '1px solid var(--border2)' }}>
+                {secondaryCtaLabel || 'Voir plus'}
+              </Link>
+            ) : (
+              <DevisExpressButton />
+            )}
           </div>
 
           <div style={{ display: 'flex', gap: 0, flexWrap: 'wrap' }}>
@@ -101,7 +119,7 @@ export default function HeroIndustrialPanel({
                     <p style={{ fontSize: 12, color: 'var(--text2)', lineHeight: 1.6 }}>Une structure plus crédible que le simple catalogue produit.</p>
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 12 }}>
-                    {['Kits de départ', 'Devis atelier', 'Consommables réguliers'].map((item) => (
+                    {(trustBullets?.length ? trustBullets.slice(0, 3) : ['Kits de départ', 'Devis atelier', 'Consommables réguliers']).map((item) => (
                       <div key={item} style={{ display: 'flex', gap: 8, fontSize: 12, color: 'var(--text2)', lineHeight: 1.5 }}>
                         <span style={{ color: 'var(--green)', fontWeight: 900, flexShrink: 0 }}>✓</span>
                         <span>{item}</span>
