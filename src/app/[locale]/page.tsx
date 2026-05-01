@@ -13,6 +13,7 @@ import DevisExpressButton from '@/components/ui/devis-express-button'
 import RoiCalculator from '@/components/home/RoiCalculator'
 import VoidCategoryShowcase from '@/components/home/VoidCategoryShowcase'
 import FluidKitShowcase from '@/components/home/FluidKitShowcase'
+import HeroIndustrialPanel from '@/components/home/HeroIndustrialPanel'
 
 export const dynamic = 'force-dynamic'
 
@@ -66,77 +67,7 @@ export default async function HomePage({ params }: { params: { locale: string } 
         overlayColor="rgba(255,255,255,1)"
         style={{ borderBottom: '1px solid var(--border)' }}
       >
-      <section style={{ padding: '72px 5% 80px' }}>
-        <div style={{ maxWidth: 1240, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6rem', alignItems: 'center' }}
-             className="grid-cols-1 lg:grid-cols-2">
-
-          {/* Left */}
-          <div>
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'var(--orangesoft)', border: '1px solid rgba(242,99,22,0.20)', borderRadius: 20, padding: '5px 14px', marginBottom: 24 }}>
-              <span style={{ width: 7, height: 7, borderRadius: '50%', background: 'var(--orange)', display: 'inline-block' }} />
-              <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--orange)' }}>
-                N°1 de l&apos;impression au Maroc · depuis 2018
-              </span>
-            </div>
-
-            <h1 style={{ fontSize: 'clamp(40px,5.5vw,72px)', fontWeight: 900, color: 'var(--text)', lineHeight: 1.06, letterSpacing: '-0.03em', marginBottom: 20 }}>
-              Lancez votre<br />
-              <span style={{ color: 'var(--orange)' }}>atelier d&apos;impression</span><br />
-              en 24 heures.
-            </h1>
-
-            <p style={{ fontSize: 16, color: 'var(--text2)', lineHeight: 1.65, marginBottom: 32, maxWidth: 460 }}>
-              Machines professionnelles, kits clé-en-main et consommables de qualité.
-              Livrés partout au Maroc sous 24–48h.
-            </p>
-
-            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 44, alignItems: 'center' }}>
-              <Link href={`/${locale}/kits`} className="btn-orange" style={{ padding: '14px 28px', fontSize: 15, fontWeight: 700 }}>
-                Voir les Kits & Packs →
-              </Link>
-              <DevisExpressButton />
-            </div>
-
-            {/* Stats */}
-            <div style={{ display: 'flex', gap: 0, flexWrap: 'wrap' }}>
-              {[
-                { val: '2 000+', lbl: 'ateliers lancés' },
-                { val: '24h',    lbl: 'livraison Maroc' },
-                { val: '80+',    lbl: 'produits' },
-              ].map((s, i) => (
-                <div key={s.lbl} style={{ display: 'flex', alignItems: 'center', gap: 0 }}>
-                  {i > 0 && <div style={{ width: 1, height: 36, background: 'var(--border2)', margin: '0 24px' }} />}
-                  <div>
-                    <div style={{ fontSize: 28, fontWeight: 800, color: 'var(--text)', lineHeight: 1, letterSpacing: '-0.02em' }}>{s.val}</div>
-                    <div style={{ fontSize: 12, color: 'var(--text2)', marginTop: 2 }}>{s.lbl}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Right — product photo collage */}
-          <div className="hidden lg:grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-            {HERO_PHOTOS.map((p, i) => (
-              <div
-                key={i}
-                style={{
-                  borderRadius: 16,
-                  overflow: 'hidden',
-                  aspectRatio: '1',
-                  background: 'var(--surface)',
-                  border: '1px solid var(--border)',
-                  position: 'relative',
-                  transform: i === 1 ? 'translateY(20px)' : i === 3 ? 'translateY(-20px)' : 'none',
-                  boxShadow: 'var(--shadow)',
-                }}
-              >
-                <Image src={p.src} alt={p.alt} fill style={{ objectFit: 'cover' }} sizes="200px" />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+        <HeroIndustrialPanel locale={locale} photos={HERO_PHOTOS} />
       </ShaderAnimation>
 
       {/* ══════════════════════════════════════════════════════
