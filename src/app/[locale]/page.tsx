@@ -10,6 +10,7 @@ import MoroccoTrustSection from '@/components/home/MoroccoTrustSection'
 import { KITS as KITS_DATA } from '@/lib/data/kits'
 import ShaderAnimation from '@/components/ui/shader-animation'
 import DevisExpressButton from '@/components/ui/devis-express-button'
+import RoiCalculator from '@/components/home/RoiCalculator'
 
 export const dynamic = 'force-dynamic'
 
@@ -160,6 +161,33 @@ export default async function HomePage({ params }: { params: { locale: string } 
       </div>
 
       <BuyerPathSection locale={locale} />
+
+      <section style={{ background: 'var(--surface)', padding: '72px 5%', borderBottom: '1px solid var(--border)' }}>
+        <div style={{ maxWidth: 1240, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '28px', alignItems: 'start' }} className="grid lg:grid-cols-2 gap-8">
+          <div>
+            <span className="stag">Simulez avant d’acheter</span>
+            <h2 style={{ fontSize: 'clamp(28px,3.5vw,44px)', fontWeight: 800, color: 'var(--text)', letterSpacing: '-0.025em', lineHeight: 1.08 }}>
+              Estimez ce que votre atelier peut réellement générer.
+            </h2>
+            <p style={{ fontSize: 15, color: 'var(--text2)', lineHeight: 1.75, marginTop: 14, maxWidth: 620 }}>
+              Avant de choisir une technique ou un kit, projetez votre volume, votre prix moyen et votre rythme de travail. C’est une bonne manière de sortir du flou et de parler concret avec NES.
+            </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginTop: 18 }}>
+              {[
+                'comparez sublimation, sérigraphie et DTF',
+                'visualisez une estimation simple de chiffre d’affaires',
+                'transformez la simulation en message WhatsApp prêt à envoyer',
+              ].map((item) => (
+                <div key={item} style={{ display: 'flex', gap: 8, fontSize: 13, color: 'var(--text2)', lineHeight: 1.6 }}>
+                  <span style={{ color: 'var(--green)', fontWeight: 800, flexShrink: 0 }}>✓</span>
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <RoiCalculator variant="hero" />
+        </div>
+      </section>
 
       {/* ══════════════════════════════════════════════════════
           CATEGORIES
