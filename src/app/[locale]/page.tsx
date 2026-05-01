@@ -12,6 +12,7 @@ import ShaderAnimation from '@/components/ui/shader-animation'
 import DevisExpressButton from '@/components/ui/devis-express-button'
 import RoiCalculator from '@/components/home/RoiCalculator'
 import VoidCategoryShowcase from '@/components/home/VoidCategoryShowcase'
+import FluidKitShowcase from '@/components/home/FluidKitShowcase'
 
 export const dynamic = 'force-dynamic'
 
@@ -199,104 +200,7 @@ export default async function HomePage({ params }: { params: { locale: string } 
       ══════════════════════════════════════════════════════ */}
       <ProductsSection products={products} locale={locale} />
 
-      {/* ══════════════════════════════════════════════════════
-          KITS
-      ══════════════════════════════════════════════════════ */}
-      <section id="kits" style={{ background: 'var(--surface)', padding: '80px 5%', borderTop: '1px solid var(--border)' }}>
-        <div style={{ maxWidth: 1240, margin: '0 auto' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 40, flexWrap: 'wrap', gap: 12 }}>
-            <div>
-              <span className="stag">Kits & Packs</span>
-              <h2 style={{ fontSize: 'clamp(28px,3.5vw,44px)', fontWeight: 800, color: 'var(--text)', letterSpacing: '-0.025em', lineHeight: 1.1 }}>
-                Démarrez avec le bon kit
-              </h2>
-              <p style={{ fontSize: 14, color: 'var(--text2)', marginTop: 8 }}>
-                Rentabilisé en moins de 30 jours. Économisez jusqu&apos;à 2 100 MAD vs achat séparé.
-              </p>
-            </div>
-            <Link href={`/${locale}/kits`} style={{ fontSize: 14, fontWeight: 600, color: 'var(--orange)', textDecoration: 'none', whiteSpace: 'nowrap' }}>
-              Voir tous les kits →
-            </Link>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-5" style={{ display: 'grid', gap: 20 }}>
-            {KITS.map(kit => (
-              <div
-                key={kit.id}
-                className="kit-item"
-                style={{
-                  background: 'var(--card)',
-                  border: kit.featured ? '2px solid var(--orange)' : '1px solid var(--border)',
-                  borderRadius: 16,
-                  padding: 28,
-                  position: 'relative',
-                  overflow: 'hidden',
-                  boxShadow: kit.featured ? '0 4px 32px rgba(242,99,22,0.12)' : 'var(--shadow)',
-                  transition: 'all .2s',
-                }}
-              >
-                {kit.badge && (
-                  <div style={{ position: 'absolute', top: 0, right: 0, background: 'var(--orange)', color: '#fff', fontSize: 9, fontWeight: 800, padding: '5px 14px', borderRadius: '0 14px 0 8px', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-                    {kit.badge}
-                  </div>
-                )}
-
-                <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--orange)', marginBottom: 8 }}>
-                  {kit.packNum}
-                </div>
-                <div style={{ fontSize: 22, fontWeight: 800, color: 'var(--text)', marginBottom: 6, letterSpacing: '-0.02em' }}>
-                  {kit.name}
-                </div>
-                <p style={{ fontSize: 13, color: 'var(--text2)', marginBottom: 20, lineHeight: 1.55 }}>
-                  {kit.desc}
-                </p>
-
-                {/* Price */}
-                <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 20 }}>
-                  <span style={{ fontSize: 36, fontWeight: 900, color: 'var(--orange)', letterSpacing: '-0.03em', lineHeight: 1 }}>
-                    {kit.priceDisplay}
-                  </span>
-                  <span style={{ fontSize: 13, color: 'var(--text2)' }}>MAD</span>
-                  {kit.oldPrice && <span style={{ fontSize: 14, color: 'var(--text3)', textDecoration: 'line-through' }}>{kit.oldPrice}</span>}
-                </div>
-
-                {/* Items */}
-                <ul style={{ listStyle: 'none', marginBottom: 20, display: 'flex', flexDirection: 'column', gap: 6 }}>
-                  {kit.items.slice(0, 5).map(item => (
-                    <li key={item} style={{ display: 'flex', alignItems: 'flex-start', gap: 8, fontSize: 13, color: 'var(--text2)' }}>
-                      <span style={{ color: 'var(--green)', fontWeight: 700, flexShrink: 0, lineHeight: 1.4 }}>✓</span>
-                      {item}
-                    </li>
-                  ))}
-                  {kit.items.length > 5 && (
-                    <li style={{ fontSize: 12, color: 'var(--text3)', paddingLeft: 16 }}>
-                      +{kit.items.length - 5} autres inclus
-                    </li>
-                  )}
-                </ul>
-
-                <div style={{ display: 'flex', gap: 10, marginTop: 4 }}>
-                  <a
-                    href={whatsappGeneralLink(kit.ctaMsg)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-wa-dark"
-                    style={{ flex: 1, justifyContent: 'center', padding: '11px 0', fontSize: 13, borderRadius: 8 }}
-                  >
-                    💬 Commander
-                  </a>
-                  <Link
-                    href={`/${locale}/kits`}
-                    style={{ padding: '11px 16px', borderRadius: 8, fontSize: 13, fontWeight: 600, color: 'var(--text2)', border: '1px solid var(--border2)', textDecoration: 'none', whiteSpace: 'nowrap' }}
-                  >
-                    Détails
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <FluidKitShowcase locale={locale} kits={KITS} />
 
       {/* ══════════════════════════════════════════════════════
           CTA BAND
