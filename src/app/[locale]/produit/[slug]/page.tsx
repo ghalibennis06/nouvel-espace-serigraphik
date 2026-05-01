@@ -51,7 +51,7 @@ export async function generateMetadata({ params }: { params: { locale: string; s
   }
 }
 
-const PRODUCT_USE_CASES: Record<string, { lane: string; summary: string; whatsapp: string; buyerTitle: string; buyerPoints: string[]; nextStep: string }> = {
+const PRODUCT_USE_CASES: Record<string, { lane: string; summary: string; whatsapp: string; buyerTitle: string; buyerPoints: string[]; nextStep: string; fitLabel: string; fitDetails: string; afterLabel: string; afterDetails: string }> = {
   'les-presses-a-chaud': {
     lane: 'Démarrage / équipement',
     summary: 'Ce type de produit sert surtout à aider un client à lancer ou structurer son activité de personnalisation textile et sublimation.',
@@ -59,6 +59,10 @@ const PRODUCT_USE_CASES: Record<string, { lane: string; summary: string; whatsap
     buyerTitle: 'Ce produit est surtout pertinent si…',
     buyerPoints: ['vous lancez une activité de personnalisation textile ou sublimation', 'vous voulez une machine adaptée à votre volume réel, pas juste la moins chère', 'vous cherchez un équipement avec accompagnement local au Maroc'],
     nextStep: 'Demandez à NES quelle taille, quelle pression et quel niveau de production correspondent à votre atelier.',
+    fitLabel: 'Bonne logique si…',
+    fitDetails: 'vous comparez une vraie première machine de travail ou une amélioration directe de votre cadence.',
+    afterLabel: 'Ce qu’on achète souvent après',
+    afterDetails: 'supports à personnaliser, consommables adaptés, et parfois une machine plus spécifique selon la technique retenue.',
   },
   'les-consommables-de-serigraphie': {
     lane: 'Réassort atelier',
@@ -67,6 +71,10 @@ const PRODUCT_USE_CASES: Record<string, { lane: string; summary: string; whatsap
     buyerTitle: 'Ce produit est surtout pertinent si…',
     buyerPoints: ['vous avez déjà un atelier actif et vous devez éviter les ruptures', 'vous voulez confirmer la compatibilité avant de commander en quantité', 'vous cherchez un réassort rapide pour continuer à livrer vos clients'],
     nextStep: 'Envoyez votre besoin atelier à NES pour vérifier la bonne référence, la compatibilité et le volume conseillé.',
+    fitLabel: 'Bonne logique si…',
+    fitDetails: 'vous savez déjà ce que vous produisez et vous cherchez surtout à sécuriser la continuité de votre atelier.',
+    afterLabel: 'Ce qu’on commande souvent avec',
+    afterDetails: 'autres consommables compatibles, accessoires atelier, et parfois des quantités plus cohérentes selon le rythme réel de production.',
   },
   'les-consommables-de-sublimation': {
     lane: 'Réassort sublimation',
@@ -75,6 +83,10 @@ const PRODUCT_USE_CASES: Record<string, { lane: string; summary: string; whatsap
     buyerTitle: 'Ce produit est surtout pertinent si…',
     buyerPoints: ['vous faites déjà de la sublimation et vous avez besoin de recharger votre stock', 'vous voulez éviter les mauvais choix de papier, encre ou support', 'vous cherchez à sécuriser une qualité plus régulière sur vos impressions'],
     nextStep: 'Parlez à NES de votre machine, de vos supports et de votre cadence pour valider le bon consommable.',
+    fitLabel: 'Bonne logique si…',
+    fitDetails: 'vous êtes déjà dans une logique de production et que votre priorité est la régularité plutôt que le test au hasard.',
+    afterLabel: 'Ce qu’on commande souvent avec',
+    afterDetails: 'papiers, encres, flex, supports, et ajustements selon la machine et le support final vendu.',
   },
   'les-machines-dimpression': {
     lane: 'Montée en gamme atelier',
@@ -83,6 +95,10 @@ const PRODUCT_USE_CASES: Record<string, { lane: string; summary: string; whatsap
     buyerTitle: 'Ce produit est surtout pertinent si…',
     buyerPoints: ['vous êtes en phase de montée en capacité', 'vous comparez plusieurs investissements machines pour votre atelier', 'vous avez besoin d’aide pour arbitrer entre budget, cadence et types de supports'],
     nextStep: 'Demandez à NES une orientation atelier avec votre volume visé, vos supports et votre budget réel.',
+    fitLabel: 'Bonne logique si…',
+    fitDetails: 'vous n’êtes plus dans un achat de test mais dans une décision d’équipement avec impact direct sur la production.',
+    afterLabel: 'Ce qu’on prépare ensuite',
+    afterDetails: 'consommables, configuration atelier, accessoires compatibles, et parfois devis plus complet pour structurer tout le poste de production.',
   },
   'les-machines-de-serigraphie': {
     lane: 'Atelier pro',
@@ -91,6 +107,10 @@ const PRODUCT_USE_CASES: Record<string, { lane: string; summary: string; whatsap
     buyerTitle: 'Ce produit est surtout pertinent si…',
     buyerPoints: ['vous voulez professionnaliser votre atelier de sérigraphie', 'vous cherchez un meilleur rythme de production sur des commandes régulières', 'vous avez besoin d’un équipement plus sérieux qu’un montage artisanal'],
     nextStep: 'Contactez NES avec votre type de production, vos formats et votre fréquence de commande pour être orienté correctement.',
+    fitLabel: 'Bonne logique si…',
+    fitDetails: 'vous cherchez une vraie progression d’atelier, pas juste un produit isolé sorti de son contexte.',
+    afterLabel: 'Ce qu’il faut souvent cadrer ensuite',
+    afterDetails: 'consommables, formats, accessoires, rythme de commande et parfois devis plus global sur tout l’ensemble sérigraphie.',
   },
   'les-produits-sublimables': {
     lane: 'Produits à vendre',
@@ -99,6 +119,10 @@ const PRODUCT_USE_CASES: Record<string, { lane: string; summary: string; whatsap
     buyerTitle: 'Ce produit est surtout pertinent si…',
     buyerPoints: ['vous cherchez des supports faciles à vendre en personnalisation', 'vous voulez tester ou élargir votre offre commerciale', 'vous avez besoin de savoir quels supports tournent le mieux selon votre activité'],
     nextStep: 'Demandez à NES quels supports se vendent le mieux selon votre cible, vos marges et votre méthode d’impression.',
+    fitLabel: 'Bonne logique si…',
+    fitDetails: 'vous réfléchissez en offre commerciale et en revente, pas seulement en machine ou en consommable.',
+    afterLabel: 'Ce qu’on regarde souvent après',
+    afterDetails: 'les encres, papiers, machines et autres supports qui permettent de transformer le produit en vraie offre vendable.',
   },
 }
 
@@ -324,7 +348,17 @@ export default async function ProductPage({ params }: PageProps) {
                     ))}
                   </div>
                 </div>
-                <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 12, padding: '16px 18px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 12 }} className="grid md:grid-cols-2 gap-3">
+                  <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 12, padding: '16px 18px' }}>
+                    <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--orange)', marginBottom: 6 }}>{useCase.fitLabel}</div>
+                    <p style={{ fontSize: 13, color: 'var(--text2)', lineHeight: 1.65 }}>{useCase.fitDetails}</p>
+                  </div>
+                  <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 12, padding: '16px 18px' }}>
+                    <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--orange)', marginBottom: 6 }}>{useCase.afterLabel}</div>
+                    <p style={{ fontSize: 13, color: 'var(--text2)', lineHeight: 1.65 }}>{useCase.afterDetails}</p>
+                  </div>
+                </div>
+                <div style={{ background: 'linear-gradient(180deg, rgba(242,99,22,0.06) 0%, rgba(255,255,255,1) 100%)', border: '1px solid rgba(242,99,22,0.14)', borderRadius: 12, padding: '16px 18px' }}>
                   <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--orange)', marginBottom: 6 }}>Prochaine étape recommandée</div>
                   <p style={{ fontSize: 13, color: 'var(--text2)', lineHeight: 1.65 }}>{useCase.nextStep}</p>
                 </div>
@@ -398,7 +432,7 @@ export default async function ProductPage({ params }: PageProps) {
         </div>
 
         {/* ── Who is this for + Trust signals ───────────────────────── */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16, marginBottom: 40 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16, marginBottom: 24 }}>
           <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 12, padding: 22 }}>
             <h3 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 18, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>
               Ce produit est fait pour vous si…
@@ -442,6 +476,30 @@ export default async function ProductPage({ params }: PageProps) {
             ))}
           </div>
         </div>
+
+        {useCase && (
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 14, marginBottom: 40 }} className="grid md:grid-cols-3 gap-4">
+            {[
+              {
+                title: 'Si vous hésitez encore',
+                text: 'Envoyez votre budget, votre type de production et votre support à NES pour éviter un mauvais arbitrage.',
+              },
+              {
+                title: 'Si vous achetez pour produire',
+                text: 'Vérifiez la cadence réelle, les consommables à prévoir et le niveau de machine dont vous avez vraiment besoin.',
+              },
+              {
+                title: 'Si vous préparez une commande plus large',
+                text: 'Passez plutôt par un devis atelier pour cadrer un ensemble cohérent au lieu d’acheter produit par produit.',
+              },
+            ].map((item) => (
+              <div key={item.title} style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 14, padding: '16px 18px' }}>
+                <div style={{ fontSize: 15, fontWeight: 800, color: 'var(--text)', marginBottom: 8, letterSpacing: '-0.01em' }}>{item.title}</div>
+                <p style={{ fontSize: 13, color: 'var(--text2)', lineHeight: 1.65 }}>{item.text}</p>
+              </div>
+            ))}
+          </div>
+        )}
 
         {/* ── Related Products ───────────────────────────────────────── */}
         {relatedProducts.length > 0 && (
