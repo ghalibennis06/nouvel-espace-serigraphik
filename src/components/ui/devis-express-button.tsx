@@ -6,9 +6,17 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 type FormStep = 'idle' | 'submitting' | 'success' | 'error'
 
+const REQUEST_TYPES = [
+  { value: 'starter', label: 'Je veux démarrer' },
+  { value: 'workshop', label: 'Je veux équiper mon atelier' },
+  { value: 'restock', label: 'Je veux me réapprovisionner' },
+  { value: 'b2b', label: 'Je veux un devis entreprise' },
+] as const
+
 export default function DevisExpressButton() {
   const [isExpanded, setIsExpanded] = useState(false)
   const [formStep, setFormStep] = useState<FormStep>('idle')
+  const [requestType, setRequestType] = useState<(typeof REQUEST_TYPES)[number]['value']>('starter')
 
   const handleExpand = () => setIsExpanded(true)
 
@@ -30,7 +38,7 @@ export default function DevisExpressButton() {
           phone:   fd.get('phone'),
           email:   fd.get('email') || undefined,
           message: fd.get('message') || undefined,
-          source:  'devis-express',
+          source:  `devis-express:${fd.get('requestType') || 'general'}`,
         }),
       })
       if (res.ok) setFormStep('success')
@@ -234,6 +242,34 @@ export default function DevisExpressButton() {
                           <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.7)' }}>Réponse garantie en moins de 2h ouvrées</p>
                         </div>
 
+                        <div>
+                          <div style={{ display: 'block', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.65)', marginBottom: 8 }}>
+                            Votre besoin principal
+                          </div>
+                          <input type="hidden" name="requestType" value={requestType} />
+                          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+                            {REQUEST_TYPES.map((item) => (
+                              <button
+                                key={item.value}
+                                type="button"
+                                onClick={() => setRequestType(item.value)}
+                                style={{
+                                  padding: '8px 12px',
+                                  borderRadius: 999,
+                                  border: `1px solid ${requestType === item.value ? 'rgba(255,255,255,0.55)' : 'rgba(255,255,255,0.18)'}`,
+                                  background: requestType === item.value ? 'rgba(255,255,255,0.18)' : 'rgba(0,0,0,0.18)',
+                                  color: '#fff',
+                                  fontSize: 12,
+                                  fontWeight: 700,
+                                  cursor: 'pointer',
+                                }}
+                              >
+                                {item.label}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+
                         {[
                           { id: 'name',    label: 'Nom complet',    type: 'text',  placeholder: 'Mohammed El Amrani',   required: true  },
                           { id: 'phone',   label: 'Téléphone',      type: 'tel',   placeholder: '06 00 00 00 00',        required: true  },
@@ -269,7 +305,7 @@ export default function DevisExpressButton() {
                             id="message"
                             name="message"
                             rows={3}
-                            placeholder="Kit sublimation débutant, presse 40×50, encres..."
+                            placeholder={requestType === 'starter' ? 'Ex: je veux démarrer avec quel kit et quel budget ?' : requestType === 'workshop' ? 'Ex: je veux équiper mon atelier avec une presse ou une machine plus adaptée...' : requestType === 'restock' ? 'Ex: je cherche un réassort rapide en encres, films, bases ou supports...' : 'Ex: nous voulons un devis sur volume avec livraison et facturation pro...'}
                             style={{
                               width: '100%', boxSizing: 'border-box',
                               padding: '11px 14px', borderRadius: 8,
