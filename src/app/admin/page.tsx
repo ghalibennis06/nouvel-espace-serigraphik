@@ -16,16 +16,20 @@ export default async function AdminDashboard() {
 
   const { data: recentLeads } = await supabase
     .from('nes_leads')
-    .select('id, name, phone, message, status, created_at, priority, next_follow_up_at, segment')
+    .select('id, name, phone, message, status, created_at, priority, next_follow_up_at, segment, assignee, last_contact_at, quote_status')
     .order('created_at', { ascending: false })
     .limit(8)
 
   const overdueLeads = (recentLeads ?? []).filter((lead) => lead.next_follow_up_at && new Date(lead.next_follow_up_at).getTime() < Date.now() && !['won', 'closed', 'lost', 'spam'].includes(lead.status)).length
+  const unassignedLeads = (recentLeads ?? []).filter((lead) => !lead.assignee).length
+  const quoteQueue = (recentLeads ?? []).filter((lead) => ['needed', 'drafting', 'sent'].includes(lead.quote_status ?? 'none')).length
 
   const stats = [
     { label: 'Demandes totales', value: totalLeads ?? 0, color: 'var(--blue)', href: '/admin/leads' },
     { label: 'Nouvelles demandes', value: newLeads ?? 0, color: 'var(--orange)', href: '/admin/leads' },
     { label: 'Suivis en retard', value: overdueLeads, color: '#ef4444', href: '/admin/leads' },
+    { label: 'Sans owner', value: unassignedLeads, color: '#7c3aed', href: '/admin/leads' },
+    { label: 'Queue devis', value: quoteQueue, color: 'var(--teal)', href: '/admin/leads' },
     { label: 'Produits en base', value: totalProducts ?? 0, color: 'var(--teal)', href: '/admin/produits' },
   ]
 
@@ -39,7 +43,7 @@ export default async function AdminDashboard() {
       </p>
 
       {/* Stats */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 18, marginBottom: 36 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: 18, marginBottom: 36 }}>
         {stats.map(s => (
           <Link key={s.label} href={s.href} style={{ textDecoration: 'none' }}>
             <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 12, padding: '22px 24px', transition: 'border-color .2s' }}>
@@ -61,7 +65,7 @@ export default async function AdminDashboard() {
         <table style={{ width: '100%', borderCollapse: 'collapse' }}>
           <thead>
             <tr style={{ background: 'var(--surface)' }}>
-              {['Nom', 'Segment', 'Priorité', 'Statut', 'Suivi', 'Date'].map(h => (
+              {['Nom', 'Segment', 'Priorité', 'Statut', 'Suivi', 'Owner', 'Date'].map(h => (
                 <th key={h} style={{ padding: '10px 16px', textAlign: 'left', fontSize: 11, fontWeight: 700, letterSpacing: '0.07em', textTransform: 'uppercase', color: 'var(--text2)' }}>{h}</th>
               ))}
             </tr>
@@ -90,6 +94,9 @@ export default async function AdminDashboard() {
                 <td style={{ padding: '12px 16px', fontSize: 12, color: lead.next_follow_up_at && new Date(lead.next_follow_up_at).getTime() < Date.now() ? '#ef4444' : 'var(--text2)' }}>
                   {lead.next_follow_up_at ? new Date(lead.next_follow_up_at).toLocaleDateString('fr-MA') : '—'}
                 </td>
+                <td style={{ padding: '12px 16px', fontSize: 12, color: lead.assignee ? 'var(--text)' : '#7c3aed', fontWeight: 600 }}>
+                  {lead.assignee ?? 'À assigner'}
+                </td>
                 <td style={{ padding: '12px 16px', fontSize: 12, color: 'var(--text2)' }}>
                   {new Date(lead.created_at).toLocaleDateString('fr-MA')}
                 </td>
@@ -97,7 +104,7 @@ export default async function AdminDashboard() {
             ))}
             {(!recentLeads || recentLeads.length === 0) && (
               <tr>
-                <td colSpan={6} style={{ padding: '24px 16px', textAlign: 'center', fontSize: 13, color: 'var(--text2)' }}>
+                <td colSpan={7} style={{ padding: '24px 16px', textAlign: 'center', fontSize: 13, color: 'var(--text2)' }}>
                   Aucune demande pour l&apos;instant.
                 </td>
               </tr>

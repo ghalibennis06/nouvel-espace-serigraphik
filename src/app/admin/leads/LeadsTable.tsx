@@ -27,6 +27,13 @@ type Lead = {
   result_reason?: string | null
 }
 
+type TimelineItem = {
+  label: string
+  date: string | null | undefined
+  tone?: 'default' | 'warn' | 'good'
+  detail?: string | null
+}
+
 const STATUS_OPTIONS = ['new', 'qualified', 'contacted', 'quoted', 'won', 'lost', 'closed', 'spam']
 const PRIORITY_OPTIONS = ['low', 'normal', 'high', 'urgent']
 const QUOTE_OPTIONS = ['none', 'needed', 'drafting', 'sent', 'won', 'lost']
@@ -71,6 +78,48 @@ function isOverdue(date?: string | null) {
   return new Date(date).getTime() < Date.now()
 }
 
+function formatDate(date?: string | null) {
+  if (!date) return '—'
+  return new Date(date).toLocaleDateString('fr-MA')
+}
+
+function buildTimeline(lead: Lead): TimelineItem[] {
+  return [
+    {
+      label: 'Lead reçu',
+      date: lead.created_at,
+      detail: lead.source || lead.segment || 'entrée NES',
+    },
+    {
+      label: 'Dernier contact',
+      date: lead.last_contact_at,
+      detail: lead.assignee ? `par ${lead.assignee}` : null,
+    },
+    {
+      label: 'Prochain suivi',
+      date: lead.next_follow_up_at,
+      tone: isOverdue(lead.next_follow_up_at) ? 'warn' : 'default',
+      detail: lead.next_follow_up_at ? (isOverdue(lead.next_follow_up_at) ? 'retard à traiter' : 'prochain point planifié') : 'non planifié',
+    },
+    {
+      label: 'Devis',
+      date: lead.quote_status && lead.quote_status !== 'none' ? lead.last_contact_at || lead.created_at : null,
+      tone: lead.quote_status === 'won' ? 'good' : lead.quote_status === 'lost' ? 'warn' : 'default',
+      detail: lead.quote_status && lead.quote_status !== 'none'
+        ? `${lead.quote_status}${lead.quote_amount ? ` · ${lead.quote_amount}` : ''}`
+        : 'pas encore lancé',
+    },
+  ]
+}
+
+function getDisciplineSignal(lead: Lead) {
+  if (!lead.assignee) return { label: 'Aucun responsable', tone: '#ef4444', bg: 'rgba(239,68,68,0.12)' }
+  if (!lead.next_follow_up_at) return { label: 'Aucun suivi planifié', tone: 'var(--orange)', bg: 'rgba(251,146,60,0.14)' }
+  if (isOverdue(lead.next_follow_up_at)) return { label: 'Suivi en retard', tone: '#ef4444', bg: 'rgba(239,68,68,0.12)' }
+  if (!lead.last_contact_at) return { label: 'Contact pas encore logué', tone: '#7c3aed', bg: 'rgba(124,58,237,0.14)' }
+  return { label: 'Discipline correcte', tone: '#16a34a', bg: 'rgba(34,197,94,0.14)' }
+}
+
 export default function LeadsTable({ leads: initial }: { leads: Lead[] }) {
   const [leads, setLeads] = useState(initial)
   const [filter, setFilter] = useState('all')
@@ -83,6 +132,7 @@ export default function LeadsTable({ leads: initial }: { leads: Lead[] }) {
     today: leads.filter((lead) => !!lead.next_follow_up_at && new Date(lead.next_follow_up_at).toDateString() === new Date().toDateString()).length,
     quoted: leads.filter((lead) => lead.status === 'quoted' || lead.quote_status === 'sent').length,
     quoteQueue: leads.filter((lead) => ['needed', 'drafting', 'sent'].includes(lead.quote_status || 'none')).length,
+    unassigned: leads.filter((lead) => !lead.assignee).length,
   }), [leads])
 
   const visible = useMemo(() => {
@@ -90,6 +140,7 @@ export default function LeadsTable({ leads: initial }: { leads: Lead[] }) {
     if (filter === 'overdue') return leads.filter((lead) => isOverdue(lead.next_follow_up_at) && !['won', 'closed', 'lost', 'spam'].includes(lead.status))
     if (filter === 'today') return leads.filter((lead) => !!lead.next_follow_up_at && new Date(lead.next_follow_up_at).toDateString() === new Date().toDateString())
     if (filter === 'quoteQueue') return leads.filter((lead) => ['needed', 'drafting', 'sent'].includes(lead.quote_status || 'none'))
+    if (filter === 'unassigned') return leads.filter((lead) => !lead.assignee)
     return leads.filter((lead) => lead.status === filter)
   }, [filter, leads])
 
@@ -108,6 +159,7 @@ export default function LeadsTable({ leads: initial }: { leads: Lead[] }) {
           { key: 'overdue', label: 'En retard', count: counts.overdue },
           { key: 'today', label: 'À faire aujourd’hui', count: counts.today },
           { key: 'quoteQueue', label: 'Queue devis', count: counts.quoteQueue },
+          { key: 'unassigned', label: 'Sans owner', count: counts.unassigned },
           { key: 'quoted', label: 'Devis envoyés', count: counts.quoted },
           ...STATUS_OPTIONS.map((s) => ({ key: s, label: s, count: leads.filter((l) => l.status === s).length })),
         ].map((item) => (
@@ -146,6 +198,8 @@ export default function LeadsTable({ leads: initial }: { leads: Lead[] }) {
               const pc = PRIORITY_COLORS[lead.priority || 'normal'] ?? PRIORITY_COLORS.normal
               const qc = QUOTE_COLORS[lead.quote_status || 'none'] ?? QUOTE_COLORS.none
               const overdue = isOverdue(lead.next_follow_up_at)
+              const discipline = getDisciplineSignal(lead)
+              const timeline = buildTimeline(lead)
               return (
                 <>
                   <tr
@@ -220,12 +274,21 @@ export default function LeadsTable({ leads: initial }: { leads: Lead[] }) {
                     <tr key={`${lead.id}-exp`} style={{ borderTop: 'none', background: 'var(--card2)' }}>
                       <td colSpan={7} style={{ padding: '18px 24px' }}>
                         <div style={{ display: 'grid', gridTemplateColumns: '1.05fr 0.95fr', gap: 18 }} className="grid md:grid-cols-[1.05fr_0.95fr] gap-4">
-                          <div>
-                            <div style={{ fontSize: 13, color: 'var(--text)', lineHeight: 1.7, marginBottom: 14 }}>
-                              <strong>Message complet :</strong><br />
-                              {lead.message ?? '—'}
+                          <div style={{ display: 'grid', gap: 12 }}>
+                            <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 10, padding: '12px 14px' }}>
+                              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 10, marginBottom: 8 }}>
+                                <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text2)' }}>Signal discipline</div>
+                                <div style={{ padding: '6px 10px', borderRadius: 999, background: discipline.bg, color: discipline.tone, fontSize: 11, fontWeight: 800 }}>
+                                  {discipline.label}
+                                </div>
+                              </div>
+                              <div style={{ fontSize: 13, color: 'var(--text)', lineHeight: 1.7 }}>
+                                <strong>Message complet :</strong><br />
+                                {lead.message ?? '—'}
+                              </div>
                             </div>
-                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 10, marginBottom: 12 }} className="grid md:grid-cols-2 gap-3">
+
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 10 }} className="grid md:grid-cols-2 gap-3">
                               {[
                                 ['Ville', lead.city || '—'],
                                 ['Budget', lead.budget_range || '—'],
@@ -238,26 +301,23 @@ export default function LeadsTable({ leads: initial }: { leads: Lead[] }) {
                                 </div>
                               ))}
                             </div>
-                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 10 }} className="grid md:grid-cols-2 gap-3">
-                              <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 10, padding: '12px 14px' }}>
-                                <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text2)', marginBottom: 4 }}>Montant devis</div>
-                                <input
-                                  defaultValue={lead.quote_amount || ''}
-                                  onClick={(e) => e.stopPropagation()}
-                                  onBlur={(e) => patchLead(lead.id, { quote_amount: e.target.value || null })}
-                                  placeholder="ex: 12500 MAD"
-                                  style={{ width: '100%', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 8, padding: '9px 10px', fontSize: 13, color: 'var(--text)' }}
-                                />
-                              </div>
-                              <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 10, padding: '12px 14px' }}>
-                                <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text2)', marginBottom: 4 }}>Dernier contact</div>
-                                <input
-                                  type="date"
-                                  defaultValue={lead.last_contact_at ? new Date(lead.last_contact_at).toISOString().slice(0, 10) : ''}
-                                  onClick={(e) => e.stopPropagation()}
-                                  onBlur={(e) => patchLead(lead.id, { last_contact_at: e.target.value ? new Date(`${e.target.value}T09:00:00`).toISOString() : null })}
-                                  style={{ width: '100%', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 8, padding: '9px 10px', fontSize: 13, color: 'var(--text)' }}
-                                />
+
+                            <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 10, padding: '14px 16px' }}>
+                              <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text2)', marginBottom: 10 }}>Timeline lead</div>
+                              <div style={{ display: 'grid', gap: 10 }}>
+                                {timeline.map((item) => (
+                                  <div key={item.label} style={{ display: 'grid', gridTemplateColumns: '14px 1fr', gap: 10, alignItems: 'start' }}>
+                                    <div style={{ display: 'grid', justifyItems: 'center', marginTop: 2 }}>
+                                      <span style={{ width: 10, height: 10, borderRadius: 999, background: item.tone === 'warn' ? '#ef4444' : item.tone === 'good' ? '#16a34a' : 'var(--blue)', display: 'block' }} />
+                                      <span style={{ width: 1, minHeight: 28, background: 'var(--border2)', display: 'block', marginTop: 4 }} />
+                                    </div>
+                                    <div style={{ paddingBottom: 4 }}>
+                                      <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--text)' }}>{item.label}</div>
+                                      <div style={{ fontSize: 11, color: 'var(--text2)', marginTop: 3 }}>{formatDate(item.date)}</div>
+                                      {item.detail ? <div style={{ fontSize: 11, color: 'var(--text2)', marginTop: 4 }}>{item.detail}</div> : null}
+                                    </div>
+                                  </div>
+                                ))}
                               </div>
                             </div>
                           </div>
@@ -280,6 +340,26 @@ export default function LeadsTable({ leads: initial }: { leads: Lead[] }) {
                                 defaultValue={lead.next_follow_up_at ? new Date(lead.next_follow_up_at).toISOString().slice(0, 10) : ''}
                                 onClick={(e) => e.stopPropagation()}
                                 onBlur={(e) => patchLead(lead.id, { next_follow_up_at: e.target.value ? new Date(`${e.target.value}T09:00:00`).toISOString() : null })}
+                                style={{ width: '100%', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 8, padding: '9px 10px', fontSize: 13, color: 'var(--text)' }}
+                              />
+                            </div>
+                            <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 10, padding: '12px 14px' }}>
+                              <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text2)', marginBottom: 6 }}>Dernier contact</div>
+                              <input
+                                type="date"
+                                defaultValue={lead.last_contact_at ? new Date(lead.last_contact_at).toISOString().slice(0, 10) : ''}
+                                onClick={(e) => e.stopPropagation()}
+                                onBlur={(e) => patchLead(lead.id, { last_contact_at: e.target.value ? new Date(`${e.target.value}T09:00:00`).toISOString() : null })}
+                                style={{ width: '100%', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 8, padding: '9px 10px', fontSize: 13, color: 'var(--text)' }}
+                              />
+                            </div>
+                            <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 10, padding: '12px 14px' }}>
+                              <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text2)', marginBottom: 6 }}>Montant devis</div>
+                              <input
+                                defaultValue={lead.quote_amount || ''}
+                                onClick={(e) => e.stopPropagation()}
+                                onBlur={(e) => patchLead(lead.id, { quote_amount: e.target.value || null })}
+                                placeholder="ex: 12500 MAD"
                                 style={{ width: '100%', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 8, padding: '9px 10px', fontSize: 13, color: 'var(--text)' }}
                               />
                             </div>
