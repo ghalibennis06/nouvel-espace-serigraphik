@@ -7,6 +7,7 @@ import { categoryHref, whatsappGeneralLink } from '@/lib/utils'
 import ProductsSection from '@/components/home/ProductsSection'
 import BuyerPathSection from '@/components/home/BuyerPathSection'
 import MoroccoTrustSection from '@/components/home/MoroccoTrustSection'
+import ProofFieldSection from '@/components/home/ProofFieldSection'
 import { KITS as KITS_DATA } from '@/lib/data/kits'
 import ShaderAnimation from '@/components/ui/shader-animation'
 import DevisExpressButton from '@/components/ui/devis-express-button'
@@ -125,6 +126,7 @@ export default async function HomePage({ params }: { params: { locale: string } 
       <VoidCategoryShowcase locale={locale} categories={CATEGORIES} />
 
       <MoroccoTrustSection locale={locale} />
+      <ProofFieldSection locale={locale} />
 
       {/* ══════════════════════════════════════════════════════
           BEST SELLERS (avec filtres)
