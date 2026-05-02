@@ -1,5 +1,5 @@
 'use client'
-import { useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 type Lead = {
   id: string
@@ -27,6 +27,17 @@ type Lead = {
   result_reason?: string | null
 }
 
+type ActivityItem = {
+  id: string
+  type: string
+  label: string
+  detail: string | null
+  old_value: string | null
+  new_value: string | null
+  actor: string | null
+  created_at: string
+}
+
 type TimelineItem = {
   label: string
   date: string | null | undefined
@@ -37,6 +48,18 @@ type TimelineItem = {
 const STATUS_OPTIONS = ['new', 'qualified', 'contacted', 'quoted', 'won', 'lost', 'closed', 'spam']
 const PRIORITY_OPTIONS = ['low', 'normal', 'high', 'urgent']
 const QUOTE_OPTIONS = ['none', 'needed', 'drafting', 'sent', 'won', 'lost']
+
+const ACTIVITY_ICONS: Record<string, string> = {
+  status_change: '🔄',
+  priority_change: '⚡',
+  assignment: '👤',
+  quote_change: '📋',
+  follow_up: '📅',
+  contact: '📞',
+  note: '📝',
+  whatsapp: '💬',
+  manual: '✍️',
+}
 
 const STATUS_COLORS: Record<string, { bg: string; color: string }> = {
   new: { bg: 'rgba(79,110,247,0.15)', color: 'var(--blue)' },
@@ -73,6 +96,14 @@ async function updateLead(id: string, payload: Record<string, string | null>) {
   })
 }
 
+async function logManualActivity(lead_id: string, type: string, label: string, detail?: string | null) {
+  await fetch('/api/leads/activity', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ lead_id, type, label, detail }),
+  })
+}
+
 function isOverdue(date?: string | null) {
   if (!date) return false
   return new Date(date).getTime() < Date.now()
@@ -81,6 +112,10 @@ function isOverdue(date?: string | null) {
 function formatDate(date?: string | null) {
   if (!date) return '—'
   return new Date(date).toLocaleDateString('fr-MA')
+}
+
+function formatDateTime(date: string) {
+  return new Date(date).toLocaleString('fr-MA', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })
 }
 
 function buildTimeline(lead: Lead): TimelineItem[] {
@@ -120,6 +155,105 @@ function getDisciplineSignal(lead: Lead) {
   return { label: 'Discipline correcte', tone: '#16a34a', bg: 'rgba(34,197,94,0.14)' }
 }
 
+function ActivityFeed({ leadId }: { leadId: string }) {
+  const [items, setItems] = useState<ActivityItem[]>([])
+  const [loading, setLoading] = useState(true)
+  const [logging, setLogging] = useState(false)
+  const [manualType, setManualType] = useState('whatsapp')
+  const [manualDetail, setManualDetail] = useState('')
+
+  useEffect(() => {
+    fetch(`/api/leads/activity?lead_id=${leadId}`)
+      .then((r) => r.json())
+      .then((d) => { setItems(d.items ?? []); setLoading(false) })
+      .catch(() => setLoading(false))
+  }, [leadId])
+
+  const handleLog = async () => {
+    if (!manualDetail.trim()) return
+    setLogging(true)
+    const labelMap: Record<string, string> = {
+      whatsapp: 'WhatsApp envoyé',
+      call: 'Appel passé',
+      email: 'Email envoyé',
+      meeting: 'Réunion tenue',
+      note: 'Note manuelle',
+    }
+    await logManualActivity(leadId, manualType === 'note' ? 'note' : 'manual', labelMap[manualType] ?? manualType, manualDetail)
+    const newItem: ActivityItem = {
+      id: Date.now().toString(),
+      type: manualType === 'note' ? 'note' : 'manual',
+      label: labelMap[manualType] ?? manualType,
+      detail: manualDetail,
+      old_value: null,
+      new_value: null,
+      actor: null,
+      created_at: new Date().toISOString(),
+    }
+    setItems((prev) => [newItem, ...prev])
+    setManualDetail('')
+    setLogging(false)
+  }
+
+  return (
+    <div>
+      <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text2)', marginBottom: 10 }}>Journal d&apos;activité</div>
+
+      {/* Manual log input */}
+      <div style={{ display: 'flex', gap: 8, marginBottom: 14 }}>
+        <select
+          value={manualType}
+          onChange={(e) => setManualType(e.target.value)}
+          style={{ padding: '8px 10px', borderRadius: 8, fontSize: 12, background: 'var(--surface)', border: '1px solid var(--border)', color: 'var(--text)', flexShrink: 0 }}
+        >
+          <option value="whatsapp">💬 WhatsApp</option>
+          <option value="call">📞 Appel</option>
+          <option value="email">📧 Email</option>
+          <option value="meeting">🤝 Réunion</option>
+          <option value="note">📝 Note</option>
+        </select>
+        <input
+          value={manualDetail}
+          onChange={(e) => setManualDetail(e.target.value)}
+          onKeyDown={(e) => { if (e.key === 'Enter') handleLog() }}
+          placeholder="Détail (ex: devis envoyé par WhatsApp...)"
+          style={{ flex: 1, padding: '8px 10px', borderRadius: 8, fontSize: 12, background: 'var(--surface)', border: '1px solid var(--border)', color: 'var(--text)' }}
+        />
+        <button
+          onClick={handleLog}
+          disabled={logging || !manualDetail.trim()}
+          style={{ padding: '8px 14px', borderRadius: 8, fontSize: 12, fontWeight: 700, background: 'var(--blue)', color: '#fff', border: 'none', cursor: 'pointer', opacity: logging || !manualDetail.trim() ? 0.5 : 1 }}
+        >
+          Logguer
+        </button>
+      </div>
+
+      {/* Activity list */}
+      {loading ? (
+        <div style={{ fontSize: 12, color: 'var(--text2)', padding: '10px 0' }}>Chargement…</div>
+      ) : items.length === 0 ? (
+        <div style={{ fontSize: 12, color: 'var(--text2)', padding: '10px 0' }}>Aucune activité enregistrée.</div>
+      ) : (
+        <div style={{ display: 'grid', gap: 6 }}>
+          {items.map((item) => (
+            <div key={item.id} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+              <div style={{ fontSize: 14, flexShrink: 0, marginTop: 1 }}>{ACTIVITY_ICONS[item.type] ?? '📌'}</div>
+              <div style={{ flex: 1 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 8 }}>
+                  <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--text)' }}>{item.label}</span>
+                  <span style={{ fontSize: 10, color: 'var(--text2)', flexShrink: 0 }}>{formatDateTime(item.created_at)}</span>
+                </div>
+                {item.detail && <div style={{ fontSize: 11, color: 'var(--text2)', marginTop: 2 }}>{item.detail}</div>}
+                {item.actor && <div style={{ fontSize: 10, color: 'var(--text2)', marginTop: 2 }}>par {item.actor}</div>}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
 export default function LeadsTable({ leads: initial }: { leads: Lead[] }) {
   const [leads, setLeads] = useState(initial)
   const [filter, setFilter] = useState('all')
@@ -157,7 +291,7 @@ export default function LeadsTable({ leads: initial }: { leads: Lead[] }) {
         {[
           { key: 'all', label: 'Toutes', count: counts.all },
           { key: 'overdue', label: 'En retard', count: counts.overdue },
-          { key: 'today', label: 'À faire aujourd’hui', count: counts.today },
+          { key: 'today', label: "Aujourd'hui", count: counts.today },
           { key: 'quoteQueue', label: 'Queue devis', count: counts.quoteQueue },
           { key: 'unassigned', label: 'Sans owner', count: counts.unassigned },
           { key: 'quoted', label: 'Devis envoyés', count: counts.quoted },
@@ -266,14 +400,16 @@ export default function LeadsTable({ leads: initial }: { leads: Lead[] }) {
                             💬
                           </a>
                         )}
-                        {savingId === lead.id && <span style={{ fontSize: 11, color: 'var(--text2)' }}>Enregistrement…</span>}
+                        {savingId === lead.id && <span style={{ fontSize: 11, color: 'var(--text2)' }}>…</span>}
                       </div>
                     </td>
                   </tr>
                   {expanded === lead.id && (
                     <tr key={`${lead.id}-exp`} style={{ borderTop: 'none', background: 'var(--card2)' }}>
                       <td colSpan={7} style={{ padding: '18px 24px' }}>
-                        <div style={{ display: 'grid', gridTemplateColumns: '1.05fr 0.95fr', gap: 18 }} className="grid md:grid-cols-[1.05fr_0.95fr] gap-4">
+                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 18 }}>
+
+                          {/* Col 1: context + timeline */}
                           <div style={{ display: 'grid', gap: 12 }}>
                             <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 10, padding: '12px 14px' }}>
                               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 10, marginBottom: 8 }}>
@@ -283,12 +419,12 @@ export default function LeadsTable({ leads: initial }: { leads: Lead[] }) {
                                 </div>
                               </div>
                               <div style={{ fontSize: 13, color: 'var(--text)', lineHeight: 1.7 }}>
-                                <strong>Message complet :</strong><br />
+                                <strong>Message :</strong><br />
                                 {lead.message ?? '—'}
                               </div>
                             </div>
 
-                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 10 }} className="grid md:grid-cols-2 gap-3">
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 10 }}>
                               {[
                                 ['Ville', lead.city || '—'],
                                 ['Budget', lead.budget_range || '—'],
@@ -303,7 +439,7 @@ export default function LeadsTable({ leads: initial }: { leads: Lead[] }) {
                             </div>
 
                             <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 10, padding: '14px 16px' }}>
-                              <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text2)', marginBottom: 10 }}>Timeline lead</div>
+                              <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text2)', marginBottom: 10 }}>Timeline</div>
                               <div style={{ display: 'grid', gap: 10 }}>
                                 {timeline.map((item) => (
                                   <div key={item.label} style={{ display: 'grid', gridTemplateColumns: '14px 1fr', gap: 10, alignItems: 'start' }}>
@@ -322,7 +458,8 @@ export default function LeadsTable({ leads: initial }: { leads: Lead[] }) {
                             </div>
                           </div>
 
-                          <div style={{ display: 'grid', gap: 10 }}>
+                          {/* Col 2: controls */}
+                          <div style={{ display: 'grid', gap: 10, alignContent: 'start' }}>
                             <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 10, padding: '12px 14px' }}>
                               <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text2)', marginBottom: 6 }}>Assigné à</div>
                               <input
@@ -364,7 +501,7 @@ export default function LeadsTable({ leads: initial }: { leads: Lead[] }) {
                               />
                             </div>
                             <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 10, padding: '12px 14px' }}>
-                              <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text2)', marginBottom: 6 }}>Raison résultat / blocage</div>
+                              <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text2)', marginBottom: 6 }}>Raison résultat</div>
                               <input
                                 defaultValue={lead.result_reason || ''}
                                 onClick={(e) => e.stopPropagation()}
@@ -379,11 +516,16 @@ export default function LeadsTable({ leads: initial }: { leads: Lead[] }) {
                                 defaultValue={lead.notes || ''}
                                 onClick={(e) => e.stopPropagation()}
                                 onBlur={(e) => patchLead(lead.id, { notes: e.target.value || null })}
-                                placeholder="Résumé, next step, devis, blocage…"
-                                rows={5}
+                                placeholder="Résumé, next step, blocage…"
+                                rows={4}
                                 style={{ width: '100%', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 8, padding: '10px 12px', fontSize: 13, color: 'var(--text)', resize: 'vertical' }}
                               />
                             </div>
+                          </div>
+
+                          {/* Col 3: activity log */}
+                          <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 10, padding: '14px 16px', height: 'fit-content' }}>
+                            <ActivityFeed leadId={lead.id} />
                           </div>
                         </div>
                       </td>
