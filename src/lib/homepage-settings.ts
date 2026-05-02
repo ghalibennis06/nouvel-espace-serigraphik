@@ -1,24 +1,17 @@
-import { supabase, isSupabaseConfigured } from '@/lib/supabase'
+import { sql, isDatabaseConfigured } from '@/lib/db'
 import { DEFAULT_HOMEPAGE_CONTROL, normalizeHomepageControlState, type HomepageControlState } from '@/lib/admin-homepage'
 
-const TABLE = 'nes_admin_settings'
-const KEY = 'homepage'
-
 export async function getHomepageControlState(): Promise<HomepageControlState> {
-  if (!isSupabaseConfigured()) {
+  if (!isDatabaseConfigured()) {
     return DEFAULT_HOMEPAGE_CONTROL
   }
 
-  const { data, error } = await supabase
-    .from(TABLE)
-    .select('value')
-    .eq('key', KEY)
-    .maybeSingle()
-
-  if (error) {
-    console.error('homepage settings read failed, using defaults:', error)
+  try {
+    const rows = (await sql`SELECT value FROM nes_admin_settings WHERE key = 'homepage' LIMIT 1`) as Record<string, unknown>[]
+    const row = rows[0]
+    return normalizeHomepageControlState((row?.value as Partial<HomepageControlState> | null) ?? null)
+  } catch (err) {
+    console.error('homepage settings read failed, using defaults:', err)
     return DEFAULT_HOMEPAGE_CONTROL
   }
-
-  return normalizeHomepageControlState((data?.value as Partial<HomepageControlState> | null) ?? null)
 }

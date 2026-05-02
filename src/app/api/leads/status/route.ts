@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase'
+import { sql } from '@/lib/db'
 
 const VALID_STATUSES = ['new', 'qualified', 'contacted', 'quoted', 'won', 'lost', 'closed', 'spam']
 const VALID_PRIORITIES = ['low', 'normal', 'high', 'urgent']
@@ -10,15 +10,10 @@ async function logActivity(lead_id: string, type: string, label: string, opts?: 
   new_value?: string | null
   actor?: string | null
 }) {
-  await supabase.from('nes_lead_activity').insert({
-    lead_id,
-    type,
-    label,
-    detail: opts?.detail ?? null,
-    old_value: opts?.old_value ?? null,
-    new_value: opts?.new_value ?? null,
-    actor: opts?.actor ?? null,
-  })
+  await sql`
+    INSERT INTO nes_lead_activity (lead_id, type, label, detail, old_value, new_value, actor)
+    VALUES (${lead_id}::uuid, ${type}, ${label}, ${opts?.detail ?? null}, ${opts?.old_value ?? null}, ${opts?.new_value ?? null}, ${opts?.actor ?? null})
+  `
 }
 
 export async function PATCH(req: NextRequest) {
@@ -46,26 +41,37 @@ export async function PATCH(req: NextRequest) {
   if (status && !VALID_STATUSES.includes(status)) return NextResponse.json({ error: 'invalid status' }, { status: 400 })
   if (priority && !VALID_PRIORITIES.includes(priority)) return NextResponse.json({ error: 'invalid priority' }, { status: 400 })
 
-  // Fetch current lead for activity diff
-  const { data: current } = await supabase.from('nes_leads').select('status,priority,assignee,quote_status,next_follow_up_at').eq('id', id).single()
+  // Fetch current for activity diff
+  const currentRows = (await sql`SELECT status, priority, assignee, quote_status, next_follow_up_at FROM nes_leads WHERE id = ${id}::uuid`) as Record<string, string | null>[]
+  const current = currentRows[0]
 
-  const payload: Record<string, string | null> = {}
-  if (status) payload.status = status
-  if (priority) payload.priority = priority
-  if (typeof assignee !== 'undefined') payload.assignee = assignee || null
-  if (typeof next_follow_up_at !== 'undefined') payload.next_follow_up_at = next_follow_up_at || null
-  if (typeof notes !== 'undefined') payload.notes = notes || null
-  if (typeof quote_status !== 'undefined') payload.quote_status = quote_status || null
-  if (typeof quote_amount !== 'undefined') payload.quote_amount = quote_amount || null
-  if (typeof last_contact_at !== 'undefined') payload.last_contact_at = last_contact_at || null
-  if (typeof result_reason !== 'undefined') payload.result_reason = result_reason || null
+  // Build dynamic SET clause
+  const updates: string[] = []
+  const values: (string | null)[] = []
+  const push = (col: string, val: string | null | undefined) => {
+    if (typeof val !== 'undefined') { updates.push(`${col} = $${updates.length + 2}`); values.push(val ?? null) }
+  }
 
-  if (Object.keys(payload).length === 0) return NextResponse.json({ error: 'nothing to update' }, { status: 400 })
+  if (status) { updates.push(`status = $${updates.length + 2}`); values.push(status) }
+  if (priority) { updates.push(`priority = $${updates.length + 2}`); values.push(priority) }
+  push('assignee', assignee)
+  push('next_follow_up_at', next_follow_up_at)
+  push('notes', notes)
+  push('quote_status', quote_status)
+  push('quote_amount', quote_amount)
+  push('last_contact_at', last_contact_at)
+  push('result_reason', result_reason)
 
-  const { error } = await supabase.from('nes_leads').update(payload).eq('id', id)
-  if (error) return NextResponse.json({ error: 'database error' }, { status: 500 })
+  if (updates.length === 0) return NextResponse.json({ error: 'nothing to update' }, { status: 400 })
 
-  // Auto-log meaningful changes
+  try {
+    await sql.query(`UPDATE nes_leads SET ${updates.join(', ')} WHERE id = $1`, [id, ...values])
+  } catch (err) {
+    console.error('lead update error:', err)
+    return NextResponse.json({ error: 'database error' }, { status: 500 })
+  }
+
+  // Auto-log changes
   const actor = _actor ?? null
   if (current) {
     if (status && status !== current.status) {
@@ -85,7 +91,7 @@ export async function PATCH(req: NextRequest) {
       await logActivity(id, 'follow_up', `Suivi planifié : ${dateLabel}`, { new_value: next_follow_up_at, actor })
     }
     if (typeof last_contact_at !== 'undefined' && last_contact_at) {
-      await logActivity(id, 'contact', `Contact logué`, { new_value: last_contact_at, actor })
+      await logActivity(id, 'contact', 'Contact logué', { new_value: last_contact_at, actor })
     }
     if (typeof notes !== 'undefined' && notes) {
       await logActivity(id, 'note', 'Note ajoutée', { detail: typeof notes === 'string' ? notes.slice(0, 120) : null, actor })

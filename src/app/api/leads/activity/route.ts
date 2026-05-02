@@ -1,19 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase'
+import { sql } from '@/lib/db'
 
 export async function GET(req: NextRequest) {
   const leadId = req.nextUrl.searchParams.get('lead_id')
   if (!leadId) return NextResponse.json({ error: 'lead_id required' }, { status: 400 })
 
-  const { data, error } = await supabase
-    .from('nes_lead_activity')
-    .select('*')
-    .eq('lead_id', leadId)
-    .order('created_at', { ascending: false })
-    .limit(50)
-
-  if (error) return NextResponse.json({ error: 'database error' }, { status: 500 })
-  return NextResponse.json({ items: data ?? [] })
+  try {
+    const items = await sql`
+      SELECT id, type, label, detail, old_value, new_value, actor, created_at
+      FROM nes_lead_activity
+      WHERE lead_id = ${leadId}::uuid
+      ORDER BY created_at DESC
+      LIMIT 50
+    `
+    return NextResponse.json({ items })
+  } catch {
+    return NextResponse.json({ error: 'database error' }, { status: 500 })
+  }
 }
 
 export async function POST(req: NextRequest) {
@@ -37,16 +40,14 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'lead_id, type, label required' }, { status: 400 })
   }
 
-  const { error } = await supabase.from('nes_lead_activity').insert({
-    lead_id,
-    type,
-    label,
-    detail: detail ?? null,
-    old_value: old_value ?? null,
-    new_value: new_value ?? null,
-    actor: actor ?? null,
-  })
+  try {
+    await sql`
+      INSERT INTO nes_lead_activity (lead_id, type, label, detail, old_value, new_value, actor)
+      VALUES (${lead_id}::uuid, ${type}, ${label}, ${detail ?? null}, ${old_value ?? null}, ${new_value ?? null}, ${actor ?? null})
+    `
+  } catch {
+    return NextResponse.json({ error: 'database error' }, { status: 500 })
+  }
 
-  if (error) return NextResponse.json({ error: 'database error' }, { status: 500 })
   return NextResponse.json({ ok: true })
 }

@@ -1,27 +1,12 @@
-import { supabase } from '@/lib/supabase'
+import { sql } from '@/lib/db'
 import Link from 'next/link'
 
 export const dynamic = 'force-dynamic'
 
-type Lead = {
-  id: string
-  status: string
-  priority: string | null
-  source: string | null
-  segment: string | null
-  request_type: string | null
-  category_interest: string | null
-  product_interest: string | null
-  quote_status: string | null
-  quote_amount: string | null
-  assignee: string | null
-  next_follow_up_at: string | null
-  last_contact_at: string | null
-  created_at: string
-}
+type Lead = Record<string, unknown>
 
-function groupBy<T>(arr: T[], key: (item: T) => string): Record<string, T[]> {
-  const result: Record<string, T[]> = {}
+function groupBy(arr: Lead[], key: (item: Lead) => string): Record<string, Lead[]> {
+  const result: Record<string, Lead[]> = {}
   for (const item of arr) {
     const k = key(item) || 'unknown'
     if (!result[k]) result[k] = []
@@ -30,7 +15,7 @@ function groupBy<T>(arr: T[], key: (item: T) => string): Record<string, T[]> {
   return result
 }
 
-function sortedEntries(obj: Record<string, unknown[]>): [string, number][] {
+function sortedEntries(obj: Record<string, Lead[]>): [string, number][] {
   return Object.entries(obj)
     .map(([k, v]) => [k, v.length] as [string, number])
     .sort((a, b) => b[1] - a[1])
@@ -39,27 +24,26 @@ function sortedEntries(obj: Record<string, unknown[]>): [string, number][] {
 const STALE_DAYS = 7
 
 export default async function ReportingPage() {
-  const { data: leads } = await supabase
-    .from('nes_leads')
-    .select('id, status, priority, source, segment, request_type, category_interest, product_interest, quote_status, quote_amount, assignee, next_follow_up_at, last_contact_at, created_at')
-    .order('created_at', { ascending: false })
+  const all = (await sql`
+    SELECT id, status, priority, source, segment, request_type, category_interest,
+           product_interest, quote_status, quote_amount, assignee,
+           next_follow_up_at, last_contact_at, created_at
+    FROM nes_leads
+    ORDER BY created_at DESC
+  `) as Lead[]
 
-  const all: Lead[] = leads ?? []
-  const active = all.filter((l) => !['won', 'closed', 'lost', 'spam'].includes(l.status))
   const now = Date.now()
+  const active = all.filter((l) => !['won', 'closed', 'lost', 'spam'].includes(l.status as string))
   const staleCutoff = now - STALE_DAYS * 86400000
 
   const stale = active.filter((l) => {
-    const last = l.last_contact_at ? new Date(l.last_contact_at).getTime() : new Date(l.created_at).getTime()
+    const last = l.last_contact_at ? new Date(l.last_contact_at as string).getTime() : new Date(l.created_at as string).getTime()
     return last < staleCutoff
   })
 
-  const overdueFollowUp = active.filter((l) => l.next_follow_up_at && new Date(l.next_follow_up_at).getTime() < now)
+  const overdueFollowUp = active.filter((l) => l.next_follow_up_at && new Date(l.next_follow_up_at as string).getTime() < now)
   const unassigned = active.filter((l) => !l.assignee)
-  const quoteWon = all.filter((l) => l.quote_status === 'won')
-  const quoteLost = all.filter((l) => l.quote_status === 'lost')
 
-  // Funnel
   const funnel = [
     { label: 'Nouveau', key: 'new', color: 'var(--blue)' },
     { label: 'Qualifié', key: 'qualified', color: '#7c3aed' },
@@ -71,16 +55,14 @@ export default async function ReportingPage() {
 
   const maxFunnel = Math.max(...funnel.map((f) => f.count), 1)
 
-  // Breakdown groups
-  const bySource = sortedEntries(groupBy(all, (l) => l.source || 'direct'))
-  const bySegment = sortedEntries(groupBy(all, (l) => l.segment || 'general'))
-  const byCategory = sortedEntries(groupBy(all.filter((l) => l.category_interest), (l) => l.category_interest!))
-  const byRequestType = sortedEntries(groupBy(all, (l) => l.request_type || 'inconnu'))
+  const bySource = sortedEntries(groupBy(all, (l) => (l.source as string) || 'direct'))
+  const bySegment = sortedEntries(groupBy(all, (l) => (l.segment as string) || 'general'))
+  const byCategory = sortedEntries(groupBy(all.filter((l) => l.category_interest), (l) => l.category_interest as string))
+  const byRequestType = sortedEntries(groupBy(all, (l) => (l.request_type as string) || 'inconnu'))
 
-  // Monthly trend (last 6 months)
   const monthlyMap: Record<string, number> = {}
   for (const l of all) {
-    const d = new Date(l.created_at)
+    const d = new Date(l.created_at as string)
     const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`
     monthlyMap[key] = (monthlyMap[key] ?? 0) + 1
   }
@@ -92,11 +74,8 @@ export default async function ReportingPage() {
       <h1 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 32, fontWeight: 700, color: 'var(--text)', marginBottom: 4 }}>
         Reporting
       </h1>
-      <p style={{ fontSize: 14, color: 'var(--text2)', marginBottom: 32 }}>
-        Intelligence commerciale — NES
-      </p>
+      <p style={{ fontSize: 14, color: 'var(--text2)', marginBottom: 32 }}>Intelligence commerciale — NES</p>
 
-      {/* Alert section */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 14, marginBottom: 36 }}>
         {[
           { label: 'Leads actifs', value: active.length, color: 'var(--blue)', sub: 'hors won/lost/closed/spam' },
@@ -114,7 +93,6 @@ export default async function ReportingPage() {
         ))}
       </div>
 
-      {/* Funnel */}
       <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 12, padding: '20px 24px', marginBottom: 24 }}>
         <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)', marginBottom: 18 }}>Entonnoir de conversion</div>
         <div style={{ display: 'grid', gap: 8 }}>
@@ -122,7 +100,7 @@ export default async function ReportingPage() {
             <div key={f.key} style={{ display: 'grid', gridTemplateColumns: '110px 1fr 44px', alignItems: 'center', gap: 12 }}>
               <div style={{ fontSize: 12, color: 'var(--text2)', textAlign: 'right' }}>{f.label}</div>
               <div style={{ background: 'var(--surface)', borderRadius: 6, height: 22, overflow: 'hidden' }}>
-                <div style={{ height: '100%', width: `${(f.count / maxFunnel) * 100}%`, background: f.color, borderRadius: 6, transition: 'width .3s', minWidth: f.count > 0 ? 6 : 0 }} />
+                <div style={{ height: '100%', width: `${(f.count / maxFunnel) * 100}%`, background: f.color, borderRadius: 6, minWidth: f.count > 0 ? 6 : 0 }} />
               </div>
               <div style={{ fontSize: 13, fontWeight: 700, color: f.color, textAlign: 'right' }}>{f.count}</div>
             </div>
@@ -130,7 +108,6 @@ export default async function ReportingPage() {
         </div>
       </div>
 
-      {/* Monthly trend */}
       {monthlyTrend.length > 0 && (
         <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 12, padding: '20px 24px', marginBottom: 24 }}>
           <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)', marginBottom: 18 }}>Volume mensuel (6 derniers mois)</div>
@@ -146,7 +123,6 @@ export default async function ReportingPage() {
         </div>
       )}
 
-      {/* Breakdown grids */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 18, marginBottom: 24 }}>
         <BreakdownTable title="Par source" rows={bySource} />
         <BreakdownTable title="Par segment" rows={bySegment} />
@@ -154,7 +130,6 @@ export default async function ReportingPage() {
         <BreakdownTable title="Par catégorie d'intérêt" rows={byCategory} />
       </div>
 
-      {/* Stale leads */}
       {stale.length > 0 && (
         <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 12, overflow: 'hidden', marginBottom: 24 }}>
           <div style={{ padding: '16px 20px', borderBottom: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -171,18 +146,18 @@ export default async function ReportingPage() {
             </thead>
             <tbody>
               {stale.slice(0, 20).map((l, i) => {
-                const last = l.last_contact_at || l.created_at
+                const last = (l.last_contact_at as string) || (l.created_at as string)
                 const daysAgo = Math.floor((now - new Date(last).getTime()) / 86400000)
                 return (
-                  <tr key={l.id} style={{ borderTop: '1px solid var(--border)', background: i % 2 === 0 ? 'transparent' : 'var(--surface)' }}>
-                    <td style={{ padding: '10px 16px', fontSize: 11, color: 'var(--text2)', fontFamily: 'monospace' }}>{l.id.slice(0, 8)}…</td>
-                    <td style={{ padding: '10px 16px', fontSize: 12, fontWeight: 700, color: 'var(--text)' }}>{l.status}</td>
-                    <td style={{ padding: '10px 16px', fontSize: 12, color: 'var(--text2)' }}>{l.source || '—'}</td>
-                    <td style={{ padding: '10px 16px', fontSize: 12, color: 'var(--text2)' }}>{l.segment || '—'}</td>
+                  <tr key={l.id as string} style={{ borderTop: '1px solid var(--border)', background: i % 2 === 0 ? 'transparent' : 'var(--surface)' }}>
+                    <td style={{ padding: '10px 16px', fontSize: 11, color: 'var(--text2)', fontFamily: 'monospace' }}>{(l.id as string).slice(0, 8)}…</td>
+                    <td style={{ padding: '10px 16px', fontSize: 12, fontWeight: 700, color: 'var(--text)' }}>{l.status as string}</td>
+                    <td style={{ padding: '10px 16px', fontSize: 12, color: 'var(--text2)' }}>{(l.source as string) || '—'}</td>
+                    <td style={{ padding: '10px 16px', fontSize: 12, color: 'var(--text2)' }}>{(l.segment as string) || '—'}</td>
                     <td style={{ padding: '10px 16px', fontSize: 12, color: '#ef4444', fontWeight: 700 }}>Il y a {daysAgo}j</td>
-                    <td style={{ padding: '10px 16px', fontSize: 12, color: l.assignee ? 'var(--text)' : '#7c3aed' }}>{l.assignee || 'non assigné'}</td>
+                    <td style={{ padding: '10px 16px', fontSize: 12, color: l.assignee ? 'var(--text)' : '#7c3aed' }}>{(l.assignee as string) || 'non assigné'}</td>
                     <td style={{ padding: '10px 16px', fontSize: 12, color: l.next_follow_up_at ? 'var(--text)' : 'var(--text2)' }}>
-                      {l.next_follow_up_at ? new Date(l.next_follow_up_at).toLocaleDateString('fr-MA') : '—'}
+                      {l.next_follow_up_at ? new Date(l.next_follow_up_at as string).toLocaleDateString('fr-MA') : '—'}
                     </td>
                   </tr>
                 )
@@ -192,12 +167,11 @@ export default async function ReportingPage() {
         </div>
       )}
 
-      {/* Quote pipeline */}
       <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 12, padding: '20px 24px' }}>
         <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)', marginBottom: 16 }}>Pipeline devis</div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: 12 }}>
           {['none', 'needed', 'drafting', 'sent', 'won', 'lost'].map((qs) => {
-            const count = all.filter((l) => (l.quote_status || 'none') === qs).length
+            const count = all.filter((l) => ((l.quote_status as string) || 'none') === qs).length
             const colorMap: Record<string, string> = { none: 'var(--text2)', needed: 'var(--blue)', drafting: '#7c3aed', sent: 'var(--orange)', won: '#16a34a', lost: '#ef4444' }
             return (
               <div key={qs} style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 10, padding: '14px 16px', textAlign: 'center' }}>

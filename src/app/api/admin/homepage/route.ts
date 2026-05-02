@@ -1,36 +1,31 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabase, isSupabaseConfigured } from '@/lib/supabase'
+import { sql, isDatabaseConfigured } from '@/lib/db'
 import { DEFAULT_HOMEPAGE_CONTROL, normalizeHomepageControlState } from '@/lib/admin-homepage'
 
-const TABLE = 'nes_admin_settings'
 const KEY = 'homepage'
 
 export async function GET() {
-  if (!isSupabaseConfigured()) {
+  if (!isDatabaseConfigured()) {
     return NextResponse.json({ ok: true, settings: DEFAULT_HOMEPAGE_CONTROL, fallback: true, disconnected: true })
   }
 
-  const { data, error } = await supabase
-    .from(TABLE)
-    .select('key, value')
-    .eq('key', KEY)
-    .maybeSingle()
-
-  if (error) {
-    console.error('homepage settings fetch error:', error)
+  try {
+    const rows = (await sql`SELECT value FROM nes_admin_settings WHERE key = ${KEY} LIMIT 1`) as Record<string, unknown>[]
+    const row = rows[0]
+    return NextResponse.json({
+      ok: true,
+      settings: normalizeHomepageControlState((row?.value as Partial<typeof DEFAULT_HOMEPAGE_CONTROL> | null) ?? null),
+      fallback: !row,
+    })
+  } catch (err) {
+    console.error('homepage settings fetch error:', err)
     return NextResponse.json({ ok: true, settings: DEFAULT_HOMEPAGE_CONTROL, fallback: true })
   }
-
-  return NextResponse.json({
-    ok: true,
-    settings: normalizeHomepageControlState((data?.value as Record<string, unknown> | null) as Partial<typeof DEFAULT_HOMEPAGE_CONTROL> | null),
-    fallback: !data,
-  })
 }
 
 export async function PATCH(req: NextRequest) {
-  if (!isSupabaseConfigured()) {
-    return NextResponse.json({ error: 'supabase not configured' }, { status: 503 })
+  if (!isDatabaseConfigured()) {
+    return NextResponse.json({ error: 'database not configured' }, { status: 503 })
   }
 
   let body: Record<string, unknown>
@@ -42,12 +37,14 @@ export async function PATCH(req: NextRequest) {
 
   const settings = normalizeHomepageControlState(body)
 
-  const { error } = await supabase
-    .from(TABLE)
-    .upsert({ key: KEY, value: settings }, { onConflict: 'key' })
-
-  if (error) {
-    console.error('homepage settings update error:', error)
+  try {
+    await sql`
+      INSERT INTO nes_admin_settings (key, value)
+      VALUES (${KEY}, ${JSON.stringify(settings)}::jsonb)
+      ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value
+    `
+  } catch (err) {
+    console.error('homepage settings update error:', err)
     return NextResponse.json({ error: 'database error' }, { status: 500 })
   }
 

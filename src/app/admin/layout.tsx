@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import type { ReactNode } from 'react'
+import { BeamsCanvas } from '@/components/ui/beams-background'
 
 const NAV = [
   { href: '/admin', label: '📊 Dashboard' },
@@ -11,7 +12,12 @@ const NAV = [
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', fontFamily: 'Outfit, sans-serif' }}>
+    <div style={{ display: 'flex', minHeight: '100vh', fontFamily: 'Outfit, sans-serif', position: 'relative' }}>
+      {/* Animated beams fixed behind everything */}
+      <div style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
+        <BeamsCanvas intensity="subtle" />
+      </div>
+
       {/* Sidebar */}
       <nav style={{
         width: 220,
@@ -23,6 +29,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
         top: 0,
         height: '100vh',
         overflowY: 'auto',
+        zIndex: 10,
       }}>
         <div style={{ padding: '0 22px 24px', fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 18, fontWeight: 700, color: 'var(--text)', borderBottom: '1px solid var(--border)' }}>
           NES <span style={{ color: 'var(--blue)' }}>Admin</span>
@@ -35,7 +42,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
             <Link
               key={href}
               href={href}
-              style={{ display: 'block', padding: '10px 22px', fontSize: 13, fontWeight: 500, color: 'var(--text2)', textDecoration: 'none', transition: 'color .15s, background .15s' }}
+              style={{ display: 'block', padding: '10px 22px', fontSize: 13, fontWeight: 500, color: 'var(--text2)', textDecoration: 'none' }}
               className="admin-nav-link"
             >
               {label}
@@ -50,7 +57,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
       </nav>
 
       {/* Main content */}
-      <main style={{ flex: 1, background: 'var(--bg)', padding: '36px 40px', overflowY: 'auto' }}>
+      <main style={{ flex: 1, background: 'var(--bg)', padding: '36px 40px', overflowY: 'auto', position: 'relative', zIndex: 10 }}>
         {children}
       </main>
     </div>

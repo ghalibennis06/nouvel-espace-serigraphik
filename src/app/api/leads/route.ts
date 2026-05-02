@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase'
+import { sql } from '@/lib/db'
 
 export async function POST(req: NextRequest) {
   let body: Record<string, string>
@@ -22,25 +22,18 @@ export async function POST(req: NextRequest) {
       ? sourceLabel.split(':')[1]
       : 'general'
 
-  const { error } = await supabase.from('nes_leads').insert({
-    name,
-    company: company || null,
-    phone: phone || null,
-    email: email || null,
-    message: message || null,
-    source: sourceLabel,
-    segment: inferredSegment,
-    request_type: requestType || inferredSegment,
-    city: city || null,
-    category_interest: categoryInterest || null,
-    product_interest: productInterest || null,
-    budget_range: budgetRange || null,
-    priority: 'normal',
-    status: 'new',
-  })
-
-  if (error) {
-    console.error('leads insert error:', error)
+  try {
+    await sql`
+      INSERT INTO nes_leads
+        (name, company, phone, email, message, source, segment, request_type, city, category_interest, product_interest, budget_range, priority, status)
+      VALUES
+        (${name}, ${company || null}, ${phone || null}, ${email || null}, ${message || null},
+         ${sourceLabel}, ${inferredSegment}, ${requestType || inferredSegment},
+         ${city || null}, ${categoryInterest || null}, ${productInterest || null}, ${budgetRange || null},
+         'normal', 'new')
+    `
+  } catch (err) {
+    console.error('leads insert error:', err)
     return NextResponse.json({ error: 'database error' }, { status: 500 })
   }
 
