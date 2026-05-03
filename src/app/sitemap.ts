@@ -4,6 +4,16 @@ import { locales } from '@/i18n'
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://nouvelespaceserigraphik.ma'
 
+const ARTICLE_SLUGS = [
+  'guide-sublimation-debutant',
+  'choisir-sa-presse-a-chaud',
+  'sublimation-mugs-guide',
+  'sublimation-vs-transfert',
+  'bases-serigraphie',
+  'base-aqueuse-vs-plastisol',
+  'guide-soies-serigraphie',
+]
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [productSlugs, categorySlugs] = await Promise.all([
     getAllProductSlugs().catch(() => [] as string[]),
@@ -17,9 +27,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Static pages
   for (const locale of locales) {
     entries.push(
-      { url: `${BASE}/${locale}`,         lastModified: now, priority: 1.0,  changeFrequency: 'weekly' },
-      { url: `${BASE}/${locale}/contact`, lastModified: now, priority: 0.7,  changeFrequency: 'monthly' },
+      { url: `${BASE}/${locale}`,           lastModified: now, priority: 1.0,  changeFrequency: 'weekly'  },
+      { url: `${BASE}/${locale}/kits`,      lastModified: now, priority: 0.95, changeFrequency: 'weekly'  },
+      { url: `${BASE}/${locale}/devis-pro`, lastModified: now, priority: 0.85, changeFrequency: 'monthly' },
+      { url: `${BASE}/${locale}/academie`,  lastModified: now, priority: 0.80, changeFrequency: 'weekly'  },
+      { url: `${BASE}/${locale}/contact`,   lastModified: now, priority: 0.70, changeFrequency: 'monthly' },
     )
+  }
+
+  // Academie articles
+  for (const slug of ARTICLE_SLUGS) {
+    for (const locale of locales) {
+      entries.push({
+        url: `${BASE}/${locale}/academie/${slug}`,
+        lastModified: now,
+        priority: 0.75,
+        changeFrequency: 'monthly',
+      })
+    }
   }
 
   // Category pages

@@ -17,7 +17,7 @@ import FluidKitShowcase from '@/components/home/FluidKitShowcase'
 import HeroIndustrialPanel from '@/components/home/HeroIndustrialPanel'
 import ClosingDecisionStation from '@/components/home/ClosingDecisionStation'
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 3600 // Refresh every hour; WC webhook purges on product changes
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -150,6 +150,26 @@ export default async function HomePage({ params }: { params: { locale: string } 
             </div>
           </div>
           <RoiCalculator variant="hero" />
+          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginTop: 20, alignItems: 'center' }}>
+            <Link
+              href={`/${locale}/kits`}
+              className="btn-orange"
+              style={{ padding: '13px 22px', fontSize: 14, fontWeight: 800 }}
+            >
+              Voir les kits correspondants →
+            </Link>
+            <span style={{ fontSize: 13, color: 'var(--text2)' }}>
+              ou{' '}
+              <a
+                href={whatsappGeneralLink("Bonjour NES, j'ai simulé mon activité et je voudrais en discuter pour choisir le bon kit.")}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: 'var(--green)', fontWeight: 700, textDecoration: 'none' }}
+              >
+                discuter directement sur WhatsApp
+              </a>
+            </span>
+          </div>
         </div>
       </section>
 

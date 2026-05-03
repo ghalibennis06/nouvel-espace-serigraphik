@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { revalidateTag } from 'next/cache'
 import { sql, isDatabaseConfigured } from '@/lib/db'
 import { DEFAULT_HOMEPAGE_CONTROL, normalizeHomepageControlState } from '@/lib/admin-homepage'
 
@@ -48,5 +49,6 @@ export async function PATCH(req: NextRequest) {
     return NextResponse.json({ error: 'database error' }, { status: 500 })
   }
 
+  revalidateTag('homepage-control')
   return NextResponse.json({ ok: true, settings })
 }

@@ -1,3 +1,4 @@
+'use client'
 import Link from 'next/link'
 import type { ReactNode } from 'react'
 import { BeamsCanvas } from '@/components/ui/beams-background'
@@ -53,6 +54,15 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
           <Link href="/fr" style={{ fontSize: 12, color: 'var(--text2)', textDecoration: 'none' }}>
             ← Retour au site
           </Link>
+          <button
+            onClick={async () => {
+              await fetch('/api/admin/auth', { method: 'DELETE' })
+              window.location.href = '/admin/login'
+            }}
+            style={{ background: 'none', border: 'none', fontSize: 12, color: 'var(--text2)', cursor: 'pointer', padding: 0, marginTop: 8, display: 'block' }}
+          >
+            Déconnexion
+          </button>
         </div>
       </nav>
 

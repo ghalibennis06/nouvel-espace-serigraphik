@@ -1,7 +1,8 @@
+import { unstable_cache } from 'next/cache'
 import { sql, isDatabaseConfigured } from '@/lib/db'
 import { DEFAULT_HOMEPAGE_CONTROL, normalizeHomepageControlState, type HomepageControlState } from '@/lib/admin-homepage'
 
-export async function getHomepageControlState(): Promise<HomepageControlState> {
+async function fetchHomepageControlState(): Promise<HomepageControlState> {
   if (!isDatabaseConfigured()) {
     return DEFAULT_HOMEPAGE_CONTROL
   }
@@ -15,3 +16,9 @@ export async function getHomepageControlState(): Promise<HomepageControlState> {
     return DEFAULT_HOMEPAGE_CONTROL
   }
 }
+
+export const getHomepageControlState = unstable_cache(
+  fetchHomepageControlState,
+  ['homepage-control'],
+  { revalidate: 3600, tags: ['homepage-control'] }
+)

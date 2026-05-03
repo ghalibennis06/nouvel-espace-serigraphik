@@ -11,3 +11,7 @@ const noopSql = new Proxy(() => Promise.resolve([]), {
 }) as unknown as ReturnType<typeof neon>
 
 export const sql = url ? neon(url) : noopSql
+
+if (process.env.NODE_ENV === 'production' && !url) {
+  console.error('[NES] FATAL: DATABASE_URL is not set. Leads will NOT be saved.')
+}
