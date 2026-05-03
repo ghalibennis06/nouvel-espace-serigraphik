@@ -44,6 +44,10 @@ const config: Config = {
           green:   '#059669',
           teal:    '#0F9080',
         },
+        // ── FileTree component ──────────────────────────────────────
+        'file-tree-bg':    '#0F0F18',
+        'file-tree-hover': 'rgba(255,255,255,0.05)',
+        'folder-icon':     '#4B7BEC',
       },
       fontFamily: {
         sans:    ['Outfit', 'system-ui', 'sans-serif'],
