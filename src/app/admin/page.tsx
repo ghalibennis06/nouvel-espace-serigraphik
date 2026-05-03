@@ -70,14 +70,14 @@ export default async function AdminDashboard() {
         Vue d&apos;ensemble — Nouvel Espace Sérigraphik
       </p>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: 16, marginBottom: 32 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 14, marginBottom: 32 }}>
         {stats.map((s) => (
           <Link key={s.label} href={s.href} style={{ textDecoration: 'none' }}>
-            <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 12, padding: '20px 22px' }}>
-              <div style={{ fontSize: 34, fontWeight: 800, color: s.color, fontFamily: '"Cormorant Garamond",Georgia,serif', lineHeight: 1 }}>
+            <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 14, padding: '20px 24px', transition: 'border-color 0.2s, transform 0.2s' }} className="card-hover">
+              <div style={{ fontSize: 38, fontWeight: 800, color: s.color, fontFamily: '"Cormorant Garamond",Georgia,serif', lineHeight: 1 }}>
                 {s.value}
               </div>
-              <div style={{ fontSize: 12, color: 'var(--text2)', marginTop: 5 }}>{s.label}</div>
+              <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text2)', marginTop: 6, letterSpacing: '0.01em' }}>{s.label}</div>
             </div>
           </Link>
         ))}

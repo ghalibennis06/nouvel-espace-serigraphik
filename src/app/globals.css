@@ -62,6 +62,50 @@
   --chat-out:   #1A3A5C;
 }
 
+/* ─── Admin panel — always dark (BeamsCanvas context) ────────────────────── */
+.admin-panel {
+  --bg:         #0A0A0F;
+  --surface:    #111118;
+  --card:       #16161E;
+  --card2:      #1C1C28;
+  --border:     rgba(255,255,255,0.07);
+  --border2:    rgba(255,255,255,0.12);
+  --text:       #F0F0F8;
+  --text2:      #8585A8;
+  --text3:      #5C5C78;
+  --orange:     #F97316;
+  --orangeh:    #EA6A0A;
+  --orangesoft: rgba(249,115,22,0.12);
+  --blue:       #4B7BEC;
+  --blueh:      #3568D8;
+  --bluesoft:   rgba(75,123,236,0.12);
+  --green:      #22C55E;
+  --greenh:     #16A34A;
+  --greensoft:  rgba(34,197,94,0.12);
+  --teal:       #14B8A6;
+  --tealsoft:   rgba(20,184,166,0.10);
+  --overlay:    rgba(10,10,15,0.97);
+  --shadow:     0 1px 4px rgba(0,0,0,0.4), 0 2px 12px rgba(0,0,0,0.3);
+  --shadow-lg:  0 4px 24px rgba(0,0,0,0.5);
+  color-scheme: dark;
+}
+
+/* ─── Admin nav links ─────────────────────────────────────────────────────── */
+.admin-nav-link {
+  transition: background 0.15s, color 0.15s;
+  border-radius: 8px;
+  margin: 0 10px;
+}
+.admin-nav-link:hover {
+  background: rgba(255,255,255,0.06) !important;
+  color: var(--text) !important;
+}
+.admin-nav-link-active {
+  background: rgba(75,123,236,0.15) !important;
+  color: var(--blue) !important;
+  font-weight: 700 !important;
+}
+
 /* ─── Keyframes ───────────────────────────────────────────────────────────── */
 @keyframes ticker        { 0%   { transform: translateX(0); }    100% { transform: translateX(-50%); } }
 @keyframes slideInRight  { from { transform: translateX(100%); } to   { transform: translateX(0); } }

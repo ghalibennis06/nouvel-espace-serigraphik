@@ -27,28 +27,48 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--bg)', fontFamily: 'Outfit, sans-serif' }}>
-      <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 16, padding: '36px 40px', width: 340, boxShadow: 'var(--shadow-lg)' }}>
-        <div style={{ fontSize: 18, fontWeight: 700, color: 'var(--text)', marginBottom: 6 }}>NES <span style={{ color: 'var(--blue)' }}>Admin</span></div>
-        <div style={{ fontSize: 12, color: 'var(--text2)', marginBottom: 24 }}>Accès réservé à l&apos;équipe NES.</div>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="password"
-            value={pw}
-            onChange={e => setPw(e.target.value)}
-            placeholder="Mot de passe"
-            required
-            style={{ width: '100%', background: 'var(--card2)', border: '1px solid var(--border)', borderRadius: 8, padding: '11px 14px', fontSize: 14, color: 'var(--text)', fontFamily: 'Outfit, sans-serif', outline: 'none', boxSizing: 'border-box', marginBottom: 12 }}
-          />
-          {error && <div style={{ fontSize: 12, color: '#c63030', marginBottom: 10 }}>{error}</div>}
-          <button
-            type="submit"
-            disabled={loading}
-            style={{ width: '100%', background: 'var(--blue)', color: '#fff', border: 'none', borderRadius: 8, padding: '12px', fontSize: 14, fontWeight: 700, cursor: loading ? 'not-allowed' : 'pointer', opacity: loading ? 0.7 : 1 }}
-          >
-            {loading ? 'Vérification…' : 'Accéder'}
-          </button>
-        </form>
+    <div className="admin-panel" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Outfit, sans-serif', position: 'relative', overflow: 'hidden' }}>
+      {/* Subtle radial gradient background */}
+      <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 80% 60% at 50% 0%, rgba(75,123,236,0.08) 0%, transparent 70%)' }} />
+
+      <div style={{ position: 'relative', width: 360 }}>
+        {/* Logo mark */}
+        <div style={{ textAlign: 'center', marginBottom: 32 }}>
+          <div style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 28, fontWeight: 700, color: 'var(--text)', letterSpacing: '-0.02em' }}>
+            NES <span style={{ color: 'var(--blue)' }}>Admin</span>
+          </div>
+          <div style={{ fontSize: 12, color: 'var(--text2)', marginTop: 6, letterSpacing: '0.04em' }}>Accès réservé à l&apos;équipe</div>
+        </div>
+
+        {/* Card */}
+        <div style={{ background: 'var(--card)', border: '1px solid var(--border2)', borderRadius: 20, padding: '32px 32px 28px', boxShadow: 'var(--shadow-lg)' }}>
+          <form onSubmit={handleSubmit}>
+            <label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: 'var(--text2)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>
+              Mot de passe
+            </label>
+            <input
+              type="password"
+              value={pw}
+              onChange={e => setPw(e.target.value)}
+              placeholder="••••••••••••"
+              required
+              autoFocus
+              style={{ width: '100%', background: 'var(--card2)', border: '1px solid var(--border2)', borderRadius: 10, padding: '12px 14px', fontSize: 15, color: 'var(--text)', fontFamily: 'Outfit, sans-serif', outline: 'none', boxSizing: 'border-box', marginBottom: 6, letterSpacing: '0.06em' }}
+            />
+            {error && (
+              <div style={{ fontSize: 12, color: '#f87171', marginBottom: 10, display: 'flex', alignItems: 'center', gap: 6 }}>
+                <span>⚠</span> {error}
+              </div>
+            )}
+            <button
+              type="submit"
+              disabled={loading}
+              style={{ width: '100%', background: 'var(--blue)', color: '#fff', border: 'none', borderRadius: 10, padding: '13px', fontSize: 14, fontWeight: 700, cursor: loading ? 'not-allowed' : 'pointer', opacity: loading ? 0.7 : 1, marginTop: 8, letterSpacing: '0.02em', transition: 'opacity 0.2s' }}
+            >
+              {loading ? 'Vérification…' : 'Accéder au tableau de bord'}
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   )
