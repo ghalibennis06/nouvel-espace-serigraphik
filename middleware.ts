@@ -36,26 +36,31 @@ const intlMiddleware = createMiddleware({ locales, defaultLocale, localePrefix: 
 export default async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl
 
-  // Protect /admin/* except /admin/login
-  if (pathname.startsWith('/admin') && !pathname.startsWith('/admin/login')) {
-    const token = req.cookies.get(COOKIE)?.value
-    if (!(await verifyAdminCookie(token))) {
-      const loginUrl = new URL('/admin/login', req.url)
-      loginUrl.searchParams.set('from', pathname)
-      return NextResponse.redirect(loginUrl)
+  // Admin + API paths: never go through i18n middleware
+  if (pathname.startsWith('/admin') || pathname.startsWith('/api/')) {
+    // Protect /admin/* except /admin/login
+    if (pathname.startsWith('/admin') && !pathname.startsWith('/admin/login')) {
+      const token = req.cookies.get(COOKIE)?.value
+      if (!(await verifyAdminCookie(token))) {
+        const loginUrl = new URL('/admin/login', req.url)
+        loginUrl.searchParams.set('from', pathname)
+        return NextResponse.redirect(loginUrl)
+      }
     }
-  }
 
-  // Protect sensitive API routes (except /api/admin/auth and public /api/leads POST)
-  if (
-    (pathname.startsWith('/api/admin/') && pathname !== '/api/admin/auth') ||
-    pathname.startsWith('/api/leads/status') ||
-    pathname.startsWith('/api/leads/activity')
-  ) {
-    const token = req.cookies.get(COOKIE)?.value
-    if (!(await verifyAdminCookie(token))) {
-      return NextResponse.json({ error: 'unauthorized' }, { status: 401 })
+    // Protect sensitive API routes (except /api/admin/auth and public /api/leads POST)
+    if (
+      (pathname.startsWith('/api/admin/') && pathname !== '/api/admin/auth') ||
+      pathname.startsWith('/api/leads/status') ||
+      pathname.startsWith('/api/leads/activity')
+    ) {
+      const token = req.cookies.get(COOKIE)?.value
+      if (!(await verifyAdminCookie(token))) {
+        return NextResponse.json({ error: 'unauthorized' }, { status: 401 })
+      }
     }
+
+    return NextResponse.next()
   }
 
   return intlMiddleware(req)
