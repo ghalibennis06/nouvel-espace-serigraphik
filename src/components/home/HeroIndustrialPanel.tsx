@@ -56,11 +56,11 @@ export default function HeroIndustrialPanel({
           </div>
 
           {title ? (
-            <h1 style={{ fontSize: 'clamp(44px,5.8vw,82px)', fontWeight: 950, color: 'var(--text)', lineHeight: 1.04, letterSpacing: '-0.04em', marginBottom: 18 }}>
+            <h1 style={{ fontSize: 'clamp(34px,4.4vw,66px)', fontWeight: 800, color: 'var(--text)', lineHeight: 1.06, letterSpacing: '-0.035em', marginBottom: 18 }}>
               {title}
             </h1>
           ) : (
-            <h1 style={{ fontSize: 'clamp(44px,5.8vw,82px)', fontWeight: 950, lineHeight: 1.04, letterSpacing: '-0.04em', marginBottom: 18 }}>
+            <h1 style={{ fontSize: 'clamp(38px,5vw,74px)', fontWeight: 800, lineHeight: 1.06, letterSpacing: '-0.035em', marginBottom: 18 }}>
               <TypewriterEffectSmooth words={DEFAULT_WORDS} className="justify-start" />
             </h1>
           )}

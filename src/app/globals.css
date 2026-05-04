@@ -137,8 +137,9 @@
   h1, h2, h3 {
     font-family: 'Syne', 'Inter', system-ui, sans-serif;
     line-height: 1.12;
-    letter-spacing: -0.025em;
+    letter-spacing: -0.022em;
     font-feature-settings: 'kern' 1, 'liga' 1;
+    font-weight: 800;
   }
   ::selection { background: rgba(242,99,22,0.18); color: var(--text); }
 }

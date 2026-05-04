@@ -85,8 +85,8 @@ export default async function HomePage({ params }: { params: { locale: string } 
           HERO
       ══════════════════════════════════════════════════════ */}
       <ShaderAnimation
-        overlayOpacity={0.78}
-        overlayColor="rgba(255,252,249,1)"
+        overlayOpacity={0.82}
+        overlayColor="rgba(255,255,255,1)"
         style={{ borderBottom: '1px solid var(--border)' }}
       >
         <HeroIndustrialPanel
