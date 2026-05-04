@@ -81,7 +81,7 @@ export default async function Footer({ locale }: { locale: string }) {
                   key={link.label}
                   href={link.href}
                   className="link-blue"
-                  style={{ display: 'block', fontSize: 13, color: 'var(--text2)', marginBottom: 9, textDecoration: 'none', transition: 'color .2s' }}
+                  style={{ display: 'block', fontSize: 13, color: 'var(--text2)', marginBottom: 4, padding: '6px 0', textDecoration: 'none', transition: 'color .2s', minHeight: 36 }}
                 >
                   {link.label}
                 </Link>

@@ -110,7 +110,7 @@ export default function ProductsSection({
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div className="hidden sm:grid grid-cols-3 gap-3">
               {[
                 'Filtres pensés comme des chemins de décision',
                 'Accès rapide aux produits qui reviennent le plus',

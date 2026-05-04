@@ -174,11 +174,24 @@ export default function Header({ locale, rootCategories, subCategories }: Header
             WhatsApp
           </a>
 
+          {/* WhatsApp shortcut — visible on mobile only, before burger */}
+          <a
+            href={whatsappGeneralLink('Bonjour NES, je veux des informations.')}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="sm:hidden"
+            aria-label="WhatsApp"
+            style={{ width: 44, height: 44, borderRadius: 10, background: 'linear-gradient(135deg,#22C55E,#16A34A)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, textDecoration: 'none' }}
+          >
+            {WA_ICON}
+          </a>
+
           {/* Burger */}
           <button
             className="md:hidden"
             onClick={() => setMenuOpen(v => !v)}
-            style={{ background: 'none', border: 'none', color: 'var(--text)', cursor: 'pointer', padding: 10, margin: -4 }}
+            aria-label="Menu"
+            style={{ background: 'none', border: 'none', color: 'var(--text)', cursor: 'pointer', width: 44, height: 44, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 8 }}
           >
             {menuOpen
               ? <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12"/></svg>
@@ -197,14 +210,14 @@ export default function Header({ locale, rootCategories, subCategories }: Header
             onClick={() => setMenuOpen(false)}
           />
           <div
-            className="fixed top-0 left-0 bottom-0 md:hidden animate-slide-in-right"
+            className="fixed top-0 left-0 bottom-0 md:hidden animate-slide-in-left"
             style={{ width: 290, maxWidth: '85vw', background: 'var(--card)', zIndex: 50, overflowY: 'auto', borderRight: '1px solid var(--border)' }}
           >
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '18px 20px', borderBottom: '1px solid var(--border)' }}>
               <span style={{ fontFamily: 'Inter, sans-serif', fontSize: 20, fontWeight: 900, color: 'var(--text)', letterSpacing: '-0.04em' }}>
                 NES<span style={{ display: 'inline-block', width: 6, height: 6, borderRadius: '50%', background: 'var(--orange)', marginLeft: 2, verticalAlign: 'middle', marginBottom: 2 }} />
               </span>
-              <button onClick={() => setMenuOpen(false)} style={{ background: 'none', border: 'none', color: 'var(--text2)', cursor: 'pointer' }}>
+              <button onClick={() => setMenuOpen(false)} style={{ background: 'none', border: 'none', color: 'var(--text2)', cursor: 'pointer', width: 44, height: 44, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 8, margin: -8 }}>
                 <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12"/></svg>
               </button>
             </div>
@@ -214,7 +227,7 @@ export default function Header({ locale, rootCategories, subCategories }: Header
                   key={link.label}
                   href={link.href}
                   onClick={() => setMenuOpen(false)}
-                  style={{ display: 'block', padding: '13px 20px', fontSize: 14, fontWeight: 500, color: isActive(link.href) ? 'var(--orange)' : 'var(--text)', textDecoration: 'none', borderBottom: '1px solid var(--border)' }}
+                  style={{ display: 'block', padding: '15px 20px', fontSize: 14, fontWeight: 500, color: isActive(link.href) ? 'var(--orange)' : 'var(--text)', textDecoration: 'none', borderBottom: '1px solid var(--border)', minHeight: 56 }}
                 >
                   <div style={{ fontSize: 14, fontWeight: 600 }}>{link.label}</div>
                   <div style={{ fontSize: 11, color: 'var(--text3)', marginTop: 4 }}>{link.hint}</div>

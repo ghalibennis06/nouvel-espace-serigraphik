@@ -55,7 +55,8 @@ export default function BuyerPathSection({ locale }: BuyerPathSectionProps) {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        {/* Horizontal scroll on mobile, 3-col grid on md+ */}
+        <div className="scroll-x-hide md:grid md:grid-cols-3" style={{ display: 'flex', gap: 20 }}>
           {PATHS.map((path, idx) => (
             <MagicCard
               key={path.title}
@@ -70,6 +71,8 @@ export default function BuyerPathSection({ locale }: BuyerPathSectionProps) {
                 display: 'flex',
                 flexDirection: 'column',
                 gap: 14,
+                minWidth: 'min(82vw, 300px)',
+                flexShrink: 0,
               }}
             >
               <div>

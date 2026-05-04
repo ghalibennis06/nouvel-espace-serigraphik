@@ -29,7 +29,7 @@ export default function MoroccoTrustSection({ locale }: MoroccoTrustSectionProps
   return (
     <section style={{ background: 'var(--bg)', padding: 'clamp(44px,7vw,80px) 5%', borderTop: '1px solid var(--border)' }}>
       <div style={{ maxWidth: 1240, margin: '0 auto', alignItems: 'start' }} className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-8">
-        <div>
+        <div className="order-2 lg:order-1">
           <span className="stag">Pourquoi NES au Maroc</span>
           <h2 style={{ fontSize: 'clamp(28px,3.5vw,42px)', fontWeight: 800, color: 'var(--text)', letterSpacing: '-0.025em', lineHeight: 1.08 }}>
             Plus qu'un catalogue, un partenaire pour démarrer, produire et tenir votre atelier.
@@ -60,7 +60,7 @@ export default function MoroccoTrustSection({ locale }: MoroccoTrustSectionProps
           </div>
         </div>
 
-        <div style={{ display: 'grid', gap: 14 }}>
+        <div className="order-1 lg:order-2" style={{ display: 'grid', gap: 14 }}>
           {TRUST_POINTS.map((point, idx) => (
             <div
               key={point.title}

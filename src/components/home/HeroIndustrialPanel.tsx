@@ -41,7 +41,7 @@ export default function HeroIndustrialPanel({
       <WarpBackground style={{ opacity: 0.55 }} />
       <div style={{ maxWidth: 1240, margin: '0 auto', alignItems: 'center', position: 'relative', zIndex: 1 }} className="grid grid-cols-1 lg:grid-cols-[1.04fr_0.96fr] gap-10 lg:gap-[54px]">
         <div>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(242,99,22,0.10)', border: '1px solid rgba(242,99,22,0.18)', borderRadius: 999, padding: '6px 14px', marginBottom: 22, overflow: 'hidden' }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(242,99,22,0.10)', border: '1px solid rgba(242,99,22,0.18)', borderRadius: 999, padding: '6px 14px', marginBottom: 18, overflow: 'hidden' }}>
             <span style={{ width: 7, height: 7, borderRadius: '50%', background: 'var(--orange)', display: 'inline-block', boxShadow: '0 0 14px rgba(242,99,22,0.5)', flexShrink: 0 }} />
             <TextMarquee
               speed={1.4}
@@ -53,6 +53,16 @@ export default function HeroIndustrialPanel({
                 <span key={t} style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--orange)', whiteSpace: 'nowrap' }}>{t}</span>
               ))}
             </TextMarquee>
+          </div>
+
+          {/* Mobile product image — visible FIRST on small screens (before headline) */}
+          <div className="lg:hidden mb-5 relative" style={{ height: 200, borderRadius: 20, overflow: 'hidden', border: '1px solid rgba(242,99,22,0.22)', boxShadow: '0 12px 40px rgba(0,0,0,0.12)' }}>
+            <Image src={photos[0].src} alt={photos[0].alt} fill sizes="100vw" style={{ objectFit: 'cover' }} />
+            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(0,0,0,0.04) 0%, rgba(0,0,0,0.60) 100%)' }} />
+            <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'flex-end', padding: 14, justifyContent: 'space-between' }}>
+              <div style={{ fontSize: 16, fontWeight: 900, color: '#fff', lineHeight: 1.15 }}>Machines &amp; kits<br /><span style={{ color: 'rgba(255,255,255,0.80)', fontWeight: 600, fontSize: 13 }}>livrés au Maroc en 24–48h</span></div>
+              <div style={{ padding: '6px 10px', borderRadius: 999, background: 'rgba(242,99,22,0.85)', color: '#fff', fontSize: 10, fontWeight: 800, flexShrink: 0 }}>NES · Atelier</div>
+            </div>
           </div>
 
           {title ? (
@@ -69,13 +79,14 @@ export default function HeroIndustrialPanel({
             {subtitle || 'NES vous aide à démarrer, équiper ou réapprovisionner votre atelier avec les bonnes machines, les bons kits et un accompagnement commercial clair.'}
           </p>
 
-          <div style={{ gap: 12, marginBottom: 26 }} className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          {/* Feature pills — horizontal scroll on mobile, 3-col grid on sm+ */}
+          <div className="scroll-x-hide sm:grid sm:grid-cols-3" style={{ display: 'flex', gap: 10, marginBottom: 26 }}>
             {[
               { title: 'Démarrer', text: 'kits, budget, première activité' },
               { title: 'Produire', text: 'machines, capacité, cadence' },
               { title: 'Tenir', text: 'consommables, réassort, support' },
             ].map((item) => (
-              <div key={item.title} style={{ background: 'var(--card)', border: '1px solid var(--border)', borderTop: '2px solid var(--orange)', borderRadius: 16, padding: '14px 14px 13px', boxShadow: 'var(--shadow)' }}>
+              <div key={item.title} style={{ background: 'var(--card)', border: '1px solid var(--border)', borderTop: '2px solid var(--orange)', borderRadius: 16, padding: '14px 14px 13px', boxShadow: 'var(--shadow)', minWidth: 148, flexShrink: 0 }}>
                 <div style={{ fontSize: 11, fontWeight: 900, color: 'var(--text)', letterSpacing: '-0.01em', marginBottom: 4 }}>{item.title}</div>
                 <div style={{ fontSize: 12, color: 'var(--text2)', lineHeight: 1.5 }}>{item.text}</div>
               </div>
@@ -111,15 +122,6 @@ export default function HeroIndustrialPanel({
             ))}
           </div>
 
-          {/* Mobile-only hero image — shows instead of the complex desktop grid */}
-          <div className="lg:hidden mt-6 relative" style={{ minHeight: 220, borderRadius: 20, overflow: 'hidden', border: '1px solid rgba(242,99,22,0.20)', boxShadow: '0 20px 60px rgba(0,0,0,0.10)' }}>
-            <Image src={photos[0].src} alt={photos[0].alt} fill sizes="100vw" style={{ objectFit: 'cover' }} />
-            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(0,0,0,0.06) 0%, rgba(0,0,0,0.62) 100%)' }} />
-            <div style={{ position: 'absolute', left: 16, right: 16, bottom: 16, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
-              <div style={{ fontSize: 18, fontWeight: 900, color: '#fff', lineHeight: 1.1 }}>Production sérieuse<br />au Maroc</div>
-              <div style={{ padding: '7px 10px', borderRadius: 999, background: 'rgba(242,99,22,0.80)', border: '1px solid rgba(255,255,255,0.20)', color: '#fff', fontSize: 11, fontWeight: 800 }}>Atelier</div>
-            </div>
-          </div>
         </div>
 
         <div className="hidden lg:block" style={{ position: 'relative' }}>
