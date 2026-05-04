@@ -105,20 +105,20 @@ export default async function HomePage({ params }: { params: { locale: string } 
       {/* ══════════════════════════════════════════════════════
           TRUST STRIP
       ══════════════════════════════════════════════════════ */}
-      <div style={{ background: 'var(--surface)', borderBottom: '1px solid var(--border)', padding: '18px 5%' }}>
-        <div style={{ maxWidth: 1240, margin: '0 auto', display: 'flex', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap', gap: 0 }}>
+      <div style={{ background: 'var(--surface)', borderBottom: '1px solid var(--border)', padding: '14px 0' }}>
+        <div className="scroll-x-hide md:flex md:justify-center" style={{ display: 'flex', alignItems: 'center', padding: '2px 5%' }}>
           {[
             { icon: '🚚', label: 'Livraison 24–48h', sub: 'partout au Maroc' },
             { icon: '🛡️', label: 'Support local', sub: 'avant et après achat' },
             { icon: '💬', label: 'Support WhatsApp', sub: 'rapide et direct' },
-            { icon: '🎯', label: 'Packs de démarrage', sub: 'pour lancer votre activité' },
-            { icon: '🏭', label: 'Pour débutants et ateliers', sub: 'du premier achat au réassort' },
+            { icon: '🎯', label: 'Packs de démarrage', sub: 'pour lancer' },
+            { icon: '🏭', label: 'Débutants & ateliers', sub: 'premier achat au réassort' },
           ].map((item, i) => (
-            <div key={item.label} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 28px', borderLeft: i > 0 ? '1px solid var(--border)' : 'none' }}>
-              <span style={{ fontSize: 18 }}>{item.icon}</span>
+            <div key={item.label} style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '8px 18px', borderLeft: i > 0 ? '1px solid var(--border)' : 'none', flexShrink: 0 }}>
+              <span style={{ fontSize: 17 }}>{item.icon}</span>
               <div>
-                <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>{item.label}</div>
-                <div style={{ fontSize: 11, color: 'var(--text2)' }}>{item.sub}</div>
+                <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', whiteSpace: 'nowrap' }}>{item.label}</div>
+                <div style={{ fontSize: 10, color: 'var(--text2)', whiteSpace: 'nowrap' }}>{item.sub}</div>
               </div>
             </div>
           ))}
@@ -127,8 +127,8 @@ export default async function HomePage({ params }: { params: { locale: string } 
 
       <BuyerPathSection locale={locale} />
 
-      <section style={{ background: 'var(--surface)', padding: '72px 5%', borderBottom: '1px solid var(--border)' }}>
-        <div style={{ maxWidth: 1240, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '28px', alignItems: 'start' }} className="grid lg:grid-cols-2 gap-8">
+      <section style={{ background: 'var(--surface)', padding: 'clamp(44px,7vw,72px) 5%', borderBottom: '1px solid var(--border)' }}>
+        <div style={{ maxWidth: 1240, margin: '0 auto', alignItems: 'start' }} className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div>
             <span className="stag">Simulez avant d’acheter</span>
             <h2 style={{ fontSize: 'clamp(28px,3.5vw,44px)', fontWeight: 800, color: 'var(--text)', letterSpacing: '-0.025em', lineHeight: 1.08 }}>
@@ -181,7 +181,7 @@ export default async function HomePage({ params }: { params: { locale: string } 
       {/* ══════════════════════════════════════════════════════
           GALLERY
       ══════════════════════════════════════════════════════ */}
-      <section style={{ background: 'var(--surface)', padding: '72px 5%', borderTop: '1px solid var(--border)' }}>
+      <section style={{ background: 'var(--surface)', padding: 'clamp(40px,6vw,72px) 5%', borderTop: '1px solid var(--border)' }}>
         <div style={{ maxWidth: 1240, margin: '0 auto' }}>
           <div style={{ marginBottom: 28 }}>
             <span className="stag">Galerie produits</span>

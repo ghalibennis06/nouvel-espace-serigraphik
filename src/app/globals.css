@@ -234,3 +234,43 @@
   .link-admin-footer:hover { opacity: 1; }
   .nav-link-active       { color: var(--orange) !important; }
 }
+
+/* ─── Mobile sticky CTA bar ─────────────────────────────────────────────────── */
+.mob-sticky {
+  display: none;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 150;
+  gap: 8px;
+  padding: 10px 14px;
+  background: var(--card);
+  border-top: 1px solid var(--border);
+  box-shadow: 0 -4px 24px rgba(0,0,0,0.10);
+}
+@media (max-width: 639px) {
+  .mob-sticky {
+    display: flex;
+    padding-bottom: max(10px, env(safe-area-inset-bottom));
+  }
+}
+
+/* ─── Hidden hover reveals → always visible on touch ────────────────────────── */
+@media (hover: none), (max-width: 1023px) {
+  .fluid-reveal {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+  .void-reveal {
+    opacity: 1 !important;
+    transform: translateY(0) scale(1) !important;
+  }
+}
+
+/* ─── Horizontal scroll strip (trust bar, filters) ──────────────────────────── */
+.scroll-x-hide {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scroll-x-hide::-webkit-scrollbar { display: none; }

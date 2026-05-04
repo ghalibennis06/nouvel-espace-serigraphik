@@ -44,12 +44,12 @@ export default async function Footer({ locale }: { locale: string }) {
   ]
 
   return (
-    <footer style={{ background: 'var(--surface)', borderTop: '1px solid var(--border)', padding: '64px 6% 32px' }}>
+    <footer style={{ background: 'var(--surface)', borderTop: '1px solid var(--border)', padding: 'clamp(36px,6vw,64px) 6% 32px' }}>
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
 
         {/* Links grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr', gap: '3rem', marginBottom: 44 }}
-             className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-5">
+        <div style={{ gap: '2rem', marginBottom: 44 }}
+             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr_1fr]">
 
           {/* Brand col */}
           <div>

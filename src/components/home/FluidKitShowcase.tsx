@@ -3,6 +3,8 @@
 import Link from 'next/link'
 import { whatsappGeneralLink } from '@/lib/utils'
 import type { Kit } from '@/lib/data/kits'
+import { TiltCard } from '@/components/ui/tilt-card'
+import { HeartFavorite } from '@/components/ui/heart-favorite'
 
 export default function FluidKitShowcase({
   locale,
@@ -12,7 +14,7 @@ export default function FluidKitShowcase({
   kits: Kit[]
 }) {
   return (
-    <section id="kits" style={{ background: 'var(--surface)', padding: '84px 5%', borderTop: '1px solid var(--border)' }}>
+    <section id="kits" style={{ background: 'var(--surface)', padding: 'clamp(44px,7vw,84px) 5%', borderTop: '1px solid var(--border)' }}>
       <div style={{ maxWidth: 1240, margin: '0 auto' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 36, flexWrap: 'wrap', gap: 12 }}>
           <div style={{ maxWidth: 720 }}>
@@ -29,22 +31,22 @@ export default function FluidKitShowcase({
           </Link>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 18 }} className="grid md:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {kits.map((kit) => (
-            <div
+            <TiltCard
               key={kit.id}
+              tiltLimit={7}
+              scale={1.02}
               className="fluid-kit"
               style={{
                 position: 'relative',
-                minHeight: 460,
+                minHeight: 'clamp(380px,50vw,460px)',
                 borderRadius: 26,
-                overflow: 'hidden',
                 border: kit.featured ? '1px solid rgba(242,99,22,0.34)' : '1px solid var(--border)',
                 background: kit.featured
                   ? 'linear-gradient(180deg, rgba(242,99,22,0.08) 0%, rgba(255,255,255,0.96) 42%, rgba(255,255,255,1) 100%)'
                   : 'linear-gradient(180deg, rgba(0,0,0,0.02) 0%, rgba(255,255,255,1) 36%)',
                 boxShadow: kit.featured ? '0 26px 70px rgba(242,99,22,0.10)' : 'var(--shadow)',
-                transition: 'transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.45s cubic-bezier(0.22, 1, 0.36, 1)',
               }}
             >
               <div
@@ -65,7 +67,7 @@ export default function FluidKitShowcase({
                 }}
               />
 
-              <div style={{ position: 'relative', zIndex: 2, padding: 26, display: 'flex', flexDirection: 'column', minHeight: 460 }}>
+              <div style={{ position: 'relative', zIndex: 2, padding: 26, display: 'flex', flexDirection: 'column', minHeight: 'clamp(380px,50vw,460px)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 12, marginBottom: 18 }}>
                   <div>
                     <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--orange)', marginBottom: 8 }}>
@@ -76,7 +78,10 @@ export default function FluidKitShowcase({
                     </div>
                     <p style={{ fontSize: 13, color: 'var(--text2)', lineHeight: 1.65, maxWidth: 280 }}>{kit.desc}</p>
                   </div>
-                  <div style={{ fontSize: 28 }}>{kit.icon}</div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                    <div style={{ fontSize: 28 }}>{kit.icon}</div>
+                    <HeartFavorite />
+                  </div>
                 </div>
 
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 16 }}>
@@ -128,14 +133,14 @@ export default function FluidKitShowcase({
                   </div>
                 </div>
               </div>
-            </div>
+            </TiltCard>
           ))}
         </div>
       </div>
 
       <style jsx>{`
         .fluid-kit:hover {
-          transform: translateY(-8px);
+          transform: none;
           box-shadow: 0 30px 80px rgba(0,0,0,0.12);
           border-color: rgba(242,99,22,0.34);
         }

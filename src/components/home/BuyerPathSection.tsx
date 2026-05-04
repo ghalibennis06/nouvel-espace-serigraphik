@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { whatsappGeneralLink } from '@/lib/utils'
+import { MagicCard } from '@/components/ui/magic-card'
 
 type BuyerPathSectionProps = {
   locale: string
@@ -42,7 +43,7 @@ const PATHS = [
 
 export default function BuyerPathSection({ locale }: BuyerPathSectionProps) {
   return (
-    <section style={{ background: 'var(--surface)', padding: '80px 5%', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }}>
+    <section style={{ background: 'var(--surface)', padding: 'clamp(44px,7vw,80px) 5%', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }}>
       <div style={{ maxWidth: 1240, margin: '0 auto' }}>
         <div style={{ maxWidth: 760, marginBottom: 28 }}>
           <span className="stag">Choisissez votre point de départ</span>
@@ -54,10 +55,12 @@ export default function BuyerPathSection({ locale }: BuyerPathSectionProps) {
           </p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 18 }} className="grid md:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {PATHS.map((path) => (
-            <div
+            <MagicCard
               key={path.title}
+              gradientColor="rgba(242,99,22,0.12)"
+              gradientSize={180}
               style={{
                 background: 'var(--card)',
                 border: '1px solid var(--border)',
@@ -110,7 +113,7 @@ export default function BuyerPathSection({ locale }: BuyerPathSectionProps) {
                   Demander conseil sur WhatsApp
                 </a>
               </div>
-            </div>
+            </MagicCard>
           ))}
         </div>
       </div>

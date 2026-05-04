@@ -84,9 +84,9 @@ export default function ProductsSection({
   const summary = getDecisionSummary(active)
 
   return (
-    <section id="products" style={{ background: 'var(--bg)', padding: '84px 5%', borderTop: '1px solid var(--border)' }}>
+    <section id="products" style={{ background: 'var(--bg)', padding: 'clamp(44px,7vw,84px) 5%', borderTop: '1px solid var(--border)' }}>
       <div style={{ maxWidth: 1240, margin: '0 auto' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '0.96fr 1.04fr', gap: 22, alignItems: 'end', marginBottom: 28 }} className="grid lg:grid-cols-2 gap-6">
+        <div style={{ alignItems: 'end', marginBottom: 28 }} className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div>
             <span className="stag">Réassort et références qui tournent</span>
             <h2 style={{ fontSize: 'clamp(30px,3.8vw,48px)', fontWeight: 900, color: 'var(--text)', letterSpacing: '-0.03em', lineHeight: 1.04, marginBottom: 10 }}>
@@ -110,7 +110,7 @@ export default function ProductsSection({
               </p>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 10 }} className="grid md:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               {[
                 'Filtres pensés comme des chemins de décision',
                 'Accès rapide aux produits qui reviennent le plus',
@@ -124,7 +124,7 @@ export default function ProductsSection({
           </div>
         </div>
 
-        <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: 24 }}>
+        <div className="scroll-x-hide" style={{ display: 'flex', gap: 10, flexWrap: 'nowrap', marginBottom: 24, paddingBottom: 4 }}>
           {FILTERS.map(({ key, label }) => (
             <button
               key={key}
@@ -148,7 +148,7 @@ export default function ProductsSection({
           ))}
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 16, marginTop: 4 }}>
+        <div className="grid grid-cols-2 md:grid-cols-[repeat(auto-fill,minmax(240px,1fr))]" style={{ gap: 16, marginTop: 4 }}>
           {visible.map((p) => {
             const cat = getCat(p)
             const saleP = parseFloat(p.sale_price || '0')
@@ -219,8 +219,8 @@ export default function ProductsSection({
                   </div>
 
                   <div style={{ display: 'flex', gap: 8, marginTop: 'auto' }}>
-                    <div style={{ display: 'inline-flex', alignItems: 'center', padding: '9px 10px', borderRadius: 12, background: 'rgba(242,99,22,0.08)', border: '1px solid rgba(242,99,22,0.12)', color: 'var(--text2)', fontSize: 11, fontWeight: 700 }}>
-                      Voir la fiche
+                    <div style={{ display: 'inline-flex', alignItems: 'center', flex: 1, justifyContent: 'center', padding: '10px 8px', borderRadius: 12, background: 'rgba(242,99,22,0.08)', border: '1px solid rgba(242,99,22,0.12)', color: 'var(--text2)', fontSize: 11, fontWeight: 700 }}>
+                      Voir →
                     </div>
                     <a
                       href={whatsappProductLink(p.name)}
@@ -232,17 +232,18 @@ export default function ProductsSection({
                         display: 'inline-flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        width: 38,
-                        height: 38,
+                        flex: 1,
+                        minHeight: 40,
                         borderRadius: 12,
                         background: 'var(--green)',
                         color: '#fff',
-                        fontSize: 16,
+                        fontSize: 12,
+                        fontWeight: 700,
                         textDecoration: 'none',
-                        flexShrink: 0,
+                        gap: 4,
                       }}
                     >
-                      💬
+                      💬 <span className="hidden sm:inline">Commander</span>
                     </a>
                   </div>
                 </div>
@@ -251,7 +252,7 @@ export default function ProductsSection({
           })}
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 14, alignItems: 'center', marginTop: 26, padding: '18px 20px', borderRadius: 22, border: '1px solid var(--border)', background: 'linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(249,246,243,1) 100%)' }} className="grid md:grid-cols-[1fr_auto] gap-4">
+        <div style={{ alignItems: 'center', marginTop: 26, padding: '18px 20px', borderRadius: 22, border: '1px solid var(--border)', background: 'linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(249,246,243,1) 100%)' }} className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-4">
           <div>
             <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--orange)', marginBottom: 7 }}>
               Si vous n’avez pas trouvé en 30 secondes

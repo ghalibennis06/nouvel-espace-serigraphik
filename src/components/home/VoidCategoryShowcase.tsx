@@ -20,7 +20,7 @@ export default function VoidCategoryShowcase({
   categories: VoidCategoryItem[]
 }) {
   return (
-    <section style={{ background: 'var(--bg)', padding: '84px 5%' }}>
+    <section style={{ background: 'var(--bg)', padding: 'clamp(44px,7vw,84px) 5%' }}>
       <div style={{ maxWidth: 1240, margin: '0 auto' }}>
         <div style={{ marginBottom: 34, maxWidth: 760 }}>
           <span className="stag">Showcase NES</span>
@@ -32,7 +32,7 @@ export default function VoidCategoryShowcase({
           </p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 18 }} className="grid md:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {categories.map((cat) => (
             <Link
               key={cat.slug}
@@ -44,7 +44,7 @@ export default function VoidCategoryShowcase({
                 className="void-shell"
                 style={{
                   position: 'relative',
-                  minHeight: 380,
+                  minHeight: 'clamp(300px,45vw,380px)',
                   borderRadius: 24,
                   overflow: 'hidden',
                   background: 'linear-gradient(180deg, rgba(10,10,10,0.02) 0%, rgba(10,10,10,0.08) 100%)',
@@ -92,7 +92,7 @@ export default function VoidCategoryShowcase({
                   }}
                 />
 
-                <div style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: 380, padding: 24 }}>
+                <div style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: 'clamp(300px,45vw,380px)', padding: 24 }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 10 }}>
                     <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '7px 10px', borderRadius: 999, background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.14)', color: '#fff', fontSize: 10, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.1em', backdropFilter: 'blur(12px)' }}>
                       {cat.recur ? 'Réassort' : 'Équipement'}

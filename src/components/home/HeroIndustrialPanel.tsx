@@ -5,6 +5,7 @@ import Link from 'next/link'
 import DevisExpressButton from '@/components/ui/devis-express-button'
 import { WarpBackground } from '@/components/ui/warp-background'
 import { TypewriterEffectSmooth } from '@/components/ui/typewriter-effect'
+import { TextMarquee } from '@/components/ui/text-marquee'
 
 const DEFAULT_WORDS = [
   { text: 'Construisez' },
@@ -36,15 +37,22 @@ export default function HeroIndustrialPanel({
   trustBullets?: string[]
 }) {
   return (
-    <section style={{ padding: '78px 5% 92px', position: 'relative', overflow: 'hidden' }}>
+    <section style={{ padding: 'clamp(44px,7vw,78px) 5% clamp(52px,8vw,92px)', position: 'relative', overflow: 'hidden' }}>
       <WarpBackground style={{ opacity: 0.35 }} />
-      <div style={{ maxWidth: 1240, margin: '0 auto', display: 'grid', gridTemplateColumns: '1.04fr 0.96fr', gap: '54px', alignItems: 'center', position: 'relative', zIndex: 1 }} className="grid lg:grid-cols-2 gap-12">
+      <div style={{ maxWidth: 1240, margin: '0 auto', alignItems: 'center', position: 'relative', zIndex: 1 }} className="grid grid-cols-1 lg:grid-cols-[1.04fr_0.96fr] gap-10 lg:gap-[54px]">
         <div>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(242,99,22,0.10)', border: '1px solid rgba(242,99,22,0.18)', borderRadius: 999, padding: '6px 14px', marginBottom: 22 }}>
-            <span style={{ width: 7, height: 7, borderRadius: '50%', background: 'var(--orange)', display: 'inline-block', boxShadow: '0 0 14px rgba(242,99,22,0.5)' }} />
-            <span style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--orange)' }}>
-              Atelier · machines · réassort · Maroc
-            </span>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(242,99,22,0.10)', border: '1px solid rgba(242,99,22,0.18)', borderRadius: 999, padding: '6px 14px', marginBottom: 22, overflow: 'hidden' }}>
+            <span style={{ width: 7, height: 7, borderRadius: '50%', background: 'var(--orange)', display: 'inline-block', boxShadow: '0 0 14px rgba(242,99,22,0.5)', flexShrink: 0 }} />
+            <TextMarquee
+              speed={1.4}
+              height={20}
+              itemHeight={20}
+              prefix={<span style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--orange)', paddingRight: 4 }}>NES · </span>}
+            >
+              {['Sérigraphie', 'Sublimation', 'DTF & UV', 'Transfert Flex', 'Broderie', 'Maroc 24–48h'].map(t => (
+                <span key={t} style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--orange)', whiteSpace: 'nowrap' }}>{t}</span>
+              ))}
+            </TextMarquee>
           </div>
 
           {title ? (
@@ -61,7 +69,7 @@ export default function HeroIndustrialPanel({
             {subtitle || 'NES vous aide à démarrer, équiper ou réapprovisionner votre atelier avec les bonnes machines, les bons kits et un accompagnement commercial clair.'}
           </p>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 12, marginBottom: 26 }} className="grid md:grid-cols-3 gap-3">
+          <div style={{ gap: 12, marginBottom: 26 }} className="grid grid-cols-3 gap-3">
             {[
               { title: 'Démarrer', text: 'kits, budget, première activité' },
               { title: 'Produire', text: 'machines, capacité, cadence' },
@@ -102,9 +110,19 @@ export default function HeroIndustrialPanel({
               </div>
             ))}
           </div>
+
+          {/* Mobile-only hero image — shows instead of the complex desktop grid */}
+          <div className="lg:hidden mt-6 relative" style={{ minHeight: 220, borderRadius: 20, overflow: 'hidden', border: '1px solid rgba(242,99,22,0.20)', boxShadow: '0 20px 60px rgba(0,0,0,0.10)' }}>
+            <Image src={photos[0].src} alt={photos[0].alt} fill sizes="100vw" style={{ objectFit: 'cover' }} />
+            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(0,0,0,0.06) 0%, rgba(0,0,0,0.62) 100%)' }} />
+            <div style={{ position: 'absolute', left: 16, right: 16, bottom: 16, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+              <div style={{ fontSize: 18, fontWeight: 900, color: '#fff', lineHeight: 1.1 }}>Production sérieuse<br />au Maroc</div>
+              <div style={{ padding: '7px 10px', borderRadius: 999, background: 'rgba(242,99,22,0.80)', border: '1px solid rgba(255,255,255,0.20)', color: '#fff', fontSize: 11, fontWeight: 800 }}>Atelier</div>
+            </div>
+          </div>
         </div>
 
-        <div style={{ position: 'relative' }}>
+        <div className="hidden lg:block" style={{ position: 'relative' }}>
           <div style={{ position: 'absolute', inset: '-28px -12px auto auto', width: 180, height: 180, borderRadius: 999, background: 'radial-gradient(circle, rgba(242,99,22,0.16) 0%, rgba(242,99,22,0.06) 42%, rgba(242,99,22,0) 74%)', filter: 'blur(10px)', pointerEvents: 'none' }} />
 
           <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: 14 }}>

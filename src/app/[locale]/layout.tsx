@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
@@ -10,6 +11,7 @@ import WhatsAppFloat from '@/components/ui/WhatsAppFloat'
 import { LiquidCursor } from '@/components/ui/liquid-cursor'
 import ThemeProvider from '@/components/ThemeProvider'
 import { getCategoryTree } from '@/lib/woocommerce'
+import { whatsappGeneralLink } from '@/lib/utils'
 
 interface LocaleLayoutProps {
   children: React.ReactNode
@@ -62,12 +64,31 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
               rootCategories={rootCategories}
               subCategories={subCategories}
             />
-            <main className="flex-1">
+            <main className="flex-1 pb-20 sm:pb-0">
               {children}
             </main>
             <Footer locale={locale} />
             <WhatsAppFloat />
             <LiquidCursor />
+            {/* Mobile sticky CTA bar — visible below 640px only */}
+            <div className="mob-sticky">
+              <a
+                href={whatsappGeneralLink('Bonjour NES, je veux commander.')}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-wa-dark"
+                style={{ flex: 1, justifyContent: 'center', borderRadius: 12, padding: '13px 0', fontSize: 14, fontWeight: 800 }}
+              >
+                💬 WhatsApp
+              </a>
+              <Link
+                href={`/${locale}/kits`}
+                className="btn-orange"
+                style={{ flex: 1, justifyContent: 'center', borderRadius: 12, padding: '13px 0', fontSize: 14, fontWeight: 800 }}
+              >
+                Voir les kits →
+              </Link>
+            </div>
           </NextIntlClientProvider>
         </ThemeProvider>
       </body>

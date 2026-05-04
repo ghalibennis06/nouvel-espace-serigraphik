@@ -28,8 +28,8 @@ const TRUST_SIGNALS = [
 
 export default function MoroccoTrustSection({ locale }: MoroccoTrustSectionProps) {
   return (
-    <section style={{ background: 'var(--bg)', padding: '80px 5%', borderTop: '1px solid var(--border)' }}>
-      <div style={{ maxWidth: 1240, margin: '0 auto', display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: '32px', alignItems: 'start' }} className="grid lg:grid-cols-2 gap-8">
+    <section style={{ background: 'var(--bg)', padding: 'clamp(44px,7vw,80px) 5%', borderTop: '1px solid var(--border)' }}>
+      <div style={{ maxWidth: 1240, margin: '0 auto', alignItems: 'start' }} className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-8">
         <div>
           <GooeyText
             texts={['Sérigraphie', 'Sublimation', 'DTF & UV', 'Broderie', 'UV Flatbed']}

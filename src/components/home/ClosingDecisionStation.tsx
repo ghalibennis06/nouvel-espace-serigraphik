@@ -47,12 +47,12 @@ export default function ClosingDecisionStation({ locale }: { locale: string }) {
   const [inputVal, setInputVal] = useState('')
 
   return (
-    <section style={{ background: '#0A0A0F', padding: '92px 5%', borderTop: '1px solid rgba(255,255,255,0.06)', position: 'relative', overflow: 'hidden' }}>
+    <section style={{ background: '#0A0A0F', padding: 'clamp(52px,8vw,92px) 5%', borderTop: '1px solid rgba(255,255,255,0.06)', position: 'relative', overflow: 'hidden' }}>
       <div style={{ position: 'absolute', top: -120, right: -100, width: 340, height: 340, borderRadius: 999, background: 'radial-gradient(circle, rgba(242,99,22,0.20) 0%, rgba(242,99,22,0.08) 42%, rgba(242,99,22,0) 74%)', filter: 'blur(18px)', pointerEvents: 'none' }} />
       <div style={{ position: 'absolute', bottom: -160, left: -90, width: 320, height: 320, borderRadius: 999, background: 'radial-gradient(circle, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.03) 42%, rgba(255,255,255,0) 76%)', filter: 'blur(20px)', pointerEvents: 'none' }} />
 
       <div style={{ maxWidth: 1240, margin: '0 auto', position: 'relative', zIndex: 2 }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1.02fr 0.98fr', gap: 24, alignItems: 'start' }} className="grid lg:grid-cols-2 gap-6">
+        <div style={{ alignItems: 'start' }} className="grid grid-cols-1 lg:grid-cols-[1.02fr_0.98fr] gap-6">
           <div style={{ paddingRight: 10 }}>
             <span style={{ display: 'inline-flex', padding: '7px 12px', borderRadius: 999, background: 'rgba(242,99,22,0.12)', border: '1px solid rgba(242,99,22,0.20)', fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#ffb58c', marginBottom: 18 }}>
               Dernière étape utile

@@ -136,16 +136,16 @@ export default function Header({ locale, rootCategories, subCategories }: Header
           <button
             onClick={() => { setSearchOpen(v => !v); setTimeout(() => searchRef.current?.focus(), 80) }}
             aria-label="Rechercher"
-            style={{ width: 36, height: 36, borderRadius: 8, border: '1px solid var(--border2)', background: 'transparent', color: 'var(--text2)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}
+            style={{ width: 44, height: 44, borderRadius: 10, border: '1px solid var(--border2)', background: 'transparent', color: 'var(--text2)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}
           >
-            <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><circle cx="11" cy="11" r="8"/><path strokeLinecap="round" d="M21 21l-4.35-4.35"/></svg>
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><circle cx="11" cy="11" r="8"/><path strokeLinecap="round" d="M21 21l-4.35-4.35"/></svg>
           </button>
 
           {/* Theme toggle */}
           <button
             onClick={toggle}
             aria-label="Changer de thème"
-            style={{ width: 36, height: 36, borderRadius: 8, border: '1px solid var(--border2)', background: 'transparent', color: 'var(--text2)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}
+            style={{ width: 44, height: 44, borderRadius: 10, border: '1px solid var(--border2)', background: 'transparent', color: 'var(--text2)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}
           >
             {theme === 'dark'
               ? <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><circle cx="12" cy="12" r="5"/><path strokeLinecap="round" d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
@@ -178,7 +178,7 @@ export default function Header({ locale, rootCategories, subCategories }: Header
           <button
             className="md:hidden"
             onClick={() => setMenuOpen(v => !v)}
-            style={{ background: 'none', border: 'none', color: 'var(--text)', cursor: 'pointer', padding: 6 }}
+            style={{ background: 'none', border: 'none', color: 'var(--text)', cursor: 'pointer', padding: 10, margin: -4 }}
           >
             {menuOpen
               ? <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12"/></svg>
