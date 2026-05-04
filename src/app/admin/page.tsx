@@ -7,27 +7,32 @@ export default async function AdminDashboard() {
   const now = Date.now()
 
   type Row = Record<string, unknown>
-  const [countsRows, active, recentLeads] = (await Promise.all([
-    sql`
-      SELECT
-        (SELECT COUNT(*)::int FROM nes_leads) AS total_leads,
-        (SELECT COUNT(*)::int FROM nes_leads WHERE status = 'new') AS new_leads,
-        (SELECT COUNT(*)::int FROM nes_products) AS total_products
-    `,
-    sql`
-      SELECT id, name, phone, status, priority, next_follow_up_at, segment, assignee, last_contact_at, quote_status, source
-      FROM nes_leads
-      WHERE status NOT IN ('won', 'closed', 'lost', 'spam')
-      ORDER BY created_at DESC
-    `,
-    sql`
-      SELECT id, name, status, priority, next_follow_up_at, segment, assignee, last_contact_at, quote_status, created_at
-      FROM nes_leads
-      ORDER BY created_at DESC
-      LIMIT 6
-    `,
-  ])) as Row[][]
-  const counts = countsRows[0] as Row
+  let countsRows: Row[] = [], active: Row[] = [], recentLeads: Row[] = []
+  try {
+    ;[countsRows, active, recentLeads] = (await Promise.all([
+      sql`
+        SELECT
+          (SELECT COUNT(*)::int FROM nes_leads) AS total_leads,
+          (SELECT COUNT(*)::int FROM nes_leads WHERE status = 'new') AS new_leads,
+          COALESCE((SELECT COUNT(*)::int FROM nes_products), 0) AS total_products
+      `,
+      sql`
+        SELECT id, name, phone, status, priority, next_follow_up_at, segment, assignee, last_contact_at, quote_status, source, created_at
+        FROM nes_leads
+        WHERE status NOT IN ('won', 'closed', 'lost', 'spam')
+        ORDER BY created_at DESC
+      `,
+      sql`
+        SELECT id, name, status, priority, next_follow_up_at, segment, assignee, last_contact_at, quote_status, created_at
+        FROM nes_leads
+        ORDER BY created_at DESC
+        LIMIT 6
+      `,
+    ])) as Row[][]
+  } catch (err) {
+    console.error('[Admin] DB query failed:', err)
+  }
+  const counts = (countsRows[0] ?? {}) as Row
 
   const totalLeads = Number(counts?.total_leads ?? 0)
   const newLeads = Number(counts?.new_leads ?? 0)

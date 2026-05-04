@@ -38,7 +38,7 @@ export default function HeroIndustrialPanel({
 }) {
   return (
     <section style={{ padding: 'clamp(44px,7vw,78px) 5% clamp(52px,8vw,92px)', position: 'relative', overflow: 'hidden' }}>
-      <WarpBackground style={{ opacity: 0.35 }} />
+      <WarpBackground style={{ opacity: 0.55 }} />
       <div style={{ maxWidth: 1240, margin: '0 auto', alignItems: 'center', position: 'relative', zIndex: 1 }} className="grid grid-cols-1 lg:grid-cols-[1.04fr_0.96fr] gap-10 lg:gap-[54px]">
         <div>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(242,99,22,0.10)', border: '1px solid rgba(242,99,22,0.18)', borderRadius: 999, padding: '6px 14px', marginBottom: 22, overflow: 'hidden' }}>

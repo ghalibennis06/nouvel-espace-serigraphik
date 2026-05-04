@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { GooeyText } from '@/components/ui/gooey-text'
 
 type MoroccoTrustSectionProps = {
   locale: string
@@ -31,13 +30,6 @@ export default function MoroccoTrustSection({ locale }: MoroccoTrustSectionProps
     <section style={{ background: 'var(--bg)', padding: 'clamp(44px,7vw,80px) 5%', borderTop: '1px solid var(--border)' }}>
       <div style={{ maxWidth: 1240, margin: '0 auto', alignItems: 'start' }} className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-8">
         <div>
-          <GooeyText
-            texts={['Sérigraphie', 'Sublimation', 'DTF & UV', 'Broderie', 'UV Flatbed']}
-            morphTime={1.5}
-            cooldownTime={2}
-            className="h-14 w-full mb-1"
-            textClassName="text-[var(--orange)] text-3xl font-black"
-          />
           <span className="stag">Pourquoi NES au Maroc</span>
           <h2 style={{ fontSize: 'clamp(28px,3.5vw,42px)', fontWeight: 800, color: 'var(--text)', letterSpacing: '-0.025em', lineHeight: 1.08 }}>
             Plus qu'un catalogue, un partenaire pour démarrer, produire et tenir votre atelier.
@@ -69,21 +61,29 @@ export default function MoroccoTrustSection({ locale }: MoroccoTrustSectionProps
         </div>
 
         <div style={{ display: 'grid', gap: 14 }}>
-          {TRUST_POINTS.map((point) => (
+          {TRUST_POINTS.map((point, idx) => (
             <div
               key={point.title}
               style={{
                 background: 'var(--card)',
                 border: '1px solid var(--border)',
+                borderLeft: '3px solid var(--orange)',
                 borderRadius: 18,
                 padding: 22,
                 boxShadow: 'var(--shadow)',
+                transition: 'box-shadow 0.2s, transform 0.2s',
               }}
+              className="card-hover"
             >
-              <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--orange)', marginBottom: 9 }}>
-                NES · Maroc
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 9 }}>
+                <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 22, height: 22, borderRadius: '50%', background: 'var(--orangesoft)', fontSize: 10, fontWeight: 900, color: 'var(--orange)', flexShrink: 0 }}>
+                  {idx + 1}
+                </span>
+                <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--orange)' }}>
+                  NES · Maroc
+                </div>
               </div>
-              <h3 style={{ fontSize: 19, fontWeight: 800, color: 'var(--text)', marginBottom: 8, letterSpacing: '-0.015em' }}>
+              <h3 style={{ fontSize: 19, fontWeight: 800, color: 'var(--text)', marginBottom: 8, letterSpacing: '-0.02em' }}>
                 {point.title}
               </h3>
               <p style={{ fontSize: 14, color: 'var(--text2)', lineHeight: 1.65 }}>

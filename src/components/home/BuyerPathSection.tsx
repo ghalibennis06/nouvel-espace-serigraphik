@@ -56,7 +56,7 @@ export default function BuyerPathSection({ locale }: BuyerPathSectionProps) {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {PATHS.map((path) => (
+          {PATHS.map((path, idx) => (
             <MagicCard
               key={path.title}
               gradientColor="rgba(242,99,22,0.12)"
@@ -73,8 +73,13 @@ export default function BuyerPathSection({ locale }: BuyerPathSectionProps) {
               }}
             >
               <div>
-                <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--orange)', marginBottom: 10 }}>
-                  {path.eyebrow}
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
+                  <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 28, height: 28, borderRadius: '50%', background: 'var(--orangesoft)', border: '1px solid rgba(242,99,22,0.22)', fontSize: 12, fontWeight: 900, color: 'var(--orange)', flexShrink: 0 }}>
+                    {String(idx + 1).padStart(2, '0')}
+                  </span>
+                  <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--orange)' }}>
+                    {path.eyebrow}
+                  </div>
                 </div>
                 <h3 style={{ fontSize: 24, fontWeight: 800, color: 'var(--text)', letterSpacing: '-0.02em', lineHeight: 1.1 }}>
                   {path.title}
