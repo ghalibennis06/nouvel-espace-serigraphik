@@ -79,7 +79,7 @@ export default async function HomePage({ params }: { params: { locale: string } 
   const visibleKits = spotlightKits.length > 0 ? spotlightKits : KITS
 
   return (
-    <div style={{ background: 'var(--bg)' }}>
+    <div style={{ background: 'var(--bg)', paddingBottom: 'var(--mob-bar-h, 0)' }}>
 
       {/* ══════════════════════════════════════════════════════
           HERO
@@ -105,20 +105,24 @@ export default async function HomePage({ params }: { params: { locale: string } 
       {/* ══════════════════════════════════════════════════════
           TRUST STRIP
       ══════════════════════════════════════════════════════ */}
-      <div style={{ background: '#0B1523', borderBottom: '1px solid rgba(255,255,255,0.06)', padding: '14px 0' }}>
-        <div className="scroll-x-hide md:flex md:justify-center" style={{ display: 'flex', alignItems: 'center', padding: '2px 5%' }}>
+      <div style={{ background: '#0B1523', borderBottom: '1px solid rgba(255,255,255,0.06)', padding: '12px 0' }}>
+        <div className="scroll-x-hide md:flex md:justify-center" style={{ display: 'flex', alignItems: 'center', padding: '0 5%' }}>
           {[
-            { icon: '🚚', label: 'Livraison 24–48h', sub: 'partout au Maroc' },
-            { icon: '🛡️', label: 'Support local', sub: 'avant et après achat' },
-            { icon: '💬', label: 'Support WhatsApp', sub: 'rapide et direct' },
-            { icon: '🎯', label: 'Packs de démarrage', sub: 'pour lancer' },
-            { icon: '🏭', label: 'Débutants & ateliers', sub: 'premier achat au réassort' },
+            { icon: '🚚', label: 'Livraison 24–48h', sub: 'partout au Maroc', mobileHide: false },
+            { icon: '🛡️', label: 'Support local', sub: 'avant et après achat', mobileHide: false },
+            { icon: '💬', label: 'WhatsApp 7j/7', sub: 'rapide et direct', mobileHide: false },
+            { icon: '🎯', label: 'Packs de démarrage', sub: 'pour lancer', mobileHide: true },
+            { icon: '🏭', label: '2 000+ ateliers', sub: 'depuis 2018', mobileHide: true },
           ].map((item, i) => (
-            <div key={item.label} style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '8px 18px', borderLeft: i > 0 ? '1px solid rgba(255,255,255,0.08)' : 'none', flexShrink: 0 }}>
-              <span style={{ fontSize: 17 }}>{item.icon}</span>
+            <div
+              key={item.label}
+              className={item.mobileHide ? 'hidden md:flex' : 'flex'}
+              style={{ alignItems: 'center', gap: 9, padding: '7px 16px', borderLeft: i > 0 ? '1px solid rgba(255,255,255,0.08)' : 'none', flexShrink: 0 }}
+            >
+              <span style={{ fontSize: 16 }}>{item.icon}</span>
               <div>
                 <div style={{ fontSize: 12, fontWeight: 600, color: '#F0F0F8', whiteSpace: 'nowrap' }}>{item.label}</div>
-                <div style={{ fontSize: 10, color: 'rgba(240,240,248,0.60)', whiteSpace: 'nowrap' }}>{item.sub}</div>
+                <div style={{ fontSize: 10, color: 'rgba(240,240,248,0.58)', whiteSpace: 'nowrap' }}>{item.sub}</div>
               </div>
             </div>
           ))}
@@ -130,18 +134,18 @@ export default async function HomePage({ params }: { params: { locale: string } 
       <section style={{ background: '#FFF4EC', padding: 'clamp(44px,7vw,72px) 5%', borderBottom: '1px solid rgba(242,99,22,0.15)', borderTop: '1px solid rgba(242,99,22,0.12)' }}>
         <div style={{ maxWidth: 1240, margin: '0 auto', alignItems: 'start' }} className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div>
-            <span className="stag">Simulez avant d’acheter</span>
+            <span className="stag">Simulez avant d&apos;acheter</span>
             <h2 style={{ fontSize: 'clamp(28px,3.5vw,44px)', fontWeight: 800, color: 'var(--text)', letterSpacing: '-0.025em', lineHeight: 1.08 }}>
               Estimez ce que votre atelier peut réellement générer.
             </h2>
             <p style={{ fontSize: 15, color: 'var(--text2)', lineHeight: 1.75, marginTop: 14, maxWidth: 620 }}>
-              Avant de choisir une technique ou un kit, projetez votre volume, votre prix moyen et votre rythme de travail. C’est une bonne manière de sortir du flou et de parler concret avec NES.
+              Avant de choisir une technique ou un kit, projetez votre volume, votre prix moyen et votre rythme de travail. C&apos;est une bonne manière de sortir du flou et de parler concret avec NES.
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginTop: 18 }}>
               {[
-                'comparez sublimation, sérigraphie et DTF',
-                'visualisez une estimation simple de chiffre d’affaires',
-                'transformez la simulation en message WhatsApp prêt à envoyer',
+                'Comparez sublimation, sérigraphie et DTF',
+                "Visualisez une estimation simple de chiffre d'affaires",
+                'Transformez la simulation en message WhatsApp prêt à envoyer',
               ].map((item) => (
                 <div key={item} style={{ display: 'flex', gap: 8, fontSize: 13, color: 'var(--text2)', lineHeight: 1.6 }}>
                   <span style={{ color: 'var(--green)', fontWeight: 800, flexShrink: 0 }}>✓</span>
@@ -149,28 +153,28 @@ export default async function HomePage({ params }: { params: { locale: string } 
                 </div>
               ))}
             </div>
+            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginTop: 24, alignItems: 'center' }}>
+              <Link
+                href={`/${locale}/kits`}
+                className="btn-orange"
+                style={{ padding: '13px 22px', fontSize: 14, fontWeight: 800 }}
+              >
+                Voir les kits correspondants →
+              </Link>
+              <span style={{ fontSize: 13, color: 'var(--text2)' }}>
+                ou{' '}
+                <a
+                  href={whatsappGeneralLink("Bonjour NES, j'ai simulé mon activité et je voudrais en discuter pour choisir le bon kit.")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: 'var(--green)', fontWeight: 700, textDecoration: 'none' }}
+                >
+                  discuter sur WhatsApp
+                </a>
+              </span>
+            </div>
           </div>
           <RoiCalculator variant="hero" />
-          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginTop: 20, alignItems: 'center' }}>
-            <Link
-              href={`/${locale}/kits`}
-              className="btn-orange"
-              style={{ padding: '13px 22px', fontSize: 14, fontWeight: 800 }}
-            >
-              Voir les kits correspondants →
-            </Link>
-            <span style={{ fontSize: 13, color: 'var(--text2)' }}>
-              ou{' '}
-              <a
-                href={whatsappGeneralLink("Bonjour NES, j'ai simulé mon activité et je voudrais en discuter pour choisir le bon kit.")}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ color: 'var(--green)', fontWeight: 700, textDecoration: 'none' }}
-              >
-                discuter directement sur WhatsApp
-              </a>
-            </span>
-          </div>
         </div>
       </section>
 
@@ -212,6 +216,26 @@ export default async function HomePage({ params }: { params: { locale: string } 
       <FluidKitShowcase locale={locale} kits={visibleKits} />
 
       <ClosingDecisionStation locale={locale} />
+
+      {/* ── Mobile sticky bottom CTA ────────────────────────────────────────── */}
+      <div className="mob-sticky" style={{ gap: 10 }}>
+        <Link
+          href={`/${locale}/kits`}
+          className="btn-orange"
+          style={{ flex: 1, justifyContent: 'center', padding: '13px 16px', fontSize: 13, fontWeight: 800 }}
+        >
+          Voir les kits →
+        </Link>
+        <a
+          href={whatsappGeneralLink('Bonjour NES, je cherche à équiper ou démarrer mon atelier.')}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-wa-dark"
+          style={{ flex: 1, justifyContent: 'center', padding: '13px 16px', fontSize: 13, fontWeight: 800 }}
+        >
+          💬 WhatsApp
+        </a>
+      </div>
 
     </div>
   )

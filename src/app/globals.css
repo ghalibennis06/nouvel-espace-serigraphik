@@ -296,3 +296,28 @@
   -ms-overflow-style: none;
 }
 .scroll-x-hide::-webkit-scrollbar { display: none; }
+
+/* ─── Reduced motion ─────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .animate-ticker          { animation: none !important; }
+  .animate-slide-in-left,
+  .animate-slide-in-right  { animation: none !important; }
+  .fluid-kit,
+  .void-shell              { transition: box-shadow 0.15s, border-color 0.15s !important; transform: none !important; }
+  .fluid-aura              { transition: none !important; }
+}
+
+/* ─── Mobile-first typography scale ─────────────────────────────────────────── */
+@media (max-width: 639px) {
+  h1 { letter-spacing: -0.03em !important; }
+  h2 { letter-spacing: -0.025em !important; }
+}
+
+/* ─── Consistent card transitions ───────────────────────────────────────────── */
+.card-hover       { transition: transform 0.25s cubic-bezier(0.22,1,0.36,1), box-shadow 0.25s, border-color 0.25s; }
+.card-dark-hover  { transition: transform 0.25s cubic-bezier(0.22,1,0.36,1), box-shadow 0.25s, border-color 0.25s; }
+
+/* ─── Mobile body padding to clear sticky bar ───────────────────────────────── */
+@media (max-width: 639px) {
+  :root { --mob-bar-h: 72px; }
+}

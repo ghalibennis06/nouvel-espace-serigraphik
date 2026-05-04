@@ -49,7 +49,7 @@ export default function BuyerPathSection({ locale }: BuyerPathSectionProps) {
         <div style={{ maxWidth: 760, marginBottom: 28 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
             <span className="stag">Choisissez votre point de départ</span>
-            <div style={{ position: 'relative', height: 28, width: 120, overflow: 'hidden' }}>
+            <div className="hidden sm:block" style={{ position: 'relative', height: 28, width: 120, overflow: 'hidden' }}>
               <GooeyText
                 texts={['Démarrer', 'Équiper', 'Réassortir']}
                 morphTime={1.2}

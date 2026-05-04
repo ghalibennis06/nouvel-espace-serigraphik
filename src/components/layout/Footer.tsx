@@ -49,7 +49,7 @@ export default async function Footer({ locale }: { locale: string }) {
 
         {/* Links grid */}
         <div style={{ gap: '2rem', marginBottom: 44 }}
-             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr_1fr]">
+             className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-[2fr_1fr_1fr_1fr_1fr]">
 
           {/* Brand col */}
           <div>

@@ -56,7 +56,7 @@ export default function HeroIndustrialPanel({
           </div>
 
           {/* Mobile product image — visible FIRST on small screens (before headline) */}
-          <div className="lg:hidden mb-5 relative" style={{ height: 200, borderRadius: 20, overflow: 'hidden', border: '1px solid rgba(242,99,22,0.22)', boxShadow: '0 12px 40px rgba(0,0,0,0.12)' }}>
+          <div className="lg:hidden mb-5 relative" style={{ height: 'clamp(190px,44vw,260px)', borderRadius: 20, overflow: 'hidden', border: '1px solid rgba(242,99,22,0.22)', boxShadow: '0 12px 40px rgba(0,0,0,0.12)' }}>
             <Image src={photos[0].src} alt={photos[0].alt} fill sizes="100vw" style={{ objectFit: 'cover' }} />
             <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(0,0,0,0.04) 0%, rgba(0,0,0,0.60) 100%)' }} />
             <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'flex-end', padding: 14, justifyContent: 'space-between' }}>
@@ -106,17 +106,16 @@ export default function HeroIndustrialPanel({
             )}
           </div>
 
-          <div style={{ display: 'flex', gap: 0, flexWrap: 'wrap' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, auto)', gap: 0, width: 'fit-content' }}>
             {[
               { val: '2 000+', lbl: 'ateliers lancés' },
               { val: '24–48h', lbl: 'livraison Maroc' },
               { val: '170+', lbl: 'références métier' },
             ].map((s, i) => (
-              <div key={s.lbl} style={{ display: 'flex', alignItems: 'center', gap: 0 }}>
-                {i > 0 && <div style={{ width: 1, height: 38, background: 'var(--border2)', margin: '0 24px' }} />}
+              <div key={s.lbl} style={{ display: 'flex', alignItems: 'center', paddingLeft: i > 0 ? 20 : 0, paddingRight: 20, borderLeft: i > 0 ? '1px solid var(--border2)' : 'none' }}>
                 <div>
-                  <div style={{ fontSize: 38, fontWeight: 900, color: 'var(--text)', lineHeight: 1, letterSpacing: '-0.03em' }}>{s.val}</div>
-                  <div style={{ fontSize: 12, color: 'var(--text2)', marginTop: 3 }}>{s.lbl}</div>
+                  <div style={{ fontSize: 'clamp(26px,3.5vw,36px)', fontWeight: 900, color: 'var(--text)', lineHeight: 1, letterSpacing: '-0.03em' }}>{s.val}</div>
+                  <div style={{ fontSize: 11, color: 'var(--text2)', marginTop: 4 }}>{s.lbl}</div>
                 </div>
               </div>
             ))}

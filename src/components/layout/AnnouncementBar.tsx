@@ -22,7 +22,7 @@ export default function AnnouncementBar() {
           <span
             key={i}
             style={{
-              padding: '0 48px',
+              padding: '0 32px',
               fontSize: '11px',
               fontWeight: 700,
               letterSpacing: '0.1em',

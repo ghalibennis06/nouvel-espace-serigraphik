@@ -49,10 +49,10 @@ export default function ClosingDecisionStation({ locale }: { locale: string }) {
 
   return (
     <section style={{ background: '#0A0A0F', padding: 'clamp(52px,8vw,92px) 5%', borderTop: '1px solid rgba(255,255,255,0.06)', position: 'relative', overflow: 'hidden' }}>
-      <AnimatedGradient config={{ preset: 'Lava', speed: 18 }} style={{ opacity: 0.18 }} />
-      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(10,10,15,0.72) 0%, rgba(10,10,15,0.88) 100%)', pointerEvents: 'none', zIndex: 0 }} />
+      <AnimatedGradient config={{ preset: 'Lava', speed: 18 }} style={{ opacity: 0.22, zIndex: 0 }} />
+      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(10,10,15,0.76) 0%, rgba(10,10,15,0.90) 100%)', pointerEvents: 'none', zIndex: 1 }} />
 
-      <div style={{ maxWidth: 1240, margin: '0 auto', position: 'relative', zIndex: 2 }}>
+      <div style={{ maxWidth: 1240, margin: '0 auto', position: 'relative', zIndex: 3 }}>
         <div style={{ alignItems: 'start' }} className="grid grid-cols-1 lg:grid-cols-[1.02fr_0.98fr] gap-6">
           <div style={{ paddingRight: 10 }}>
             <span style={{ display: 'inline-flex', padding: '7px 12px', borderRadius: 999, background: 'rgba(242,99,22,0.12)', border: '1px solid rgba(242,99,22,0.20)', fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#ffb58c', marginBottom: 18 }}>
