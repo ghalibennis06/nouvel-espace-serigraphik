@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import DevisExpressButton from '@/components/ui/devis-express-button'
-import { TubesBackground } from '@/components/ui/tubes-background'
+import { WarpBackground } from '@/components/ui/warp-background'
 
 export default function HeroIndustrialPanel({
   locale,
@@ -28,7 +28,7 @@ export default function HeroIndustrialPanel({
 }) {
   return (
     <section style={{ padding: '78px 5% 92px', position: 'relative', overflow: 'hidden' }}>
-      <TubesBackground />
+      <WarpBackground style={{ opacity: 0.35 }} />
       <div style={{ maxWidth: 1240, margin: '0 auto', display: 'grid', gridTemplateColumns: '1.04fr 0.96fr', gap: '54px', alignItems: 'center', position: 'relative', zIndex: 1 }} className="grid lg:grid-cols-2 gap-12">
         <div>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(242,99,22,0.10)', border: '1px solid rgba(242,99,22,0.18)', borderRadius: 999, padding: '6px 14px', marginBottom: 22 }}>
