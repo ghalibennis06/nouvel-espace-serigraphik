@@ -4,6 +4,15 @@ import Image from 'next/image'
 import Link from 'next/link'
 import DevisExpressButton from '@/components/ui/devis-express-button'
 import { WarpBackground } from '@/components/ui/warp-background'
+import { TypewriterEffectSmooth } from '@/components/ui/typewriter-effect'
+
+const DEFAULT_WORDS = [
+  { text: 'Construisez' },
+  { text: 'un' },
+  { text: 'vrai' },
+  { text: 'business' },
+  { text: "d'impression.", className: 'text-[var(--orange)]' },
+]
 
 export default function HeroIndustrialPanel({
   locale,
@@ -38,9 +47,15 @@ export default function HeroIndustrialPanel({
             </span>
           </div>
 
-          <h1 style={{ fontSize: 'clamp(44px,5.8vw,82px)', fontWeight: 950, color: 'var(--text)', lineHeight: 1.04, letterSpacing: '-0.04em', marginBottom: 18 }}>
-            {title || 'Construisez un vrai business d’impression.'}
-          </h1>
+          {title ? (
+            <h1 style={{ fontSize: ‘clamp(44px,5.8vw,82px)’, fontWeight: 950, color: ‘var(--text)’, lineHeight: 1.04, letterSpacing: ‘-0.04em’, marginBottom: 18 }}>
+              {title}
+            </h1>
+          ) : (
+            <h1 style={{ fontSize: ‘clamp(44px,5.8vw,82px)’, fontWeight: 950, lineHeight: 1.04, letterSpacing: ‘-0.04em’, marginBottom: 18 }}>
+              <TypewriterEffectSmooth words={DEFAULT_WORDS} className="justify-start" />
+            </h1>
+          )}
 
           <p style={{ fontSize: 17, color: 'var(--text2)', lineHeight: 1.75, marginBottom: 28, maxWidth: 560 }}>
             {subtitle || 'NES vous aide à démarrer, équiper ou réapprovisionner votre atelier avec les bonnes machines, les bons kits et un accompagnement commercial clair.'}
