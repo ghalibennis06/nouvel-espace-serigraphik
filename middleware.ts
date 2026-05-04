@@ -5,7 +5,8 @@ import { NextRequest, NextResponse } from 'next/server'
 const COOKIE = 'nes-admin-session'
 const SECRET = process.env.ADMIN_COOKIE_SECRET ?? 'fallback-dev-secret-change-in-prod'
 
-// Edge-compatible HMAC verify using Web Crypto API
+// Edge-compatible HMAC verify — re-sign and compare to avoid atob() padding issues
+// (Node's digest('base64url') emits unpadded base64; atob() requires padding)
 async function verifyAdminCookie(signed: string | undefined): Promise<boolean> {
   if (!signed) return false
   const dotIdx = signed.lastIndexOf('.')
@@ -18,14 +19,20 @@ async function verifyAdminCookie(signed: string | undefined): Promise<boolean> {
     const key = await crypto.subtle.importKey(
       'raw', enc.encode(SECRET),
       { name: 'HMAC', hash: 'SHA-256' },
-      false, ['verify']
+      false, ['sign']
     )
-    // base64url → Uint8Array
-    const sigBytes = Uint8Array.from(
-      atob(sig.replace(/-/g, '+').replace(/_/g, '/')),
-      c => c.charCodeAt(0)
-    )
-    return await crypto.subtle.verify('HMAC', key, sigBytes, enc.encode(value))
+    const expectedBuf = await crypto.subtle.sign('HMAC', key, enc.encode(value))
+    // Convert to base64url (no padding) to match signAdminToken output
+    const bytes = new Uint8Array(expectedBuf)
+    const expectedSig = btoa(Array.from(bytes, b => String.fromCharCode(b)).join(''))
+      .replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '')
+    // Timing-safe comparison via XOR
+    if (expectedSig.length !== sig.length) return false
+    let diff = 0
+    for (let i = 0; i < expectedSig.length; i++) {
+      diff |= expectedSig.charCodeAt(i) ^ sig.charCodeAt(i)
+    }
+    return diff === 0
   } catch {
     return false
   }
