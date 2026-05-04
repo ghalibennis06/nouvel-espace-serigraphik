@@ -101,32 +101,36 @@ export default function Header({ locale, rootCategories, subCategories }: Header
 
         {/* Desktop nav */}
         <div className="hidden md:flex" style={{ gap: 0, alignItems: 'center' }}>
-          {navLinks.map(link => (
-            <Link
-              key={link.label}
-              href={link.href}
-              style={{
-                padding: '0 14px',
-                height: 64,
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'flex-start',
-                fontSize: 13,
-                fontWeight: 500,
-                color: isActive(link.href) ? 'var(--orange)' : 'var(--text2)',
-                textDecoration: 'none',
-                borderBottom: isActive(link.href) ? '2px solid var(--orange)' : '2px solid transparent',
-                transition: 'color .15s',
-                lineHeight: 1.15,
-              }}
-              onMouseEnter={e => (e.currentTarget.style.color = 'var(--text)')}
-              onMouseLeave={e => (e.currentTarget.style.color = isActive(link.href) ? 'var(--orange)' : 'var(--text2)')}
-            >
-              <span>{link.label}</span>
-              <span style={{ fontSize: 10, color: isActive(link.href) ? 'var(--orange)' : 'var(--text3)', marginTop: 3 }}>{link.hint}</span>
-            </Link>
-          ))}
+          {navLinks.map(link => {
+            const active = isActive(link.href)
+            return (
+              <Link
+                key={link.label}
+                href={link.href}
+                style={{
+                  padding: '0 12px',
+                  height: 64,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  alignItems: 'flex-start',
+                  fontSize: 13,
+                  fontWeight: active ? 700 : 500,
+                  color: active ? 'var(--orange)' : 'var(--text2)',
+                  textDecoration: 'none',
+                  borderBottom: active ? '2px solid var(--orange)' : '2px solid transparent',
+                  transition: 'color .15s, font-weight .15s',
+                  lineHeight: 1.15,
+                  position: 'relative',
+                }}
+                onMouseEnter={e => { e.currentTarget.style.color = 'var(--text)'; e.currentTarget.style.fontWeight = '600' }}
+                onMouseLeave={e => { e.currentTarget.style.color = active ? 'var(--orange)' : 'var(--text2)'; e.currentTarget.style.fontWeight = active ? '700' : '500' }}
+              >
+                <span>{link.label}</span>
+                <span style={{ fontSize: 10, color: active ? 'rgba(242,99,22,0.7)' : 'var(--text3)', marginTop: 2 }}>{link.hint}</span>
+              </Link>
+            )
+          })}
         </div>
 
         {/* Right actions */}
@@ -221,18 +225,44 @@ export default function Header({ locale, rootCategories, subCategories }: Header
                 <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12"/></svg>
               </button>
             </div>
-            <nav style={{ padding: '6px 0' }}>
-              {navLinks.map(link => (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  onClick={() => setMenuOpen(false)}
-                  style={{ display: 'block', padding: '15px 20px', fontSize: 14, fontWeight: 500, color: isActive(link.href) ? 'var(--orange)' : 'var(--text)', textDecoration: 'none', borderBottom: '1px solid var(--border)', minHeight: 56 }}
-                >
-                  <div style={{ fontSize: 14, fontWeight: 600 }}>{link.label}</div>
-                  <div style={{ fontSize: 11, color: 'var(--text3)', marginTop: 4 }}>{link.hint}</div>
-                </Link>
-              ))}
+            {/* Highlighted top CTA inside drawer */}
+            <div style={{ padding: '12px 16px 0' }}>
+              <Link
+                href={`/${locale}/kits`}
+                onClick={() => setMenuOpen(false)}
+                className="btn-orange"
+                style={{ width: '100%', justifyContent: 'center', padding: '13px 0', fontSize: 14, fontWeight: 800, borderRadius: 12 }}
+              >
+                Voir les kits →
+              </Link>
+            </div>
+            <nav style={{ padding: '8px 0' }}>
+              {navLinks.map(link => {
+                const active = isActive(link.href)
+                return (
+                  <Link
+                    key={link.label}
+                    href={link.href}
+                    onClick={() => setMenuOpen(false)}
+                    style={{
+                      display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                      padding: '14px 20px', fontSize: 14,
+                      fontWeight: active ? 700 : 500,
+                      color: active ? 'var(--orange)' : 'var(--text)',
+                      textDecoration: 'none',
+                      borderBottom: '1px solid var(--border)',
+                      minHeight: 56,
+                      background: active ? 'var(--orangesoft)' : 'transparent',
+                    }}
+                  >
+                    <div>
+                      <div style={{ fontSize: 14, fontWeight: active ? 700 : 600 }}>{link.label}</div>
+                      <div style={{ fontSize: 11, color: active ? 'rgba(242,99,22,0.7)' : 'var(--text3)', marginTop: 3 }}>{link.hint}</div>
+                    </div>
+                    {active && <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--orange)', flexShrink: 0 }} />}
+                  </Link>
+                )
+              })}
             </nav>
             <div style={{ padding: 16, borderTop: '1px solid var(--border)' }}>
               <a
@@ -240,7 +270,7 @@ export default function Header({ locale, rootCategories, subCategories }: Header
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-wa-dark"
-                style={{ width: '100%', padding: '13px 0', fontSize: 14, justifyContent: 'center', borderRadius: 8 }}
+                style={{ width: '100%', padding: '13px 0', fontSize: 14, justifyContent: 'center', borderRadius: 10 }}
               >
                 {WA_ICON} Commander via WhatsApp
               </a>

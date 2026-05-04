@@ -67,13 +67,13 @@ export default function BuyerPathSection({ locale }: BuyerPathSectionProps) {
           </p>
         </div>
 
-        {/* Horizontal scroll on mobile, 3-col grid on md+ */}
-        <div className="scroll-x-hide md:grid md:grid-cols-3" style={{ display: 'flex', gap: 20 }}>
+        {/* Full-width stacked on mobile, 3-col grid on md+ */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {PATHS.map((path, idx) => (
             <MagicCard
               key={path.title}
               gradientColor="rgba(242,99,22,0.12)"
-              gradientSize={180}
+              gradientSize={200}
               style={{
                 background: 'var(--card)',
                 border: '1px solid var(--border)',
@@ -83,8 +83,6 @@ export default function BuyerPathSection({ locale }: BuyerPathSectionProps) {
                 display: 'flex',
                 flexDirection: 'column',
                 gap: 14,
-                minWidth: 'min(82vw, 300px)',
-                flexShrink: 0,
               }}
             >
               <div>

@@ -27,7 +27,7 @@ const TRUST_SIGNALS = [
 
 export default function MoroccoTrustSection({ locale }: MoroccoTrustSectionProps) {
   return (
-    <section style={{ background: 'var(--bg)', padding: 'clamp(44px,7vw,80px) 5%', borderTop: '1px solid var(--border)' }}>
+    <section style={{ background: 'var(--surface)', padding: 'clamp(44px,7vw,80px) 5%', borderTop: '1px solid var(--border)' }}>
       <div style={{ maxWidth: 1240, margin: '0 auto', alignItems: 'start' }} className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-8">
         <div className="order-2 lg:order-1">
           <span className="stag">Pourquoi NES au Maroc</span>

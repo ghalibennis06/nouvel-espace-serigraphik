@@ -159,7 +159,7 @@ export default function ProductsSection({
           ))}
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-[repeat(auto-fill,minmax(240px,1fr))]" style={{ gap: 16, marginTop: 4 }}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-[repeat(auto-fill,minmax(240px,1fr))]" style={{ gap: 16, marginTop: 4 }}>
           {visible.map((p) => {
             const cat = getCat(p)
             const saleP = parseFloat(p.sale_price || '0')

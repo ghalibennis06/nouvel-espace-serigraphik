@@ -101,20 +101,39 @@ export default function ClosingDecisionStation({ locale }: { locale: string }) {
             </div>
           </div>
 
-          <div style={{ display: 'grid', gap: 14 }}>
-            {DECISION_LANES.map((lane) => {
+          <div style={{ display: 'grid', gap: 12 }}>
+            {DECISION_LANES.map((lane, idx) => {
+              const isWA = lane.external
               const content = (
-                <div style={{ borderRadius: 24, border: '1px solid rgba(255,255,255,0.10)', background: lane.tone, padding: 22, boxShadow: '0 20px 60px rgba(0,0,0,0.14)', transition: 'transform 0.25s ease, border-color 0.25s ease' }}>
-                  <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#ff9f6a', marginBottom: 8 }}>
-                    Décision NES
+                <div style={{
+                  borderRadius: 20,
+                  border: isWA ? '1px solid rgba(37,211,102,0.28)' : '1px solid rgba(255,255,255,0.10)',
+                  background: lane.tone,
+                  padding: '20px 22px',
+                  boxShadow: '0 16px 48px rgba(0,0,0,0.18)',
+                  transition: 'transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  gap: 16,
+                }}>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
+                      <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 22, height: 22, borderRadius: '50%', background: isWA ? 'rgba(37,211,102,0.20)' : 'rgba(255,255,255,0.08)', fontSize: 11, fontWeight: 900, color: isWA ? '#4ade80' : '#ff9f6a', flexShrink: 0 }}>
+                        {idx + 1}
+                      </span>
+                      <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', color: isWA ? '#4ade80' : '#ff9f6a' }}>
+                        {isWA ? 'Contact direct' : 'Décision NES'}
+                      </div>
+                    </div>
+                    <h3 style={{ fontSize: 'clamp(17px,2vw,20px)', fontWeight: 800, color: '#fffaf6', lineHeight: 1.1, letterSpacing: '-0.02em', marginBottom: 5 }}>
+                      {lane.title}
+                    </h3>
+                    <p style={{ fontSize: 13, color: 'rgba(255,244,237,0.68)', lineHeight: 1.65, maxWidth: 400 }}>
+                      {lane.text}
+                    </p>
                   </div>
-                  <h3 style={{ fontSize: 22, fontWeight: 900, color: '#fffaf6', lineHeight: 1.06, letterSpacing: '-0.02em', marginBottom: 8 }}>
-                    {lane.title}
-                  </h3>
-                  <p style={{ fontSize: 14, color: 'rgba(255,244,237,0.72)', lineHeight: 1.72, marginBottom: 16 }}>
-                    {lane.text}
-                  </p>
-                  <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '14px 20px', borderRadius: 14, background: lane.external ? 'rgba(37,211,102,0.16)' : 'rgba(255,255,255,0.08)', border: lane.external ? '1px solid rgba(37,211,102,0.30)' : '1px solid rgba(255,255,255,0.12)', color: '#fff', fontSize: 13, fontWeight: 800 }}>
+                  <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '12px 18px', borderRadius: 12, background: isWA ? 'rgba(37,211,102,0.18)' : 'rgba(255,255,255,0.08)', border: isWA ? '1px solid rgba(37,211,102,0.32)' : '1px solid rgba(255,255,255,0.12)', color: '#fff', fontSize: 12, fontWeight: 800, whiteSpace: 'nowrap', flexShrink: 0 }}>
                     {lane.cta} →
                   </div>
                 </div>

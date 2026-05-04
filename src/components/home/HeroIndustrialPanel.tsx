@@ -79,14 +79,14 @@ export default function HeroIndustrialPanel({
             {subtitle || 'NES vous aide à démarrer, équiper ou réapprovisionner votre atelier avec les bonnes machines, les bons kits et un accompagnement commercial clair.'}
           </p>
 
-          {/* Feature pills — horizontal scroll on mobile, 3-col grid on sm+ */}
-          <div className="scroll-x-hide sm:grid sm:grid-cols-3" style={{ display: 'flex', gap: 10, marginBottom: 26 }}>
+          {/* Feature pills — always 3-col grid */}
+          <div className="grid grid-cols-3 gap-3" style={{ marginBottom: 26 }}>
             {[
               { title: 'Démarrer', text: 'kits, budget, première activité' },
               { title: 'Produire', text: 'machines, capacité, cadence' },
               { title: 'Tenir', text: 'consommables, réassort, support' },
             ].map((item) => (
-              <div key={item.title} style={{ background: 'var(--card)', border: '1px solid var(--border)', borderTop: '2px solid var(--orange)', borderRadius: 16, padding: '14px 14px 13px', boxShadow: 'var(--shadow)', minWidth: 148, flexShrink: 0 }}>
+              <div key={item.title} style={{ background: 'var(--card)', border: '1px solid var(--border)', borderTop: '2px solid var(--orange)', borderRadius: 14, padding: '12px 10px 11px', boxShadow: 'var(--shadow)' }}>
                 <div style={{ fontSize: 11, fontWeight: 900, color: 'var(--text)', letterSpacing: '-0.01em', marginBottom: 4 }}>{item.title}</div>
                 <div style={{ fontSize: 12, color: 'var(--text2)', lineHeight: 1.5 }}>{item.text}</div>
               </div>

@@ -103,16 +103,16 @@ export default function VoidCategoryShowcase({
                   </div>
 
                   <div>
-                    <div style={{ fontSize: 30, fontWeight: 900, color: '#fff', letterSpacing: '-0.03em', lineHeight: 1.02, marginBottom: 10 }}>
+                    <div style={{ fontSize: 'clamp(20px,3.8vw,30px)', fontWeight: 900, color: '#fff', letterSpacing: '-0.03em', lineHeight: 1.05, marginBottom: 8 }}>
                       {cat.name}
                     </div>
-                    <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.76)', lineHeight: 1.65, maxWidth: 320, marginBottom: 18 }}>
+                    <p style={{ fontSize: 'clamp(12px,1.4vw,13px)', color: 'rgba(255,255,255,0.78)', lineHeight: 1.6, maxWidth: 320, marginBottom: 16 }}>
                       {cat.info}
                     </p>
 
-                    <div className="void-reveal" style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '12px 16px', borderRadius: 16, background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.12)', color: '#fff', fontSize: 12, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', backdropFilter: 'blur(12px)', transform: 'translateY(18px) scale(0.96)', opacity: 0, transition: 'all 0.55s cubic-bezier(0.22, 1, 0.36, 1)' }}>
-                      <span style={{ display: 'inline-flex', width: 8, height: 8, borderRadius: 999, background: 'var(--orange)', boxShadow: '0 0 18px rgba(242,99,22,0.9)' }} />
-                      Entrer dans cet univers
+                    <div className="void-reveal" style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '11px 16px', borderRadius: 14, background: 'rgba(242,99,22,0.22)', border: '1px solid rgba(242,99,22,0.40)', color: '#fff', fontSize: 12, fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase', backdropFilter: 'blur(12px)', transform: 'translateY(18px) scale(0.96)', opacity: 0, transition: 'all 0.55s cubic-bezier(0.22, 1, 0.36, 1)' }}>
+                      <span style={{ display: 'inline-flex', width: 7, height: 7, borderRadius: 999, background: 'var(--orange)', boxShadow: '0 0 14px rgba(242,99,22,0.9)' }} />
+                      Explorer →
                     </div>
                   </div>
                 </div>

@@ -85,7 +85,7 @@ export default function FluidKitShowcase({
                 </div>
 
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 16 }}>
-                  <span style={{ fontSize: 40, fontWeight: 900, color: 'var(--orange)', letterSpacing: '-0.04em', lineHeight: 1 }}>{kit.priceDisplay}</span>
+                  <span style={{ fontSize: 'clamp(28px,5vw,40px)', fontWeight: 900, color: 'var(--orange)', letterSpacing: '-0.04em', lineHeight: 1 }}>{kit.priceDisplay}</span>
                   <span style={{ fontSize: 13, color: 'var(--text2)' }}>MAD</span>
                   {kit.oldPrice ? <span style={{ fontSize: 14, color: 'var(--text3)', textDecoration: 'line-through' }}>{kit.oldPrice}</span> : null}
                 </div>
@@ -104,9 +104,9 @@ export default function FluidKitShowcase({
 
                 <div style={{ background: 'rgba(255,255,255,0.72)', border: '1px solid var(--border)', borderRadius: 16, padding: '16px 16px 14px', marginBottom: 16, backdropFilter: 'blur(10px)' }}>
                   <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--orange)', marginBottom: 8 }}>Ce que vous obtenez</div>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                    {kit.items.slice(0, 4).map((item) => (
-                      <div key={item} style={{ display: 'flex', gap: 8, fontSize: 12, color: 'var(--text2)', lineHeight: 1.55 }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
+                    {kit.items.slice(0, 4).map((item, itemIdx) => (
+                      <div key={item} className={itemIdx === 3 ? 'hidden md:flex' : 'flex'} style={{ gap: 8, fontSize: 12, color: 'var(--text2)', lineHeight: 1.55 }}>
                         <span style={{ color: 'var(--green)', fontWeight: 800, flexShrink: 0 }}>✓</span>
                         <span>{item}</span>
                       </div>
