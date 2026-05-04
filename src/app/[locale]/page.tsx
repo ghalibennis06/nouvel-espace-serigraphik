@@ -16,6 +16,7 @@ import VoidCategoryShowcase from '@/components/home/VoidCategoryShowcase'
 import FluidKitShowcase from '@/components/home/FluidKitShowcase'
 import HeroIndustrialPanel from '@/components/home/HeroIndustrialPanel'
 import ClosingDecisionStation from '@/components/home/ClosingDecisionStation'
+import { ExpandableGallery } from '@/components/ui/expandable-gallery'
 
 export const revalidate = 3600 // Refresh every hour; WC webhook purges on product changes
 
@@ -176,6 +177,31 @@ export default async function HomePage({ params }: { params: { locale: string } 
       <VoidCategoryShowcase locale={locale} categories={visibleCategories} />
 
       <MoroccoTrustSection locale={locale} />
+
+      {/* ══════════════════════════════════════════════════════
+          GALLERY
+      ══════════════════════════════════════════════════════ */}
+      <section style={{ background: 'var(--surface)', padding: '72px 5%', borderTop: '1px solid var(--border)' }}>
+        <div style={{ maxWidth: 1240, margin: '0 auto' }}>
+          <div style={{ marginBottom: 28 }}>
+            <span className="stag">Galerie produits</span>
+            <h2 style={{ fontSize: 'clamp(26px,3vw,38px)', fontWeight: 800, color: 'var(--text)', letterSpacing: '-0.025em', lineHeight: 1.08 }}>
+              Machines, kits et consommables NES
+            </h2>
+          </div>
+          <ExpandableGallery
+            images={[
+              '/api/img?u=https%3A%2F%2Fnouvelespaceserigraphik.ma%2Fwp-content%2Fuploads%2F2024%2F12%2Fpresse-40x50autoopen.jpg',
+              '/api/img?u=https%3A%2F%2Fnouvelespaceserigraphik.ma%2Fwp-content%2Fuploads%2F2024%2F12%2FSH02.png',
+              '/api/img?u=https%3A%2F%2Fnouvelespaceserigraphik.ma%2Fwp-content%2Fuploads%2F2025%2F01%2FINK-C.png',
+              '/api/img?u=https%3A%2F%2Fnouvelespaceserigraphik.ma%2Fwp-content%2Fuploads%2F2024%2F12%2F4-couleurs-4-stations-pro.jpg',
+              '/api/img?u=https%3A%2F%2Fnouvelespaceserigraphik.ma%2Fwp-content%2Fuploads%2F2024%2F12%2F61gC992Xr5L.jpg',
+              '/api/img?u=https%3A%2F%2Fnouvelespaceserigraphik.ma%2Fwp-content%2Fuploads%2F2024%2F12%2FINK-C.png',
+            ]}
+          />
+        </div>
+      </section>
+
       <ProofFieldSection locale={locale} />
 
       {/* ══════════════════════════════════════════════════════

@@ -1,7 +1,9 @@
 'use client'
 
+import { useState } from 'react'
 import Link from 'next/link'
 import { whatsappGeneralLink } from '@/lib/utils'
+import { PlaceholdersAndVanishInput } from '@/components/ui/vanish-input'
 
 const DECISION_LANES: Array<{
   title: string
@@ -42,6 +44,8 @@ const CLOSING_SIGNALS = [
 ]
 
 export default function ClosingDecisionStation({ locale }: { locale: string }) {
+  const [inputVal, setInputVal] = useState('')
+
   return (
     <section style={{ background: '#0A0A0F', padding: '92px 5%', borderTop: '1px solid rgba(255,255,255,0.06)', position: 'relative', overflow: 'hidden' }}>
       <div style={{ position: 'absolute', top: -120, right: -100, width: 340, height: 340, borderRadius: 999, background: 'radial-gradient(circle, rgba(242,99,22,0.20) 0%, rgba(242,99,22,0.08) 42%, rgba(242,99,22,0) 74%)', filter: 'blur(18px)', pointerEvents: 'none' }} />
@@ -72,6 +76,27 @@ export default function ClosingDecisionStation({ locale }: { locale: string }) {
                   </div>
                 ))}
               </div>
+            </div>
+
+            <div style={{ marginTop: 20 }}>
+              <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#ff9f6a', marginBottom: 10 }}>
+                Décrivez votre besoin, NES vous répond sur WhatsApp
+              </div>
+              <PlaceholdersAndVanishInput
+                placeholders={[
+                  "Je veux lancer un atelier de sublimation...",
+                  "J'ai besoin d'une presse à chaud pro...",
+                  "Je cherche à me réapprovisionner en encres DTF...",
+                  "Je veux comparer DTF vs sérigraphie pour mon budget...",
+                  "Je veux équiper mon atelier de A à Z...",
+                ]}
+                onChange={(e) => setInputVal(e.target.value)}
+                onSubmit={() => {
+                  if (inputVal.trim()) {
+                    window.open(whatsappGeneralLink(inputVal.trim()), '_blank')
+                  }
+                }}
+              />
             </div>
           </div>
 

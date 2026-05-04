@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { GooeyText } from '@/components/ui/gooey-text'
 
 type MoroccoTrustSectionProps = {
   locale: string
@@ -30,6 +31,13 @@ export default function MoroccoTrustSection({ locale }: MoroccoTrustSectionProps
     <section style={{ background: 'var(--bg)', padding: '80px 5%', borderTop: '1px solid var(--border)' }}>
       <div style={{ maxWidth: 1240, margin: '0 auto', display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: '32px', alignItems: 'start' }} className="grid lg:grid-cols-2 gap-8">
         <div>
+          <GooeyText
+            texts={['Sérigraphie', 'Sublimation', 'DTF & UV', 'Broderie', 'UV Flatbed']}
+            morphTime={1.5}
+            cooldownTime={2}
+            className="h-14 w-full mb-1"
+            textClassName="text-[var(--orange)] text-3xl font-black"
+          />
           <span className="stag">Pourquoi NES au Maroc</span>
           <h2 style={{ fontSize: 'clamp(28px,3.5vw,42px)', fontWeight: 800, color: 'var(--text)', letterSpacing: '-0.025em', lineHeight: 1.08 }}>
             Plus qu'un catalogue, un partenaire pour démarrer, produire et tenir votre atelier.
