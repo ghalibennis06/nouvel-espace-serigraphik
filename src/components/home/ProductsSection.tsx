@@ -4,6 +4,7 @@ import Link from 'next/link'
 import type { WCProduct } from '@/lib/types'
 import { getProductImage, productHref, whatsappProductLink } from '@/lib/utils'
 import ImageWithFallback from '@/components/ui/ImageWithFallback'
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card'
 
 const CAT_MAP: Record<string, string> = {
   'les-presses-a-chaud': 'presses',
@@ -125,26 +126,36 @@ export default function ProductsSection({
         </div>
 
         <div className="scroll-x-hide" style={{ display: 'flex', gap: 10, flexWrap: 'nowrap', marginBottom: 24, paddingBottom: 4 }}>
-          {FILTERS.map(({ key, label }) => (
-            <button
-              key={key}
-              onClick={() => setActive(key)}
-              style={{
-                padding: '10px 16px',
-                borderRadius: 999,
-                fontSize: 12,
-                fontWeight: 800,
-                cursor: 'pointer',
-                fontFamily: 'Inter, sans-serif',
-                transition: 'all .18s',
-                background: active === key ? 'var(--orange)' : 'var(--card)',
-                color: active === key ? '#fff' : 'var(--text2)',
-                border: active === key ? '1px solid var(--orange)' : '1px solid var(--border2)',
-                boxShadow: active === key ? '0 10px 28px rgba(242,99,22,0.18)' : 'none',
-              }}
-            >
-              {label}
-            </button>
+          {FILTERS.map(({ key, label, title, text }) => (
+            <HoverCard key={key} openDelay={200} closeDelay={100}>
+              <HoverCardTrigger asChild>
+                <button
+                  onClick={() => setActive(key)}
+                  style={{
+                    padding: '10px 16px',
+                    borderRadius: 999,
+                    fontSize: 12,
+                    fontWeight: 800,
+                    cursor: 'pointer',
+                    fontFamily: 'Inter, sans-serif',
+                    transition: 'all .18s',
+                    background: active === key ? 'var(--orange)' : 'var(--card)',
+                    color: active === key ? '#fff' : 'var(--text2)',
+                    border: active === key ? '1px solid var(--orange)' : '1px solid var(--border2)',
+                    boxShadow: active === key ? '0 10px 28px rgba(242,99,22,0.18)' : 'none',
+                  }}
+                >
+                  {label}
+                </button>
+              </HoverCardTrigger>
+              <HoverCardContent className="w-56 p-3" style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 14, boxShadow: 'var(--shadow)' }}>
+                <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--orange)', marginBottom: 4 }}>
+                  {label}
+                </div>
+                <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)', marginBottom: 4 }}>{title}</div>
+                <p style={{ fontSize: 12, color: 'var(--text2)', lineHeight: 1.6 }}>{text}</p>
+              </HoverCardContent>
+            </HoverCard>
           ))}
         </div>
 

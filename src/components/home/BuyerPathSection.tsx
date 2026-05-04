@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { whatsappGeneralLink } from '@/lib/utils'
 import { MagicCard } from '@/components/ui/magic-card'
+import { GooeyText } from '@/components/ui/gooey-text'
 
 type BuyerPathSectionProps = {
   locale: string
@@ -46,7 +47,18 @@ export default function BuyerPathSection({ locale }: BuyerPathSectionProps) {
     <section style={{ background: 'var(--surface)', padding: 'clamp(44px,7vw,80px) 5%', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }}>
       <div style={{ maxWidth: 1240, margin: '0 auto' }}>
         <div style={{ maxWidth: 760, marginBottom: 28 }}>
-          <span className="stag">Choisissez votre point de départ</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
+            <span className="stag">Choisissez votre point de départ</span>
+            <div style={{ position: 'relative', height: 28, width: 120, overflow: 'hidden' }}>
+              <GooeyText
+                texts={['Démarrer', 'Équiper', 'Réassortir']}
+                morphTime={1.2}
+                cooldownTime={2.2}
+                className="h-full w-full"
+                textClassName="!text-base !text-[var(--orange)] !font-extrabold"
+              />
+            </div>
+          </div>
           <h2 style={{ fontSize: 'clamp(28px,3.5vw,44px)', fontWeight: 800, color: 'var(--text)', letterSpacing: '-0.025em', lineHeight: 1.08 }}>
             NES vous aide à acheter selon votre vrai besoin, pas au hasard.
           </h2>
