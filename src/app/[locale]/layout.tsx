@@ -7,6 +7,7 @@ import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import AnnouncementBar from '@/components/layout/AnnouncementBar'
 import WhatsAppFloat from '@/components/ui/WhatsAppFloat'
+import { LiquidCursor } from '@/components/ui/liquid-cursor'
 import ThemeProvider from '@/components/ThemeProvider'
 import { getCategoryTree } from '@/lib/woocommerce'
 
@@ -66,6 +67,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
             </main>
             <Footer locale={locale} />
             <WhatsAppFloat />
+            <LiquidCursor />
           </NextIntlClientProvider>
         </ThemeProvider>
       </body>
