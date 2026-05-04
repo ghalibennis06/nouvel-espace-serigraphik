@@ -20,15 +20,15 @@ export default function VoidCategoryShowcase({
   categories: VoidCategoryItem[]
 }) {
   return (
-    <section style={{ background: 'var(--bg)', padding: 'clamp(44px,7vw,84px) 5%' }}>
+    <section style={{ background: 'var(--surface)', padding: 'clamp(44px,7vw,84px) 5%' }}>
       <div style={{ maxWidth: 1240, margin: '0 auto' }}>
         <div style={{ marginBottom: 34, maxWidth: 760 }}>
-          <span className="stag">Showcase NES</span>
+          <span className="stag">Catalogue NES</span>
           <h2 style={{ fontSize: 'clamp(30px,3.8vw,48px)', fontWeight: 900, color: 'var(--text)', letterSpacing: '-0.03em', lineHeight: 1.05, marginBottom: 12 }}>
-            Explorez les univers NES avec une interaction plus forte.
+            Machines, consommables et produits pour chaque technique.
           </h2>
           <p style={{ fontSize: 15, color: 'var(--text2)', lineHeight: 1.75, maxWidth: 660 }}>
-            On garde l’énergie d’un reveal plus vivant, mais dans un langage plus atelier, plus premium et plus crédible pour NES.
+            Sérigraphie, sublimation, DTF, UV flatbed — NES stock et livre tout ce qu'il faut pour lancer ou tenir une production au Maroc.
           </p>
         </div>
 

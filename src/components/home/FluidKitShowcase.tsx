@@ -14,19 +14,19 @@ export default function FluidKitShowcase({
   kits: Kit[]
 }) {
   return (
-    <section id="kits" style={{ background: 'var(--surface)', padding: 'clamp(44px,7vw,84px) 5%', borderTop: '1px solid var(--border)' }}>
+    <section id="kits" style={{ background: '#0B1523', padding: 'clamp(44px,7vw,84px) 5%', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
       <div style={{ maxWidth: 1240, margin: '0 auto' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 36, flexWrap: 'wrap', gap: 12 }}>
           <div style={{ maxWidth: 720 }}>
             <span className="stag">Kits & Packs</span>
-            <h2 style={{ fontSize: 'clamp(30px,3.8vw,48px)', fontWeight: 900, color: 'var(--text)', letterSpacing: '-0.03em', lineHeight: 1.05, marginBottom: 10 }}>
-              Des packs plus lisibles, plus désirables, plus prêts à vendre.
+            <h2 style={{ fontSize: 'clamp(30px,3.8vw,48px)', fontWeight: 900, color: '#F0F0F8', letterSpacing: '-0.03em', lineHeight: 1.05, marginBottom: 10 }}>
+              Tout pour démarrer, produire et vendre — livré en 24–48h.
             </h2>
-            <p style={{ fontSize: 15, color: 'var(--text2)', lineHeight: 1.75 }}>
-              Cette version remplace la simple carte catalogue par un bloc plus vivant, plus premium, et plus clair sur le vrai gain commercial de chaque kit.
+            <p style={{ fontSize: 15, color: 'rgba(240,240,248,0.70)', lineHeight: 1.75 }}>
+              Chaque kit NES est conçu pour vous faire gagner du temps : matériel sélectionné, budget transparent, et support WhatsApp inclus.
             </p>
           </div>
-          <Link href={`/${locale}/kits`} style={{ fontSize: 14, fontWeight: 700, color: 'var(--orange)', textDecoration: 'none', whiteSpace: 'nowrap' }}>
+          <Link href={`/${locale}/kits`} style={{ fontSize: 14, fontWeight: 700, color: '#F97316', textDecoration: 'none', whiteSpace: 'nowrap' }}>
             Voir tous les kits →
           </Link>
         </div>

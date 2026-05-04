@@ -37,7 +37,7 @@ export default function HeroIndustrialPanel({
   trustBullets?: string[]
 }) {
   return (
-    <section style={{ padding: 'clamp(44px,7vw,78px) 5% clamp(52px,8vw,92px)', position: 'relative', overflow: 'hidden' }}>
+    <section style={{ padding: 'clamp(44px,7vw,78px) 5% clamp(52px,8vw,92px)', position: 'relative', overflow: 'hidden', background: 'var(--bg)' }}>
       <WarpBackground style={{ opacity: 0.55 }} />
       <div style={{ maxWidth: 1240, margin: '0 auto', alignItems: 'center', position: 'relative', zIndex: 1 }} className="grid grid-cols-1 lg:grid-cols-[1.04fr_0.96fr] gap-10 lg:gap-[54px]">
         <div>
@@ -69,13 +69,13 @@ export default function HeroIndustrialPanel({
             {subtitle || 'NES vous aide à démarrer, équiper ou réapprovisionner votre atelier avec les bonnes machines, les bons kits et un accompagnement commercial clair.'}
           </p>
 
-          <div style={{ gap: 12, marginBottom: 26 }} className="grid grid-cols-3 gap-3">
+          <div style={{ gap: 12, marginBottom: 26 }} className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {[
               { title: 'Démarrer', text: 'kits, budget, première activité' },
               { title: 'Produire', text: 'machines, capacité, cadence' },
               { title: 'Tenir', text: 'consommables, réassort, support' },
             ].map((item) => (
-              <div key={item.title} style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 16, padding: '14px 14px 13px', boxShadow: 'var(--shadow)' }}>
+              <div key={item.title} style={{ background: 'var(--card)', border: '1px solid var(--border)', borderTop: '2px solid var(--orange)', borderRadius: 16, padding: '14px 14px 13px', boxShadow: 'var(--shadow)' }}>
                 <div style={{ fontSize: 11, fontWeight: 900, color: 'var(--text)', letterSpacing: '-0.01em', marginBottom: 4 }}>{item.title}</div>
                 <div style={{ fontSize: 12, color: 'var(--text2)', lineHeight: 1.5 }}>{item.text}</div>
               </div>

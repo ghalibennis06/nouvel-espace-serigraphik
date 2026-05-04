@@ -85,7 +85,7 @@ export default async function HomePage({ params }: { params: { locale: string } 
           HERO
       ══════════════════════════════════════════════════════ */}
       <ShaderAnimation
-        overlayOpacity={0.82}
+        overlayOpacity={0.96}
         overlayColor="rgba(255,255,255,1)"
         style={{ borderBottom: '1px solid var(--border)' }}
       >
@@ -105,7 +105,7 @@ export default async function HomePage({ params }: { params: { locale: string } 
       {/* ══════════════════════════════════════════════════════
           TRUST STRIP
       ══════════════════════════════════════════════════════ */}
-      <div style={{ background: 'var(--surface)', borderBottom: '1px solid var(--border)', padding: '14px 0' }}>
+      <div style={{ background: '#0B1523', borderBottom: '1px solid rgba(255,255,255,0.06)', padding: '14px 0' }}>
         <div className="scroll-x-hide md:flex md:justify-center" style={{ display: 'flex', alignItems: 'center', padding: '2px 5%' }}>
           {[
             { icon: '🚚', label: 'Livraison 24–48h', sub: 'partout au Maroc' },
@@ -114,11 +114,11 @@ export default async function HomePage({ params }: { params: { locale: string } 
             { icon: '🎯', label: 'Packs de démarrage', sub: 'pour lancer' },
             { icon: '🏭', label: 'Débutants & ateliers', sub: 'premier achat au réassort' },
           ].map((item, i) => (
-            <div key={item.label} style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '8px 18px', borderLeft: i > 0 ? '1px solid var(--border)' : 'none', flexShrink: 0 }}>
+            <div key={item.label} style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '8px 18px', borderLeft: i > 0 ? '1px solid rgba(255,255,255,0.08)' : 'none', flexShrink: 0 }}>
               <span style={{ fontSize: 17 }}>{item.icon}</span>
               <div>
-                <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', whiteSpace: 'nowrap' }}>{item.label}</div>
-                <div style={{ fontSize: 10, color: 'var(--text2)', whiteSpace: 'nowrap' }}>{item.sub}</div>
+                <div style={{ fontSize: 12, fontWeight: 600, color: '#F0F0F8', whiteSpace: 'nowrap' }}>{item.label}</div>
+                <div style={{ fontSize: 10, color: 'rgba(240,240,248,0.60)', whiteSpace: 'nowrap' }}>{item.sub}</div>
               </div>
             </div>
           ))}
@@ -127,7 +127,7 @@ export default async function HomePage({ params }: { params: { locale: string } 
 
       <BuyerPathSection locale={locale} />
 
-      <section style={{ background: 'var(--surface)', padding: 'clamp(44px,7vw,72px) 5%', borderBottom: '1px solid var(--border)' }}>
+      <section style={{ background: '#FFF4EC', padding: 'clamp(44px,7vw,72px) 5%', borderBottom: '1px solid rgba(242,99,22,0.15)', borderTop: '1px solid rgba(242,99,22,0.12)' }}>
         <div style={{ maxWidth: 1240, margin: '0 auto', alignItems: 'start' }} className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div>
             <span className="stag">Simulez avant d’acheter</span>
