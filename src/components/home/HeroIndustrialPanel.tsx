@@ -36,7 +36,7 @@ export default function HeroIndustrialPanel({
             </span>
           </div>
 
-          <h1 style={{ fontSize: 'clamp(44px,5.8vw,82px)', fontWeight: 950, color: 'var(--text)', lineHeight: 0.98, letterSpacing: '-0.05em', marginBottom: 18 }}>
+          <h1 style={{ fontSize: 'clamp(44px,5.8vw,82px)', fontWeight: 950, color: 'var(--text)', lineHeight: 1.04, letterSpacing: '-0.04em', marginBottom: 18 }}>
             {title || 'Construisez un vrai business d’impression.'}
           </h1>
 
@@ -79,7 +79,7 @@ export default function HeroIndustrialPanel({
               <div key={s.lbl} style={{ display: 'flex', alignItems: 'center', gap: 0 }}>
                 {i > 0 && <div style={{ width: 1, height: 38, background: 'var(--border2)', margin: '0 24px' }} />}
                 <div>
-                  <div style={{ fontSize: 30, fontWeight: 900, color: 'var(--text)', lineHeight: 1, letterSpacing: '-0.03em' }}>{s.val}</div>
+                  <div style={{ fontSize: 38, fontWeight: 900, color: 'var(--text)', lineHeight: 1, letterSpacing: '-0.03em' }}>{s.val}</div>
                   <div style={{ fontSize: 12, color: 'var(--text2)', marginTop: 3 }}>{s.lbl}</div>
                 </div>
               </div>

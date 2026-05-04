@@ -78,7 +78,7 @@ export default function BuyerPathSection({ locale }: BuyerPathSectionProps) {
                 </h3>
               </div>
 
-              <p style={{ fontSize: 14, color: 'var(--text2)', lineHeight: 1.65, minHeight: 92 }}>
+              <p style={{ fontSize: 14, color: 'var(--text2)', lineHeight: 1.65 }}>
                 {path.description}
               </p>
 
@@ -97,7 +97,7 @@ export default function BuyerPathSection({ locale }: BuyerPathSectionProps) {
               </div>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginTop: 'auto' }}>
-                <Link href={path.href(locale)} className="btn-orange" style={{ justifyContent: 'center', padding: '13px 18px', fontSize: 14, fontWeight: 700 }}>
+                <Link href={path.href(locale)} className="btn-orange" style={{ justifyContent: ‘center’, padding: ‘14px 20px’, fontSize: 14, fontWeight: 700 }}>
                   {path.ctaLabel} →
                 </Link>
                 <a
@@ -105,7 +105,7 @@ export default function BuyerPathSection({ locale }: BuyerPathSectionProps) {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-outline"
-                  style={{ justifyContent: 'center', padding: '12px 18px', fontSize: 13, fontWeight: 700 }}
+                  style={{ justifyContent: ‘center’, padding: ‘14px 20px’, fontSize: 13, fontWeight: 700 }}
                 >
                   Demander conseil sur WhatsApp
                 </a>

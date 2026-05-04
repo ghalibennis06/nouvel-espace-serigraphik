@@ -6,23 +6,23 @@ type MoroccoTrustSectionProps = {
 
 const TRUST_POINTS = [
   {
-    title: 'Stock et livraison au Maroc',
-    text: 'NES rassure sur la disponibilité, la livraison et la proximité commerciale, avec une promesse claire dès l’entrée.',
+    title: ‘Stock disponible, livraison rapide’,
+    text: ‘Toutes nos machines et consommables sont disponibles au Maroc. Vous recevez votre commande en 24 à 48h — sans attendre une importation ou un délai inconnu.’,
   },
   {
-    title: 'Accompagnement pour choisir',
-    text: 'Le marché est confus pour beaucoup de clients entre sublimation, sérigraphie, DTF, UV et consommables. NES simplifie la décision avec des parcours plus clairs.',
+    title: ‘On vous aide à choisir la bonne technique’,
+    text: ‘Sérigraphie, sublimation, DTF, UV — le choix peut paraître complexe. NES clarifie selon votre budget, votre capacité et ce que vous voulez vendre.’,
   },
   {
-    title: 'Business launch + réassort',
-    text: 'Le site sert à la fois les débutants qui veulent démarrer et les ateliers qui ont besoin de se réapprovisionner vite.',
+    title: ‘Un partenaire du démarrage au réassort’,
+    text: ‘Que vous lanciez votre premier atelier ou que vous réapprovisionnez un stock qui tourne, NES s’adapte à votre étape — et reste joignable sur WhatsApp.’,
   },
 ] as const
 
 const TRUST_SIGNALS = [
-  'parcours débutant → atelier → réassort déjà structuré',
-  'devis pro, kits, catégories et produits maintenant alignés',
-  'conversion WhatsApp pensée comme un vrai canal commercial',
+  ‘Kits prêts à l’emploi pour démarrer sans prise de tête’,
+  ‘Machines pro pour les ateliers qui produisent sérieusement’,
+  ‘Réassort rapide pour ne jamais bloquer votre production’,
 ]
 
 export default function MoroccoTrustSection({ locale }: MoroccoTrustSectionProps) {
