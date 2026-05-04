@@ -48,11 +48,11 @@ export default function HeroIndustrialPanel({
           </div>
 
           {title ? (
-            <h1 style={{ fontSize: ‘clamp(44px,5.8vw,82px)’, fontWeight: 950, color: ‘var(--text)’, lineHeight: 1.04, letterSpacing: ‘-0.04em’, marginBottom: 18 }}>
+            <h1 style={{ fontSize: 'clamp(44px,5.8vw,82px)', fontWeight: 950, color: 'var(--text)', lineHeight: 1.04, letterSpacing: '-0.04em', marginBottom: 18 }}>
               {title}
             </h1>
           ) : (
-            <h1 style={{ fontSize: ‘clamp(44px,5.8vw,82px)’, fontWeight: 950, lineHeight: 1.04, letterSpacing: ‘-0.04em’, marginBottom: 18 }}>
+            <h1 style={{ fontSize: 'clamp(44px,5.8vw,82px)', fontWeight: 950, lineHeight: 1.04, letterSpacing: '-0.04em', marginBottom: 18 }}>
               <TypewriterEffectSmooth words={DEFAULT_WORDS} className="justify-start" />
             </h1>
           )}
@@ -161,7 +161,7 @@ export default function HeroIndustrialPanel({
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.74) 100%)' }} />
                 <div style={{ position: 'absolute', left: 16, right: 16, bottom: 16 }}>
                   <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.72)', marginBottom: 6 }}>Montée en gamme</div>
-                  <div style={{ fontSize: 18, fontWeight: 900, color: '#fff', lineHeight: 1.06, letterSpacing: '-0.02em', marginBottom: 8 }}>Passez d’un achat isolé à une vraie logique atelier.</div>
+                  <div style={{ fontSize: 18, fontWeight: 900, color: '#fff', lineHeight: 1.06, letterSpacing: '-0.02em', marginBottom: 8 }}>Passez d'un achat isolé à une vraie logique atelier.</div>
                   <div style={{ display: 'inline-flex', padding: '8px 10px', borderRadius: 999, background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.18)', color: '#fff', fontSize: 11, fontWeight: 800, backdropFilter: 'blur(8px)' }}>
                     Maroc · NES
                   </div>

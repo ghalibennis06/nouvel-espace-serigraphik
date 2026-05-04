@@ -6,23 +6,23 @@ type MoroccoTrustSectionProps = {
 
 const TRUST_POINTS = [
   {
-    title: ‘Stock disponible, livraison rapide’,
-    text: ‘Toutes nos machines et consommables sont disponibles au Maroc. Vous recevez votre commande en 24 à 48h — sans attendre une importation ou un délai inconnu.’,
+    title: 'Stock disponible, livraison rapide',
+    text: 'Toutes nos machines et consommables sont disponibles au Maroc. Vous recevez votre commande en 24 à 48h — sans attendre une importation ou un délai inconnu.',
   },
   {
-    title: ‘On vous aide à choisir la bonne technique’,
-    text: ‘Sérigraphie, sublimation, DTF, UV — le choix peut paraître complexe. NES clarifie selon votre budget, votre capacité et ce que vous voulez vendre.’,
+    title: 'On vous aide à choisir la bonne technique',
+    text: 'Sérigraphie, sublimation, DTF, UV — le choix peut paraître complexe. NES clarifie selon votre budget, votre capacité et ce que vous voulez vendre.',
   },
   {
-    title: ‘Un partenaire du démarrage au réassort’,
-    text: ‘Que vous lanciez votre premier atelier ou que vous réapprovisionnez un stock qui tourne, NES s’adapte à votre étape — et reste joignable sur WhatsApp.’,
+    title: 'Un partenaire du démarrage au réassort',
+    text: "Que vous lanciez votre premier atelier ou que vous réapprovisionnez un stock qui tourne, NES s'adapte à votre étape — et reste joignable sur WhatsApp.",
   },
 ] as const
 
 const TRUST_SIGNALS = [
-  ‘Kits prêts à l’emploi pour démarrer sans prise de tête’,
-  ‘Machines pro pour les ateliers qui produisent sérieusement’,
-  ‘Réassort rapide pour ne jamais bloquer votre production’,
+  "Kits prêts à l'emploi pour démarrer sans prise de tête",
+  'Machines pro pour les ateliers qui produisent sérieusement',
+  'Réassort rapide pour ne jamais bloquer votre production',
 ]
 
 export default function MoroccoTrustSection({ locale }: MoroccoTrustSectionProps) {
@@ -32,7 +32,7 @@ export default function MoroccoTrustSection({ locale }: MoroccoTrustSectionProps
         <div>
           <span className="stag">Pourquoi NES au Maroc</span>
           <h2 style={{ fontSize: 'clamp(28px,3.5vw,42px)', fontWeight: 800, color: 'var(--text)', letterSpacing: '-0.025em', lineHeight: 1.08 }}>
-            Plus qu’un catalogue, un partenaire pour démarrer, produire et tenir votre atelier.
+            Plus qu'un catalogue, un partenaire pour démarrer, produire et tenir votre atelier.
           </h2>
           <p style={{ fontSize: 15, color: 'var(--text2)', lineHeight: 1.75, marginTop: 14, maxWidth: 640 }}>
             NES inspire confiance, clarifie les techniques, et fait gagner du temps au client marocain qui cherche soit à lancer une activité, soit à acheter le bon matériel sans perdre des semaines.
@@ -55,7 +55,7 @@ export default function MoroccoTrustSection({ locale }: MoroccoTrustSectionProps
               Demander un devis pro →
             </Link>
             <Link href={`/${locale}/academie`} className="btn-outline" style={{ padding: '13px 22px', fontSize: 14, fontWeight: 700 }}>
-              Voir le guide d’achat
+              Voir le guide d'achat
             </Link>
           </div>
         </div>

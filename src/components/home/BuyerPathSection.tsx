@@ -16,7 +16,7 @@ const PATHS = [
     bullets: ['Packs prêts à démarrer', 'Budget clair', 'Conseil rapide WhatsApp'],
     ctaLabel: 'Voir les kits',
     href: (locale: string) => `/${locale}/kits`,
-    proof: 'Idéal si vous partez de zéro et avez besoin d’un cadre simple pour choisir.',
+    proof: "Idéal si vous partez de zéro et avez besoin d'un cadre simple pour choisir.",
   },
   {
     title: 'Je veux équiper mon atelier',
@@ -50,7 +50,7 @@ export default function BuyerPathSection({ locale }: BuyerPathSectionProps) {
             NES vous aide à acheter selon votre vrai besoin, pas au hasard.
           </h2>
           <p style={{ fontSize: 15, color: 'var(--text2)', lineHeight: 1.7, marginTop: 12, maxWidth: 680 }}>
-            Que vous soyez au début, en train d’équiper un atelier, ou simplement en réassort, vous arrivez plus vite vers le bon choix.
+            Que vous soyez au début, en train d'équiper un atelier, ou simplement en réassort, vous arrivez plus vite vers le bon choix.
           </p>
         </div>
 
@@ -97,15 +97,15 @@ export default function BuyerPathSection({ locale }: BuyerPathSectionProps) {
               </div>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginTop: 'auto' }}>
-                <Link href={path.href(locale)} className="btn-orange" style={{ justifyContent: ‘center’, padding: ‘14px 20px’, fontSize: 14, fontWeight: 700 }}>
+                <Link href={path.href(locale)} className="btn-orange" style={{ justifyContent: 'center', padding: '14px 20px', fontSize: 14, fontWeight: 700 }}>
                   {path.ctaLabel} →
                 </Link>
                 <a
-                  href={whatsappGeneralLink(`Bonjour NES, ${path.title.toLowerCase()} et j’ai besoin d’aide pour choisir.`)}
+                  href={whatsappGeneralLink(`Bonjour NES, ${path.title.toLowerCase()} et j'ai besoin d'aide pour choisir.`)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-outline"
-                  style={{ justifyContent: ‘center’, padding: ‘14px 20px’, fontSize: 13, fontWeight: 700 }}
+                  style={{ justifyContent: 'center', padding: '14px 20px', fontSize: 13, fontWeight: 700 }}
                 >
                   Demander conseil sur WhatsApp
                 </a>

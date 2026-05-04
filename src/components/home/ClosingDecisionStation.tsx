@@ -19,7 +19,7 @@ const DECISION_LANES: Array<{
     tone: 'rgba(255,255,255,0.14)',
   },
   {
-    title: 'J’ai besoin d’un devis atelier',
+    title: "J'ai besoin d'un devis atelier",
     text: 'Si vous équipez un vrai atelier ou comparez plusieurs machines, NES peut cadrer une configuration plus sérieuse.',
     cta: 'Demander un devis pro',
     href: (locale: string) => `/${locale}/devis-pro`,
@@ -57,7 +57,7 @@ export default function ClosingDecisionStation({ locale }: { locale: string }) {
               Ne terminez pas la visite avec plus de flou.
             </h2>
             <p style={{ fontSize: 16, color: 'rgba(255,244,237,0.74)', lineHeight: 1.8, maxWidth: 620, marginBottom: 22 }}>
-              Si vous êtes arrivé jusqu’ici, le bon prochain pas n’est pas de rouvrir vingt onglets. C’est de choisir votre chemin de décision, selon votre vrai niveau de besoin.
+              Si vous êtes arrivé jusqu'ici, le bon prochain pas n'est pas de rouvrir vingt onglets. C'est de choisir votre chemin de décision, selon votre vrai niveau de besoin.
             </p>
 
             <div style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.09)', borderRadius: 24, padding: '18px 18px 16px', maxWidth: 650 }}>
