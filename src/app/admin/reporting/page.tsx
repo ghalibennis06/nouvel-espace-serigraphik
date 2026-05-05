@@ -76,7 +76,7 @@ export default async function ReportingPage() {
       </h1>
       <p style={{ fontSize: 14, color: 'var(--text2)', marginBottom: 32 }}>Intelligence commerciale — NES</p>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 14, marginBottom: 36 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 14, marginBottom: 36 }}>
         {[
           { label: 'Leads actifs', value: active.length, color: 'var(--blue)', sub: 'hors won/lost/closed/spam' },
           { label: 'Suivis en retard', value: overdueFollowUp.length, color: '#ef4444', sub: 'suivi planifié dépassé' },

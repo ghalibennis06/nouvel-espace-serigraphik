@@ -39,6 +39,7 @@ export default function DevisExpressButton() {
           email:   fd.get('email') || undefined,
           message: fd.get('message') || undefined,
           source:  `devis-express:${fd.get('requestType') || 'general'}`,
+          website: fd.get('website') ?? '',
         }),
       })
       if (res.ok) setFormStep('success')
@@ -237,6 +238,15 @@ export default function DevisExpressButton() {
                       </motion.div>
                     ) : (
                       <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+                        {/* Honeypot — bots fill it, humans never see it */}
+                        <input
+                          type="text"
+                          name="website"
+                          tabIndex={-1}
+                          autoComplete="off"
+                          aria-hidden="true"
+                          style={{ position: 'absolute', left: '-10000px', width: 1, height: 1, opacity: 0 }}
+                        />
                         <div>
                           <h3 style={{ fontSize: 18, fontWeight: 800, color: '#fff', marginBottom: 4 }}>Devis Express</h3>
                           <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.7)' }}>Réponse garantie en moins de 2h ouvrées</p>

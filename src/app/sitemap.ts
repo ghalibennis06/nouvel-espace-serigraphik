@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { getAllProductSlugs, getAllCategorySlugs } from '@/lib/woocommerce'
-import { locales } from '@/i18n'
+import { publicLocales as locales } from '@/i18n'
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://nouvelespaceserigraphik.ma'
 

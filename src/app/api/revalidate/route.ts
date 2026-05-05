@@ -18,15 +18,21 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'REVALIDATE_SECRET not set' }, { status: 500 })
   }
 
-  // Verify WooCommerce webhook signature
+  // Verify WooCommerce webhook signature.
+  // When the secret is configured, the signature header is REQUIRED.
   const signature = request.headers.get('x-wc-webhook-signature')
   const body      = await request.text()
 
-  if (signature) {
-    const expected = crypto.createHmac('sha256', secret).update(body).digest('base64')
-    if (!crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(expected))) {
-      return NextResponse.json({ error: 'Invalid signature' }, { status: 401 })
-    }
+  if (!signature) {
+    return NextResponse.json({ error: 'Missing signature' }, { status: 401 })
+  }
+
+  const expected = crypto.createHmac('sha256', secret).update(body).digest('base64')
+  const sigBuf = Buffer.from(signature)
+  const expBuf = Buffer.from(expected)
+  // Length-mismatched buffers crash timingSafeEqual — gate first.
+  if (sigBuf.length !== expBuf.length || !crypto.timingSafeEqual(sigBuf, expBuf)) {
+    return NextResponse.json({ error: 'Invalid signature' }, { status: 401 })
   }
 
   const topic = request.headers.get('x-wc-webhook-topic') ?? ''

@@ -34,6 +34,7 @@ export default function ContactPage({ params }: { params: { locale: string } }) 
           email:   fd.get('email'),
           message: fd.get('message'),
           source:  `contact:${fd.get('intent') || 'general'}`,
+          website: fd.get('website') ?? '',
         }),
       })
       if (res.ok) { setStatus('sent'); setShowForm(false) }
@@ -127,8 +128,8 @@ export default function ContactPage({ params }: { params: { locale: string } }) 
           </p>
         </div>
 
-        {/* 3 action cards */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18, marginBottom: 40 }}>
+        {/* 3 action cards — auto-fit collapses to 1/2 cols on smaller widths */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 18, marginBottom: 40 }}>
 
           {/* WhatsApp — primary */}
           <a
@@ -222,6 +223,15 @@ export default function ContactPage({ params }: { params: { locale: string } }) 
             </div>
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
               <input type="hidden" name="intent" value={intent} />
+              {/* Honeypot — invisible to humans, bots will fill it */}
+              <input
+                type="text"
+                name="website"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                style={{ position: 'absolute', left: '-10000px', width: 1, height: 1, opacity: 0 }}
+              />
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
                 <div>
                   <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text2)', marginBottom: 6 }}>Nom *</div>
@@ -259,7 +269,7 @@ export default function ContactPage({ params }: { params: { locale: string } }) 
         )}
 
         {/* ── Info strip ── */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 1, background: 'var(--border)', border: '1px solid var(--border)', borderRadius: 14, overflow: 'hidden' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 1, background: 'var(--border)', border: '1px solid var(--border)', borderRadius: 14, overflow: 'hidden' }}>
           {[
             { icon: '📍', label: 'Showroom', value: 'Casablanca, Maroc' },
             { icon: '🕐', label: 'Horaires',  value: 'Lun–Ven 9h–18h / Sam 9h–14h' },
