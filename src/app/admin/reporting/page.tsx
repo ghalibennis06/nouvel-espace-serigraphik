@@ -123,7 +123,7 @@ export default async function ReportingPage() {
         </div>
       )}
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 18, marginBottom: 24 }}>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4" style={{ marginBottom: 24 }}>
         <BreakdownTable title="Par source" rows={bySource} />
         <BreakdownTable title="Par segment" rows={bySegment} />
         <BreakdownTable title="Par type de demande" rows={byRequestType} />
@@ -136,7 +136,8 @@ export default async function ReportingPage() {
             <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--orange)' }}>⚠️ Leads stagnants ({stale.length})</span>
             <span style={{ fontSize: 11, color: 'var(--text2)' }}>Actifs, sans contact depuis +{STALE_DAYS} jours</span>
           </div>
-          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+         <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: 720 }}>
             <thead>
               <tr style={{ background: 'var(--surface)' }}>
                 {['ID', 'Statut', 'Source', 'Segment', 'Dernier contact', 'Owner', 'Suivi planifié'].map((h) => (
@@ -164,12 +165,13 @@ export default async function ReportingPage() {
               })}
             </tbody>
           </table>
+         </div>
         </div>
       )}
 
       <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 12, padding: '20px 24px' }}>
         <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)', marginBottom: 16 }}>Pipeline devis</div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: 12 }}>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
           {['none', 'needed', 'drafting', 'sent', 'won', 'lost'].map((qs) => {
             const count = all.filter((l) => ((l.quote_status as string) || 'none') === qs).length
             const colorMap: Record<string, string> = { none: 'var(--text2)', needed: 'var(--blue)', drafting: '#7c3aed', sent: 'var(--orange)', won: '#16a34a', lost: '#ef4444' }

@@ -22,7 +22,7 @@ export default async function LeadsPage() {
       <p style={{ fontSize: 14, color: 'var(--text2)', marginBottom: 14 }}>
         {leads.length} demande{leads.length !== 1 ? 's' : ''} au total
       </p>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, minmax(0, 1fr))', gap: 12, marginBottom: 24 }} className="grid md:grid-cols-7 gap-3">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3" style={{ marginBottom: 24 }}>
         {[
           ['Nouvelles', leads.filter((l) => l.status === 'new').length, 'var(--blue)'],
           ['À qualifier / relancer', leads.filter((l) => ['new', 'qualified', 'contacted', 'quoted'].includes(l.status as string)).length, 'var(--orange)'],

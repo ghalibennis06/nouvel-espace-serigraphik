@@ -91,7 +91,7 @@ export default function HomepageControlForm({
           </div>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1.15fr 0.85fr', gap: 18 }} className="grid lg:grid-cols-[1.15fr_0.85fr] gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-4">
           <div style={{ display: 'grid', gap: 12 }}>
             <label style={{ display: 'grid', gap: 6 }}>
               <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--text)' }}>Hero title</span>
@@ -101,7 +101,7 @@ export default function HomepageControlForm({
               <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--text)' }}>Hero subtitle</span>
               <textarea value={form.heroSubtitle} onChange={(e) => setForm((prev) => ({ ...prev, heroSubtitle: e.target.value }))} rows={4} style={fieldStyle} />
             </label>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 12 }} className="grid md:grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <label style={{ display: 'grid', gap: 6 }}>
                 <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--text)' }}>CTA principal</span>
                 <input value={form.heroPrimaryCtaLabel} onChange={(e) => setForm((prev) => ({ ...prev, heroPrimaryCtaLabel: e.target.value }))} style={fieldStyle} />
@@ -129,7 +129,7 @@ export default function HomepageControlForm({
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 18 }} className="grid lg:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <SelectionCard
           title="Catégories prioritaires"
           hint="Une ligne par slug"
@@ -162,7 +162,7 @@ export default function HomepageControlForm({
 
       <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 12, padding: 18 }}>
         <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)', marginBottom: 10 }}>Références utiles</div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 12 }} className="grid lg:grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           <ReferenceList title="Catégories" options={categories.map((item) => `${item.slug} · ${item.name}`)} />
           <ReferenceList title="Produits" options={products.slice(0, 12).map((item) => `${item.slug} · ${item.name}`)} />
           <ReferenceList title="Kits" options={kits.map((item) => `${item.id} · ${item.name}`)} />

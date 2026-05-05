@@ -188,7 +188,7 @@ export default async function ProductPage({ params }: PageProps) {
       </div>
 
       <div style={{ maxWidth: 1280, margin: '0 auto', padding: '40px 6%' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, marginBottom: 56, alignItems: 'start' }} className="lg:grid-cols-2 grid-cols-1">
+        <div className="grid grid-cols-1 lg:grid-cols-2" style={{ gap: 48, marginBottom: 56, alignItems: 'start' }}>
 
           {/* ── Gallery ─────────────────────────────────────────────── */}
           <div>
@@ -348,7 +348,7 @@ export default async function ProductPage({ params }: PageProps) {
                     ))}
                   </div>
                 </div>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 12 }} className="grid md:grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 12, padding: '16px 18px' }}>
                     <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--orange)', marginBottom: 6 }}>{useCase.fitLabel}</div>
                     <p style={{ fontSize: 13, color: 'var(--text2)', lineHeight: 1.65 }}>{useCase.fitDetails}</p>
@@ -401,7 +401,7 @@ export default async function ProductPage({ params }: PageProps) {
         </div>
 
         {/* ── Description & Attributes ───────────────────────────────── */}
-        <div style={{ display: 'grid', gridTemplateColumns: attributes.length > 0 ? '2fr 1fr' : '1fr', gap: 20, marginBottom: 56 }} className="lg:grid-cols-3">
+        <div className={attributes.length > 0 ? 'grid grid-cols-1 lg:grid-cols-3' : 'grid grid-cols-1'} style={{ gap: 20, marginBottom: 56 }}>
           {/* Description */}
           <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 12, padding: 28, gridColumn: attributes.length > 0 ? '1 / 3' : undefined }} className={attributes.length > 0 ? 'lg:col-span-2' : ''}>
             <h2 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 22, fontWeight: 700, color: 'var(--text)', marginBottom: 16 }}>
@@ -478,7 +478,7 @@ export default async function ProductPage({ params }: PageProps) {
         </div>
 
         {useCase && (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 14, marginBottom: 40 }} className="grid md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4" style={{ marginBottom: 40 }}>
             {[
               {
                 title: 'Si vous hésitez encore',

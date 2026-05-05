@@ -232,7 +232,7 @@ export default function ContactPage({ params }: { params: { locale: string } }) 
                 aria-hidden="true"
                 style={{ position: 'absolute', left: '-10000px', width: 1, height: 1, opacity: 0 }}
               />
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
+              <div className="grid grid-cols-1 sm:grid-cols-2" style={{ gap: 14 }}>
                 <div>
                   <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text2)', marginBottom: 6 }}>Nom *</div>
                   <input name="name" required style={inputStyle} placeholder="Votre nom" />
@@ -242,7 +242,7 @@ export default function ContactPage({ params }: { params: { locale: string } }) 
                   <input name="company" style={inputStyle} placeholder="Votre société (optionnel)" />
                 </div>
               </div>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
+              <div className="grid grid-cols-1 sm:grid-cols-2" style={{ gap: 14 }}>
                 <div>
                   <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text2)', marginBottom: 6 }}>Téléphone *</div>
                   <input name="phone" required type="tel" style={inputStyle} placeholder="+212 6XX XXX XXX" />

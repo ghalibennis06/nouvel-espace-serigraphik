@@ -119,7 +119,7 @@ export default function DevisExpressButton() {
                 overflow: 'hidden',
                 width: '100%',
                 maxWidth: 960,
-                maxHeight: '92vh',
+                maxHeight: '94vh',
                 display: 'flex',
                 background: '#D94F0A',
               }}
@@ -138,17 +138,17 @@ export default function DevisExpressButton() {
                 }}
               />
 
-              {/* Close */}
+              {/* Close — sticky-feeling, always reachable on mobile */}
               <motion.button
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 onClick={handleClose}
                 style={{
-                  position: 'absolute', top: 20, right: 20, zIndex: 10,
+                  position: 'absolute', top: 14, right: 14, zIndex: 20,
                   width: 38, height: 38, borderRadius: '50%',
-                  background: 'rgba(255,255,255,0.15)', border: 'none',
+                  background: 'rgba(0,0,0,0.45)', border: '1px solid rgba(255,255,255,0.18)',
                   color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  cursor: 'pointer', backdropFilter: 'blur(6px)',
+                  cursor: 'pointer', backdropFilter: 'blur(8px)',
                 }}
                 aria-label="Fermer"
               >
@@ -162,8 +162,8 @@ export default function DevisExpressButton() {
                 transition={{ delay: 0.18, duration: 0.35 }}
                 style={{ position: 'relative', zIndex: 1, display: 'flex', width: '100%', overflowY: 'auto', flexWrap: 'wrap' }}
               >
-                {/* ── Left panel ── */}
-                <div style={{ flex: '1 1 280px', padding: '52px 44px', color: '#fff', display: 'flex', flexDirection: 'column', gap: 28 }}>
+                {/* ── Left panel — hidden on mobile to keep the form above the fold ── */}
+                <div className="hidden md:flex" style={{ flex: '1 1 280px', padding: '52px 44px', color: '#fff', flexDirection: 'column', gap: 28 }}>
                   <div>
                     <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', opacity: 0.7, marginBottom: 12 }}>
                       Nouvel Espace Sérigraphik
@@ -210,8 +210,8 @@ export default function DevisExpressButton() {
                   </div>
                 </div>
 
-                {/* ── Right panel — form ── */}
-                <div style={{ flex: '1 1 280px', padding: '52px 44px', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', background: 'rgba(0,0,0,0.15)', backdropFilter: 'blur(8px)' }}>
+                {/* ── Right panel — form (slim padding on mobile) ── */}
+                <div className="px-5 py-6 md:p-[52px_44px]" style={{ flex: '1 1 280px', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', background: 'rgba(0,0,0,0.15)', backdropFilter: 'blur(8px)' }}>
                   <div style={{ width: '100%', maxWidth: 380, background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.20)', borderRadius: 18, padding: 32, backdropFilter: 'blur(12px)' }}>
 
                     {formStep === 'success' ? (

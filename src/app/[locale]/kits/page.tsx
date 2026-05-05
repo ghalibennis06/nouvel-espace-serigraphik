@@ -72,7 +72,7 @@ export default function KitsPage({ params }: { params: { locale: string } }) {
             ))}
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 14, textAlign: 'left', marginBottom: 18 }} className="grid md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4" style={{ textAlign: 'left', marginBottom: 18 }}>
             {[
               {
                 title: 'Je veux commencer petit',
@@ -100,7 +100,7 @@ export default function KitsPage({ params }: { params: { locale: string } }) {
             <p style={{ fontSize: 13, color: 'var(--text2)', lineHeight: 1.65, marginBottom: 12 }}>
               Si vous hésitez encore, envoyez ces informations à NES et nous pourrons vous orienter plus vite vers le bon kit.
             </p>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 8 }} className="grid md:grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {STARTER_CHECKLIST.map((item) => (
                 <div key={item} style={{ display: 'flex', gap: 8, fontSize: 12, color: 'var(--text2)', lineHeight: 1.5 }}>
                   <span style={{ color: 'var(--teal)', fontWeight: 700, flexShrink: 0 }}>✓</span>
@@ -113,7 +113,7 @@ export default function KitsPage({ params }: { params: { locale: string } }) {
       </div>
 
       <div style={{ maxWidth: 1100, margin: '0 auto', padding: '56px 6% 12px' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 16 }} className="grid md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {STARTER_STEPS.map((step) => (
             <div key={step.title} style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 14, padding: 20 }}>
               <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 8 }}>{step.title}</div>
@@ -264,7 +264,7 @@ export default function KitsPage({ params }: { params: { locale: string } }) {
             </a>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 14 }} className="grid md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {[
               { title: 'Petit budget · démarrage rapide', pick: 'Kit Sublimation Starter', why: 'Le plus accessible pour tester un marché, commencer depuis chez soi et vendre des objets personnalisés.' },
               { title: 'Textile et production régulière', pick: 'Kit Sérigraphie Pro', why: 'Le meilleur point d’entrée si vous visez t-shirts, sweats, tote bags et commandes locales récurrentes.' },

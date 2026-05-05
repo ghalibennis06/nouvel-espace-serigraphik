@@ -106,7 +106,7 @@ export default function HeroIndustrialPanel({
             )}
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, auto)', gap: 0, width: 'fit-content' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 0 }}>
             {[
               { val: '2 000+', lbl: 'ateliers lancés' },
               { val: '24–48h', lbl: 'livraison Maroc' },

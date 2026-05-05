@@ -104,7 +104,7 @@ export default function DevisProPage({ params }: { params: { locale: string } })
             <p style={{ fontSize: 13, color: 'var(--text2)', lineHeight: 1.65, marginBottom: 12 }}>
               Si vous voulez un devis exploitable rapidement, envoyez directement ces éléments dans votre message.
             </p>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 8 }} className="grid md:grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {REQUEST_CHECKLIST.map((item) => (
                 <div key={item} style={{ display: 'flex', gap: 8, fontSize: 12, color: 'var(--text2)', lineHeight: 1.5 }}>
                   <span style={{ color: 'var(--teal)', fontWeight: 700, flexShrink: 0 }}>✓</span>
@@ -120,7 +120,7 @@ export default function DevisProPage({ params }: { params: { locale: string } })
             ))}
           </div>
 
-          <div style={{ marginTop: 26, display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 14 }} className="grid md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4" style={{ marginTop: 26 }}>
             {[
               {
                 title: 'Je veux commander pour mon organisation',
@@ -146,7 +146,7 @@ export default function DevisProPage({ params }: { params: { locale: string } })
       </div>
 
       <div style={{ maxWidth: 1100, margin: '0 auto', padding: '56px 6% 12px' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 16 }} className="grid md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {INTAKE_STEPS.map((step) => (
             <div key={step.title} style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 14, padding: 20 }}>
               <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 8 }}>{step.title}</div>

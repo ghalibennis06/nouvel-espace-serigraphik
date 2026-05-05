@@ -114,7 +114,7 @@ export default async function CatalogIndexPage({
             <span style={{ color: 'var(--text)' }}>Catalogue</span>
           </nav>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '0.98fr 1.02fr', gap: 22, alignItems: 'start' }} className="grid lg:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6" style={{ alignItems: 'start' }}>
             <div>
               <span style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.13em', textTransform: 'uppercase', color: 'var(--orange)', display: 'block', marginBottom: 12 }}>
                 Catalogue NES · Maroc
@@ -161,7 +161,7 @@ export default async function CatalogIndexPage({
                     Débutant, atelier en équipement, ou atelier déjà en production, le bon chemin n’est pas le même. NES structure le catalogue autour de cette réalité.
                   </p>
                 </div>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 10 }} className="grid md:grid-cols-3 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   {[
                     'Commencer par les kits si vous partez de zéro',
                     'Passer aux machines si vous structurez un atelier',
@@ -177,7 +177,7 @@ export default async function CatalogIndexPage({
           </div>
 
           {!searchQuery && (
-            <div style={{ marginTop: 24, display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 14 }} className="grid md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4" style={{ marginTop: 24 }}>
               {ROUTER_PATHS.map((item) => (
                 <Link key={item.title} href={item.href(locale)} style={{ textDecoration: 'none' }}>
                   <div style={{ background: 'linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(250,247,244,1) 100%)', border: '1px solid var(--border)', borderRadius: 20, padding: 20, boxShadow: 'var(--shadow)', minHeight: 190 }}>
@@ -240,7 +240,7 @@ export default async function CatalogIndexPage({
 
             return (
               <section key={cat.id}>
-                <div style={{ display: 'grid', gridTemplateColumns: '0.88fr 1.12fr', gap: 18, alignItems: 'start', marginBottom: 20 }} className="grid lg:grid-cols-[0.88fr_1.12fr] gap-5">
+                <div className="grid grid-cols-1 lg:grid-cols-[0.88fr_1.12fr] gap-5" style={{ alignItems: 'start', marginBottom: 20 }}>
                   <div>
                     <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--orange)', marginBottom: 7 }}>
                       {lane?.badge ?? 'Catalogue NES'}

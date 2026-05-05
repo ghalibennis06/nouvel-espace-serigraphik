@@ -318,7 +318,8 @@ export default function LeadsTable({ leads: initial }: { leads: Lead[] }) {
       </div>
 
       <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 12, overflow: 'hidden' }}>
-        <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+       <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
+        <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: 760 }}>
           <thead>
             <tr style={{ background: 'var(--surface)' }}>
               {['Lead', 'Segment', 'Priorité', 'Devis', 'Suivi', 'Statut', 'Actions'].map((h) => (
@@ -407,7 +408,7 @@ export default function LeadsTable({ leads: initial }: { leads: Lead[] }) {
                   {expanded === lead.id && (
                     <tr key={`${lead.id}-exp`} style={{ borderTop: 'none', background: 'var(--card2)' }}>
                       <td colSpan={7} style={{ padding: '18px 24px' }}>
-                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 18 }}>
+                        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3" style={{ gap: 18 }}>
 
                           {/* Col 1: context + timeline */}
                           <div style={{ display: 'grid', gap: 12 }}>
@@ -543,6 +544,7 @@ export default function LeadsTable({ leads: initial }: { leads: Lead[] }) {
             )}
           </tbody>
         </table>
+       </div>
       </div>
     </div>
   )

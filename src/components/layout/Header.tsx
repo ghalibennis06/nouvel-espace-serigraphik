@@ -136,20 +136,22 @@ export default function Header({ locale, rootCategories, subCategories }: Header
         {/* Right actions */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
 
-          {/* Search */}
+          {/* Search — desktop only (mobile gets a leaner header) */}
           <button
             onClick={() => { setSearchOpen(v => !v); setTimeout(() => searchRef.current?.focus(), 80) }}
             aria-label="Rechercher"
-            style={{ width: 44, height: 44, borderRadius: 10, border: '1px solid var(--border2)', background: 'transparent', color: 'var(--text2)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}
+            className="hidden md:flex"
+            style={{ width: 44, height: 44, borderRadius: 10, border: '1px solid var(--border2)', background: 'transparent', color: 'var(--text2)', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}
           >
             <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><circle cx="11" cy="11" r="8"/><path strokeLinecap="round" d="M21 21l-4.35-4.35"/></svg>
           </button>
 
-          {/* Theme toggle */}
+          {/* Theme toggle — desktop only; mobile users get it inside the drawer */}
           <button
             onClick={toggle}
             aria-label="Changer de thème"
-            style={{ width: 44, height: 44, borderRadius: 10, border: '1px solid var(--border2)', background: 'transparent', color: 'var(--text2)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}
+            className="hidden md:flex"
+            style={{ width: 44, height: 44, borderRadius: 10, border: '1px solid var(--border2)', background: 'transparent', color: 'var(--text2)', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}
           >
             {theme === 'dark'
               ? <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><circle cx="12" cy="12" r="5"/><path strokeLinecap="round" d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
@@ -264,7 +266,7 @@ export default function Header({ locale, rootCategories, subCategories }: Header
                 )
               })}
             </nav>
-            <div style={{ padding: 16, borderTop: '1px solid var(--border)' }}>
+            <div style={{ padding: 16, borderTop: '1px solid var(--border)', display: 'flex', flexDirection: 'column', gap: 10 }}>
               <a
                 href={whatsappGeneralLink()}
                 target="_blank"
@@ -274,6 +276,13 @@ export default function Header({ locale, rootCategories, subCategories }: Header
               >
                 {WA_ICON} Commander via WhatsApp
               </a>
+              <button
+                onClick={toggle}
+                aria-label="Changer de thème"
+                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, width: '100%', padding: '11px 0', borderRadius: 10, border: '1px solid var(--border2)', background: 'transparent', color: 'var(--text2)', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}
+              >
+                {theme === 'dark' ? '☀️ Mode clair' : '🌙 Mode sombre'}
+              </button>
             </div>
           </div>
         </>

@@ -86,7 +86,7 @@ export default function GuidePage() {
         Vue d&apos;ensemble de ce qui compose votre site NES et comment tout fonctionne ensemble.
       </p>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24, alignItems: 'start' }}>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6" style={{ alignItems: 'start' }}>
         {/* Left — FileTree */}
         <div>
           <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--text2)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 12 }}>

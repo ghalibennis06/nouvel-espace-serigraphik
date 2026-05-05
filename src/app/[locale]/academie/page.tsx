@@ -93,7 +93,7 @@ export default function AcademiePage({ params }: { params: { locale: string } })
             la sublimation, la sérigraphie et le DTF. De débutant à expert, à votre rythme.
           </p>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 14, margin: '0 auto 34px', maxWidth: 960 }} className="grid md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4" style={{ margin: '0 auto 34px', maxWidth: 960 }}>
             {[
               {
                 title: 'Je veux démarrer',
