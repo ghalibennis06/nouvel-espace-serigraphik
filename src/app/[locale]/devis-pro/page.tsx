@@ -16,253 +16,228 @@ const WA_SVG = (
 )
 
 const SEGMENTS = [
-  { icon: '🏫', title: 'Établissements scolaires', desc: 'T-shirts fin d\'année, uniformes personnalisés, goodies événements scolaires.', example: 'Ex : 200 t-shirts fin d\'année — 80 MAD/pièce (vs 120 MAD unité)' },
-  { icon: '⚽', title: 'Clubs & Associations', desc: 'Maillots, t-shirts supporters, vêtements de campagne pour ONG.', example: 'Ex : Kit 100 t-shirts club de foot — livraison + facturation pro incluses' },
-  { icon: '🏨', title: 'Hôtels & Restaurants', desc: 'Uniformes personnel, t-shirts de marque, cadeaux client.', example: 'Ex : 50 polos uniformes avec logo — prix dégressif à partir de 30 pièces' },
-  { icon: '🏢', title: 'Entreprises & Agences', desc: 'Goodies corporate, team-building, événements, cadeaux B2B.', example: 'Ex : 150 mugs sublimés avec logo — facture TVA, délai prioritaire' },
-  { icon: '🎓', title: 'Universités & Grandes Écoles', desc: 'Tenues étudiantes, events, remises de diplômes, séminaires.', example: 'Ex : 300 sweats avec logo promo — livraison sur campus' },
-  { icon: '🏭', title: 'Ateliers & Sous-traitants', desc: 'Commandes en gros de consommables, machines, revente B2B.', example: 'Ex : 12 bouteilles encres DTF + 10kg poudre — prix grossiste' },
-]
+  { icon: '🏫', title: 'Établissements scolaires', desc: 'T-shirts fin d\'année, uniformes personnalisés, goodies événements scolaires.', example: 'Ex : 200 t-shirts fin d\'année, orientation rapide sur la bonne technique et le bon délai.' },
+  { icon: '⚽', title: 'Clubs & associations', desc: 'Maillots, t-shirts supporters, vêtements de campagne ou équipements d\'événement.', example: 'Ex : lot club de sport, avec quantité, personnalisation et livraison cadrées dès le départ.' },
+  { icon: '🏨', title: 'Hôtels & restaurants', desc: 'Uniformes, tabliers, tenues de service, objets de marque et besoins récurrents.', example: 'Ex : série d\'uniformes ou de goodies avec suivi commercial et facturation pro.' },
+  { icon: '🏢', title: 'Entreprises & agences', desc: 'Goodies corporate, activations, team building, événements, cadeaux B2B.', example: 'Ex : lot de mugs, tote bags ou vêtements avec devis clair et délais confirmés.' },
+  { icon: '🎓', title: 'Universités & écoles sup', desc: 'Clubs étudiants, séminaires, promos, remises, événements campus.', example: 'Ex : sweats ou t-shirts promotion avec quantité, livraison et contraintes étudiantes prises en compte.' },
+  { icon: '🏭', title: 'Ateliers & sous-traitants', desc: 'Consommables, machines, pièces et commandes de réassort métier.', example: 'Ex : besoin atelier urgent sur encres, films, papiers, flex ou accessoires de production.' },
+] as const
 
 const ADVANTAGES = [
-  { icon: '💰', title: 'Prix dégressifs', desc: 'À partir de 10 pièces, les prix baissent. Demandez votre grille tarifaire.' },
-  { icon: '🧾', title: 'Facture + devis pro', desc: 'Document officiel pour vos dépenses entreprise, école ou association.' },
-  { icon: '🚚', title: 'Livraison prioritaire', desc: 'Traitement prioritaire pour les commandes B2B. Suivi dédié.' },
-  { icon: '💬', title: 'Interlocuteur dédié', desc: 'Un expert NES suit votre commande du devis à la livraison.' },
-  { icon: '📦', title: 'Emballage professionnel', desc: 'Conditionnement adapté aux grandes quantités, palettes si nécessaire.' },
-  { icon: '🔄', title: 'Commandes récurrentes', desc: 'Programme de réapprovisionnement mensuel pour les consommables.' },
-]
+  { code: 'ADV-01', title: 'Qualification rapide', desc: 'NES clarifie le besoin, la quantité, la technique et le délai avant de chiffrer.' },
+  { code: 'ADV-02', title: 'Facture et logique pro', desc: 'Devis, facturation et relation commerciale adaptés aux organisations.' },
+  { code: 'ADV-03', title: 'Support Maroc', desc: 'Un interlocuteur NES suit la demande avec un vrai niveau de réponse locale.' },
+  { code: 'ADV-04', title: 'Réponse exploitable', desc: 'Vous recevez une proposition utile pour décider, pas une réponse vague.' },
+] as const
 
 const INTAKE_STEPS = [
   {
-    title: '1. Vous envoyez votre besoin',
-    text: 'Quantité, produit, délai, ville de livraison, logo ou contraintes techniques. Plus la demande est claire, plus le devis est rapide.',
+    code: 'STEP-01',
+    title: 'Vous envoyez le besoin',
+    text: 'Quantité, produit, ville, délai, visuel ou contrainte. Plus la base est claire, plus le devis est rapide et juste.',
   },
   {
-    title: '2. NES qualifie la demande',
-    text: 'Nous vérifions le produit, la technique, la quantité, les fichiers et le niveau de priorité avant de chiffrer.',
+    code: 'STEP-02',
+    title: 'NES qualifie la demande',
+    text: 'Technique, support, niveau de gamme, faisabilité, urgence, réassort ou production ponctuelle.',
   },
   {
-    title: '3. Vous recevez une proposition exploitable',
-    text: 'Prix, délai, options, facturation et prochaines étapes. Vous recevez une réponse exploitable pour avancer réellement.',
+    code: 'STEP-03',
+    title: 'Vous recevez une proposition nette',
+    text: 'Prix, délai, options, facturation, et prochaine étape pour lancer réellement la commande.',
   },
-]
+] as const
 
 const REQUEST_CHECKLIST = [
   'quantité estimée',
   'produit ou famille de produit',
   'ville de livraison',
   'date limite ou urgence',
-  'logo, visuel ou besoin de personnalisation',
+  'logo, visuel ou référence',
   'si possible, budget cible ou niveau de gamme',
 ]
+
+const QUALIFICATION_FIELDS = [
+  { label: 'TYPE DE BESOIN', value: 'commande volume / réassort / devis machine / goodies / textile' },
+  { label: 'SUPPORT / TECHNIQUE', value: 'sérigraphie / sublimation / DTF / UV / broderie / autre' },
+  { label: 'DÉLAI', value: 'urgent / cette semaine / ce mois / à planifier' },
+  { label: 'PIÈCES JOINTES', value: 'logo, plan, visuel, format, référence, photo ou besoin libre' },
+] as const
 
 export default function DevisProPage({ params }: { params: { locale: string } }) {
   const { locale } = params
   setRequestLocale(locale)
 
-  const waB2B = whatsappGeneralLink("Bonjour NES, je représente une entreprise / école / association et je souhaite un devis professionnel. Pouvez-vous me contacter ?")
-  const waGros = whatsappGeneralLink("Bonjour NES, je souhaite passer une commande en volume. Pouvez-vous me transmettre votre grille tarifaire grossiste ?")
+  const waB2B = whatsappGeneralLink("Bonjour NES, je représente une entreprise / école / association et je souhaite un devis professionnel structuré. Voici mon besoin :")
+  const waGros = whatsappGeneralLink("Bonjour NES, je souhaite passer une commande en volume ou mettre en place un réassort régulier. Pouvez-vous me transmettre votre orientation tarifaire ?")
 
   return (
-    <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
-
-      {/* ── Hero ─────────────────────────────────────────────────── */}
-      <div style={{ background: 'var(--surface)', borderBottom: '1px solid var(--border)', padding: '72px 6% 56px' }}>
-        <div style={{ maxWidth: 900, margin: '0 auto' }}>
-          <nav style={{ fontSize: 12, color: 'var(--text2)', marginBottom: 24, display: 'flex', gap: 6, alignItems: 'center' }}>
-            <Link href={`/${locale}`} className="link-blue" style={{ color: 'var(--text2)', textDecoration: 'none' }}>Accueil</Link>
+    <div style={{ minHeight: '100vh', background: '#0b1016', color: '#dde3eb' }}>
+      <section style={{ position: 'relative', overflow: 'hidden', borderBottom: '1px solid rgba(255,181,154,0.12)' }}>
+        <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 82% 18%, rgba(242,99,22,0.16) 0%, rgba(242,99,22,0.04) 30%, rgba(0,0,0,0) 58%)' }} />
+        <div style={{ maxWidth: 1240, margin: '0 auto', padding: '72px 6% 62px', position: 'relative', zIndex: 1 }}>
+          <nav style={{ fontSize: 11, color: 'rgba(228,190,177,0.62)', marginBottom: 24, display: 'flex', gap: 6, alignItems: 'center', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+            <Link href={`/${locale}`} style={{ color: 'rgba(228,190,177,0.62)', textDecoration: 'none' }}>Accueil</Link>
             <span>/</span>
-            <span style={{ color: 'var(--text)' }}>Devis Professionnel</span>
+            <span style={{ color: '#ffb59a' }}>Devis pro</span>
           </nav>
 
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'var(--bluesoft)', border: '1px solid var(--bluesoft2)', borderRadius: 20, padding: '6px 16px', marginBottom: 24 }}>
-            <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--blue)', letterSpacing: '0.08em' }}>🏢 COMMANDES PROFESSIONNELLES B2B</span>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '8px 12px', border: '1px solid rgba(255,92,0,0.34)', background: 'rgba(255,92,0,0.1)', color: '#ffb59a', fontSize: 11, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 18 }}>
+            <span style={{ width: 7, height: 7, borderRadius: 999, background: '#ff5c00', display: 'inline-block' }} />
+            B2B // Qualification NES
           </div>
 
-          <h1 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 'clamp(32px,4.5vw,58px)', fontWeight: 700, color: 'var(--text)', lineHeight: 1.1, marginBottom: 20 }}>
-            Prix entreprise.<br />
-            <span style={{ color: 'var(--blue)' }}>Devis en moins de 2h.</span>
-          </h1>
-          <p style={{ fontSize: 16, color: 'var(--text2)', lineHeight: 1.75, maxWidth: 700, marginBottom: 36 }}>
-            Entreprises, écoles, associations et ateliers peuvent ici demander un devis clair, avec un vrai interlocuteur et une exécution sérieuse au Maroc.
-          </p>
+          <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-14 items-start">
+            <div>
+              <h1 style={{ fontSize: 'clamp(38px,5vw,74px)', lineHeight: 1.03, letterSpacing: '-0.045em', color: '#f6efe8', fontWeight: 900, marginBottom: 18, maxWidth: 760 }}>
+                Devis professionnel, cadrage rapide, réponse exploitable.
+              </h1>
+              <p style={{ fontSize: 16, color: 'rgba(221,227,235,0.76)', lineHeight: 1.78, maxWidth: 660, marginBottom: 28 }}>
+                Entreprises, écoles, associations et ateliers peuvent ici entrer dans un vrai parcours NES. Le but n&apos;est pas seulement de demander un prix, mais de cadrer le besoin pour recevoir une proposition utile, avec le bon produit, la bonne technique et le bon délai.
+              </p>
 
-          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-            <a href={waB2B} target="_blank" rel="noopener noreferrer"
-              style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '14px 28px', background: 'var(--green)', color: '#fff', borderRadius: 8, fontSize: 15, fontWeight: 700, textDecoration: 'none' }}>
-              {WA_SVG} Demander un devis maintenant
-            </a>
-            <Link href={`/${locale}/contact`}
-              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '14px 28px', border: '1px solid var(--bluesoft2)', color: 'var(--blue)', borderRadius: 8, fontSize: 14, fontWeight: 600, textDecoration: 'none' }}>
-              📋 Passer par le formulaire NES →
-            </Link>
-          </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3" style={{ marginBottom: 26 }}>
+                {QUALIFICATION_FIELDS.map((field) => (
+                  <div key={field.label} style={{ border: '1px solid rgba(171,137,125,0.18)', background: 'rgba(255,255,255,0.03)', padding: '16px 14px 15px' }}>
+                    <div style={{ fontSize: 10, color: '#ff9f6a', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 7 }}>{field.label}</div>
+                    <div style={{ fontSize: 13, color: 'rgba(221,227,235,0.76)', lineHeight: 1.6 }}>{field.value}</div>
+                  </div>
+                ))}
+              </div>
 
-          <div style={{ marginTop: 22, background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 14, padding: '18px 20px', maxWidth: 720 }}>
-            <div style={{ fontSize: 10, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--orange)', marginBottom: 8 }}>Pour aller vite</div>
-            <p style={{ fontSize: 13, color: 'var(--text2)', lineHeight: 1.65, marginBottom: 12 }}>
-              Si vous voulez un devis exploitable rapidement, envoyez directement ces éléments dans votre message.
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-              {REQUEST_CHECKLIST.map((item) => (
-                <div key={item} style={{ display: 'flex', gap: 8, fontSize: 12, color: 'var(--text2)', lineHeight: 1.5 }}>
-                  <span style={{ color: 'var(--teal)', fontWeight: 700, flexShrink: 0 }}>✓</span>
-                  <span>{item}</span>
-                </div>
-              ))}
+              <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 18 }}>
+                <a
+                  href={waB2B}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '14px 22px', background: '#ff5c00', color: '#521800', fontSize: 13, fontWeight: 900, letterSpacing: '0.12em', textTransform: 'uppercase', textDecoration: 'none' }}
+                >
+                  {WA_SVG} Envoyer mon besoin
+                </a>
+                <Link
+                  href={`/${locale}/contact`}
+                  style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', padding: '14px 20px', border: '1px solid rgba(255,181,154,0.2)', background: 'rgba(255,255,255,0.03)', color: '#dde3eb', fontSize: 13, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', textDecoration: 'none' }}
+                >
+                  Ouvrir le formulaire NES
+                </Link>
+              </div>
+
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px 24px' }}>
+                {['Devis structuré', 'Facturation pro', 'Support local', 'Commandes récurrentes'].map((item) => (
+                  <span key={item} style={{ fontSize: 12, color: 'rgba(221,227,235,0.72)', fontWeight: 700, letterSpacing: '0.04em' }}>
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div style={{ border: '1px solid rgba(171,137,125,0.18)', background: 'rgba(255,255,255,0.03)', padding: 20 }}>
+              <div style={{ fontSize: 10, color: '#ff9f6a', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 8 }}>CHECKLIST // POUR ALLER VITE</div>
+              <p style={{ fontSize: 13, color: 'rgba(221,227,235,0.72)', lineHeight: 1.65, marginBottom: 14 }}>
+                Si vous voulez une réponse rapide et exploitable, commencez par envoyer ces éléments. Plus la demande est propre, plus le traitement commercial est efficace.
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {REQUEST_CHECKLIST.map((item, index) => (
+                  <div key={item} style={{ display: 'flex', gap: 10, padding: '11px 0', borderTop: index < 2 ? '1px solid rgba(171,137,125,0.14)' : '1px solid rgba(171,137,125,0.12)' }}>
+                    <span style={{ color: '#ffb59a', fontWeight: 800, flexShrink: 0 }}>{`0${index + 1}`}</span>
+                    <span style={{ fontSize: 12, color: 'rgba(221,227,235,0.76)', lineHeight: 1.55 }}>{item}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px 28px', marginTop: 28 }}>
-            {['✅ Devis sous 2h', '✅ Facture + TVA', '✅ Prix dégressifs', '✅ Livraison prioritaire'].map(t => (
-              <span key={t} style={{ fontSize: 13, color: 'var(--text2)', fontWeight: 500 }}>{t}</span>
-            ))}
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4" style={{ marginTop: 26 }}>
-            {[
-              {
-                title: 'Je veux commander pour mon organisation',
-                text: 'Vous avez un besoin clair en quantité, en délai et en facturation.',
-              },
-              {
-                title: 'Je veux comparer plusieurs solutions',
-                text: 'Vous hésitez entre plusieurs produits, techniques ou budgets et vous avez besoin d’un vrai échange.',
-              },
-              {
-                title: 'Je veux une relation récurrente',
-                text: 'Vous cherchez un partenaire de réassort ou de commandes répétées, avec une relation commerciale suivie.',
-              },
-            ].map((item) => (
-              <div key={item.title} style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 12, padding: 18, boxShadow: 'var(--shadow)' }}>
-                <div style={{ fontSize: 10, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--blue)', marginBottom: 8 }}>Parcours devis</div>
-                <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 8 }}>{item.title}</h3>
-                <p style={{ fontSize: 13, color: 'var(--text2)', lineHeight: 1.6 }}>{item.text}</p>
-              </div>
-            ))}
-          </div>
         </div>
-      </div>
+      </section>
 
-      <div style={{ maxWidth: 1100, margin: '0 auto', padding: '56px 6% 12px' }}>
+      <div style={{ maxWidth: 1240, margin: '0 auto', padding: '48px 6% 8px' }}>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {INTAKE_STEPS.map((step) => (
-            <div key={step.title} style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 14, padding: 20 }}>
-              <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', marginBottom: 8 }}>{step.title}</div>
-              <p style={{ fontSize: 13, color: 'var(--text2)', lineHeight: 1.65 }}>{step.text}</p>
+            <div key={step.code} style={{ border: '1px solid rgba(171,137,125,0.18)', background: 'rgba(255,255,255,0.03)', padding: 20 }}>
+              <div style={{ fontSize: 10, color: '#ff9f6a', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 8 }}>{step.code}</div>
+              <div style={{ fontSize: 18, fontWeight: 800, color: '#f6efe8', lineHeight: 1.15, marginBottom: 8 }}>{step.title}</div>
+              <p style={{ fontSize: 13, color: 'rgba(221,227,235,0.72)', lineHeight: 1.7 }}>{step.text}</p>
             </div>
           ))}
         </div>
       </div>
 
-      {/* ── Who we serve ─────────────────────────────────────────── */}
-      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '64px 6%' }}>
-        <div style={{ textAlign: 'center', marginBottom: 44 }}>
-          <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.13em', textTransform: 'uppercase', color: 'var(--blue)' }}>Qui fait appel à NES B2B ?</span>
-          <h2 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 34, fontWeight: 700, color: 'var(--text)', marginTop: 10 }}>
-            Nous traitons des demandes concrètes, secteur par secteur
+      <div style={{ maxWidth: 1240, margin: '0 auto', padding: '56px 6%' }}>
+        <div style={{ marginBottom: 28 }}>
+          <div style={{ fontSize: 10, color: '#ff9f6a', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 8 }}>Secteurs servis</div>
+          <h2 style={{ fontSize: 'clamp(28px,3.8vw,46px)', fontWeight: 900, color: '#f6efe8', letterSpacing: '-0.035em', lineHeight: 1.05, marginBottom: 10 }}>
+            NES traite des demandes réelles, secteur par secteur.
           </h2>
+          <p style={{ fontSize: 15, color: 'rgba(221,227,235,0.7)', lineHeight: 1.75, maxWidth: 720 }}>
+            L&apos;objectif n&apos;est pas de paraître premium dans le vide. Il faut comprendre le contexte, la quantité, la technique et la pression de délai propre à chaque organisation.
+          </p>
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 16 }}>
-          {SEGMENTS.map(s => (
-            <div key={s.title} style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 12, padding: 24 }}>
-              <span style={{ fontSize: 32, display: 'block', marginBottom: 14 }}>{s.icon}</span>
-              <h3 style={{ fontSize: 16, fontWeight: 700, color: 'var(--text)', marginBottom: 8 }}>{s.title}</h3>
-              <p style={{ fontSize: 13, color: 'var(--text2)', lineHeight: 1.6, marginBottom: 12 }}>{s.desc}</p>
-              <div style={{ fontSize: 11, color: 'var(--blue)', fontStyle: 'italic', padding: '8px 12px', background: 'var(--bluesoft)', borderRadius: 6 }}>
-                {s.example}
+          {SEGMENTS.map((segment) => (
+            <div key={segment.title} style={{ border: '1px solid rgba(171,137,125,0.18)', background: 'rgba(255,255,255,0.03)', padding: 22 }}>
+              <div style={{ fontSize: 28, marginBottom: 14 }}>{segment.icon}</div>
+              <h3 style={{ fontSize: 17, fontWeight: 800, color: '#f6efe8', marginBottom: 8 }}>{segment.title}</h3>
+              <p style={{ fontSize: 13, color: 'rgba(221,227,235,0.72)', lineHeight: 1.65, marginBottom: 12 }}>{segment.desc}</p>
+              <div style={{ borderTop: '1px solid rgba(171,137,125,0.14)', paddingTop: 12, fontSize: 12, color: '#ffb59a', lineHeight: 1.55 }}>
+                {segment.example}
               </div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* ── B2B advantages ───────────────────────────────────────── */}
-      <div style={{ background: 'var(--surface)', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)', padding: '64px 6%' }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 44 }}>
-            <h2 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 34, fontWeight: 700, color: 'var(--text)' }}>
-              Les avantages du compte B2B NES
-            </h2>
+      <div style={{ borderTop: '1px solid rgba(255,181,154,0.08)', borderBottom: '1px solid rgba(255,181,154,0.08)', background: '#111820', padding: '56px 6%' }}>
+        <div style={{ maxWidth: 1240, margin: '0 auto' }}>
+          <div style={{ marginBottom: 24 }}>
+            <div style={{ fontSize: 10, color: '#ff9f6a', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 8 }}>Pourquoi ce parcours</div>
+            <h2 style={{ fontSize: 'clamp(26px,3.4vw,40px)', fontWeight: 900, color: '#f6efe8', letterSpacing: '-0.03em', lineHeight: 1.08 }}>Plus clair qu&apos;un simple contact, plus utile qu&apos;un formulaire vague.</h2>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 16 }}>
-            {ADVANTAGES.map(a => (
-              <div key={a.title} style={{ display: 'flex', gap: 14, padding: '18px', background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 10 }}>
-                <span style={{ fontSize: 24, flexShrink: 0 }}>{a.icon}</span>
-                <div>
-                  <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)', marginBottom: 4 }}>{a.title}</div>
-                  <div style={{ fontSize: 12, color: 'var(--text2)', lineHeight: 1.55 }}>{a.desc}</div>
-                </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {ADVANTAGES.map((advantage) => (
+              <div key={advantage.code} style={{ border: '1px solid rgba(171,137,125,0.18)', background: 'rgba(255,255,255,0.03)', padding: 18 }}>
+                <div style={{ fontSize: 10, color: '#ff9f6a', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 8 }}>{advantage.code}</div>
+                <div style={{ fontSize: 17, fontWeight: 800, color: '#f6efe8', marginBottom: 8 }}>{advantage.title}</div>
+                <p style={{ fontSize: 12, color: 'rgba(221,227,235,0.72)', lineHeight: 1.65 }}>{advantage.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </div>
 
-      {/* ── Pricing tiers ────────────────────────────────────────── */}
-      <div style={{ maxWidth: 860, margin: '0 auto', padding: '64px 6%' }}>
-        <h2 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 30, fontWeight: 700, color: 'var(--text)', marginBottom: 8, textAlign: 'center' }}>
-          Exemple de tarification déguéssive
-        </h2>
-        <p style={{ fontSize: 13, color: 'var(--text2)', textAlign: 'center', marginBottom: 32 }}>
-          Exemple sur t-shirt coton sérigraphié 1 couleur — prix en MAD HT
-        </p>
-        <div style={{ overflowX: 'auto', borderRadius: 12, border: '1px solid var(--border)' }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-            <thead>
-              <tr style={{ borderBottom: '1px solid var(--border)', background: 'var(--card)' }}>
-                {['Quantité', 'Prix unitaire', 'Total estimé', 'Remise'].map(h => (
-                  <th key={h} style={{ padding: '14px 18px', fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--text2)', textAlign: 'center' }}>{h}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {[
-                { qty: '1–9 pièces',    price: '140 MAD', total: '—', discount: 'Tarif standard' },
-                { qty: '10–49 pièces',  price: '110 MAD', total: '1 100–5 390 MAD', discount: '-21%' },
-                { qty: '50–99 pièces',  price: '95 MAD',  total: '4 750–9 405 MAD', discount: '-32%' },
-                { qty: '100–199 pièces',price: '80 MAD',  total: '8 000–15 920 MAD', discount: '-43%' },
-                { qty: '200+ pièces',   price: 'Sur devis', total: 'Sur devis', discount: 'Max remise' },
-              ].map((row, i) => (
-                <tr key={row.qty} style={{ borderBottom: '1px solid var(--border)', background: i % 2 !== 0 ? 'var(--card)' : 'transparent' }}>
-                  <td style={{ padding: '12px 18px', fontSize: 13, fontWeight: 600, color: 'var(--text)', textAlign: 'center' }}>{row.qty}</td>
-                  <td style={{ padding: '12px 18px', fontSize: 13, color: 'var(--text)', textAlign: 'center', fontWeight: i >= 4 ? 700 : 400 }}>{row.price}</td>
-                  <td style={{ padding: '12px 18px', fontSize: 13, color: 'var(--text2)', textAlign: 'center' }}>{row.total}</td>
-                  <td style={{ padding: '12px 18px', fontSize: 12, fontWeight: 700, color: i === 0 ? 'var(--text2)' : 'var(--green)', textAlign: 'center' }}>{row.discount}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <p style={{ fontSize: 11, color: 'var(--text2)', marginTop: 12, textAlign: 'center' }}>
-          * Prix indicatifs. Tarification exacte sur devis selon produit, couleurs, technique et localisation.
-        </p>
-      </div>
-
-      {/* ── CTA ──────────────────────────────────────────────────── */}
-      <div style={{ background: 'var(--blue)', padding: '72px 6%', textAlign: 'center' }}>
-        <div style={{ maxWidth: 680, margin: '0 auto' }}>
-          <h2 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 38, fontWeight: 700, color: '#fff', marginBottom: 14 }}>
-            Votre devis en moins de 2 heures.
-          </h2>
-          <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.75)', lineHeight: 1.7, marginBottom: 32 }}>
-            Envoyez-nous votre besoin (quantité, type de produit, délai) et nous vous répondons avec une proposition détaillée.
-          </p>
-          <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <a href={waB2B} target="_blank" rel="noopener noreferrer"
-              style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '16px 32px', background: 'var(--green)', color: '#fff', borderRadius: 8, fontSize: 15, fontWeight: 700, textDecoration: 'none' }}>
-              {WA_SVG} Devis WhatsApp — réponse 2h
-            </a>
-            <a href={waGros} target="_blank" rel="noopener noreferrer"
-              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '16px 32px', background: '#fff', color: 'var(--blue)', borderRadius: 8, fontSize: 15, fontWeight: 700, textDecoration: 'none' }}>
-              📋 Tarifs grossiste
-            </a>
+      <div style={{ maxWidth: 1240, margin: '0 auto', padding: '56px 6% 72px' }}>
+        <div style={{ border: '1px solid rgba(255,92,0,0.26)', background: 'linear-gradient(180deg, rgba(255,92,0,0.12) 0%, rgba(255,255,255,0.03) 100%)', padding: 28 }}>
+          <div className="grid grid-cols-1 lg:grid-cols-[1.02fr_0.98fr] gap-8 items-start">
+            <div>
+              <div style={{ fontSize: 10, color: '#ff9f6a', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 8 }}>Finaliser la demande</div>
+              <h2 style={{ fontSize: 'clamp(28px,3.8vw,46px)', fontWeight: 900, color: '#f6efe8', letterSpacing: '-0.035em', lineHeight: 1.04, marginBottom: 12 }}>
+                Envoyez votre besoin, NES qualifie et répond.
+              </h2>
+              <p style={{ fontSize: 15, color: 'rgba(221,227,235,0.74)', lineHeight: 1.75, maxWidth: 620 }}>
+                Si vous avez déjà le contexte, la quantité ou un visuel, partez sur WhatsApp. Si vous voulez cadrer plus proprement votre demande, passez aussi par le formulaire NES.
+              </p>
+            </div>
+            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'center' }}>
+              <a
+                href={waB2B}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '15px 22px', background: '#ff5c00', color: '#521800', fontSize: 13, fontWeight: 900, letterSpacing: '0.12em', textTransform: 'uppercase', textDecoration: 'none' }}
+              >
+                {WA_SVG} Devis WhatsApp
+              </a>
+              <a
+                href={waGros}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '15px 20px', border: '1px solid rgba(255,181,154,0.2)', background: 'rgba(255,255,255,0.03)', color: '#dde3eb', fontSize: 13, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', textDecoration: 'none' }}
+              >
+                Réassort / gros volume
+              </a>
+            </div>
           </div>
         </div>
       </div>
-
     </div>
   )
 }
