@@ -2,83 +2,87 @@
 
 import Link from 'next/link'
 import { TestimonialsNES } from '@/components/home/TestimonialsNES'
-import { Pointer } from '@/components/ui/pointer'
 
 const FIELD_SIGNALS = [
   {
-    label: 'Atelier lancé',
-    title: '« On a rentabilisé notre kit sublimation en moins de 3 semaines. »',
-    text: 'Atelier textile, Casablanca — kit démarrage sublimation, première commande client livrée en J+5.',
+    code: 'P-01',
+    title: 'Ateliers lancés partout au Maroc',
+    text: 'NES accompagne des profils très différents, du premier kit jusqu’au vrai atelier qui produit et réassortit régulièrement.',
   },
   {
-    label: 'Réassort régulier',
-    title: 'Les ateliers qui tournent reviennent. En moyenne toutes les 3 à 6 semaines.',
-    text: 'Encres, films, papiers de transfert, flex — NES livre toujours ce dont l’atelier a besoin pour produire sans interruption.',
+    code: 'P-02',
+    title: 'Réassort qui suit le rythme terrain',
+    text: 'Encres, films, papiers, flex et références atelier restent disponibles pour éviter que la production s’arrête.',
   },
   {
-    label: 'Support local',
-    title: 'Un vrai interlocuteur au Maroc, pas un chatbot ou un ticket support.',
-    text: 'Avant l’achat pour choisir, après l’achat si ça coince. WhatsApp, rappel, ou passage en boutique — NES reste joignable.',
+    code: 'P-03',
+    title: 'Un contact local qui répond',
+    text: 'Avant achat, après achat, pour une orientation, un devis ou un blocage technique, NES reste joignable rapidement.',
   },
+] as const
+
+const METRICS = [
+  { value: '2 000+', label: 'ateliers accompagnés' },
+  { value: '24–48h', label: 'livraison Maroc' },
+  { value: 'WhatsApp', label: 'canal rapide' },
 ] as const
 
 export default function ProofFieldSection({ locale }: { locale: string }) {
   return (
-    <section style={{ background: '#22120b', padding: 'clamp(44px,7vw,84px) 5%', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-      <div style={{ maxWidth: 1240, margin: '0 auto', alignItems: 'stretch' }} className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-6">
+    <section style={{ background: '#fbf7f2', padding: 'clamp(46px,7vw,84px) 5%', borderTop: '1px solid rgba(20,20,20,0.08)' }}>
+      <div style={{ maxWidth: 1240, margin: '0 auto' }}>
+        <div className="grid grid-cols-1 lg:grid-cols-[0.98fr_1.02fr] gap-8 lg:gap-10 items-start" style={{ marginBottom: 26 }}>
+          <div>
+            <div style={{ fontSize: 11, color: '#f26316', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 10 }}>
+              Preuve terrain NES
+            </div>
+            <h2 style={{ fontSize: 'clamp(30px,3.8vw,50px)', fontWeight: 900, color: '#151515', letterSpacing: '-0.04em', lineHeight: 1.04, marginBottom: 14, maxWidth: 680 }}>
+              NES ne vend pas seulement des produits, NES aide les ateliers à tourner.
+            </h2>
+            <p style={{ fontSize: 15, color: 'rgba(20,20,20,0.68)', lineHeight: 1.8, maxWidth: 620, marginBottom: 22 }}>
+              C&apos;est là que la différence se joue. Un bon fournisseur ne s&apos;arrête pas à la première vente. Il aide à choisir, à lancer, à réassortir et à garder un rythme de production viable.
+            </p>
 
-        {/* Left — headline proof block (order-2 on mobile, order-1 on desktop) */}
-        <div className="order-2 lg:order-1" style={{ position: 'relative', overflow: 'hidden', borderRadius: 28, border: '1px solid rgba(255,255,255,0.10)', background: 'linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%)', padding: 28, boxShadow: '0 28px 90px rgba(0,0,0,0.20)' }}>
-          <div style={{ position: 'absolute', top: -90, right: -40, width: 240, height: 240, borderRadius: 999, background: 'radial-gradient(circle, rgba(242,99,22,0.24) 0%, rgba(242,99,22,0.08) 42%, rgba(242,99,22,0) 74%)', filter: 'blur(16px)', pointerEvents: 'none' }} />
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3" style={{ marginBottom: 18 }}>
+              {METRICS.map((item) => (
+                <div key={item.label} style={{ background: '#fff', border: '1px solid rgba(20,20,20,0.08)', padding: '18px 16px' }}>
+                  <div style={{ fontSize: 28, color: '#151515', fontWeight: 900, letterSpacing: '-0.04em', lineHeight: 1, marginBottom: 6 }}>{item.value}</div>
+                  <div style={{ fontSize: 12, color: 'rgba(20,20,20,0.62)', lineHeight: 1.45 }}>{item.label}</div>
+                </div>
+              ))}
+            </div>
 
-          <span style={{ display: 'inline-flex', padding: '7px 12px', borderRadius: 999, background: 'rgba(242,99,22,0.12)', border: '1px solid rgba(242,99,22,0.24)', fontSize: 10, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#ffb58c', marginBottom: 18 }}>
-            Ce que les ateliers disent
-          </span>
+            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+              <Link href={`/${locale}/devis-pro`} className="btn-orange" style={{ padding: '14px 22px', fontSize: 14, fontWeight: 800 }}>
+                Demander un devis pro →
+              </Link>
+              <Link href={`/${locale}/contact`} className="btn-outline" style={{ padding: '14px 20px', fontSize: 14, fontWeight: 800 }}>
+                Parler à NES
+              </Link>
+            </div>
+          </div>
 
-          <h2 style={{ fontSize: 'clamp(30px,3.8vw,48px)', fontWeight: 900, color: '#fff4ed', letterSpacing: '-0.035em', lineHeight: 1.04, marginBottom: 14 }}>
-            2 000 ateliers lancés. Des clients qui reviennent chaque mois.
-          </h2>
-
-          <p style={{ fontSize: 15, color: 'rgba(255,244,237,0.76)', lineHeight: 1.75, maxWidth: 620, marginBottom: 24 }}>
-            Depuis Casablanca, NES livre partout au Maroc sous 24–48h, avec un stock réel et un accompagnement commercial qui ne s&apos;arrête pas à la première commande.
-          </p>
-
-          <div className="grid grid-cols-3 gap-3" style={{ position: 'relative' }}>
-            <Pointer>
-              <div style={{ background: 'rgba(242,99,22,0.18)', borderRadius: 8, padding: '4px 10px', fontSize: 11, fontWeight: 800, color: '#ffb58c', whiteSpace: 'nowrap' }}>
-                NES ↗
-              </div>
-            </Pointer>
-            {[
-              { val: '2 000+', lbl: 'ateliers livrés' },
-              { val: '24–48h', lbl: 'délai moyen' },
-              { val: '170+', lbl: 'références stock' },
-            ].map((item) => (
-              <div key={item.lbl} style={{ borderRadius: 18, border: '1px solid rgba(255,255,255,0.09)', background: 'rgba(255,255,255,0.05)', padding: '14px 14px 13px', textAlign: 'center' }}>
-                <div style={{ fontSize: 22, fontWeight: 900, color: '#fff4ed', lineHeight: 1 }}>{item.val}</div>
-                <div style={{ fontSize: 11, color: 'rgba(255,244,237,0.6)', marginTop: 4 }}>{item.lbl}</div>
-              </div>
-            ))}
+          <div style={{ background: '#fff', border: '1px solid rgba(20,20,20,0.08)', padding: '22px 22px 18px' }}>
+            <div style={{ fontSize: 11, color: '#f26316', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 12 }}>
+              Ce que cela veut dire concrètement
+            </div>
+            <div className="grid grid-cols-1 gap-3">
+              {FIELD_SIGNALS.map((item) => (
+                <div key={item.code} style={{ borderTop: '1px solid rgba(20,20,20,0.08)', paddingTop: 14 }}>
+                  <div style={{ fontSize: 10, color: 'rgba(20,20,20,0.48)', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 6 }}>{item.code}</div>
+                  <div style={{ fontSize: 18, color: '#151515', fontWeight: 800, letterSpacing: '-0.02em', lineHeight: 1.15, marginBottom: 7 }}>{item.title}</div>
+                  <p style={{ fontSize: 13, color: 'rgba(20,20,20,0.66)', lineHeight: 1.65 }}>{item.text}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* Right — testimonials (order-1 on mobile = shows first) */}
-        <div className="order-1 lg:order-2" style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-          <div style={{ borderRadius: 24, border: '1px solid rgba(255,255,255,0.08)', background: 'linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%)', padding: '8px 24px 24px' }}>
-            <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#ff9f6a', marginBottom: 0, paddingTop: 16 }}>
-              Ce que les ateliers disent
-            </div>
-            <TestimonialsNES />
+        <div style={{ background: '#fff', border: '1px solid rgba(20,20,20,0.08)', padding: '10px 22px 22px' }}>
+          <div style={{ fontSize: 11, color: '#f26316', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', paddingTop: 14, marginBottom: 4 }}>
+            Retours clients
           </div>
-
-          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginTop: 2 }}>
-            <Link href={`/${locale}/devis-pro`} style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', padding: '14px 20px', borderRadius: 14, background: '#f26316', color: '#fff', fontSize: 14, fontWeight: 800, textDecoration: 'none' }}>
-              Demander un devis pro →
-            </Link>
-            <Link href={`/${locale}/contact`} style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', padding: '14px 20px', borderRadius: 14, background: 'rgba(255,255,255,0.06)', color: '#fff4ed', fontSize: 14, fontWeight: 800, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.12)' }}>
-              Parler à NES
-            </Link>
-          </div>
+          <TestimonialsNES />
         </div>
       </div>
     </section>
