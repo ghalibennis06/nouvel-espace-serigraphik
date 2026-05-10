@@ -1,10 +1,19 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { whatsappGeneralLink } from '@/lib/utils'
 
-export const metadata = {
-  title: 'Livraison & Retours — Nouvel Espace Sérigraphik',
-  description:
-    "Délais de livraison, transporteurs, frais de port et politique de retour pour les commandes Nouvel Espace Sérigraphik partout au Maroc.",
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://nouvelespaceserigraphik.ma'
+
+export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
+  const url = `${SITE_URL}/${params.locale}/livraison`
+  const title = 'Livraison 24–48h partout au Maroc — frais, délais et retours'
+  const description = 'Livraison rapide pour vos machines et consommables d\'impression : Casablanca 24h, Rabat · Marrakech · Tanger · Fès · Agadir · Oujda 24–48h. Frais offerts dès 2 500 MAD, retour 14 jours.'
+  return {
+    title, description,
+    alternates: { canonical: url, languages: { 'fr-MA': `${SITE_URL}/fr/livraison`, 'ar-MA': `${SITE_URL}/ar/livraison` } },
+    openGraph: { title, description, url, type: 'website' },
+    twitter: { card: 'summary_large_image', title, description },
+  }
 }
 
 const ZONES = [

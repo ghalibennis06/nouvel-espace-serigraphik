@@ -3,9 +3,19 @@ import Link from 'next/link'
 import { setRequestLocale } from 'next-intl/server'
 import { whatsappGeneralLink } from '@/lib/utils'
 
-export const metadata: Metadata = {
-  title: 'Devis Professionnel B2B — Nouvel Espace Sérigraphik',
-  description: 'Commandes en gros, devis école / association / entreprise. Prix sur volume, facturation pro, livraison dédiée.',
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://nouvelespaceserigraphik.ma'
+
+export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
+  const url = `${SITE_URL}/${params.locale}/devis-pro`
+  const title = 'Devis Pro B2B impression textile Maroc — prix gros, facture, livraison dédiée'
+  const description = 'Devis professionnel pour ateliers, écoles, associations et entreprises au Maroc. Prix dégressifs sur volume, facturation TVA, livraison dédiée Casablanca · Rabat · Marrakech. Réponse WhatsApp sous 1h.'
+  return {
+    title, description,
+    keywords: ['devis impression textile Maroc', 'gros sublimation Maroc', 'prix volume sérigraphie Casablanca', 'fournisseur DTF entreprise Maroc'],
+    alternates: { canonical: url, languages: { 'fr-MA': `${SITE_URL}/fr/devis-pro`, 'ar-MA': `${SITE_URL}/ar/devis-pro` } },
+    openGraph: { title, description, url, type: 'website' },
+    twitter: { card: 'summary_large_image', title, description },
+  }
 }
 
 const WA_SVG = (

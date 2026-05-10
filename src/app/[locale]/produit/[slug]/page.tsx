@@ -40,14 +40,26 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: { locale: string; slug: string } }): Promise<Metadata> {
   const product = await getProductBySlug(params.slug)
   if (!product) return {}
+  const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://nouvelespaceserigraphik.ma'
+  const url = `${SITE_URL}/${params.locale}/produit/${params.slug}`
+  const desc = stripHtml(product.short_description || product.description).slice(0, 155)
+  const title = `${product.name} — Maroc, livraison 24–48h`
+  const description = `${desc}${desc ? ' · ' : ''}Stock Maroc, livraison Casablanca, Rabat, Marrakech 24–48h. Devis WhatsApp.`
   return {
-    title: product.name,
-    description: stripHtml(product.short_description || product.description).slice(0, 160),
+    title,
+    description,
+    alternates: {
+      canonical: url,
+      languages: { 'fr-MA': `${SITE_URL}/fr/produit/${params.slug}`, 'ar-MA': `${SITE_URL}/ar/produit/${params.slug}` },
+    },
     openGraph: {
       title: product.name,
-      description: stripHtml(product.short_description || product.description).slice(0, 160),
-      images: product.images?.[0] ? [{ url: product.images[0].src, alt: product.images[0].alt }] : [],
+      description,
+      url,
+      type: 'website',
+      images: product.images?.[0] ? [{ url: product.images[0].src, alt: product.images[0].alt }] : undefined,
     },
+    twitter: { card: 'summary_large_image', title: product.name, description },
   }
 }
 
@@ -166,8 +178,47 @@ export default async function ProductPage({ params }: PageProps) {
   const useCase = PRODUCT_USE_CASES[primaryCategorySlug] ?? null
   const whatsappUrl = useCase ? whatsappProductLink(`${name} — ${useCase.whatsapp}`) : whatsappProductLink(name)
 
+  const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://nouvelespaceserigraphik.ma'
+  const productUrl = `${SITE_URL}/${locale}/produit/${slug}`
+  const productJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name,
+    description: stripHtml(short_description || description).slice(0, 5000),
+    sku: sku || undefined,
+    image: images?.map(i => i.src).slice(0, 6),
+    brand: { '@type': 'Brand', name: 'Nouvel Espace Sérigraphik' },
+    category: categories[0]?.name,
+    aggregateRating: rating_count > 0 ? {
+      '@type': 'AggregateRating',
+      ratingValue: average_rating,
+      reviewCount: rating_count,
+    } : undefined,
+    offers: {
+      '@type': 'Offer',
+      url: productUrl,
+      priceCurrency: 'MAD',
+      price: parseFloat(sale_price || price || regular_price || '0'),
+      availability: stock_status === 'instock' ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+      seller: { '@type': 'Organization', name: 'Nouvel Espace Sérigraphik' },
+      areaServed: { '@type': 'Country', name: 'Morocco' },
+    },
+  }
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${SITE_URL}/${locale}` },
+      { '@type': 'ListItem', position: 2, name: 'Catalogue', item: `${SITE_URL}/${locale}/categorie-produit` },
+      ...(categories[0] ? [{ '@type': 'ListItem', position: 3, name: categories[0].name, item: `${SITE_URL}/${locale}/categorie-produit/${categories[0].slug}` }] : []),
+      { '@type': 'ListItem', position: categories[0] ? 4 : 3, name, item: productUrl },
+    ],
+  }
+
   return (
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
       {/* ── Breadcrumb ────────────────────────────────────────────────── */}
       <div style={{ background: 'var(--surface)', borderBottom: '1px solid var(--border)', padding: '12px 6%' }}>
         <div style={{ maxWidth: 1280, margin: '0 auto' }}>

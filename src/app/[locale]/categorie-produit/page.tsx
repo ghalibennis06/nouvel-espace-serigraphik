@@ -8,9 +8,19 @@ import ProductCard from '@/components/catalog/ProductCard'
 
 export const dynamic = 'force-dynamic'
 
-export const metadata: Metadata = {
-  title: 'Catalogue — Toutes les catégories',
-  description: "Découvrez toutes nos catégories de fournitures professionnelles pour la sérigraphie, la sublimation et l'impression textile.",
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://nouvelespaceserigraphik.ma'
+
+export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
+  const url = `${SITE_URL}/${params.locale}/categorie-produit`
+  const title = 'Catalogue machines & consommables impression textile au Maroc'
+  const description = 'Tout le matériel pour sérigraphie, sublimation, DTF, UV et broderie au Maroc : presses à chaud, encres, papiers, films, cadres, mugs sublimables. Stock Maroc, livraison 24–48h.'
+  return {
+    title, description,
+    keywords: ['catalogue sérigraphie Maroc', 'machine impression textile Casablanca', 'consommables sublimation Maroc', 'fournitures DTF Maroc'],
+    alternates: { canonical: url, languages: { 'fr-MA': `${SITE_URL}/fr/categorie-produit`, 'ar-MA': `${SITE_URL}/ar/categorie-produit` } },
+    openGraph: { title, description, url, type: 'website' },
+    twitter: { card: 'summary_large_image', title, description },
+  }
 }
 
 const CAT_EMOJIS: Record<string, string> = {

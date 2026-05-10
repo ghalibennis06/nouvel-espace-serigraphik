@@ -90,10 +90,20 @@ export default async function Footer({ locale }: { locale: string }) {
           ))}
         </div>
 
+        {/* City coverage — local SEO */}
+        <div style={{ borderTop: '1px solid var(--border)', paddingTop: 22, marginBottom: 18 }}>
+          <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.10em', textTransform: 'uppercase', color: 'var(--text)', marginBottom: 10 }}>
+            Livraison partout au Maroc 🇲🇦
+          </div>
+          <p style={{ fontSize: 12, color: 'var(--text2)', lineHeight: 1.7 }}>
+            Casablanca · Rabat · Marrakech · Tanger · Fès · Agadir · Meknès · Oujda · Tétouan · Kénitra · Salé · El Jadida · Mohammedia · Nador · Béni Mellal · Safi · Khouribga · Settat · Larache · Berkane — livraison express 24–48h, paiement à la livraison disponible.
+          </p>
+        </div>
+
         {/* Bottom bar */}
         <div style={{ borderTop: '1px solid var(--border)', paddingTop: 22, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8 }}>
           <span style={{ fontSize: 12, color: 'var(--text2)' }}>
-            © 2026 Nouvel Espace Sérigraphik · Casablanca, Maroc 🇲🇦
+            © 2026 Nouvel Espace Sérigraphik · Casablanca, Maroc
           </span>
           <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
             <span style={{ fontSize: 12, color: 'var(--text2)' }}>Tous droits réservés</span>

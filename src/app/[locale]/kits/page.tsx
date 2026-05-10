@@ -4,9 +4,19 @@ import { setRequestLocale } from 'next-intl/server'
 import { whatsappGeneralLink } from '@/lib/utils'
 import { KITS, COMPARISON } from '@/lib/data/kits'
 
-export const metadata: Metadata = {
-  title: 'Kits Démarrage Impression Textile — Nouvel Espace Serigraphik',
-  description: 'Kits clé-en-main pour lancer votre atelier d\'impression textile au Maroc. Sublimation, sérigraphie, DTF. Livraison 48h, support inclus.',
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://nouvelespaceserigraphik.ma'
+
+export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
+  const url = `${SITE_URL}/${params.locale}/kits`
+  const title = 'Kits de démarrage impression textile au Maroc — sublimation, sérigraphie, DTF'
+  const description = "Kits clé-en-main pour lancer votre atelier d'impression au Maroc. Sublimation, sérigraphie, DTF, UV. Livraison 24–48h Casablanca, Rabat, Marrakech, Tanger, Agadir. Support WhatsApp, garantie 1 an."
+  return {
+    title, description,
+    keywords: ['kit sublimation Maroc', 'kit sérigraphie Casablanca', 'kit DTF Maroc', 'pack impression textile Maroc', 'lancer atelier impression Maroc'],
+    alternates: { canonical: url, languages: { 'fr-MA': `${SITE_URL}/fr/kits`, 'ar-MA': `${SITE_URL}/ar/kits` } },
+    openGraph: { title, description, url, type: 'website' },
+    twitter: { card: 'summary_large_image', title, description },
+  }
 }
 
 const WA = whatsappGeneralLink

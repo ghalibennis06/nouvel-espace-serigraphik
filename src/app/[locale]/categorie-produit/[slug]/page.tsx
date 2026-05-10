@@ -113,15 +113,26 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: { locale: string; slug: string } }): Promise<Metadata> {
   const category = await getCategoryBySlug(params.slug)
   if (!category) return {}
-  const desc = stripHtml(category.description)
+  const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://nouvelespaceserigraphik.ma'
+  const url = `${SITE_URL}/${params.locale}/categorie-produit/${params.slug}`
+  const baseDesc = stripHtml(category.description)
+  const title = `${category.name} — Maroc, livraison 24–48h`
+  const description = (baseDesc || `${category.name} pour ateliers d\'impression au Maroc. Sélection pro, prix MAD, garantie 1 an.`) + ' Stock Casablanca, livraison Rabat · Marrakech · Tanger · Fès · Agadir · Oujda. Devis WhatsApp.'
   return {
-    title: category.name,
-    description: desc || `${category.name} — Fournitures professionnelles d'impression textile au Maroc.`,
-    openGraph: {
-      title: category.name,
-      description: desc,
-      images: category.image ? [{ url: category.image.src }] : [],
+    title,
+    description: description.slice(0, 280),
+    alternates: {
+      canonical: url,
+      languages: {
+        'fr-MA': `${SITE_URL}/fr/categorie-produit/${params.slug}`,
+        'ar-MA': `${SITE_URL}/ar/categorie-produit/${params.slug}`,
+      },
     },
+    openGraph: {
+      title: category.name, description: description.slice(0, 280), url, type: 'website',
+      images: category.image ? [{ url: category.image.src }] : undefined,
+    },
+    twitter: { card: 'summary_large_image', title: category.name, description: description.slice(0, 280) },
   }
 }
 
@@ -188,8 +199,33 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
     { value: 'price-desc', label: t('sortPriceDesc') },
   ]
 
+  const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://nouvelespaceserigraphik.ma'
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Accueil',   item: `${SITE_URL}/${locale}` },
+      { '@type': 'ListItem', position: 2, name: 'Catalogue', item: `${SITE_URL}/${locale}/categorie-produit` },
+      { '@type': 'ListItem', position: 3, name: category.name, item: `${SITE_URL}/${locale}/categorie-produit/${slug}` },
+    ],
+  }
+  const itemListJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: category.name,
+    numberOfItems: products.length,
+    itemListElement: products.slice(0, 30).map((p, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      url: `${SITE_URL}/${locale}/produit/${p.slug}`,
+      name: p.name,
+    })),
+  }
+
   return (
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }} />
       {/* ── Category Header ─────────────────────────────────────────── */}
       <div style={{ background: 'var(--surface)', borderBottom: '1px solid var(--border)', padding: '40px 6% 32px' }}>
         <div style={{ maxWidth: 1280, margin: '0 auto' }}>

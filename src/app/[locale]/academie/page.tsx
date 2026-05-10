@@ -3,9 +3,19 @@ import Link from 'next/link'
 import { setRequestLocale } from 'next-intl/server'
 import { whatsappGeneralLink } from '@/lib/utils'
 
-export const metadata: Metadata = {
-  title: 'Académie NES — Guides Impression Textile Maroc',
-  description: 'Guides gratuits pour maîtriser la sublimation, la sérigraphie et le DTF. Apprenez les techniques pro et lancez votre atelier au Maroc.',
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://nouvelespaceserigraphik.ma'
+
+export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
+  const url = `${SITE_URL}/${params.locale}/academie`
+  const title = 'Académie NES — guides sublimation, sérigraphie et DTF au Maroc'
+  const description = 'Guides gratuits pour maîtriser la sublimation, la sérigraphie, le DTF et l\'UV au Maroc. Choisir sa presse, lancer son atelier en 30 jours, calculer la rentabilité — tout est en français, écrit pour le marché marocain.'
+  return {
+    title, description,
+    keywords: ['guide sublimation Maroc', 'apprendre sérigraphie', 'tuto DTF français', 'lancer atelier impression textile Maroc'],
+    alternates: { canonical: url, languages: { 'fr-MA': `${SITE_URL}/fr/academie`, 'ar-MA': `${SITE_URL}/ar/academie` } },
+    openGraph: { title, description, url, type: 'website' },
+    twitter: { card: 'summary_large_image', title, description },
+  }
 }
 
 const GUIDES = [
