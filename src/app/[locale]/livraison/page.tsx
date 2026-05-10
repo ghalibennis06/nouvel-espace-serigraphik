@@ -42,8 +42,18 @@ const FAQ = [
 ]
 
 export default function LivraisonPage({ params }: { params: { locale: string } }) {
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: FAQ.map(({ q, a }) => ({
+      '@type': 'Question',
+      name: q,
+      acceptedAnswer: { '@type': 'Answer', text: a },
+    })),
+  }
   return (
     <div style={{ background: 'var(--bg)', minHeight: '80vh' }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       <div style={{ maxWidth: 980, margin: '0 auto', padding: '64px 6% 80px' }}>
         <span className="stag" style={{ marginBottom: 12 }}>Logistique NES · Maroc</span>
         <h1 style={{ fontFamily: 'Inter,system-ui,sans-serif', fontSize: 'clamp(28px,3.4vw,42px)', fontWeight: 700, color: 'var(--text)', lineHeight: 1.05, margin: '8px 0 16px' }}>

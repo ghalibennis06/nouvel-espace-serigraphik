@@ -68,6 +68,22 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   const ADDRESS  = process.env.NEXT_PUBLIC_ADDRESS ?? 'Bd Mohammed V, Casablanca 20250'
   const WHATSAPP = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '212522448090'
 
+  const websiteJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': `${SITE_URL}#website`,
+    name: 'Nouvel Espace Sérigraphik',
+    alternateName: 'NES',
+    url: SITE_URL,
+    inLanguage: locale === 'ar' ? 'ar-MA' : 'fr-MA',
+    publisher: { '@id': `${SITE_URL}#organization` },
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: { '@type': 'EntryPoint', urlTemplate: `${SITE_URL}/${locale}/categorie-produit?search={search_term_string}` },
+      'query-input': 'required name=search_term_string',
+    },
+  }
+
   const orgJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
@@ -92,6 +108,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem('nes-theme');if(t==='dark')document.documentElement.classList.add('dark');}catch(e){}})();` }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
       </head>
       <body className="min-h-screen flex flex-col" style={{ background: 'var(--bg)' }}>

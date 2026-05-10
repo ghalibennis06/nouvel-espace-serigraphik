@@ -53,12 +53,31 @@ const STARTER_CHECKLIST = [
   'la ville où vous voulez être livré',
 ]
 
+const KITS_FAQ = [
+  { q: 'Quel kit choisir pour démarrer un atelier d\'impression au Maroc ?', a: 'Pour un premier achat avec budget contenu, le Pack N°1 sublimation couvre mugs, t-shirts et petits formats. Pour un atelier qui veut produire en volume, le Pack N°2 ou N°3 inclut une presse pro et des consommables longue durée. Sur WhatsApp, NES vous oriente selon votre activité réelle.' },
+  { q: 'Les kits sont-ils livrables partout au Maroc ?', a: 'Oui — Casablanca en 24h, Rabat, Marrakech, Tanger, Fès, Agadir, Oujda en 24 à 48h. Paiement à la livraison disponible sur la plupart des kits.' },
+  { q: 'Quelle garantie sur le matériel des kits ?', a: 'Toutes les machines incluses dans les kits NES sont garanties 12 mois pièces et main-d\'œuvre. Échange sous 7 jours en cas de défaut à la livraison.' },
+  { q: 'Avez-vous un kit pour la sérigraphie textile ?', a: 'Oui : kit sérigraphie 1 couleur pour démarrer ou kit 4 couleurs / 4 stations pour atelier qui produit. Encres Antex, soies, cadres alu et raclettes inclus.' },
+  { q: 'Peut-on personnaliser un kit selon notre besoin ?', a: 'Bien sûr — décrivez votre activité, votre volume hebdo et votre budget sur WhatsApp, et NES compose un kit sur mesure (machine + consommables + accompagnement).' },
+]
+
 export default function KitsPage({ params }: { params: { locale: string } }) {
   const { locale } = params
   setRequestLocale(locale)
 
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: KITS_FAQ.map(({ q, a }) => ({
+      '@type': 'Question',
+      name: q,
+      acceptedAnswer: { '@type': 'Answer', text: a },
+    })),
+  }
+
   return (
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
 
       {/* ── HERO ──────────────────────────────────────────────────────────── */}
       <div style={{ background: 'var(--surface)', borderBottom: '1px solid var(--border)', padding: '72px 6% 56px' }}>
@@ -348,6 +367,29 @@ export default function KitsPage({ params }: { params: { locale: string } }) {
           <p style={{ fontSize: 13, color: 'var(--text2)' }}>Aucun engagement · 100% gratuit · Lun–Sam 9h–18h</p>
         </div>
       </div>
+
+      {/* ── FAQ — visible content matching JSON-LD ─────────────────────────── */}
+      <section style={{ background: 'var(--surface)', borderTop: '1px solid var(--border)', padding: '64px 6%' }}>
+        <div style={{ maxWidth: 880, margin: '0 auto' }}>
+          <span className="stag">Questions fréquentes</span>
+          <h2 style={{ fontSize: 'clamp(24px,2.8vw,34px)', fontWeight: 700, color: 'var(--text)', letterSpacing: '-0.02em', lineHeight: 1.1, marginBottom: 24 }}>
+            Acheter un kit d&apos;impression au Maroc — ce que demandent nos clients
+          </h2>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+            {KITS_FAQ.map(({ q, a }) => (
+              <details
+                key={q}
+                style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 12, padding: '16px 18px' }}
+              >
+                <summary style={{ fontSize: 15, fontWeight: 600, color: 'var(--text)', cursor: 'pointer', listStyle: 'none' }}>
+                  {q}
+                </summary>
+                <p style={{ marginTop: 10, fontSize: 14, color: 'var(--text2)', lineHeight: 1.7 }}>{a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
 
     </div>
   )
