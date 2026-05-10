@@ -104,6 +104,6 @@ export default async function middleware(req: NextRequest) {
 
 export const config = {
   matcher: [
-    '/((?!_next|_vercel|images|favicon.ico|robots.txt|sitemap.xml|.*\\..*).*)',
+    '/((?!_next|_vercel|images|favicon.ico|robots.txt|sitemap.xml|opengraph-image|twitter-image|icon|apple-icon|manifest.webmanifest|.*\\..*).*)',
   ],
 }
