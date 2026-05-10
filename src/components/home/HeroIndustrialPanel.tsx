@@ -103,13 +103,14 @@ export default function HeroIndustrialPanel({
 
           <h1
             style={{
-              fontSize: 'clamp(36px,5vw,72px)',
-              lineHeight: 1.02,
-              letterSpacing: '-0.05em',
+              fontSize: 'clamp(30px,4.2vw,56px)',
+              lineHeight: 1.05,
+              letterSpacing: '-0.035em',
               color: '#151515',
-              fontWeight: 900,
-              marginBottom: 18,
-              maxWidth: 760,
+              fontWeight: 800,
+              marginBottom: 20,
+              maxWidth: 720,
+              fontFamily: 'Inter, system-ui, sans-serif',
             }}
           >
             {title || 'Machines, kits et consommables pour lancer, équiper et faire tourner un vrai atelier.'}
