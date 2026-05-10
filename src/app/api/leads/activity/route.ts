@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { sql } from '@/lib/db'
+import { isAdminRequest } from '@/lib/admin-auth'
 
 export async function GET(req: NextRequest) {
+  if (!isAdminRequest(req)) return NextResponse.json({ error: 'unauthorized' }, { status: 401 })
   const leadId = req.nextUrl.searchParams.get('lead_id')
   if (!leadId) return NextResponse.json({ error: 'lead_id required' }, { status: 400 })
 
@@ -20,6 +22,7 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
+  if (!isAdminRequest(req)) return NextResponse.json({ error: 'unauthorized' }, { status: 401 })
   let body: {
     lead_id?: string
     type?: string

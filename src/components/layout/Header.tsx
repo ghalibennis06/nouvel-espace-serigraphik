@@ -159,15 +159,6 @@ export default function Header({ locale, rootCategories, subCategories }: Header
             }
           </button>
 
-          {/* Admin — desktop, discreet */}
-          <Link
-            href="/admin"
-            className="hidden md:flex"
-            style={{ alignItems: 'center', gap: 5, padding: '6px 12px', borderRadius: 8, fontSize: 11, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--text3)', border: '1px solid var(--border)', background: 'transparent', textDecoration: 'none' }}
-          >
-            ⚙ Admin
-          </Link>
-
           {/* WhatsApp CTA */}
           <a
             href={whatsappGeneralLink('Bonjour NES, je souhaite des informations sur vos produits.')}

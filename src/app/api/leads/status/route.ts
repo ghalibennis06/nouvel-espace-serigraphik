@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { sql } from '@/lib/db'
+import { isAdminRequest } from '@/lib/admin-auth'
 
 const VALID_STATUSES = ['new', 'qualified', 'contacted', 'quoted', 'won', 'lost', 'closed', 'spam']
 const VALID_PRIORITIES = ['low', 'normal', 'high', 'urgent']
@@ -17,6 +18,7 @@ async function logActivity(lead_id: string, type: string, label: string, opts?: 
 }
 
 export async function PATCH(req: NextRequest) {
+  if (!isAdminRequest(req)) return NextResponse.json({ error: 'unauthorized' }, { status: 401 })
   let body: {
     id?: string
     status?: string

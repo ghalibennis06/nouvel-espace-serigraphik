@@ -1,5 +1,5 @@
 import createMiddleware from 'next-intl/middleware'
-import { locales, defaultLocale } from './src/i18n'
+import { locales, defaultLocale } from './i18n'
 import { NextRequest, NextResponse } from 'next/server'
 
 const COOKIE = 'nes-admin-session'
@@ -9,8 +9,8 @@ function readSecret(): string | null {
   const s = process.env.ADMIN_COOKIE_SECRET
   if (!s || s.length < 16) {
     if (process.env.NODE_ENV === 'production') {
-      // Don't throw inside the Edge runtime — log loudly and treat all admin
-      // sessions as invalid so the surface stays locked rather than world-open.
+      // Edge runtime: log loudly and treat all admin sessions as invalid
+      // so the surface stays locked rather than world-open.
       console.error('[NES] ADMIN_COOKIE_SECRET missing/short — refusing all admin sessions.')
       return null
     }
@@ -19,8 +19,6 @@ function readSecret(): string | null {
   return s
 }
 
-// Edge-compatible HMAC verify — re-sign and compare to avoid atob() padding issues
-// (Node's digest('base64url') emits unpadded base64; atob() requires padding)
 async function verifyAdminCookie(signed: string | undefined): Promise<boolean> {
   if (!signed) return false
   const secret = readSecret()
@@ -49,7 +47,6 @@ async function verifyAdminCookie(signed: string | undefined): Promise<boolean> {
     }
     if (diff !== 0) return false
 
-    // Server-side TTL check — never trust cookie maxAge alone.
     const m = /^admin:(\d+)$/.exec(value)
     if (!m) return false
     const issuedAt = Number(m[1])
@@ -63,22 +60,29 @@ async function verifyAdminCookie(signed: string | undefined): Promise<boolean> {
 
 const intlMiddleware = createMiddleware({ locales, defaultLocale, localePrefix: 'always' })
 
+function noindex(res: NextResponse): NextResponse {
+  res.headers.set('X-Robots-Tag', 'noindex, nofollow, noarchive')
+  return res
+}
+
 export default async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl
 
-  // Admin + API paths: never go through i18n middleware
+  // Admin + API: never run i18n middleware here.
   if (pathname.startsWith('/admin') || pathname.startsWith('/api/')) {
-    // Protect /admin/* except /admin/login
+    // Protect /admin/* (except the login page itself)
     if (pathname.startsWith('/admin') && !pathname.startsWith('/admin/login')) {
       const token = req.cookies.get(COOKIE)?.value
       if (!(await verifyAdminCookie(token))) {
         const loginUrl = new URL('/admin/login', req.url)
         loginUrl.searchParams.set('from', pathname)
-        return NextResponse.redirect(loginUrl)
+        return noindex(NextResponse.redirect(loginUrl))
       }
     }
 
-    // Protect sensitive API routes (except /api/admin/auth and public /api/leads POST)
+    // Sensitive APIs: 401 JSON (not redirect) for unauthenticated callers.
+    // Public: /api/leads (POST capture), /api/admin/auth (login),
+    //         /api/revalidate (HMAC-signed by Woo), /api/img (proxy).
     if (
       (pathname.startsWith('/api/admin/') && pathname !== '/api/admin/auth') ||
       pathname.startsWith('/api/leads/status') ||
@@ -90,6 +94,8 @@ export default async function middleware(req: NextRequest) {
       }
     }
 
+    // Strip admin pages from search engines defensively.
+    if (pathname.startsWith('/admin')) return noindex(NextResponse.next())
     return NextResponse.next()
   }
 

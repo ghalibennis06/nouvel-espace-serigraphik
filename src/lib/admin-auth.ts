@@ -1,4 +1,5 @@
 import crypto from 'crypto'
+import type { NextRequest } from 'next/server'
 
 export const ADMIN_COOKIE = 'nes-admin-session'
 export const ADMIN_TOKEN_TTL_MS = 8 * 60 * 60 * 1000 // 8 hours
@@ -45,3 +46,13 @@ export function verifyAdminToken(signed: string): boolean {
   const age = Date.now() - issuedAt
   return age >= 0 && age <= ADMIN_TOKEN_TTL_MS
 }
+
+// Defense-in-depth: every admin/sensitive route handler should call this in
+// addition to relying on middleware. Returns true if the request carries a
+// valid admin session cookie.
+export function isAdminRequest(req: NextRequest): boolean {
+  const token = req.cookies.get(ADMIN_COOKIE)?.value
+  if (!token) return false
+  try { return verifyAdminToken(token) } catch { return false }
+}
+

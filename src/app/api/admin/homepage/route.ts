@@ -2,10 +2,12 @@ import { NextRequest, NextResponse } from 'next/server'
 import { revalidateTag } from 'next/cache'
 import { sql, isDatabaseConfigured } from '@/lib/db'
 import { DEFAULT_HOMEPAGE_CONTROL, normalizeHomepageControlState } from '@/lib/admin-homepage'
+import { isAdminRequest } from '@/lib/admin-auth'
 
 const KEY = 'homepage'
 
-export async function GET() {
+export async function GET(req: NextRequest) {
+  if (!isAdminRequest(req)) return NextResponse.json({ error: 'unauthorized' }, { status: 401 })
   if (!isDatabaseConfigured()) {
     return NextResponse.json({ ok: true, settings: DEFAULT_HOMEPAGE_CONTROL, fallback: true, disconnected: true })
   }
@@ -25,6 +27,7 @@ export async function GET() {
 }
 
 export async function PATCH(req: NextRequest) {
+  if (!isAdminRequest(req)) return NextResponse.json({ error: 'unauthorized' }, { status: 401 })
   if (!isDatabaseConfigured()) {
     return NextResponse.json({ error: 'database not configured' }, { status: 503 })
   }

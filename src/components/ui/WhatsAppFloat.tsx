@@ -4,8 +4,9 @@ import { whatsappGeneralLink } from '@/lib/utils'
 export default function WhatsAppFloat() {
   return (
     <div
-      style={{ position: 'fixed', bottom: 28, right: 28, zIndex: 300, display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer' }}
-      className="group"
+      // Lifted on mobile to avoid overlap with product-page sticky bottom bar.
+      style={{ position: 'fixed', right: 18, zIndex: 300, display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer', bottom: 'calc(env(safe-area-inset-bottom, 0px) + 88px)' }}
+      className="group sm:!bottom-7 sm:!right-7"
     >
       <div style={{ background: 'var(--surface)', color: 'var(--text)', padding: '8px 14px', borderRadius: 8, fontSize: 12, fontWeight: 500, border: '1px solid var(--border2)', opacity: 0, transform: 'translateX(10px)', transition: 'opacity .2s, transform .2s', pointerEvents: 'none', whiteSpace: 'nowrap' }}
            className="group-hover:opacity-100 group-hover:translate-x-0">
