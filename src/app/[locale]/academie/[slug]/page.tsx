@@ -905,7 +905,7 @@ export default function GuideePage({ params }: PageProps) {
             <span style={{ fontSize: 12, color: 'var(--text2)' }}>· {guide.category}</span>
           </div>
 
-          <h1 style={{ fontFamily: 'Inter,system-ui,sans-serif', fontSize: 'clamp(28px,4vw,46px)', fontWeight: 700, color: 'var(--text)', lineHeight: 1.15, marginBottom: 16 }}>
+          <h1 style={{ fontFamily: 'Inter,system-ui,sans-serif', fontSize: 'clamp(24px,3vw,38px)', fontWeight: 700, color: 'var(--text)', lineHeight: 1.15, marginBottom: 16 }}>
             {guide.title}
           </h1>
           <p style={{ fontSize: 16, color: 'var(--text2)', lineHeight: 1.7 }}>

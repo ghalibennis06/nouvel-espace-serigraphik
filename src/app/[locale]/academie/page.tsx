@@ -84,7 +84,7 @@ export default function AcademiePage({ params }: { params: { locale: string } })
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'var(--bluesoft)', border: '1px solid var(--bluesoft2)', borderRadius: 20, padding: '6px 16px', marginBottom: 24 }}>
             <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--blue)', letterSpacing: '0.08em' }}>📖 ACADÉMIE NES — CONTENU 100% GRATUIT</span>
           </div>
-          <h1 style={{ fontFamily: 'Inter,system-ui,sans-serif', fontSize: 'clamp(36px,5vw,58px)', fontWeight: 700, color: 'var(--text)', lineHeight: 1.1, marginBottom: 20 }}>
+          <h1 style={{ fontFamily: 'Inter,system-ui,sans-serif', fontSize: 'clamp(28px,3.6vw,44px)', fontWeight: 700, color: 'var(--text)', lineHeight: 1.1, marginBottom: 20 }}>
             Maîtrisez l&apos;impression<br />
             <span style={{ color: 'var(--blue)' }}>textile au Maroc.</span>
           </h1>

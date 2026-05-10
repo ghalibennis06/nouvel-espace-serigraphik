@@ -76,7 +76,7 @@ export default function MoroccoTrustSection({ locale }: MoroccoTrustSectionProps
               className="card-hover"
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 9 }}>
-                <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 22, height: 22, borderRadius: '50%', background: 'var(--orangesoft)', fontSize: 10, fontWeight: 900, color: 'var(--orange)', flexShrink: 0 }}>
+                <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 22, height: 22, borderRadius: '50%', background: 'var(--orangesoft)', fontSize: 10, fontWeight: 700, color: 'var(--orange)', flexShrink: 0 }}>
                   {idx + 1}
                 </span>
                 <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--orange)' }}>

@@ -149,7 +149,7 @@ export default function HeroIndustrialPanel({
               { title: 'Réassortir', text: 'Encres, papiers, films, flex et stock atelier.' },
             ].map((item) => (
               <div key={item.title} style={{ background: '#fff', border: '1px solid rgba(20,20,20,0.08)', padding: '16px 14px', minHeight: 128 }}>
-                <div style={{ fontSize: 18, color: '#151515', fontWeight: 900, letterSpacing: '-0.02em', marginBottom: 8 }}>{item.title}</div>
+                <div style={{ fontSize: 18, color: '#151515', fontWeight: 700, letterSpacing: '-0.02em', marginBottom: 8 }}>{item.title}</div>
                 <p style={{ fontSize: 13, color: 'rgba(20,20,20,0.66)', lineHeight: 1.6 }}>{item.text}</p>
               </div>
             ))}
@@ -158,7 +158,7 @@ export default function HeroIndustrialPanel({
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {bullets.map((item, index) => (
               <div key={`${item}-${index}`} style={{ display: 'flex', gap: 10, alignItems: 'flex-start', padding: '12px 0', borderTop: '1px solid rgba(20,20,20,0.08)' }}>
-                <span style={{ color: '#f26316', fontWeight: 900, flexShrink: 0 }}>✓</span>
+                <span style={{ color: '#f26316', fontWeight: 700, flexShrink: 0 }}>✓</span>
                 <span style={{ fontSize: 13, color: 'rgba(20,20,20,0.72)', lineHeight: 1.6 }}>{item}</span>
               </div>
             ))}
@@ -173,7 +173,7 @@ export default function HeroIndustrialPanel({
               <div style={{ position: 'absolute', left: 18, right: 18, bottom: 18, display: 'flex', justifyContent: 'space-between', gap: 18, alignItems: 'flex-end' }}>
                 <div>
                   <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.78)', fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 6 }}>Atelier NES</div>
-                  <div style={{ fontSize: 28, color: '#fff', fontWeight: 900, lineHeight: 1.02, letterSpacing: '-0.03em', maxWidth: 340 }}>
+                  <div style={{ fontSize: 28, color: '#fff', fontWeight: 700, lineHeight: 1.02, letterSpacing: '-0.03em', maxWidth: 340 }}>
                     Plus clair qu&apos;un simple catalogue.
                   </div>
                 </div>
@@ -186,12 +186,12 @@ export default function HeroIndustrialPanel({
             <div className="grid grid-cols-2 gap-4">
               <div style={{ background: '#fff', border: '1px solid rgba(20,20,20,0.08)', padding: 18 }}>
                 <div style={{ fontSize: 10, color: '#f26316', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 8 }}>Preuve NES</div>
-                <div style={{ fontSize: 28, color: '#151515', fontWeight: 900, letterSpacing: '-0.04em', lineHeight: 1, marginBottom: 6 }}>2 000+</div>
+                <div style={{ fontSize: 28, color: '#151515', fontWeight: 700, letterSpacing: '-0.04em', lineHeight: 1, marginBottom: 6 }}>2 000+</div>
                 <div style={{ fontSize: 13, color: 'rgba(20,20,20,0.66)', lineHeight: 1.55 }}>ateliers lancés ou accompagnés au Maroc</div>
               </div>
               <div style={{ background: '#fff', border: '1px solid rgba(20,20,20,0.08)', padding: 18 }}>
                 <div style={{ fontSize: 10, color: '#f26316', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 8 }}>Réponse rapide</div>
-                <div style={{ fontSize: 28, color: '#151515', fontWeight: 900, letterSpacing: '-0.04em', lineHeight: 1, marginBottom: 6 }}>WhatsApp</div>
+                <div style={{ fontSize: 28, color: '#151515', fontWeight: 700, letterSpacing: '-0.04em', lineHeight: 1, marginBottom: 6 }}>WhatsApp</div>
                 <div style={{ fontSize: 13, color: 'rgba(20,20,20,0.66)', lineHeight: 1.55 }}>orientation, devis et suivi plus simples</div>
               </div>
             </div>

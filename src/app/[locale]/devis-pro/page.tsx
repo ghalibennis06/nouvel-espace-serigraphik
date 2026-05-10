@@ -90,7 +90,7 @@ export default function DevisProPage({ params }: { params: { locale: string } })
 
           <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-14 items-start">
             <div>
-              <h1 style={{ fontSize: 'clamp(38px,5vw,74px)', lineHeight: 1.03, letterSpacing: '-0.045em', color: '#f6efe8', fontWeight: 900, marginBottom: 18, maxWidth: 760 }}>
+              <h1 style={{ fontSize: 'clamp(38px,5vw,74px)', lineHeight: 1.03, letterSpacing: '-0.045em', color: '#f6efe8', fontWeight: 700, marginBottom: 18, maxWidth: 760 }}>
                 Devis professionnel, cadrage rapide, réponse exploitable.
               </h1>
               <p style={{ fontSize: 16, color: 'rgba(221,227,235,0.76)', lineHeight: 1.78, maxWidth: 660, marginBottom: 28 }}>
@@ -111,7 +111,7 @@ export default function DevisProPage({ params }: { params: { locale: string } })
                   href={waB2B}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '14px 22px', background: '#ff5c00', color: '#521800', fontSize: 13, fontWeight: 900, letterSpacing: '0.12em', textTransform: 'uppercase', textDecoration: 'none' }}
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '14px 22px', background: '#ff5c00', color: '#521800', fontSize: 13, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', textDecoration: 'none' }}
                 >
                   {WA_SVG} Envoyer mon besoin
                 </a>
@@ -165,7 +165,7 @@ export default function DevisProPage({ params }: { params: { locale: string } })
       <div style={{ maxWidth: 1240, margin: '0 auto', padding: '56px 6%' }}>
         <div style={{ marginBottom: 28 }}>
           <div style={{ fontSize: 10, color: '#ff9f6a', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 8 }}>Secteurs servis</div>
-          <h2 style={{ fontSize: 'clamp(28px,3.8vw,46px)', fontWeight: 900, color: '#f6efe8', letterSpacing: '-0.035em', lineHeight: 1.05, marginBottom: 10 }}>
+          <h2 style={{ fontSize: 'clamp(28px,3.8vw,46px)', fontWeight: 700, color: '#f6efe8', letterSpacing: '-0.035em', lineHeight: 1.05, marginBottom: 10 }}>
             NES traite des demandes réelles, secteur par secteur.
           </h2>
           <p style={{ fontSize: 15, color: 'rgba(221,227,235,0.7)', lineHeight: 1.75, maxWidth: 720 }}>
@@ -191,7 +191,7 @@ export default function DevisProPage({ params }: { params: { locale: string } })
         <div style={{ maxWidth: 1240, margin: '0 auto' }}>
           <div style={{ marginBottom: 24 }}>
             <div style={{ fontSize: 10, color: '#ff9f6a', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 8 }}>Pourquoi ce parcours</div>
-            <h2 style={{ fontSize: 'clamp(26px,3.4vw,40px)', fontWeight: 900, color: '#f6efe8', letterSpacing: '-0.03em', lineHeight: 1.08 }}>Plus clair qu&apos;un simple contact, plus utile qu&apos;un formulaire vague.</h2>
+            <h2 style={{ fontSize: 'clamp(26px,3.4vw,40px)', fontWeight: 700, color: '#f6efe8', letterSpacing: '-0.03em', lineHeight: 1.08 }}>Plus clair qu&apos;un simple contact, plus utile qu&apos;un formulaire vague.</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {ADVANTAGES.map((advantage) => (
@@ -210,7 +210,7 @@ export default function DevisProPage({ params }: { params: { locale: string } })
           <div className="grid grid-cols-1 lg:grid-cols-[1.02fr_0.98fr] gap-8 items-start">
             <div>
               <div style={{ fontSize: 10, color: '#ff9f6a', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 8 }}>Finaliser la demande</div>
-              <h2 style={{ fontSize: 'clamp(28px,3.8vw,46px)', fontWeight: 900, color: '#f6efe8', letterSpacing: '-0.035em', lineHeight: 1.04, marginBottom: 12 }}>
+              <h2 style={{ fontSize: 'clamp(28px,3.8vw,46px)', fontWeight: 700, color: '#f6efe8', letterSpacing: '-0.035em', lineHeight: 1.04, marginBottom: 12 }}>
                 Envoyez votre besoin, NES qualifie et répond.
               </h2>
               <p style={{ fontSize: 15, color: 'rgba(221,227,235,0.74)', lineHeight: 1.75, maxWidth: 620 }}>
@@ -222,7 +222,7 @@ export default function DevisProPage({ params }: { params: { locale: string } })
                 href={waB2B}
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '15px 22px', background: '#ff5c00', color: '#521800', fontSize: 13, fontWeight: 900, letterSpacing: '0.12em', textTransform: 'uppercase', textDecoration: 'none' }}
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '15px 22px', background: '#ff5c00', color: '#521800', fontSize: 13, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', textDecoration: 'none' }}
               >
                 {WA_SVG} Devis WhatsApp
               </a>

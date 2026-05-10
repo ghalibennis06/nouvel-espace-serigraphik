@@ -72,7 +72,7 @@ export default function ClosingDecisionStation({ locale }: { locale: string }) {
               <div style={{ display: 'grid', gap: 10 }}>
                 {CLOSING_SIGNALS.map((item) => (
                   <div key={item} style={{ display: 'flex', gap: 8, fontSize: 13, color: 'rgba(255,244,237,0.82)', lineHeight: 1.65 }}>
-                    <span style={{ color: '#f26316', fontWeight: 900, flexShrink: 0 }}>•</span>
+                    <span style={{ color: '#f26316', fontWeight: 700, flexShrink: 0 }}>•</span>
                     <span>{item}</span>
                   </div>
                 ))}
@@ -119,7 +119,7 @@ export default function ClosingDecisionStation({ locale }: { locale: string }) {
                 }}>
                   <div style={{ flex: 1 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
-                      <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 22, height: 22, borderRadius: '50%', background: isWA ? 'rgba(37,211,102,0.20)' : 'rgba(255,255,255,0.08)', fontSize: 11, fontWeight: 900, color: isWA ? '#4ade80' : '#ff9f6a', flexShrink: 0 }}>
+                      <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 22, height: 22, borderRadius: '50%', background: isWA ? 'rgba(37,211,102,0.20)' : 'rgba(255,255,255,0.08)', fontSize: 11, fontWeight: 700, color: isWA ? '#4ade80' : '#ff9f6a', flexShrink: 0 }}>
                         {idx + 1}
                       </span>
                       <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', color: isWA ? '#4ade80' : '#ff9f6a' }}>

@@ -119,7 +119,7 @@ export default async function CatalogIndexPage({
               <span style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.13em', textTransform: 'uppercase', color: 'var(--orange)', display: 'block', marginBottom: 12 }}>
                 Catalogue NES · Maroc
               </span>
-              <h1 style={{ fontSize: 'clamp(34px,4.3vw,58px)', fontWeight: 950, color: 'var(--text)', lineHeight: 0.98, letterSpacing: '-0.04em', marginBottom: 14 }}>
+              <h1 style={{ fontSize: 'clamp(34px,4.3vw,58px)', fontWeight: 800, color: 'var(--text)', lineHeight: 0.98, letterSpacing: '-0.04em', marginBottom: 14 }}>
                 {searchQuery ? `Résultats pour « ${searchQuery} »` : 'Entrez dans le catalogue par le bon besoin.'}
               </h1>
               <p style={{ fontSize: 15, color: 'var(--text2)', maxWidth: 760, lineHeight: 1.8, marginBottom: 18 }}>
@@ -154,7 +154,7 @@ export default async function CatalogIndexPage({
                   <div style={{ fontSize: 10, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--orange)', marginBottom: 8 }}>
                     Lecture rapide NES
                   </div>
-                  <div style={{ fontSize: 22, fontWeight: 900, color: 'var(--text)', letterSpacing: '-0.02em', lineHeight: 1.05, marginBottom: 8 }}>
+                  <div style={{ fontSize: 22, fontWeight: 700, color: 'var(--text)', letterSpacing: '-0.02em', lineHeight: 1.05, marginBottom: 8 }}>
                     Trois façons utiles d’entrer dans ce catalogue.
                   </div>
                   <p style={{ fontSize: 13, color: 'var(--text2)', lineHeight: 1.7 }}>
@@ -182,7 +182,7 @@ export default async function CatalogIndexPage({
                 <Link key={item.title} href={item.href(locale)} style={{ textDecoration: 'none' }}>
                   <div style={{ background: 'linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(250,247,244,1) 100%)', border: '1px solid var(--border)', borderRadius: 20, padding: 20, boxShadow: 'var(--shadow)', minHeight: 190 }}>
                     <div style={{ fontSize: 10, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--orange)', marginBottom: 8 }}>Parcours NES</div>
-                    <h3 style={{ fontSize: 20, fontWeight: 900, color: 'var(--text)', lineHeight: 1.08, letterSpacing: '-0.02em', marginBottom: 8 }}>{item.title}</h3>
+                    <h3 style={{ fontSize: 20, fontWeight: 700, color: 'var(--text)', lineHeight: 1.08, letterSpacing: '-0.02em', marginBottom: 8 }}>{item.title}</h3>
                     <p style={{ fontSize: 13, color: 'var(--text2)', lineHeight: 1.7, marginBottom: 16 }}>{item.text}</p>
                     <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 14px', borderRadius: 14, background: 'rgba(242,99,22,0.08)', border: '1px solid rgba(242,99,22,0.12)', color: 'var(--text)', fontSize: 12, fontWeight: 800 }}>
                       {item.cta} →
@@ -225,7 +225,7 @@ export default async function CatalogIndexPage({
               </a>
             </div>
           )}
-          <h2 style={{ fontSize: 28, fontWeight: 900, color: 'var(--text)', letterSpacing: '-0.03em', margin: '52px 0 24px' }}>
+          <h2 style={{ fontSize: 28, fontWeight: 700, color: 'var(--text)', letterSpacing: '-0.03em', margin: '52px 0 24px' }}>
             Ou entrez par une famille de produits
           </h2>
         </div>
@@ -245,7 +245,7 @@ export default async function CatalogIndexPage({
                     <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--orange)', marginBottom: 7 }}>
                       {lane?.badge ?? 'Catalogue NES'}
                     </div>
-                    <h2 style={{ fontSize: 28, fontWeight: 900, color: 'var(--text)', letterSpacing: '-0.03em', lineHeight: 1.04, marginBottom: 8 }}>
+                    <h2 style={{ fontSize: 28, fontWeight: 700, color: 'var(--text)', letterSpacing: '-0.03em', lineHeight: 1.04, marginBottom: 8 }}>
                       {cat.name}
                     </h2>
                     <p style={{ fontSize: 13, color: 'var(--text2)', lineHeight: 1.7, marginBottom: 8 }}>

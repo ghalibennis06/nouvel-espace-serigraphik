@@ -103,7 +103,7 @@ export default function ProductsSection({
               <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--orange)', marginBottom: 7 }}>
                 Lecture rapide NES
               </div>
-              <div style={{ fontSize: 22, fontWeight: 900, color: 'var(--text)', letterSpacing: '-0.02em', lineHeight: 1.06, marginBottom: 8 }}>
+              <div style={{ fontSize: 22, fontWeight: 700, color: 'var(--text)', letterSpacing: '-0.02em', lineHeight: 1.06, marginBottom: 8 }}>
                 {summary.title}
               </div>
               <p style={{ fontSize: 13, color: 'var(--text2)', lineHeight: 1.7 }}>
@@ -219,7 +219,7 @@ export default function ProductsSection({
                   </div>
 
                   <div style={{ display: 'flex', alignItems: 'baseline', gap: 6, marginBottom: 14 }}>
-                    <span style={{ fontSize: 22, fontWeight: 900, color: 'var(--orange)', letterSpacing: '-0.02em' }}>
+                    <span style={{ fontSize: 22, fontWeight: 700, color: 'var(--orange)', letterSpacing: '-0.02em' }}>
                       {finalP > 0 ? `${Math.round(finalP)} MAD` : 'Sur devis'}
                     </span>
                     {isOnSale && regP > 0 && (
@@ -268,7 +268,7 @@ export default function ProductsSection({
             <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--orange)', marginBottom: 7 }}>
               Si vous n’avez pas trouvé en 30 secondes
             </div>
-            <div style={{ fontSize: 18, fontWeight: 900, color: 'var(--text)', letterSpacing: '-0.02em', marginBottom: 5 }}>
+            <div style={{ fontSize: 18, fontWeight: 700, color: 'var(--text)', letterSpacing: '-0.02em', marginBottom: 5 }}>
               NES peut vous orienter directement vers la bonne famille ou préparer un devis plus sérieux.
             </div>
             <p style={{ fontSize: 13, color: 'var(--text2)', lineHeight: 1.65 }}>

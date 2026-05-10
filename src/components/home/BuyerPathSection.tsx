@@ -87,7 +87,7 @@ export default function BuyerPathSection({ locale }: BuyerPathSectionProps) {
             >
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
-                  <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 28, height: 28, borderRadius: '50%', background: 'var(--orangesoft)', border: '1px solid rgba(242,99,22,0.22)', fontSize: 12, fontWeight: 900, color: 'var(--orange)', flexShrink: 0 }}>
+                  <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 28, height: 28, borderRadius: '50%', background: 'var(--orangesoft)', border: '1px solid rgba(242,99,22,0.22)', fontSize: 12, fontWeight: 700, color: 'var(--orange)', flexShrink: 0 }}>
                     {String(idx + 1).padStart(2, '0')}
                   </span>
                   <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--orange)' }}>

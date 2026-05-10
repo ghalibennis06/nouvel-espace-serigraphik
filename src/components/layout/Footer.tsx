@@ -53,7 +53,7 @@ export default async function Footer({ locale }: { locale: string }) {
 
           {/* Brand col */}
           <div>
-            <div style={{ fontSize: 22, fontWeight: 900, color: 'var(--text)', marginBottom: 12, letterSpacing: '-0.03em' }}>
+            <div style={{ fontSize: 22, fontWeight: 700, color: 'var(--text)', marginBottom: 12, letterSpacing: '-0.03em' }}>
               NES<span style={{ display: 'inline-block', width: 7, height: 7, borderRadius: '50%', background: 'var(--orange)', marginLeft: 2, verticalAlign: 'middle', marginBottom: 3 }} />
             </div>
             <p style={{ fontSize: 13, color: 'var(--text2)', lineHeight: 1.75, marginBottom: 22 }}>

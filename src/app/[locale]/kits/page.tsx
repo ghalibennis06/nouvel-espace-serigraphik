@@ -59,7 +59,7 @@ export default function KitsPage({ params }: { params: { locale: string } }) {
             </svg>
             <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--blue)', letterSpacing: '0.08em' }}>KITS CLÉ-EN-MAIN — LIVRAISON 48H</span>
           </div>
-          <h1 style={{ fontFamily: 'Inter,system-ui,sans-serif', fontSize: 'clamp(36px,5vw,60px)', fontWeight: 700, color: 'var(--text)', lineHeight: 1.1, marginBottom: 20 }}>
+          <h1 style={{ fontFamily: 'Inter,system-ui,sans-serif', fontSize: 'clamp(28px,3.6vw,44px)', fontWeight: 700, color: 'var(--text)', lineHeight: 1.1, marginBottom: 20 }}>
             Choisissez le bon kit pour lancer votre activité,
             <span style={{ color: 'var(--blue)' }}> sans acheter au hasard.</span>
           </h1>

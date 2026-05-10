@@ -46,7 +46,7 @@ export default function ProofFieldSection({ locale }: { locale: string }) {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3" style={{ marginBottom: 18 }}>
               {METRICS.map((item) => (
                 <div key={item.label} style={{ background: '#fff', border: '1px solid rgba(20,20,20,0.08)', padding: '18px 16px' }}>
-                  <div style={{ fontSize: 28, color: '#151515', fontWeight: 900, letterSpacing: '-0.022em', lineHeight: 1, marginBottom: 6 }}>{item.value}</div>
+                  <div style={{ fontSize: 28, color: '#151515', fontWeight: 700, letterSpacing: '-0.022em', lineHeight: 1, marginBottom: 6 }}>{item.value}</div>
                   <div style={{ fontSize: 12, color: 'rgba(20,20,20,0.62)', lineHeight: 1.45 }}>{item.label}</div>
                 </div>
               ))}

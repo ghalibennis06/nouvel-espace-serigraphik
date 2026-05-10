@@ -94,7 +94,7 @@ export default function Header({ locale }: HeaderProps) {
           height: 68,
         }}>
           <Link href={`/${locale}`} aria-label="NES — accueil" style={{ display: 'flex', alignItems: 'center', gap: 4, textDecoration: 'none', flexShrink: 0 }}>
-            <span style={{ fontFamily: 'Inter, sans-serif', fontSize: 22, fontWeight: 900, color: 'var(--text)', letterSpacing: '-0.05em' }}>NES</span>
+            <span style={{ fontFamily: 'Inter, sans-serif', fontSize: 22, fontWeight: 700, color: 'var(--text)', letterSpacing: '-0.05em' }}>NES</span>
             <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--orange)', display: 'inline-block', marginTop: 8 }} />
           </Link>
 
@@ -191,7 +191,7 @@ export default function Header({ locale }: HeaderProps) {
             style={{ width: 320, maxWidth: '88vw', background: 'var(--card)', zIndex: 50, overflowY: 'auto', borderLeft: '1px solid var(--border)' }}
           >
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '20px 22px', borderBottom: '1px solid var(--border)' }}>
-              <span style={{ fontFamily: 'Inter, sans-serif', fontSize: 20, fontWeight: 900, color: 'var(--text)', letterSpacing: '-0.05em' }}>
+              <span style={{ fontFamily: 'Inter, sans-serif', fontSize: 20, fontWeight: 700, color: 'var(--text)', letterSpacing: '-0.05em' }}>
                 NES<span style={{ display: 'inline-block', width: 5, height: 5, borderRadius: '50%', background: 'var(--orange)', marginLeft: 3, verticalAlign: 'middle', marginBottom: 2 }} />
               </span>
               <button onClick={() => setMenuOpen(false)} aria-label="Fermer" style={{ background: 'none', border: 'none', color: 'var(--text2)', cursor: 'pointer', width: 40, height: 40, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

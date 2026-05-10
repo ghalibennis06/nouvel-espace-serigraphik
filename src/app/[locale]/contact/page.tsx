@@ -109,7 +109,7 @@ export default function ContactPage({ params }: { params: { locale: string } }) 
 
           <div className="grid grid-cols-1 lg:grid-cols-[1.04fr_0.96fr] gap-10 lg:gap-14 items-start">
             <div>
-              <h1 style={{ fontSize: 'clamp(38px,5vw,72px)', lineHeight: 1.03, letterSpacing: '-0.045em', color: '#f6efe8', fontWeight: 900, marginBottom: 18, maxWidth: 760 }}>
+              <h1 style={{ fontSize: 'clamp(38px,5vw,72px)', lineHeight: 1.03, letterSpacing: '-0.045em', color: '#f6efe8', fontWeight: 700, marginBottom: 18, maxWidth: 760 }}>
                 Entrez par le bon besoin, pas par un message flou.
               </h1>
               <p style={{ fontSize: 16, color: 'rgba(221,227,235,0.76)', lineHeight: 1.78, maxWidth: 660, marginBottom: 24 }}>
@@ -134,7 +134,7 @@ export default function ContactPage({ params }: { params: { locale: string } }) 
                     }}
                   >
                     <div style={{ fontSize: 10, color: intent === item.value ? '#ff9f6a' : 'rgba(228,190,177,0.62)', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 8 }}>{item.code}</div>
-                    <div style={{ fontSize: 18, color: '#f6efe8', fontWeight: 900, letterSpacing: '-0.02em', marginBottom: 7 }}>{item.title}</div>
+                    <div style={{ fontSize: 18, color: '#f6efe8', fontWeight: 700, letterSpacing: '-0.02em', marginBottom: 7 }}>{item.title}</div>
                     <p style={{ fontSize: 12, color: 'rgba(221,227,235,0.72)', lineHeight: 1.6 }}>{item.text}</p>
                   </button>
                 ))}
@@ -155,7 +155,7 @@ export default function ContactPage({ params }: { params: { locale: string } }) 
                   )}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', padding: '14px 22px', background: '#ff5c00', color: '#521800', fontSize: 13, fontWeight: 900, letterSpacing: '0.12em', textTransform: 'uppercase', textDecoration: 'none' }}
+                  style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', padding: '14px 22px', background: '#ff5c00', color: '#521800', fontSize: 13, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', textDecoration: 'none' }}
                 >
                   WhatsApp immédiat
                 </a>
@@ -216,7 +216,7 @@ export default function ContactPage({ params }: { params: { locale: string } }) 
         {showForm && (
           <div style={{ border: '1px solid rgba(255,92,0,0.36)', background: 'rgba(255,255,255,0.03)', padding: '28px 28px 24px', marginBottom: 30 }}>
             <div style={{ fontSize: 10, color: '#ff9f6a', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 8 }}>Formulaire NES</div>
-            <div style={{ fontSize: 22, fontWeight: 900, color: '#f6efe8', letterSpacing: '-0.02em', marginBottom: 8 }}>Demande orientée : {currentIntentLabel}</div>
+            <div style={{ fontSize: 22, fontWeight: 700, color: '#f6efe8', letterSpacing: '-0.02em', marginBottom: 8 }}>Demande orientée : {currentIntentLabel}</div>
             <div style={{ fontSize: 13, color: 'rgba(221,227,235,0.72)', lineHeight: 1.65, marginBottom: 20 }}>
               Décrivez le besoin de manière concrète, pour que NES réponde avec une vraie orientation exploitable.
             </div>
@@ -279,7 +279,7 @@ export default function ContactPage({ params }: { params: { locale: string } }) 
                 <button
                   type="submit"
                   disabled={status === 'sending'}
-                  style={{ padding: '14px 22px', background: '#ff5c00', color: '#521800', fontSize: 13, fontWeight: 900, letterSpacing: '0.12em', textTransform: 'uppercase', border: 'none', cursor: 'pointer' }}
+                  style={{ padding: '14px 22px', background: '#ff5c00', color: '#521800', fontSize: 13, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', border: 'none', cursor: 'pointer' }}
                 >
                   {status === 'sending' ? 'Envoi...' : 'Envoyer la demande'}
                 </button>

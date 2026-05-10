@@ -58,7 +58,7 @@ export default function VoidCategoryShowcase({
                     <span style={{ fontSize: 11, color: 'rgba(20,20,20,0.52)', fontWeight: 700 }}>{cat.count} produits</span>
                   </div>
 
-                  <h3 style={{ fontSize: 22, color: '#151515', fontWeight: 900, letterSpacing: '-0.02em', lineHeight: 1.08, marginBottom: 10 }}>
+                  <h3 style={{ fontSize: 22, color: '#151515', fontWeight: 700, letterSpacing: '-0.02em', lineHeight: 1.08, marginBottom: 10 }}>
                     {cat.name}
                   </h3>
 
