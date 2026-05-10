@@ -24,12 +24,27 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
   const t = await getTranslations({ locale: params.locale, namespace: 'site' })
+  const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://nouvelespaceserigraphik.ma'
   return {
     title: {
       default: t('name'),
       template: `%s | ${t('name')}`,
     },
     description: t('description'),
+    alternates: {
+      canonical: `${SITE_URL}/${params.locale}`,
+      languages: {
+        'fr-MA': `${SITE_URL}/fr`,
+        'ar-MA': `${SITE_URL}/ar`,
+        'x-default': `${SITE_URL}/fr`,
+      },
+    },
+    openGraph: {
+      type: 'website',
+      url: `${SITE_URL}/${params.locale}`,
+      siteName: t('name'),
+      locale: params.locale === 'ar' ? 'ar_MA' : 'fr_MA',
+    },
   }
 }
 
@@ -47,13 +62,37 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
 
   const dir = locale === 'ar' ? 'rtl' : 'ltr'
 
+  const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://nouvelespaceserigraphik.ma'
+  const PHONE    = process.env.NEXT_PUBLIC_PHONE   ?? '+212-522-44-80-90'
+  const EMAIL    = process.env.NEXT_PUBLIC_EMAIL   ?? 'contact@nouvelespaceserigraphik.ma'
+  const ADDRESS  = process.env.NEXT_PUBLIC_ADDRESS ?? 'Bd Mohammed V, Casablanca 20250'
+  const WHATSAPP = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '212522448090'
+
+  const orgJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    '@id': `${SITE_URL}#organization`,
+    name: 'Nouvel Espace Sérigraphik',
+    alternateName: 'NES',
+    url: SITE_URL,
+    logo: `${SITE_URL}/logo.png`,
+    image: `${SITE_URL}/og-default.jpg`,
+    description: 'Machines, kits et consommables pour sérigraphie, sublimation, DTF, UV et broderie au Maroc.',
+    telephone: PHONE,
+    email: EMAIL,
+    address: { '@type': 'PostalAddress', streetAddress: ADDRESS, addressLocality: 'Casablanca', postalCode: '20250', addressCountry: 'MA' },
+    areaServed: { '@type': 'Country', name: 'Morocco' },
+    priceRange: 'MAD',
+    sameAs: [`https://wa.me/${WHATSAPP}`],
+  }
+
   return (
     <html lang={locale} dir={dir}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        {/* FOUC prevention: apply saved theme before first paint */}
         <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem('nes-theme');if(t==='dark')document.documentElement.classList.add('dark');}catch(e){}})();` }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
       </head>
       <body className="min-h-screen flex flex-col" style={{ background: 'var(--bg)' }}>
         <ThemeProvider>

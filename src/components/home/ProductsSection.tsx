@@ -90,7 +90,7 @@ export default function ProductsSection({
         <div style={{ alignItems: 'end', marginBottom: 28 }} className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div>
             <span className="stag">Réassort et références qui tournent</span>
-            <h2 style={{ fontSize: 'clamp(30px,3.8vw,48px)', fontWeight: 900, color: 'var(--text)', letterSpacing: '-0.03em', lineHeight: 1.04, marginBottom: 10 }}>
+            <h2 style={{ fontSize: 'clamp(24px,2.8vw,36px)', fontWeight: 700, color: 'var(--text)', letterSpacing: '-0.02em', lineHeight: 1.04, marginBottom: 10 }}>
               Les produits à revoir quand vous voulez avancer vite.
             </h2>
             <p style={{ fontSize: 15, color: 'var(--text2)', lineHeight: 1.75, maxWidth: 700 }}>
@@ -219,7 +219,7 @@ export default function ProductsSection({
                   </div>
 
                   <div style={{ display: 'flex', alignItems: 'baseline', gap: 6, marginBottom: 14 }}>
-                    <span style={{ fontSize: 22, fontWeight: 900, color: 'var(--orange)', letterSpacing: '-0.03em' }}>
+                    <span style={{ fontSize: 22, fontWeight: 900, color: 'var(--orange)', letterSpacing: '-0.02em' }}>
                       {finalP > 0 ? `${Math.round(finalP)} MAD` : 'Sur devis'}
                     </span>
                     {isOnSale && regP > 0 && (

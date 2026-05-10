@@ -40,7 +40,7 @@ export default function RoiCalculator({ variant = 'hero' }: Props) {
   if (variant === 'academie') {
     return (
       <div style={{ background: 'var(--card)', border: '1px solid var(--border2)', borderRadius: 18, padding: 28 }}>
-        <h3 style={{ fontFamily: '"Cormorant Garamond", Georgia, serif', fontSize: 26, fontWeight: 700, color: 'var(--text)', marginBottom: 5 }}>
+        <h3 style={{ fontFamily: 'Inter,system-ui,sans-serif', fontSize: 26, fontWeight: 700, color: 'var(--text)', marginBottom: 5 }}>
           Simulateur de rentabilité
         </h3>
         <p style={{ fontSize: 13, color: 'var(--text2)', marginBottom: 20 }}>
@@ -90,7 +90,7 @@ export default function RoiCalculator({ variant = 'hero' }: Props) {
         ))}
 
         <div style={{ background: 'var(--bluesoft)', border: '1px solid var(--bluesoft2)', borderRadius: 11, padding: 18, textAlign: 'center', marginTop: 22 }}>
-          <div style={{ fontFamily: '"Cormorant Garamond", Georgia, serif', fontSize: 44, fontWeight: 700, color: 'var(--blue)', lineHeight: 1 }}>
+          <div style={{ fontFamily: 'Inter,system-ui,sans-serif', fontSize: 44, fontWeight: 700, color: 'var(--blue)', lineHeight: 1 }}>
             {fmt(revenue)}
           </div>
           <div style={{ fontSize: 12, color: 'var(--text2)', marginTop: 3 }}>MAD de CA mensuel estimé</div>
@@ -165,7 +165,7 @@ export default function RoiCalculator({ variant = 'hero' }: Props) {
         </div>
 
         <div style={{ textAlign: 'center', margin: '16px 0 20px' }}>
-          <div style={{ fontFamily: '"Cormorant Garamond", Georgia, serif', fontSize: 52, fontWeight: 700, color: 'var(--blue)', lineHeight: 1 }}>
+          <div style={{ fontFamily: 'Inter,system-ui,sans-serif', fontSize: 52, fontWeight: 700, color: 'var(--blue)', lineHeight: 1 }}>
             {fmt(revenue)}
           </div>
           <div style={{ fontSize: 12, color: 'var(--text2)', marginTop: 4 }}>MAD de revenu mensuel estimé</div>

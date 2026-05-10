@@ -19,7 +19,7 @@ export default function FluidKitShowcase({
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 36, flexWrap: 'wrap', gap: 12 }}>
           <div style={{ maxWidth: 720 }}>
             <span className="stag">Kits & Packs</span>
-            <h2 style={{ fontSize: 'clamp(30px,3.8vw,48px)', fontWeight: 900, color: '#F0F0F8', letterSpacing: '-0.03em', lineHeight: 1.05, marginBottom: 10 }}>
+            <h2 style={{ fontSize: 'clamp(24px,2.8vw,36px)', fontWeight: 700, color: '#F0F0F8', letterSpacing: '-0.02em', lineHeight: 1.05, marginBottom: 10 }}>
               Tout pour démarrer, produire et vendre — livré en 24–48h.
             </h2>
             <p style={{ fontSize: 15, color: 'rgba(240,240,248,0.70)', lineHeight: 1.75 }}>
@@ -73,7 +73,7 @@ export default function FluidKitShowcase({
                     <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--orange)', marginBottom: 8 }}>
                       {kit.packNum}
                     </div>
-                    <div style={{ fontSize: 26, fontWeight: 900, color: 'var(--text)', letterSpacing: '-0.03em', lineHeight: 1.05, marginBottom: 6 }}>
+                    <div style={{ fontSize: 26, fontWeight: 900, color: 'var(--text)', letterSpacing: '-0.02em', lineHeight: 1.05, marginBottom: 6 }}>
                       {kit.name}
                     </div>
                     <p style={{ fontSize: 13, color: 'var(--text2)', lineHeight: 1.65, maxWidth: 280 }}>{kit.desc}</p>
@@ -85,7 +85,7 @@ export default function FluidKitShowcase({
                 </div>
 
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 16 }}>
-                  <span style={{ fontSize: 'clamp(28px,5vw,40px)', fontWeight: 900, color: 'var(--orange)', letterSpacing: '-0.04em', lineHeight: 1 }}>{kit.priceDisplay}</span>
+                  <span style={{ fontSize: 'clamp(28px,5vw,40px)', fontWeight: 900, color: 'var(--orange)', letterSpacing: '-0.022em', lineHeight: 1 }}>{kit.priceDisplay}</span>
                   <span style={{ fontSize: 13, color: 'var(--text2)' }}>MAD</span>
                   {kit.oldPrice ? <span style={{ fontSize: 14, color: 'var(--text3)', textDecoration: 'line-through' }}>{kit.oldPrice}</span> : null}
                 </div>

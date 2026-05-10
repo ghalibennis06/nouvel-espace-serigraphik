@@ -59,7 +59,7 @@ export default function KitsPage({ params }: { params: { locale: string } }) {
             </svg>
             <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--blue)', letterSpacing: '0.08em' }}>KITS CLÉ-EN-MAIN — LIVRAISON 48H</span>
           </div>
-          <h1 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 'clamp(36px,5vw,60px)', fontWeight: 700, color: 'var(--text)', lineHeight: 1.1, marginBottom: 20 }}>
+          <h1 style={{ fontFamily: 'Inter,system-ui,sans-serif', fontSize: 'clamp(36px,5vw,60px)', fontWeight: 700, color: 'var(--text)', lineHeight: 1.1, marginBottom: 20 }}>
             Choisissez le bon kit pour lancer votre activité,
             <span style={{ color: 'var(--blue)' }}> sans acheter au hasard.</span>
           </h1>
@@ -152,14 +152,14 @@ export default function KitsPage({ params }: { params: { locale: string } }) {
                 <div style={{ marginBottom: 24 }}>
                   <span style={{ fontSize: 36, display: 'block', marginBottom: 12 }}>{kit.icon}</span>
                   <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--blue)', display: 'block', marginBottom: 6 }}>{kit.tag}</span>
-                  <h2 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 26, fontWeight: 700, color: 'var(--text)', marginBottom: 5, lineHeight: 1.2 }}>{kit.name}</h2>
+                  <h2 style={{ fontFamily: 'Inter,system-ui,sans-serif', fontSize: 26, fontWeight: 700, color: 'var(--text)', marginBottom: 5, lineHeight: 1.2 }}>{kit.name}</h2>
                   <p style={{ fontSize: 13, color: 'var(--text2)' }}>{kit.subtitle}</p>
                 </div>
 
                 {/* Price */}
                 <div style={{ paddingBottom: 22, marginBottom: 22, borderBottom: '1px solid var(--border)' }}>
                   <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, marginBottom: 10 }}>
-                    <span style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 44, fontWeight: 700, color: 'var(--text)', lineHeight: 1 }}>{kit.priceDisplay}</span>
+                    <span style={{ fontFamily: 'Inter,system-ui,sans-serif', fontSize: 44, fontWeight: 700, color: 'var(--text)', lineHeight: 1 }}>{kit.priceDisplay}</span>
                     <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--text2)' }}>MAD HT</span>
                     {kit.oldPrice && (
                       <span style={{ fontSize: 14, color: 'var(--text2)', textDecoration: 'line-through' }}>{kit.oldPrice} MAD</span>
@@ -249,7 +249,7 @@ export default function KitsPage({ params }: { params: { locale: string } }) {
           <div style={{ display: 'flex', justifyContent: 'space-between', gap: 18, flexWrap: 'wrap', alignItems: 'center', marginBottom: 18 }}>
             <div>
               <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--orange)', marginBottom: 6 }}>Besoin d’un raccourci ?</div>
-              <h2 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 30, fontWeight: 700, color: 'var(--text)' }}>
+              <h2 style={{ fontFamily: 'Inter,system-ui,sans-serif', fontSize: 30, fontWeight: 700, color: 'var(--text)' }}>
                 Quel kit choisir selon votre objectif ?
               </h2>
             </div>
@@ -285,7 +285,7 @@ export default function KitsPage({ params }: { params: { locale: string } }) {
         <div style={{ maxWidth: 860, margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: 40 }}>
             <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.13em', textTransform: 'uppercase', color: 'var(--blue)', display: 'block', marginBottom: 10 }}>Tableau Comparatif</span>
-            <h2 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 34, fontWeight: 700, color: 'var(--text)' }}>Comparez les kits en détail</h2>
+            <h2 style={{ fontFamily: 'Inter,system-ui,sans-serif', fontSize: 34, fontWeight: 700, color: 'var(--text)' }}>Comparez les kits en détail</h2>
           </div>
 
           <div style={{ overflowX: 'auto', borderRadius: 12, border: '1px solid var(--border)' }}>
@@ -319,7 +319,7 @@ export default function KitsPage({ params }: { params: { locale: string } }) {
           <div style={{ width: 56, height: 56, borderRadius: '50%', background: 'var(--greensoft)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 24px', color: 'var(--green)' }}>
             {WA_SVG}
           </div>
-          <h2 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 36, fontWeight: 700, color: 'var(--text)', marginBottom: 14, lineHeight: 1.2 }}>
+          <h2 style={{ fontFamily: 'Inter,system-ui,sans-serif', fontSize: 36, fontWeight: 700, color: 'var(--text)', marginBottom: 14, lineHeight: 1.2 }}>
             Vous ne savez pas lequel choisir ?
           </h2>
           <p style={{ fontSize: 15, color: 'var(--text2)', lineHeight: 1.7, marginBottom: 32 }}>

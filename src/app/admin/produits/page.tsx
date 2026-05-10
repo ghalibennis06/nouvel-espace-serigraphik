@@ -15,7 +15,7 @@ export default async function ProduitsPage() {
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 28 }}>
         <div>
-          <h1 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 32, fontWeight: 700, color: 'var(--text)', marginBottom: 4 }}>
+          <h1 style={{ fontFamily: 'Inter,system-ui,sans-serif', fontSize: 32, fontWeight: 700, color: 'var(--text)', marginBottom: 4 }}>
             Produits
           </h1>
           <p style={{ fontSize: 14, color: 'var(--text2)' }}>

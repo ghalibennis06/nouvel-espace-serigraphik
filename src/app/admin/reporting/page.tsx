@@ -71,7 +71,7 @@ export default async function ReportingPage() {
 
   return (
     <div>
-      <h1 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 32, fontWeight: 700, color: 'var(--text)', marginBottom: 4 }}>
+      <h1 style={{ fontFamily: 'Inter,system-ui,sans-serif', fontSize: 32, fontWeight: 700, color: 'var(--text)', marginBottom: 4 }}>
         Reporting
       </h1>
       <p style={{ fontSize: 14, color: 'var(--text2)', marginBottom: 32 }}>Intelligence commerciale — NES</p>
@@ -85,7 +85,7 @@ export default async function ReportingPage() {
         ].map((s) => (
           <Link key={s.label} href="/admin/leads" style={{ textDecoration: 'none' }}>
             <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 12, padding: '20px 22px' }}>
-              <div style={{ fontSize: 34, fontWeight: 800, color: s.color, fontFamily: '"Cormorant Garamond",Georgia,serif', lineHeight: 1 }}>{s.value}</div>
+              <div style={{ fontSize: 34, fontWeight: 800, color: s.color, fontFamily: 'Inter,system-ui,sans-serif', lineHeight: 1 }}>{s.value}</div>
               <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)', marginTop: 6 }}>{s.label}</div>
               <div style={{ fontSize: 11, color: 'var(--text2)', marginTop: 3 }}>{s.sub}</div>
             </div>
@@ -177,7 +177,7 @@ export default async function ReportingPage() {
             const colorMap: Record<string, string> = { none: 'var(--text2)', needed: 'var(--blue)', drafting: '#7c3aed', sent: 'var(--orange)', won: '#16a34a', lost: '#ef4444' }
             return (
               <div key={qs} style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 10, padding: '14px 16px', textAlign: 'center' }}>
-                <div style={{ fontSize: 26, fontWeight: 800, color: colorMap[qs], fontFamily: '"Cormorant Garamond",Georgia,serif' }}>{count}</div>
+                <div style={{ fontSize: 26, fontWeight: 800, color: colorMap[qs], fontFamily: 'Inter,system-ui,sans-serif' }}>{count}</div>
                 <div style={{ fontSize: 11, color: 'var(--text2)', marginTop: 4, textTransform: 'capitalize' }}>{qs}</div>
               </div>
             )

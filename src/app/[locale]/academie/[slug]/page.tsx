@@ -905,7 +905,7 @@ export default function GuideePage({ params }: PageProps) {
             <span style={{ fontSize: 12, color: 'var(--text2)' }}>· {guide.category}</span>
           </div>
 
-          <h1 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 'clamp(28px,4vw,46px)', fontWeight: 700, color: 'var(--text)', lineHeight: 1.15, marginBottom: 16 }}>
+          <h1 style={{ fontFamily: 'Inter,system-ui,sans-serif', fontSize: 'clamp(28px,4vw,46px)', fontWeight: 700, color: 'var(--text)', lineHeight: 1.15, marginBottom: 16 }}>
             {guide.title}
           </h1>
           <p style={{ fontSize: 16, color: 'var(--text2)', lineHeight: 1.7 }}>
@@ -934,7 +934,7 @@ export default function GuideePage({ params }: PageProps) {
         <div style={{ display: 'flex', flexDirection: 'column', gap: 44 }}>
           {guide.sections.map((section, i) => (
             <div key={i}>
-              <h2 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 26, fontWeight: 700, color: 'var(--text)', marginBottom: 18, paddingBottom: 14, borderBottom: '1px solid var(--border)' }}>
+              <h2 style={{ fontFamily: 'Inter,system-ui,sans-serif', fontSize: 26, fontWeight: 700, color: 'var(--text)', marginBottom: 18, paddingBottom: 14, borderBottom: '1px solid var(--border)' }}>
                 {section.heading}
               </h2>
               <div style={{ fontSize: 15, color: 'var(--text2)', lineHeight: 1.85 }}>
@@ -974,7 +974,7 @@ export default function GuideePage({ params }: PageProps) {
         {/* Related products */}
         {guide.relatedProducts.length > 0 && (
           <div style={{ marginTop: 52, padding: 28, background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 14 }}>
-            <h3 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 22, fontWeight: 700, color: 'var(--text)', marginBottom: 18 }}>
+            <h3 style={{ fontFamily: 'Inter,system-ui,sans-serif', fontSize: 22, fontWeight: 700, color: 'var(--text)', marginBottom: 18 }}>
               Produits liés à ce guide
             </h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
@@ -995,7 +995,7 @@ export default function GuideePage({ params }: PageProps) {
         {/* CTA */}
         <div style={{ marginTop: 44, padding: '32px 28px', background: 'var(--card)', border: '1px solid var(--border2)', borderRadius: 14, textAlign: 'center' }}>
           <div style={{ fontSize: 32, marginBottom: 12 }}>💬</div>
-          <h3 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 24, fontWeight: 700, color: 'var(--text)', marginBottom: 10 }}>
+          <h3 style={{ fontFamily: 'Inter,system-ui,sans-serif', fontSize: 24, fontWeight: 700, color: 'var(--text)', marginBottom: 10 }}>
             Une question sur ce guide ?
           </h3>
           <p style={{ fontSize: 14, color: 'var(--text2)', lineHeight: 1.65, marginBottom: 22, maxWidth: 420, margin: '0 auto 22px' }}>

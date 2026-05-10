@@ -84,7 +84,7 @@ export default function AcademiePage({ params }: { params: { locale: string } })
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'var(--bluesoft)', border: '1px solid var(--bluesoft2)', borderRadius: 20, padding: '6px 16px', marginBottom: 24 }}>
             <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--blue)', letterSpacing: '0.08em' }}>📖 ACADÉMIE NES — CONTENU 100% GRATUIT</span>
           </div>
-          <h1 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 'clamp(36px,5vw,58px)', fontWeight: 700, color: 'var(--text)', lineHeight: 1.1, marginBottom: 20 }}>
+          <h1 style={{ fontFamily: 'Inter,system-ui,sans-serif', fontSize: 'clamp(36px,5vw,58px)', fontWeight: 700, color: 'var(--text)', lineHeight: 1.1, marginBottom: 20 }}>
             Maîtrisez l&apos;impression<br />
             <span style={{ color: 'var(--blue)' }}>textile au Maroc.</span>
           </h1>
@@ -127,7 +127,7 @@ export default function AcademiePage({ params }: { params: { locale: string } })
           <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '12px 40px' }}>
             {STATS.map(s => (
               <div key={s.label} style={{ textAlign: 'center' }}>
-                <div style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 28, fontWeight: 700, color: 'var(--blue)', lineHeight: 1 }}>{s.n}</div>
+                <div style={{ fontFamily: 'Inter,system-ui,sans-serif', fontSize: 28, fontWeight: 700, color: 'var(--blue)', lineHeight: 1 }}>{s.n}</div>
                 <div style={{ fontSize: 11, color: 'var(--text2)', marginTop: 2 }}>{s.label}</div>
               </div>
             ))}
@@ -146,7 +146,7 @@ export default function AcademiePage({ params }: { params: { locale: string } })
                   {section.icon}
                 </div>
                 <div>
-                  <h2 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 24, fontWeight: 700, color: 'var(--text)', lineHeight: 1.1 }}>{section.category}</h2>
+                  <h2 style={{ fontFamily: 'Inter,system-ui,sans-serif', fontSize: 24, fontWeight: 700, color: 'var(--text)', lineHeight: 1.1 }}>{section.category}</h2>
                   <p style={{ fontSize: 12, color: 'var(--text2)', marginTop: 2 }}>{section.articles.length} guides</p>
                 </div>
               </div>
@@ -194,7 +194,7 @@ export default function AcademiePage({ params }: { params: { locale: string } })
       <div style={{ background: 'var(--surface)', borderTop: '1px solid var(--border)', padding: '72px 6%' }}>
         <div style={{ maxWidth: 680, margin: '0 auto', textAlign: 'center' }}>
           <div style={{ fontSize: 44, marginBottom: 20 }}>💬</div>
-          <h2 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 36, fontWeight: 700, color: 'var(--text)', marginBottom: 14, lineHeight: 1.2 }}>
+          <h2 style={{ fontFamily: 'Inter,system-ui,sans-serif', fontSize: 36, fontWeight: 700, color: 'var(--text)', marginBottom: 14, lineHeight: 1.2 }}>
             Vous avez une question technique ?
           </h2>
           <p style={{ fontSize: 15, color: 'var(--text2)', lineHeight: 1.7, marginBottom: 36 }}>

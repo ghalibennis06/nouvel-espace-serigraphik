@@ -14,7 +14,7 @@ export default async function MerchandisingPage() {
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 28, gap: 16 }}>
         <div>
-          <h1 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 32, fontWeight: 700, color: 'var(--text)', marginBottom: 4 }}>
+          <h1 style={{ fontFamily: 'Inter,system-ui,sans-serif', fontSize: 32, fontWeight: 700, color: 'var(--text)', marginBottom: 4 }}>
             Merchandising homepage
           </h1>
           <p style={{ fontSize: 14, color: 'var(--text2)', maxWidth: 760 }}>

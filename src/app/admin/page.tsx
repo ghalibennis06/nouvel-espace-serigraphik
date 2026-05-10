@@ -68,7 +68,7 @@ export default async function AdminDashboard() {
 
   return (
     <div>
-      <h1 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 32, fontWeight: 700, color: 'var(--text)', marginBottom: 4 }}>
+      <h1 style={{ fontFamily: 'Inter,system-ui,sans-serif', fontSize: 32, fontWeight: 700, color: 'var(--text)', marginBottom: 4 }}>
         Dashboard
       </h1>
       <p style={{ fontSize: 14, color: 'var(--text2)', marginBottom: 28 }}>
@@ -79,7 +79,7 @@ export default async function AdminDashboard() {
         {stats.map((s) => (
           <Link key={s.label} href={s.href} style={{ textDecoration: 'none' }}>
             <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 14, padding: '20px 24px', transition: 'border-color 0.2s, transform 0.2s' }} className="card-hover">
-              <div style={{ fontSize: 38, fontWeight: 800, color: s.color, fontFamily: '"Cormorant Garamond",Georgia,serif', lineHeight: 1 }}>
+              <div style={{ fontSize: 38, fontWeight: 800, color: s.color, fontFamily: 'Inter,system-ui,sans-serif', lineHeight: 1 }}>
                 {s.value}
               </div>
               <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text2)', marginTop: 6, letterSpacing: '0.01em' }}>{s.label}</div>

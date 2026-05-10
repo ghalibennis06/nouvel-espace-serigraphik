@@ -40,7 +40,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
       }}>
         {/* Logo */}
         <div style={{ padding: '0 22px 24px', borderBottom: '1px solid var(--border)' }}>
-          <div style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 20, fontWeight: 700, color: 'var(--text)', lineHeight: 1.1 }}>
+          <div style={{ fontFamily: 'Inter,system-ui,sans-serif', fontSize: 20, fontWeight: 700, color: 'var(--text)', lineHeight: 1.1 }}>
             NES <span style={{ color: 'var(--blue)' }}>Admin</span>
           </div>
           <div style={{ fontSize: 10, fontWeight: 500, color: 'var(--text2)', marginTop: 5, letterSpacing: '0.04em' }}>

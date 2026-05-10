@@ -245,7 +245,7 @@ export default async function ProductPage({ params }: PageProps) {
             </div>
 
             {/* Name */}
-            <h1 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 32, fontWeight: 700, color: 'var(--text)', lineHeight: 1.2, marginBottom: 14 }}>
+            <h1 style={{ fontFamily: 'Inter,system-ui,sans-serif', fontSize: 32, fontWeight: 700, color: 'var(--text)', lineHeight: 1.2, marginBottom: 14 }}>
               {name}
             </h1>
 
@@ -404,7 +404,7 @@ export default async function ProductPage({ params }: PageProps) {
         <div className={attributes.length > 0 ? 'grid grid-cols-1 lg:grid-cols-3' : 'grid grid-cols-1'} style={{ gap: 20, marginBottom: 56 }}>
           {/* Description */}
           <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 12, padding: 28, gridColumn: attributes.length > 0 ? '1 / 3' : undefined }} className={attributes.length > 0 ? 'lg:col-span-2' : ''}>
-            <h2 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 22, fontWeight: 700, color: 'var(--text)', marginBottom: 16 }}>
+            <h2 style={{ fontFamily: 'Inter,system-ui,sans-serif', fontSize: 22, fontWeight: 700, color: 'var(--text)', marginBottom: 16 }}>
               {t('description')}
             </h2>
             <div
@@ -416,7 +416,7 @@ export default async function ProductPage({ params }: PageProps) {
           {/* Specifications */}
           {attributes.length > 0 && (
             <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 12, padding: 28 }}>
-              <h2 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 22, fontWeight: 700, color: 'var(--text)', marginBottom: 16 }}>
+              <h2 style={{ fontFamily: 'Inter,system-ui,sans-serif', fontSize: 22, fontWeight: 700, color: 'var(--text)', marginBottom: 16 }}>
                 {t('specifications')}
               </h2>
               <dl style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
@@ -434,7 +434,7 @@ export default async function ProductPage({ params }: PageProps) {
         {/* ── Who is this for + Trust signals ───────────────────────── */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16, marginBottom: 24 }}>
           <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 12, padding: 22 }}>
-            <h3 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 18, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>
+            <h3 style={{ fontFamily: 'Inter,system-ui,sans-serif', fontSize: 18, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>
               Ce produit est fait pour vous si…
             </h3>
             {categories.length > 0 && (() => {
@@ -457,7 +457,7 @@ export default async function ProductPage({ params }: PageProps) {
           </div>
 
           <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 12, padding: 22 }}>
-            <h3 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 18, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>
+            <h3 style={{ fontFamily: 'Inter,system-ui,sans-serif', fontSize: 18, fontWeight: 700, color: 'var(--text)', marginBottom: 12 }}>
               Garanties &amp; Service
             </h3>
             {[
@@ -504,7 +504,7 @@ export default async function ProductPage({ params }: PageProps) {
         {/* ── Related Products ───────────────────────────────────────── */}
         {relatedProducts.length > 0 && (
           <div>
-            <h2 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 26, fontWeight: 700, color: 'var(--text)', marginBottom: 16 }}>
+            <h2 style={{ fontFamily: 'Inter,system-ui,sans-serif', fontSize: 26, fontWeight: 700, color: 'var(--text)', marginBottom: 16 }}>
               {t('relatedProducts')}
             </h2>
             <p style={{ fontSize: 13, color: 'var(--text2)', marginBottom: 20 }}>

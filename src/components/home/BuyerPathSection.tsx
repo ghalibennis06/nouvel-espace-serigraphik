@@ -59,7 +59,7 @@ export default function BuyerPathSection({ locale }: BuyerPathSectionProps) {
               />
             </div>
           </div>
-          <h2 style={{ fontSize: 'clamp(28px,3.5vw,44px)', fontWeight: 800, color: 'var(--text)', letterSpacing: '-0.025em', lineHeight: 1.08 }}>
+          <h2 style={{ fontSize: 'clamp(22px,2.6vw,34px)', fontWeight: 700, color: 'var(--text)', letterSpacing: '-0.025em', lineHeight: 1.08 }}>
             NES vous aide à acheter selon votre vrai besoin, pas au hasard.
           </h2>
           <p style={{ fontSize: 15, color: 'var(--text2)', lineHeight: 1.7, marginTop: 12, maxWidth: 680 }}>

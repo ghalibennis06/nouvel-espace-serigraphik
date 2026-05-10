@@ -135,7 +135,7 @@ export default async function HomePage({ params }: { params: { locale: string } 
         <div style={{ maxWidth: 1240, margin: '0 auto', alignItems: 'start' }} className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div>
             <span className="stag">Simulez avant d&apos;acheter</span>
-            <h2 style={{ fontSize: 'clamp(28px,3.5vw,44px)', fontWeight: 800, color: 'var(--text)', letterSpacing: '-0.025em', lineHeight: 1.08 }}>
+            <h2 style={{ fontSize: 'clamp(22px,2.6vw,34px)', fontWeight: 700, color: 'var(--text)', letterSpacing: '-0.025em', lineHeight: 1.08 }}>
               Estimez ce que votre atelier peut réellement générer.
             </h2>
             <p style={{ fontSize: 15, color: 'var(--text2)', lineHeight: 1.75, marginTop: 14, maxWidth: 620 }}>
@@ -189,7 +189,7 @@ export default async function HomePage({ params }: { params: { locale: string } 
         <div style={{ maxWidth: 1240, margin: '0 auto' }}>
           <div style={{ marginBottom: 28 }}>
             <span className="stag">Galerie produits</span>
-            <h2 style={{ fontSize: 'clamp(26px,3vw,38px)', fontWeight: 800, color: 'var(--text)', letterSpacing: '-0.025em', lineHeight: 1.08 }}>
+            <h2 style={{ fontSize: 'clamp(22px,2.4vw,32px)', fontWeight: 700, color: 'var(--text)', letterSpacing: '-0.025em', lineHeight: 1.08 }}>
               Machines, kits et consommables NES
             </h2>
           </div>

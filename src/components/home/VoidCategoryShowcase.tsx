@@ -26,7 +26,7 @@ export default function VoidCategoryShowcase({
           <div style={{ fontSize: 11, color: '#f26316', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 10 }}>
             Catalogue NES
           </div>
-          <h2 style={{ fontSize: 'clamp(30px,3.8vw,48px)', fontWeight: 900, color: '#151515', letterSpacing: '-0.035em', lineHeight: 1.05, marginBottom: 12 }}>
+          <h2 style={{ fontSize: 'clamp(24px,2.8vw,36px)', fontWeight: 700, color: '#151515', letterSpacing: '-0.02em', lineHeight: 1.05, marginBottom: 12 }}>
             Un catalogue organisé pour acheter par vrai besoin, pas au hasard.
           </h2>
           <p style={{ fontSize: 15, color: 'rgba(20,20,20,0.68)', lineHeight: 1.78, maxWidth: 680 }}>
@@ -58,7 +58,7 @@ export default function VoidCategoryShowcase({
                     <span style={{ fontSize: 11, color: 'rgba(20,20,20,0.52)', fontWeight: 700 }}>{cat.count} produits</span>
                   </div>
 
-                  <h3 style={{ fontSize: 22, color: '#151515', fontWeight: 900, letterSpacing: '-0.03em', lineHeight: 1.08, marginBottom: 10 }}>
+                  <h3 style={{ fontSize: 22, color: '#151515', fontWeight: 900, letterSpacing: '-0.02em', lineHeight: 1.08, marginBottom: 10 }}>
                     {cat.name}
                   </h3>
 

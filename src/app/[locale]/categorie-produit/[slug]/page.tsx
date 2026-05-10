@@ -204,7 +204,7 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
 
           <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 20, flexWrap: 'wrap' }}>
             <div>
-              <h1 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 34, fontWeight: 700, color: 'var(--text)', marginBottom: 8, lineHeight: 1.15 }}>
+              <h1 style={{ fontFamily: 'Inter,system-ui,sans-serif', fontSize: 34, fontWeight: 700, color: 'var(--text)', marginBottom: 8, lineHeight: 1.15 }}>
                 {category.name}
               </h1>
               {category.description && (
@@ -214,7 +214,7 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
               )}
             </div>
             <div style={{ textAlign: 'center', flexShrink: 0 }}>
-              <div style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 32, fontWeight: 700, color: 'var(--blue)', lineHeight: 1 }}>
+              <div style={{ fontFamily: 'Inter,system-ui,sans-serif', fontSize: 32, fontWeight: 700, color: 'var(--blue)', lineHeight: 1 }}>
                 {pagination.total}
               </div>
               <div style={{ fontSize: 10, color: 'var(--text2)', letterSpacing: '0.1em', textTransform: 'uppercase', marginTop: 2 }}>

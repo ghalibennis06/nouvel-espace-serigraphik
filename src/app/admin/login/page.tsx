@@ -34,7 +34,7 @@ export default function AdminLoginPage() {
       <div style={{ position: 'relative', width: 360 }}>
         {/* Logo mark */}
         <div style={{ textAlign: 'center', marginBottom: 32 }}>
-          <div style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 28, fontWeight: 700, color: 'var(--text)', letterSpacing: '-0.02em' }}>
+          <div style={{ fontFamily: 'Inter,system-ui,sans-serif', fontSize: 28, fontWeight: 700, color: 'var(--text)', letterSpacing: '-0.02em' }}>
             NES <span style={{ color: 'var(--blue)' }}>Admin</span>
           </div>
           <div style={{ fontSize: 12, color: 'var(--text2)', marginTop: 6, letterSpacing: '0.04em' }}>Accès réservé à l&apos;équipe</div>

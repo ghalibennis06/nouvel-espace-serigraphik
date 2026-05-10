@@ -58,7 +58,7 @@ export default function ClosingDecisionStation({ locale }: { locale: string }) {
             <span style={{ display: 'inline-flex', padding: '7px 12px', borderRadius: 999, background: 'rgba(242,99,22,0.12)', border: '1px solid rgba(242,99,22,0.20)', fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#ffb58c', marginBottom: 18 }}>
               Dernière étape utile
             </span>
-            <h2 style={{ fontSize: 'clamp(34px,4.4vw,58px)', fontWeight: 950, color: '#fff4ed', letterSpacing: '-0.04em', lineHeight: 1.04, marginBottom: 16 }}>
+            <h2 style={{ fontSize: 'clamp(26px,3vw,40px)', fontWeight: 700, color: '#fff4ed', letterSpacing: '-0.022em', lineHeight: 1.04, marginBottom: 16 }}>
               Ne terminez pas la visite avec plus de flou.
             </h2>
             <p style={{ fontSize: 16, color: 'rgba(255,244,237,0.74)', lineHeight: 1.8, maxWidth: 620, marginBottom: 22 }}>

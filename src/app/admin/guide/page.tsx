@@ -79,7 +79,7 @@ const SECTIONS = [
 export default function GuidePage() {
   return (
     <div style={{ maxWidth: 960, margin: '0 auto' }}>
-      <h1 style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: 32, fontWeight: 700, color: 'var(--text)', marginBottom: 4 }}>
+      <h1 style={{ fontFamily: 'Inter,system-ui,sans-serif', fontSize: 32, fontWeight: 700, color: 'var(--text)', marginBottom: 4 }}>
         Guide du site
       </h1>
       <p style={{ fontSize: 14, color: 'var(--text2)', marginBottom: 36 }}>
