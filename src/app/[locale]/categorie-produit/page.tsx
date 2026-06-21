@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { setRequestLocale } from 'next-intl/server'
-import { getCategoryTree, getProducts } from '@/lib/woocommerce'
+import { getCategoryTree, getProducts } from '@/lib/catalog'
 import { categoryHref, whatsappGeneralLink } from '@/lib/utils'
 import ProductCard from '@/components/catalog/ProductCard'
 

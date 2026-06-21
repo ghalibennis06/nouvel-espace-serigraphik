@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { setRequestLocale } from 'next-intl/server'
-import { getFeaturedProducts, getCategoryTree } from '@/lib/woocommerce'
+import { getFeaturedProducts, getCategoryTree } from '@/lib/catalog'
 import { categoryHref, whatsappGeneralLink } from '@/lib/utils'
 import ProductsSection from '@/components/home/ProductsSection'
 import BuyerPathSection from '@/components/home/BuyerPathSection'
@@ -18,7 +18,7 @@ import HeroIndustrialPanel from '@/components/home/HeroIndustrialPanel'
 import ClosingDecisionStation from '@/components/home/ClosingDecisionStation'
 import { ExpandableGallery } from '@/components/ui/expandable-gallery'
 
-export const revalidate = 3600 // Refresh every hour; WC webhook purges on product changes
+export const revalidate = 300 // ISR — re-render depuis Neon toutes les 5 min
 
 export async function generateMetadata(): Promise<Metadata> {
   return {

@@ -8,7 +8,7 @@ import {
   getRelatedProducts,
   getVariations,
   getAllProductSlugs,
-} from '@/lib/woocommerce'
+} from '@/lib/catalog'
 import ProductCard from '@/components/catalog/ProductCard'
 import {
   formatPrice,
@@ -24,6 +24,7 @@ interface PageProps {
 }
 
 export const dynamicParams = true
+export const revalidate = 120 // ISR — re-render depuis Neon
 
 export async function generateStaticParams() {
   try {

@@ -10,7 +10,7 @@ import AnnouncementBar from '@/components/layout/AnnouncementBar'
 import WhatsAppFloat from '@/components/ui/WhatsAppFloat'
 import { LiquidCursor } from '@/components/ui/liquid-cursor'
 import ThemeProvider from '@/components/ThemeProvider'
-import { getCategoryTree } from '@/lib/woocommerce'
+import { getCategoryTree } from '@/lib/catalog'
 import { whatsappGeneralLink } from '@/lib/utils'
 
 interface LocaleLayoutProps {

@@ -1,4 +1,4 @@
-import { getCategories, getFeaturedProducts } from '@/lib/woocommerce'
+import { getCategories, getFeaturedProducts } from '@/lib/catalog'
 import { KITS } from '@/lib/data/kits'
 import HomepageControlForm from './HomepageControlForm'
 
