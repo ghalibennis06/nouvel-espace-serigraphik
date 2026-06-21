@@ -245,6 +245,32 @@ export async function listDocuments(docType?: DocType): Promise<ErpDocument[]> {
   `) as unknown as ErpDocument[]
 }
 
+export async function getDocument(id: string): Promise<ErpDocument | null> {
+  const rows = (await sql`
+    SELECT id, doc_type, number, client_id, client_name, client_ice, status, issue_date, due_date,
+           currency, subtotal_ht, discount, tva_amount, total_ttc, paid_amount, notes, created_at
+    FROM nes_documents WHERE id = ${id}::uuid
+  `) as unknown as ErpDocument[]
+  return rows[0] ?? null
+}
+
+export interface DocItemRow {
+  product_id: string | null
+  label: string
+  qty: string
+  unit_price_ht: string
+  tva_rate: string
+  discount: string
+  line_total_ht: string
+}
+
+export async function getDocumentItemRows(documentId: string): Promise<DocItemRow[]> {
+  return (await sql`
+    SELECT product_id, label, qty, unit_price_ht, tva_rate, discount, line_total_ht
+    FROM nes_document_items WHERE document_id = ${documentId}::uuid ORDER BY sort_order ASC
+  `) as unknown as DocItemRow[]
+}
+
 export async function getDocumentItems(documentId: string): Promise<Row[]> {
   return (await sql`
     SELECT product_id, label, qty, unit_price_ht, tva_rate, discount, line_total_ht

@@ -1,6 +1,7 @@
 'use client'
 import { useMemo, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import type { ErpDocument } from '@/lib/erp'
 
 interface ClientOpt { id: string; name: string; ice: string | null }
@@ -150,7 +151,7 @@ export default function InvoicingManager({ docs, clients, products }: { docs: Er
               <tr><td colSpan={7} style={{ padding: 40, textAlign: 'center', color: 'var(--text2)', fontSize: 13 }}>Aucun {tab}.</td></tr>
             ) : shown.map((d, i) => (
               <tr key={d.id} style={{ borderTop: '1px solid var(--border)', background: i % 2 ? 'var(--surface)' : 'transparent' }}>
-                <td style={{ padding: '11px 16px', fontSize: 13, fontWeight: 700, color: 'var(--text)' }}>{d.number}</td>
+                <td style={{ padding: '11px 16px', fontSize: 13, fontWeight: 700 }}><Link href={`/admin/facturation/${d.id}`} style={{ color: 'var(--blue)', textDecoration: 'none' }}>{d.number}</Link></td>
                 <td style={{ padding: '11px 16px', fontSize: 12.5, color: 'var(--text2)' }}>{d.client_name}{d.client_ice && <div style={{ fontSize: 10.5, color: 'var(--text3)' }}>ICE {d.client_ice}</div>}</td>
                 <td style={{ padding: '11px 16px', fontSize: 12.5, color: 'var(--text2)' }}>{new Date(d.issue_date).toLocaleDateString('fr-MA')}</td>
                 <td style={{ padding: '11px 16px', fontSize: 13, fontWeight: 700, color: 'var(--blue)' }}>{money(Number(d.total_ttc))}</td>
