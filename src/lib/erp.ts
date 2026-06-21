@@ -300,6 +300,69 @@ export async function recordPayment(opts: {
   return { paid, status }
 }
 
+// ─── Reporting comptable ─────────────────────────────────────────────────────
+export interface AccountingKpis {
+  ca_ttc: number; ca_ht: number; tva_collectee: number
+  encaisse: number; encours: number
+  factures_count: number; impayees_count: number
+  devis_count: number; devis_acceptes: number; devis_montant: number
+}
+
+export async function accountingKpis(year: number): Promise<AccountingKpis> {
+  const rows = (await sql`
+    SELECT
+      COALESCE(SUM(total_ttc)  FILTER (WHERE doc_type='facture' AND status <> 'cancelled'), 0) AS ca_ttc,
+      COALESCE(SUM(subtotal_ht) FILTER (WHERE doc_type='facture' AND status <> 'cancelled'), 0) AS ca_ht,
+      COALESCE(SUM(tva_amount) FILTER (WHERE doc_type='facture' AND status <> 'cancelled'), 0) AS tva,
+      COALESCE(SUM(paid_amount) FILTER (WHERE doc_type='facture'), 0) AS encaisse,
+      COALESCE(SUM(total_ttc - paid_amount) FILTER (WHERE doc_type='facture' AND status IN ('sent','partial','accepted')), 0) AS encours,
+      COUNT(*) FILTER (WHERE doc_type='facture' AND status <> 'cancelled') AS factures_count,
+      COUNT(*) FILTER (WHERE doc_type='facture' AND status IN ('sent','partial')) AS impayees_count,
+      COUNT(*) FILTER (WHERE doc_type='devis') AS devis_count,
+      COUNT(*) FILTER (WHERE doc_type='devis' AND status IN ('accepted','converted')) AS devis_acceptes,
+      COALESCE(SUM(total_ttc) FILTER (WHERE doc_type='devis'), 0) AS devis_montant
+    FROM nes_documents
+    WHERE EXTRACT(YEAR FROM issue_date) = ${year}
+  `) as Row[]
+  const r = rows[0]
+  return {
+    ca_ttc: Number(r.ca_ttc), ca_ht: Number(r.ca_ht), tva_collectee: Number(r.tva),
+    encaisse: Number(r.encaisse), encours: Number(r.encours),
+    factures_count: Number(r.factures_count), impayees_count: Number(r.impayees_count),
+    devis_count: Number(r.devis_count), devis_acceptes: Number(r.devis_acceptes), devis_montant: Number(r.devis_montant),
+  }
+}
+
+export async function monthlyRevenue(year: number): Promise<{ month: number; ca_ttc: number }[]> {
+  const rows = (await sql`
+    SELECT EXTRACT(MONTH FROM issue_date)::int AS month, COALESCE(SUM(total_ttc),0) AS ca_ttc
+    FROM nes_documents
+    WHERE doc_type='facture' AND status <> 'cancelled' AND EXTRACT(YEAR FROM issue_date) = ${year}
+    GROUP BY 1 ORDER BY 1
+  `) as Row[]
+  const map = new Map(rows.map(r => [Number(r.month), Number(r.ca_ttc)]))
+  return Array.from({ length: 12 }, (_, i) => ({ month: i + 1, ca_ttc: map.get(i + 1) ?? 0 }))
+}
+
+export async function unpaidInvoices(): Promise<Row[]> {
+  return (await sql`
+    SELECT id, number, client_name, total_ttc, paid_amount, issue_date, due_date, status,
+           (current_date - issue_date) AS age_days
+    FROM nes_documents
+    WHERE doc_type='facture' AND status IN ('sent','partial')
+    ORDER BY issue_date ASC LIMIT 50
+  `) as Row[]
+}
+
+export async function topClients(year: number): Promise<Row[]> {
+  return (await sql`
+    SELECT client_name, COUNT(*) AS nb, COALESCE(SUM(total_ttc),0) AS ca
+    FROM nes_documents
+    WHERE doc_type='facture' AND status <> 'cancelled' AND EXTRACT(YEAR FROM issue_date) = ${year}
+    GROUP BY client_name ORDER BY ca DESC LIMIT 8
+  `) as Row[]
+}
+
 // Convert an accepted devis into a facture (copies lines, links both).
 export async function convertDevisToFacture(devisId: string): Promise<{ id: string; number: string }> {
   const docs = (await sql`SELECT * FROM nes_documents WHERE id = ${devisId}::uuid AND doc_type = 'devis'`) as Row[]
