@@ -11,6 +11,9 @@ import {
 import type { ProductFilters } from '@/lib/types'
 import ProductCard from '@/components/catalog/ProductCard'
 import FilterSidebar from '@/components/catalog/FilterSidebar'
+import TrustBar from '@/components/catalog/TrustBar'
+import BulkPricingBar from '@/components/catalog/BulkPricingBar'
+import CategoryKitStrip from '@/components/catalog/CategoryKitStrip'
 import { categoryHref, stripHtml, whatsappGeneralLink } from '@/lib/utils'
 
 // ─── Category educational context ─────────────────────────────────────────────
@@ -249,13 +252,21 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
                 </p>
               )}
             </div>
-            <div style={{ textAlign: 'center', flexShrink: 0 }}>
-              <div style={{ fontFamily: 'Inter,system-ui,sans-serif', fontSize: 32, fontWeight: 700, color: 'var(--blue)', lineHeight: 1 }}>
-                {pagination.total}
-              </div>
-              <div style={{ fontSize: 10, color: 'var(--text2)', letterSpacing: '0.1em', textTransform: 'uppercase', marginTop: 2 }}>
-                {t('products')}
-              </div>
+            <div style={{ display: 'flex', gap: 24, flexShrink: 0 }}>
+              {[
+                { num: String(pagination.total), label: t('products') },
+                ...(subcategories.length > 0 ? [{ num: String(subcategories.length), label: 'Sous-catégories' }] : []),
+                { num: '48h', label: 'Livraison' },
+              ].map(s => (
+                <div key={s.label} style={{ textAlign: 'center' }}>
+                  <div style={{ fontFamily: 'Inter,system-ui,sans-serif', fontSize: 30, fontWeight: 700, color: 'var(--blue)', lineHeight: 1 }}>
+                    {s.num}
+                  </div>
+                  <div style={{ fontSize: 10, color: 'var(--text2)', letterSpacing: '0.08em', textTransform: 'uppercase', marginTop: 4 }}>
+                    {s.label}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
 
@@ -282,6 +293,9 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
           )}
         </div>
       </div>
+
+      {/* ── Trust bar ───────────────────────────────────────────────── */}
+      <TrustBar />
 
       {/* ── Category educational context ─────────────────────────── */}
       {catCtx && (
@@ -371,6 +385,12 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
 
           {/* Product area */}
           <div style={{ flex: 1, minWidth: 0 }}>
+            {/* Starter kits cross-sell */}
+            <CategoryKitStrip locale={locale} />
+
+            {/* Professional volume pricing */}
+            <BulkPricingBar categoryName={category.name} />
+
             {/* Toolbar */}
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20, flexWrap: 'wrap', gap: 12 }}>
               <p style={{ fontSize: 13, color: 'var(--text2)' }}>
