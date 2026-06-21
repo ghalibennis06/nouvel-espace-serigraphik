@@ -7,8 +7,11 @@ import { BeamsCanvas } from '@/components/ui/beams-background'
 const NAV = [
   { href: '/admin', label: '📊 Dashboard' },
   { href: '/admin/leads', label: '📩 Pipeline leads' },
-  { href: '/admin/reporting', label: '📈 Reporting' },
+  { href: '/admin/clients', label: '👥 Clients' },
   { href: '/admin/produits', label: '📦 Produits' },
+  { href: '/admin/stock', label: '🏷️ Stock' },
+  { href: '/admin/facturation', label: '🧾 Devis & Factures' },
+  { href: '/admin/reporting', label: '📈 Reporting' },
   { href: '/admin/merchandising', label: '🧭 Merchandising' },
   { href: '/admin/guide', label: '📖 Guide du site' },
 ]
