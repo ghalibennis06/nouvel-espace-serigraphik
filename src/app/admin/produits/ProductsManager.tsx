@@ -49,6 +49,16 @@ export default function ProductsManager({ initial, categories }: { initial: ErpP
     if (res.ok) router.refresh()
   }
 
+  const [importing, setImporting] = useState(false)
+  async function importCatalog() {
+    if (!confirm('Importer le catalogue NES existant dans la base ? (idempotent — ne crée pas de doublons)')) return
+    setImporting(true)
+    const res = await fetch('/api/admin/import-catalog', { method: 'POST' })
+    setImporting(false)
+    if (res.ok) { const r = await res.json(); alert(`Importé : ${r.products} produits, ${r.categories} catégories.`); router.refresh() }
+    else alert('Erreur lors de l’import.')
+  }
+
   const set = (k: string, v: unknown) => setForm(f => ({ ...f, [k]: v }))
 
   return (
@@ -58,7 +68,14 @@ export default function ProductsManager({ initial, categories }: { initial: ErpP
           <h1 style={{ fontFamily: 'Inter,system-ui,sans-serif', fontSize: 30, fontWeight: 700, color: 'var(--text)' }}>Produits</h1>
           <p style={{ fontSize: 13, color: 'var(--text2)' }}>{initial.length} produit{initial.length !== 1 ? 's' : ''} · gestion du catalogue</p>
         </div>
-        <button onClick={openNew} style={{ background: 'var(--blue)', color: '#fff', border: 'none', borderRadius: 8, padding: '11px 18px', fontSize: 13, fontWeight: 700, cursor: 'pointer' }}>+ Nouveau produit</button>
+        <div style={{ display: 'flex', gap: 10 }}>
+          {initial.length === 0 && (
+            <button onClick={importCatalog} disabled={importing} style={{ background: 'transparent', color: 'var(--blue)', border: '1px solid var(--blue)', borderRadius: 8, padding: '11px 18px', fontSize: 13, fontWeight: 700, cursor: 'pointer', opacity: importing ? 0.6 : 1 }}>
+              {importing ? 'Import…' : '⬇ Importer le catalogue NES'}
+            </button>
+          )}
+          <button onClick={openNew} style={{ background: 'var(--blue)', color: '#fff', border: 'none', borderRadius: 8, padding: '11px 18px', fontSize: 13, fontWeight: 700, cursor: 'pointer' }}>+ Nouveau produit</button>
+        </div>
       </div>
 
       {editing && (
