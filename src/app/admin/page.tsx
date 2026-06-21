@@ -1,10 +1,25 @@
 import { sql } from '@/lib/db'
 import Link from 'next/link'
+import { accountingKpis, type AccountingKpis } from '@/lib/erp'
 
 export const dynamic = 'force-dynamic'
 
+const moneyK = (n: number) => n >= 1000 ? `${(n / 1000).toLocaleString('fr-MA', { maximumFractionDigits: 1 })}k` : String(Math.round(n))
+
 export default async function AdminDashboard() {
   const now = Date.now()
+  const year = new Date().getFullYear()
+
+  // ERP commercial KPIs (silent if tables are empty / migration not run yet)
+  let erp: AccountingKpis | null = null
+  let lowStock = 0
+  try {
+    erp = await accountingKpis(year)
+    const ls = (await sql`SELECT COUNT(*)::int AS n FROM nes_products WHERE active = true AND stock_qty <= low_stock_threshold`) as Record<string, unknown>[]
+    lowStock = Number(ls[0]?.n ?? 0)
+  } catch (err) {
+    console.error('[Admin] ERP KPIs failed:', err)
+  }
 
   type Row = Record<string, unknown>
   let countsRows: Row[] = [], active: Row[] = [], recentLeads: Row[] = []
@@ -75,6 +90,32 @@ export default async function AdminDashboard() {
         Vue d&apos;ensemble — Nouvel Espace Sérigraphik
       </p>
 
+      {erp && (
+        <div style={{ marginBottom: 28 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+            <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--text2)' }}>Activité commerciale {year}</span>
+            <Link href="/admin/comptabilite" style={{ fontSize: 12, color: 'var(--blue)', textDecoration: 'none' }}>Comptabilité →</Link>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: 14 }}>
+            {[
+              { label: 'CA facturé TTC', value: `${moneyK(erp.ca_ttc)} MAD`, color: 'var(--blue)', href: '/admin/comptabilite' },
+              { label: 'Encaissé', value: `${moneyK(erp.encaisse)} MAD`, color: '#16a34a', href: '/admin/comptabilite' },
+              { label: 'Encours clients', value: `${moneyK(erp.encours)} MAD`, color: erp.encours > 0 ? 'var(--orange)' : 'var(--text2)', href: '/admin/comptabilite' },
+              { label: 'Factures impayées', value: String(erp.impayees_count), color: erp.impayees_count > 0 ? '#ef4444' : 'var(--text2)', href: '/admin/facturation' },
+              { label: 'Stock bas', value: String(lowStock), color: lowStock > 0 ? 'var(--orange)' : 'var(--text2)', href: '/admin/stock' },
+            ].map((s) => (
+              <Link key={s.label} href={s.href} style={{ textDecoration: 'none' }}>
+                <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 14, padding: '18px 22px' }} className="card-hover">
+                  <div style={{ fontSize: 26, fontWeight: 800, color: s.color, fontFamily: 'Inter,system-ui,sans-serif', lineHeight: 1 }}>{s.value}</div>
+                  <div style={{ fontSize: 11.5, fontWeight: 600, color: 'var(--text2)', marginTop: 6 }}>{s.label}</div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--text2)', marginBottom: 12 }}>Pipeline commercial</div>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 14, marginBottom: 32 }}>
         {stats.map((s) => (
           <Link key={s.label} href={s.href} style={{ textDecoration: 'none' }}>
