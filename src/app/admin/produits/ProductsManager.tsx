@@ -7,7 +7,7 @@ interface Cat { id: string; name_fr: string }
 const TVA = [20, 14, 10, 7, 0]
 const empty = {
   name_fr: '', sku: '', reference: '', category_id: '', public_price: '', cost_price: '',
-  tva_rate: 20, stock_qty: 0, unit: 'unité', barcode: '', description: '', featured: false, active: true,
+  tva_rate: 20, stock_qty: 0, unit: 'unité', barcode: '', description: '', image_url: '', featured: false, active: true,
 }
 
 const inp: React.CSSProperties = { width: '100%', padding: '9px 11px', fontSize: 13, background: 'var(--surface)', color: 'var(--text)', border: '1px solid var(--border2)', borderRadius: 7, outline: 'none' }
@@ -28,7 +28,7 @@ export default function ProductsManager({ initial, categories }: { initial: ErpP
       name_fr: p.name_fr, sku: p.sku ?? '', reference: p.reference ?? '', category_id: p.category_id ?? '',
       public_price: p.public_price ?? '', cost_price: p.cost_price ?? '', tva_rate: Number(p.tva_rate ?? 20),
       stock_qty: p.stock_qty, unit: p.unit ?? 'unité', barcode: p.barcode ?? '', description: p.description ?? '',
-      featured: p.featured, active: p.active,
+      image_url: p.image_url ?? '', featured: p.featured, active: p.active,
     })
     setEditing(p.id); setErr('')
   }
@@ -47,6 +47,30 @@ export default function ProductsManager({ initial, categories }: { initial: ErpP
     if (!confirm('Supprimer ce produit ?')) return
     const res = await fetch(`/api/admin/products?id=${id}`, { method: 'DELETE' })
     if (res.ok) router.refresh()
+  }
+
+  const [uploading, setUploading] = useState(false)
+  async function uploadFile(file: File) {
+    setUploading(true); setErr('')
+    const fd = new FormData(); fd.append('file', file)
+    const res = await fetch('/api/admin/upload', { method: 'POST', body: fd })
+    setUploading(false)
+    if (res.ok) { const r = await res.json(); set('image_url', r.url) }
+    else setErr((await res.json().catch(() => ({}))).error || 'Échec upload')
+  }
+
+  const [rehosting, setRehosting] = useState(false)
+  async function rehostImages() {
+    if (!confirm('Réhéberger les images WordPress vers le stockage propre (Vercel Blob) ?')) return
+    setRehosting(true)
+    let total = 0
+    for (let i = 0; i < 20; i++) {
+      const res = await fetch('/api/admin/rehost-images?limit=20', { method: 'POST' })
+      if (!res.ok) { alert((await res.json().catch(() => ({}))).error || 'Erreur'); break }
+      const r = await res.json(); total += r.processed
+      if (r.remaining === 0) { alert(`Terminé : ${total} images réhébergées.`); break }
+    }
+    setRehosting(false); router.refresh()
   }
 
   const [importing, setImporting] = useState(false)
@@ -69,9 +93,13 @@ export default function ProductsManager({ initial, categories }: { initial: ErpP
           <p style={{ fontSize: 13, color: 'var(--text2)' }}>{initial.length} produit{initial.length !== 1 ? 's' : ''} · gestion du catalogue</p>
         </div>
         <div style={{ display: 'flex', gap: 10 }}>
-          {initial.length === 0 && (
+          {initial.length === 0 ? (
             <button onClick={importCatalog} disabled={importing} style={{ background: 'transparent', color: 'var(--blue)', border: '1px solid var(--blue)', borderRadius: 8, padding: '11px 18px', fontSize: 13, fontWeight: 700, cursor: 'pointer', opacity: importing ? 0.6 : 1 }}>
               {importing ? 'Import…' : '⬇ Importer le catalogue NES'}
+            </button>
+          ) : (
+            <button onClick={rehostImages} disabled={rehosting} title="Migre les images WordPress vers le stockage propre" style={{ background: 'transparent', color: 'var(--text2)', border: '1px solid var(--border2)', borderRadius: 8, padding: '11px 18px', fontSize: 13, fontWeight: 700, cursor: 'pointer', opacity: rehosting ? 0.6 : 1 }}>
+              {rehosting ? 'Migration…' : '🖼️ Réhéberger images'}
             </button>
           )}
           <button onClick={openNew} style={{ background: 'var(--blue)', color: '#fff', border: 'none', borderRadius: 8, padding: '11px 18px', fontSize: 13, fontWeight: 700, cursor: 'pointer' }}>+ Nouveau produit</button>
@@ -102,6 +130,20 @@ export default function ProductsManager({ initial, categories }: { initial: ErpP
             <div><label style={lbl}>Unité</label><input style={inp} value={String(form.unit)} onChange={e => set('unit', e.target.value)} /></div>
             <div><label style={lbl}>Code-barres</label><input style={inp} value={String(form.barcode)} onChange={e => set('barcode', e.target.value)} /></div>
             <div style={{ gridColumn: '1 / -1' }}><label style={lbl}>Description</label><textarea style={{ ...inp, minHeight: 60, resize: 'vertical' }} value={String(form.description)} onChange={e => set('description', e.target.value)} /></div>
+            <div style={{ gridColumn: '1 / -1' }}>
+              <label style={lbl}>Image produit</label>
+              <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
+                {form.image_url ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={String(form.image_url)} alt="" style={{ width: 56, height: 56, objectFit: 'cover', borderRadius: 8, border: '1px solid var(--border2)' }} />
+                ) : <div style={{ width: 56, height: 56, borderRadius: 8, border: '1px dashed var(--border2)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text3)', fontSize: 18 }}>🖼️</div>}
+                <label style={{ fontSize: 12.5, fontWeight: 700, color: 'var(--blue)', cursor: 'pointer', border: '1px solid var(--blue)', borderRadius: 7, padding: '8px 14px' }}>
+                  {uploading ? 'Envoi…' : 'Téléverser'}
+                  <input type="file" accept="image/*" style={{ display: 'none' }} onChange={e => { const f = e.target.files?.[0]; if (f) uploadFile(f) }} />
+                </label>
+                <input style={{ ...inp, flex: 1, minWidth: 200 }} placeholder="…ou coller une URL d'image" value={String(form.image_url)} onChange={e => set('image_url', e.target.value)} />
+              </div>
+            </div>
           </div>
           <div style={{ display: 'flex', gap: 18, marginTop: 14 }}>
             <label style={{ display: 'flex', alignItems: 'center', gap: 7, fontSize: 13, color: 'var(--text2)', cursor: 'pointer' }}><input type="checkbox" checked={Boolean(form.active)} onChange={e => set('active', e.target.checked)} /> Actif</label>
