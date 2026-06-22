@@ -3,14 +3,27 @@
  *
  * Remplace l'ancien client WooCommerce. Les fonctions renvoient les mêmes formes
  * (WCProduct / WCCategory) pour que tout le storefront fonctionne sans modification.
- * Repli sur le catalogue statique uniquement si DATABASE_URL n'est pas configuré
- * (sécurité build/CI) — en production tout vient de Neon.
+ * Repli automatique sur le catalogue statique tant que Neon est vide / non
+ * configuré / en erreur (voir useStatic) — le site public n'est jamais cassé.
  */
 import type { WCProduct, WCCategory, WCVariation, ProductFilters, PaginationMeta } from './types'
 import { sql, isDatabaseConfigured } from './db'
 import * as StaticData from './data'
 
 type Row = Record<string, unknown>
+
+// Résilience démo/transition : tant que Neon n'est pas configuré OU que le
+// catalogue n'a pas encore été importé (table vide), OU en cas d'erreur DB,
+// on sert le catalogue statique (124 produits) — le site public n'est jamais vide.
+async function useStatic(): Promise<boolean> {
+  if (!isDatabaseConfigured()) return true
+  try {
+    const r = (await sql`SELECT EXISTS(SELECT 1 FROM nes_products WHERE active = true) AS e`) as Row[]
+    return !r[0]?.e
+  } catch {
+    return true
+  }
+}
 
 // Stable numeric id derived from the uuid (les types WC attendent un number).
 // Le même hash md5→int28 est calculé dans les deux sens (mapping & related).
@@ -67,7 +80,7 @@ function mapCategory(r: Row): WCCategory {
 
 // ─── Categories ───────────────────────────────────────────────────────────────
 export async function getCategories(parent?: number): Promise<WCCategory[]> {
-  if (!isDatabaseConfigured()) {
+  if (await useStatic()) {
     const cats = StaticData.staticGetCategories()
     return parent !== undefined ? cats.filter(c => c.parent === parent) : cats
   }
@@ -81,7 +94,7 @@ export async function getCategories(parent?: number): Promise<WCCategory[]> {
 }
 
 export async function getCategoryBySlug(slug: string): Promise<WCCategory | null> {
-  if (!isDatabaseConfigured()) return StaticData.staticGetCategoryBySlug(slug)
+  if (await useStatic()) return StaticData.staticGetCategoryBySlug(slug)
   const rows = (await sql`
     SELECT ('x' || substr(md5(c.id::text),1,7))::bit(28)::int AS ref_id, c.id, c.name_fr, c.slug,
            (SELECT COUNT(*)::int FROM nes_products p WHERE p.category_id = c.id AND p.active) AS count
@@ -97,7 +110,7 @@ export async function getCategoryTree(): Promise<{ root: WCCategory[]; children:
 
 // ─── Products ─────────────────────────────────────────────────────────────────
 export async function getProducts(filters: ProductFilters = {}): Promise<{ products: WCProduct[]; pagination: PaginationMeta }> {
-  if (!isDatabaseConfigured()) {
+  if (await useStatic()) {
     const r = StaticData.staticGetProducts(filters)
     return { products: r.products, pagination: { total: r.pagination.total, totalPages: r.pagination.totalPages, currentPage: r.pagination.page ?? 1, perPage: r.pagination.per_page ?? 12 } }
   }
@@ -131,7 +144,7 @@ export async function getProducts(filters: ProductFilters = {}): Promise<{ produ
 }
 
 export async function getProductBySlug(slug: string): Promise<WCProduct | null> {
-  if (!isDatabaseConfigured()) return StaticData.staticGetProductBySlug(slug)
+  if (await useStatic()) return StaticData.staticGetProductBySlug(slug)
   const rows = (await sql.query(
     `SELECT ('x' || substr(md5(p.id::text),1,7))::bit(28)::int AS ref_id, p.id AS uuid, p.product_slug, p.name_fr, p.sku, p.description,
             p.public_price, p.price, p.stock_status, p.stock_qty, p.featured, p.image_url, p.tva_rate, p.created_at,
@@ -141,7 +154,7 @@ export async function getProductBySlug(slug: string): Promise<WCProduct | null> 
 }
 
 export async function getFeaturedProducts(limit = 8): Promise<WCProduct[]> {
-  if (!isDatabaseConfigured()) return StaticData.staticGetFeaturedProducts(limit)
+  if (await useStatic()) return StaticData.staticGetFeaturedProducts(limit)
   const rows = (await sql.query(
     `SELECT ('x' || substr(md5(p.id::text),1,7))::bit(28)::int AS ref_id, p.id AS uuid, p.product_slug, p.name_fr, p.sku, p.description,
             p.public_price, p.price, p.stock_status, p.stock_qty, p.featured, p.image_url, p.tva_rate, p.created_at,
@@ -152,7 +165,7 @@ export async function getFeaturedProducts(limit = 8): Promise<WCProduct[]> {
 }
 
 export async function getRelatedProducts(productId: number, limit = 4): Promise<WCProduct[]> {
-  if (!isDatabaseConfigured()) {
+  if (await useStatic()) {
     const product = StaticData.PRODUCTS_BY_ID.get(productId)
     return product ? StaticData.staticGetRelatedProducts(product, limit) : []
   }
@@ -176,7 +189,7 @@ export async function getVariations(_productId: number): Promise<WCVariation[]> 
 }
 
 export async function searchProducts(query: string, limit = 10): Promise<WCProduct[]> {
-  if (!isDatabaseConfigured()) return StaticData.staticSearchProducts(query, limit)
+  if (await useStatic()) return StaticData.staticSearchProducts(query, limit)
   const rows = (await sql.query(
     `SELECT ('x' || substr(md5(p.id::text),1,7))::bit(28)::int AS ref_id, p.id AS uuid, p.product_slug, p.name_fr, p.sku, p.description,
             p.public_price, p.price, p.stock_status, p.stock_qty, p.featured, p.image_url, p.tva_rate, p.created_at,
@@ -188,13 +201,13 @@ export async function searchProducts(query: string, limit = 10): Promise<WCProdu
 
 // ─── Sitemap helpers ──────────────────────────────────────────────────────────
 export async function getAllProductSlugs(): Promise<string[]> {
-  if (!isDatabaseConfigured()) return StaticData.staticGetAllProductSlugs()
+  if (await useStatic()) return StaticData.staticGetAllProductSlugs()
   const rows = (await sql`SELECT product_slug FROM nes_products WHERE active = true`) as Row[]
   return rows.map(r => String(r.product_slug))
 }
 
 export async function getAllCategorySlugs(): Promise<string[]> {
-  if (!isDatabaseConfigured()) return StaticData.staticGetAllCategorySlugs()
+  if (await useStatic()) return StaticData.staticGetAllCategorySlugs()
   const rows = (await sql`SELECT slug FROM nes_categories`) as Row[]
   return rows.map(r => String(r.slug))
 }
