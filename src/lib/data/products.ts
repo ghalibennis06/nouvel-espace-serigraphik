@@ -48,8 +48,9 @@ function product(
     attributes,
     variations,
     related_ids: [],
-    average_rating: (3.8 + Math.random() * 1.2).toFixed(1),
-    rating_count: Math.floor(total_sales * 0.15 + 5),
+    // Pas de faux avis : 0 tant qu'aucun avis réel n'existe (évite étoiles + aggregateRating bidon)
+    average_rating: '0',
+    rating_count: 0,
     date_created: '2024-10-01T00:00:00',
     date_modified: '2025-01-15T00:00:00',
   }
