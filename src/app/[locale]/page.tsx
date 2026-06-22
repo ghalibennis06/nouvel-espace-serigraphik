@@ -8,7 +8,7 @@ import ProductsSection from '@/components/home/ProductsSection'
 import BuyerPathSection from '@/components/home/BuyerPathSection'
 import MoroccoTrustSection from '@/components/home/MoroccoTrustSection'
 import ProofFieldSection from '@/components/home/ProofFieldSection'
-import { KITS as KITS_DATA } from '@/lib/data/kits'
+import { getKits } from '@/lib/kits'
 import { getHomepageControlState } from '@/lib/homepage-settings'
 import ShaderAnimation from '@/components/ui/shader-animation'
 import RoiCalculator from '@/components/home/RoiCalculator'
@@ -28,8 +28,6 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 // ─── Static data ──────────────────────────────────────────────────────────────
-
-const KITS = KITS_DATA
 
 const CATEGORIES = [
   { img: '/api/img?u=https%3A%2F%2Fnouvelespaceserigraphik.ma%2Fwp-content%2Fuploads%2F2024%2F12%2Fpresse-40x50autoopen.jpg',         name: 'Presses à Chaud',          info: 'Manuelles, auto-ouverture, 5en1, casquette, mug',    count: 23, slug: 'les-presses-a-chaud',             recur: false },
@@ -72,6 +70,7 @@ export default async function HomePage({ params }: { params: { locale: string } 
     .filter((product): product is (typeof products)[number] => Boolean(product))
   const visibleProducts = spotlightProducts.length > 0 ? spotlightProducts : products
 
+  const KITS = await getKits()
   const kitsById = new Map(KITS.map((kit) => [kit.id, kit]))
   const spotlightKits = homepageControl.spotlightKitIds
     .map((id) => kitsById.get(id))

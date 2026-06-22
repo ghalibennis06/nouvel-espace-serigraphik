@@ -24,6 +24,25 @@ export function buildAdminToken(): string {
   return signAdminToken('admin:' + Date.now())
 }
 
+export type AdminRole = 'super_admin' | 'admin' | 'seller'
+
+// Token utilisateur : u:<id>:<role>:<issuedAt>.<hmac>
+export function buildUserToken(id: string, role: AdminRole): string {
+  return signAdminToken(`u:${id}:${role}:${Date.now()}`)
+}
+
+// Renvoie l'acteur courant (pour audit + gating rôle). Null si non authentifié.
+export function getAdminActor(req: NextRequest): { id: string | null; role: AdminRole; email?: string } | null {
+  const token = req.cookies.get(ADMIN_COOKIE)?.value
+  if (!token || !verifyAdminToken(token)) return null
+  const value = token.slice(0, token.lastIndexOf('.'))
+  const mu = /^u:([^:]+):(super_admin|admin|seller):\d+$/.exec(value)
+  if (mu) return { id: mu[1], role: mu[2] as AdminRole }
+  // Legacy single-password login → super_admin
+  if (/^admin:\d+$/.test(value)) return { id: null, role: 'super_admin', email: 'admin' }
+  return null
+}
+
 // Server-side verification: HMAC AND issued-at within TTL window.
 export function verifyAdminToken(signed: string): boolean {
   const dotIdx = signed.lastIndexOf('.')
@@ -39,7 +58,7 @@ export function verifyAdminToken(signed: string): boolean {
   try { hmacOk = crypto.timingSafeEqual(a, b) } catch { return false }
   if (!hmacOk) return false
 
-  const m = /^admin:(\d+)$/.exec(value)
+  const m = /^admin:(\d+)$/.exec(value) || /^u:[^:]+:(?:super_admin|admin|seller):(\d+)$/.exec(value)
   if (!m) return false
   const issuedAt = Number(m[1])
   if (!Number.isFinite(issuedAt)) return false

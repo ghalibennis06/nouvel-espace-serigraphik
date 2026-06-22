@@ -344,6 +344,23 @@ export async function monthlyRevenue(year: number): Promise<{ month: number; ca_
   return Array.from({ length: 12 }, (_, i) => ({ month: i + 1, ca_ttc: map.get(i + 1) ?? 0 }))
 }
 
+export async function listPayments(limit = 80): Promise<Row[]> {
+  return (await sql`
+    SELECT p.amount, p.method, p.reference, p.paid_at, p.created_at,
+           d.number, d.client_name, d.doc_type
+    FROM nes_payments p JOIN nes_documents d ON d.id = p.document_id
+    ORDER BY p.created_at DESC LIMIT ${limit}
+  `) as Row[]
+}
+
+export async function paymentsTotalThisMonth(): Promise<number> {
+  const r = (await sql`
+    SELECT COALESCE(SUM(amount),0) AS s FROM nes_payments
+    WHERE date_trunc('month', paid_at) = date_trunc('month', current_date)
+  `) as Row[]
+  return Number(r[0]?.s ?? 0)
+}
+
 export async function unpaidInvoices(): Promise<Row[]> {
   return (await sql`
     SELECT id, number, client_name, total_ttc, paid_amount, issue_date, due_date, status,

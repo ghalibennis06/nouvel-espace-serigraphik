@@ -11,9 +11,12 @@ const NAV = [
   { href: '/admin/produits', label: '📦 Produits' },
   { href: '/admin/stock', label: '🏷️ Stock' },
   { href: '/admin/facturation', label: '🧾 Devis & Factures' },
+  { href: '/admin/paiements', label: '💳 Paiements' },
   { href: '/admin/comptabilite', label: '💵 Comptabilité' },
   { href: '/admin/reporting', label: '📈 Reporting' },
+  { href: '/admin/kits', label: '🧰 Kits' },
   { href: '/admin/merchandising', label: '🧭 Merchandising' },
+  { href: '/admin/utilisateurs', label: '🔑 Utilisateurs' },
   { href: '/admin/guide', label: '📖 Guide du site' },
 ]
 
