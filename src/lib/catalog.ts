@@ -18,8 +18,13 @@ type Row = Record<string, unknown>
 async function useStatic(): Promise<boolean> {
   if (!isDatabaseConfigured()) return true
   try {
-    const r = (await sql`SELECT EXISTS(SELECT 1 FROM nes_products WHERE active = true) AS e`) as Row[]
-    return !r[0]?.e
+    // Statique tant que : schéma ERP absent (migration non lancée) OU catalogue vide.
+    const r = (await sql`
+      SELECT
+        EXISTS(SELECT 1 FROM information_schema.columns WHERE table_name='nes_products' AND column_name='public_price') AS has_schema,
+        EXISTS(SELECT 1 FROM nes_products WHERE active = true) AS has_rows
+    `) as Row[]
+    return !(r[0]?.has_schema && r[0]?.has_rows)
   } catch {
     return true
   }
