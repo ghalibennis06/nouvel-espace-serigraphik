@@ -27,13 +27,13 @@ const nextConfig = {
       {
         source: '/categorie-produit/:slug*',
         destination: '/fr/categorie-produit/:slug*',
-        permanent: false,
+        permanent: true,
         locale: false,
       },
       {
         source: '/produit/:slug*',
         destination: '/fr/produit/:slug*',
-        permanent: false,
+        permanent: true,
         locale: false,
       },
     ]

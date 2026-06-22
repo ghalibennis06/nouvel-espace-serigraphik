@@ -196,7 +196,9 @@ export default async function ProductPage({ params }: PageProps) {
       ratingValue: average_rating,
       reviewCount: rating_count,
     } : undefined,
-    offers: {
+    // Offre uniquement si un vrai prix existe (NES = beaucoup de "sur devis") —
+    // un price:0 est marqué invalide par Google et supprime le rich result.
+    offers: (parseFloat(sale_price || price || regular_price || '0') > 0) ? {
       '@type': 'Offer',
       url: productUrl,
       priceCurrency: 'MAD',
@@ -204,7 +206,7 @@ export default async function ProductPage({ params }: PageProps) {
       availability: stock_status === 'instock' ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
       seller: { '@type': 'Organization', name: 'Nouvel Espace Sérigraphik' },
       areaServed: { '@type': 'Country', name: 'Morocco' },
-    },
+    } : undefined,
   }
   const breadcrumbJsonLd = {
     '@context': 'https://schema.org',

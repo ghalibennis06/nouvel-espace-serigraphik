@@ -98,7 +98,8 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
     email: EMAIL,
     address: { '@type': 'PostalAddress', streetAddress: ADDRESS, addressLocality: 'Casablanca', postalCode: '20250', addressCountry: 'MA' },
     areaServed: { '@type': 'Country', name: 'Morocco' },
-    priceRange: 'MAD',
+    currenciesAccepted: 'MAD',
+    priceRange: '150 – 15000 MAD',
     sameAs: [`https://wa.me/${WHATSAPP}`],
   }
 
