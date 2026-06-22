@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import ImageWithFallback from '@/components/ui/ImageWithFallback'
 import Link from 'next/link'
 import type { WCProduct } from '@/lib/types'
 import {
@@ -47,7 +47,7 @@ export default function ProductCard({ product, locale, priority = false }: Produ
       {/* Photo */}
       <div style={{ position: 'relative', aspectRatio: '1/1', background: 'var(--surface)', overflow: 'hidden' }}>
         <Link href={href} style={{ display: 'block', width: '100%', height: '100%' }}>
-          <Image
+          <ImageWithFallback
             src={imageSrc}
             alt={images[0]?.alt || name}
             fill

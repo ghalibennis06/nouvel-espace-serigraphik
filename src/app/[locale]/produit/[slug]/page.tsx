@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
+import ImageWithFallback from '@/components/ui/ImageWithFallback'
 import Link from 'next/link'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import {
@@ -246,7 +247,7 @@ export default async function ProductPage({ params }: PageProps) {
           <div>
             <div style={{ position: 'relative', background: 'var(--card)', borderRadius: 12, overflow: 'hidden', border: '1px solid var(--border)', aspectRatio: '1/1', marginBottom: 12 }}>
               {images[0] ? (
-                <Image
+                <ImageWithFallback
                   src={images[0].src}
                   alt={images[0].alt || name}
                   fill
@@ -276,7 +277,7 @@ export default async function ProductPage({ params }: PageProps) {
                     border: `2px solid ${i === 0 ? 'var(--blue)' : 'var(--border)'}`,
                     background: 'var(--card)',
                   }}>
-                    <Image src={img.src} alt={img.alt || name} fill className="object-contain p-1" sizes="62px" />
+                    <ImageWithFallback src={img.src} alt={img.alt || name} fill className="object-contain p-1" sizes="62px" />
                   </div>
                 ))}
               </div>
