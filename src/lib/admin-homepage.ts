@@ -12,9 +12,9 @@ export type HomepageControlState = {
 }
 
 export const DEFAULT_HOMEPAGE_CONTROL: HomepageControlState = {
-  heroTitle: "Machines & kits d'impression pour lancer, équiper et réassortir votre atelier au Maroc.",
+  heroTitle: "Lancez votre atelier d'impression au Maroc.",
   heroSubtitle:
-    'NES aide les débutants, ateliers et revendeurs à choisir le bon équipement, sécuriser leur production et avancer vite avec un support terrain.',
+    'Machines, kits et consommables sérigraphie · sublimation · DTF — en stock à Casablanca, livrés en 48h. Importateur officiel Antex & Inknovator. Plus de 2 000 ateliers équipés.',
   heroPrimaryCtaLabel: 'Demander un devis WhatsApp',
   heroPrimaryCtaHref: '/fr/devis-pro',
   heroSecondaryCtaLabel: 'Voir les kits de démarrage',

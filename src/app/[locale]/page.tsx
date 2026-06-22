@@ -22,8 +22,8 @@ export const revalidate = 300 // ISR — re-render depuis Neon toutes les 5 min
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Nouvel Espace Sérigraphik — Machines & Kits d'impression au Maroc",
-    description: 'Machines professionnelles, kits complets, consommables de qualité. Plus de 2 000 ateliers lancés partout au Maroc — livraison 24–48h, support WhatsApp 7j/7.',
+    title: "Matériel sérigraphie, sublimation & DTF au Maroc — stock Casablanca, 48h",
+    description: 'Machines, presses à chaud, kits et consommables pour sérigraphie, sublimation et DTF au Maroc. Stock à Casablanca, livraison 48h, importateur officiel Antex & Inknovator. +2 000 ateliers équipés. Devis WhatsApp.',
   }
 }
 
