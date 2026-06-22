@@ -36,7 +36,7 @@ export default async function Footer({ locale }: { locale: string }) {
       title: 'B2B & Services',
       links: [
         { label: 'Devis Pro & Tarifs Gros', href: `/${locale}/devis-pro` },
-        { label: 'Kit Personnalisé',        href: `/${locale}/contact` },
+        { label: 'Magasin Casablanca',      href: `/${locale}/materiel-impression-casablanca` },
         { label: 'Livraison & retours',     href: `/${locale}/livraison` },
         { label: 'Contact & showroom',      href: `/${locale}/contact` },
       ],
