@@ -2,13 +2,13 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { setRequestLocale } from 'next-intl/server'
-import { getFeaturedProducts, getCategoryTree } from '@/lib/woocommerce'
+import { getFeaturedProducts, getCategoryTree } from '@/lib/catalog'
 import { categoryHref, whatsappGeneralLink } from '@/lib/utils'
 import ProductsSection from '@/components/home/ProductsSection'
 import BuyerPathSection from '@/components/home/BuyerPathSection'
 import MoroccoTrustSection from '@/components/home/MoroccoTrustSection'
 import ProofFieldSection from '@/components/home/ProofFieldSection'
-import { KITS as KITS_DATA } from '@/lib/data/kits'
+import { getKits } from '@/lib/kits'
 import { getHomepageControlState } from '@/lib/homepage-settings'
 import ShaderAnimation from '@/components/ui/shader-animation'
 import RoiCalculator from '@/components/home/RoiCalculator'
@@ -18,18 +18,16 @@ import HeroIndustrialPanel from '@/components/home/HeroIndustrialPanel'
 import ClosingDecisionStation from '@/components/home/ClosingDecisionStation'
 import { ExpandableGallery } from '@/components/ui/expandable-gallery'
 
-export const revalidate = 3600 // Refresh every hour; WC webhook purges on product changes
+export const revalidate = 300 // ISR — re-render depuis Neon toutes les 5 min
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Nouvel Espace Sérigraphik — Machines & Kits d'impression au Maroc",
-    description: 'Machines professionnelles, kits complets, consommables de qualité. Plus de 2 000 ateliers lancés partout au Maroc — livraison 24–48h, support WhatsApp 7j/7.',
+    title: "Matériel sérigraphie, sublimation & DTF au Maroc — stock Casablanca, 48h",
+    description: 'Machines, presses à chaud, kits et consommables pour sérigraphie, sublimation et DTF au Maroc. Stock à Casablanca, livraison 48h, importateur officiel Antex & Inknovator. +2 000 ateliers équipés. Devis WhatsApp.',
   }
 }
 
 // ─── Static data ──────────────────────────────────────────────────────────────
-
-const KITS = KITS_DATA
 
 const CATEGORIES = [
   { img: '/api/img?u=https%3A%2F%2Fnouvelespaceserigraphik.ma%2Fwp-content%2Fuploads%2F2024%2F12%2Fpresse-40x50autoopen.jpg',         name: 'Presses à Chaud',          info: 'Manuelles, auto-ouverture, 5en1, casquette, mug',    count: 23, slug: 'les-presses-a-chaud',             recur: false },
@@ -72,6 +70,7 @@ export default async function HomePage({ params }: { params: { locale: string } 
     .filter((product): product is (typeof products)[number] => Boolean(product))
   const visibleProducts = spotlightProducts.length > 0 ? spotlightProducts : products
 
+  const KITS = await getKits()
   const kitsById = new Map(KITS.map((kit) => [kit.id, kit]))
   const spotlightKits = homepageControl.spotlightKitIds
     .map((id) => kitsById.get(id))

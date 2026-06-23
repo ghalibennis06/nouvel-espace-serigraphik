@@ -11,10 +11,11 @@ interface Props {
   className?: string
   style?: React.CSSProperties
   sizes?: string
+  priority?: boolean
 }
 
 export default function ImageWithFallback({ src, alt, ...props }: Props) {
-  const [imgSrc, setImgSrc] = useState(src)
+  const [imgSrc, setImgSrc] = useState(src || '/images/placeholder.svg')
   return (
     <Image
       {...props}

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
+import ImageWithFallback from '@/components/ui/ImageWithFallback'
 import Link from 'next/link'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import {
@@ -8,7 +9,7 @@ import {
   getRelatedProducts,
   getVariations,
   getAllProductSlugs,
-} from '@/lib/woocommerce'
+} from '@/lib/catalog'
 import ProductCard from '@/components/catalog/ProductCard'
 import {
   formatPrice,
@@ -24,6 +25,7 @@ interface PageProps {
 }
 
 export const dynamicParams = true
+export const revalidate = 120 // ISR — re-render depuis Neon
 
 export async function generateStaticParams() {
   try {
@@ -194,7 +196,9 @@ export default async function ProductPage({ params }: PageProps) {
       ratingValue: average_rating,
       reviewCount: rating_count,
     } : undefined,
-    offers: {
+    // Offre uniquement si un vrai prix existe (NES = beaucoup de "sur devis") —
+    // un price:0 est marqué invalide par Google et supprime le rich result.
+    offers: (parseFloat(sale_price || price || regular_price || '0') > 0) ? {
       '@type': 'Offer',
       url: productUrl,
       priceCurrency: 'MAD',
@@ -202,7 +206,7 @@ export default async function ProductPage({ params }: PageProps) {
       availability: stock_status === 'instock' ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
       seller: { '@type': 'Organization', name: 'Nouvel Espace Sérigraphik' },
       areaServed: { '@type': 'Country', name: 'Morocco' },
-    },
+    } : undefined,
   }
   const breadcrumbJsonLd = {
     '@context': 'https://schema.org',
@@ -245,7 +249,7 @@ export default async function ProductPage({ params }: PageProps) {
           <div>
             <div style={{ position: 'relative', background: 'var(--card)', borderRadius: 12, overflow: 'hidden', border: '1px solid var(--border)', aspectRatio: '1/1', marginBottom: 12 }}>
               {images[0] ? (
-                <Image
+                <ImageWithFallback
                   src={images[0].src}
                   alt={images[0].alt || name}
                   fill
@@ -275,7 +279,7 @@ export default async function ProductPage({ params }: PageProps) {
                     border: `2px solid ${i === 0 ? 'var(--blue)' : 'var(--border)'}`,
                     background: 'var(--card)',
                   }}>
-                    <Image src={img.src} alt={img.alt || name} fill className="object-contain p-1" sizes="62px" />
+                    <ImageWithFallback src={img.src} alt={img.alt || name} fill className="object-contain p-1" sizes="62px" />
                   </div>
                 ))}
               </div>

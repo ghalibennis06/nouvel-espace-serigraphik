@@ -15,6 +15,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'secure.gravatar.com',
       },
+      {
+        protocol: 'https',
+        hostname: '*.public.blob.vercel-storage.com',
+      },
     ],
   },
   // Preserve legacy WooCommerce-style SEO URLs
@@ -23,13 +27,13 @@ const nextConfig = {
       {
         source: '/categorie-produit/:slug*',
         destination: '/fr/categorie-produit/:slug*',
-        permanent: false,
+        permanent: true,
         locale: false,
       },
       {
         source: '/produit/:slug*',
         destination: '/fr/produit/:slug*',
-        permanent: false,
+        permanent: true,
         locale: false,
       },
     ]

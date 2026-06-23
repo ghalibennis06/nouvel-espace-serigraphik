@@ -142,16 +142,32 @@ export default function HeroIndustrialPanel({
             )}
           </div>
 
+          {/* Entrée rapide par technique — pour l'acheteur qui sait ce qu'il veut */}
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 22 }}>
+            <span style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(20,20,20,0.5)', alignSelf: 'center' }}>Par technique :</span>
+            {[
+              { l: 'Sérigraphie', s: 'les-consommables-de-serigraphie' },
+              { l: 'Sublimation', s: 'les-consommables-de-sublimation' },
+              { l: 'DTF', s: 'les-machines-dimpression' },
+              { l: 'Presses à chaud', s: 'les-presses-a-chaud' },
+            ].map((t) => (
+              <Link key={t.s} href={`/${locale}/categorie-produit/${t.s}`} style={{ fontSize: 13, fontWeight: 700, color: '#151515', background: '#fff', border: '1px solid rgba(20,20,20,0.14)', borderRadius: 999, padding: '7px 14px', textDecoration: 'none' }}>
+                {t.l}
+              </Link>
+            ))}
+          </div>
+
+          {/* Parcours acheteur — sélection cliquable */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3" style={{ marginBottom: 24 }}>
             {[
-              { title: 'Lancer', text: 'Kits de départ, budget initial, premières ventes.' },
-              { title: 'Équiper', text: 'Presse, machine, capacité et choix technique.' },
-              { title: 'Réassortir', text: 'Encres, papiers, films, flex et stock atelier.' },
+              { title: 'Je débute', text: 'Kit de départ, budget initial, premières ventes.', href: `/${locale}/kits` },
+              { title: "J'équipe mon atelier", text: 'Presse, machine, capacité et choix technique.', href: `/${locale}/categorie-produit` },
+              { title: 'Je réassortis', text: 'Encres, papiers, films, flex et stock atelier.', href: `/${locale}/categorie-produit/les-consommables-de-serigraphie` },
             ].map((item) => (
-              <div key={item.title} style={{ background: '#fff', border: '1px solid rgba(20,20,20,0.08)', padding: '16px 14px', minHeight: 128 }}>
-                <div style={{ fontSize: 18, color: '#151515', fontWeight: 700, letterSpacing: '-0.02em', marginBottom: 8 }}>{item.title}</div>
+              <Link key={item.title} href={item.href} className="hero-lane" style={{ background: '#fff', border: '1px solid rgba(20,20,20,0.08)', padding: '16px 14px', minHeight: 128, textDecoration: 'none', display: 'block', transition: 'border-color .15s, transform .15s' }}>
+                <div style={{ fontSize: 17, color: '#151515', fontWeight: 700, letterSpacing: '-0.02em', marginBottom: 8, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>{item.title}<span style={{ color: '#f26316' }}>→</span></div>
                 <p style={{ fontSize: 13, color: 'rgba(20,20,20,0.66)', lineHeight: 1.6 }}>{item.text}</p>
-              </div>
+              </Link>
             ))}
           </div>
 

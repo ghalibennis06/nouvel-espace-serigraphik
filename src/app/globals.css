@@ -323,3 +323,6 @@
 @media (max-width: 639px) {
   :root { --mob-bar-h: 72px; }
 }
+
+/* Parcours acheteur cliquables (hero) */
+.hero-lane:hover{border-color:#f26316 !important;transform:translateY(-2px)}

@@ -2,7 +2,10 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { setRequestLocale } from 'next-intl/server'
 import { whatsappGeneralLink } from '@/lib/utils'
-import { KITS, COMPARISON } from '@/lib/data/kits'
+import { COMPARISON } from '@/lib/data/kits'
+import { getKits } from '@/lib/kits'
+
+export const revalidate = 120 // ISR — applique les overrides kits depuis Neon
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://nouvelespaceserigraphik.ma'
 
@@ -61,9 +64,10 @@ const KITS_FAQ = [
   { q: 'Peut-on personnaliser un kit selon notre besoin ?', a: 'Bien sûr — décrivez votre activité, votre volume hebdo et votre budget sur WhatsApp, et NES compose un kit sur mesure (machine + consommables + accompagnement).' },
 ]
 
-export default function KitsPage({ params }: { params: { locale: string } }) {
+export default async function KitsPage({ params }: { params: { locale: string } }) {
   const { locale } = params
   setRequestLocale(locale)
+  const KITS = await getKits()
 
   const faqJsonLd = {
     '@context': 'https://schema.org',

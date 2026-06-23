@@ -3,6 +3,7 @@ import { useState, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 
 export default function AdminLoginPage() {
+  const [email, setEmail] = useState('')
   const [pw, setPw] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
@@ -15,13 +16,13 @@ export default function AdminLoginPage() {
     const res = await fetch('/api/admin/auth', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ password: pw }),
+      body: JSON.stringify({ email: email || undefined, password: pw }),
     })
     if (res.ok) {
       router.push('/admin')
       router.refresh()
     } else {
-      setError('Mot de passe incorrect.')
+      setError(email ? 'Identifiants incorrects.' : 'Mot de passe incorrect.')
       setLoading(false)
     }
   }
@@ -43,6 +44,17 @@ export default function AdminLoginPage() {
         {/* Card */}
         <div style={{ background: 'var(--card)', border: '1px solid var(--border2)', borderRadius: 20, padding: '32px 32px 28px', boxShadow: 'var(--shadow-lg)' }}>
           <form onSubmit={handleSubmit}>
+            <label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: 'var(--text2)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>
+              Email <span style={{ textTransform: 'none', fontWeight: 400 }}>(optionnel)</span>
+            </label>
+            <input
+              type="email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              placeholder="vous@nes.ma"
+              autoComplete="username"
+              style={{ width: '100%', background: 'var(--card2)', border: '1px solid var(--border2)', borderRadius: 10, padding: '12px 14px', fontSize: 15, color: 'var(--text)', fontFamily: 'Outfit, sans-serif', outline: 'none', boxSizing: 'border-box', marginBottom: 14 }}
+            />
             <label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: 'var(--text2)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>
               Mot de passe
             </label>

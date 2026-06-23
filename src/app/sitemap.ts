@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next'
-import { getAllProductSlugs, getAllCategorySlugs } from '@/lib/woocommerce'
+import { getAllProductSlugs, getAllCategorySlugs } from '@/lib/catalog'
 import { publicLocales as locales } from '@/i18n'
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://nouvelespaceserigraphik.ma'
@@ -34,6 +34,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       { url: `${BASE}/${locale}/academie`,          lastModified: now, priority: 0.80, changeFrequency: 'weekly'  },
       { url: `${BASE}/${locale}/livraison`,         lastModified: now, priority: 0.65, changeFrequency: 'monthly' },
       { url: `${BASE}/${locale}/contact`,           lastModified: now, priority: 0.70, changeFrequency: 'monthly' },
+      { url: `${BASE}/${locale}/materiel-impression-casablanca`, lastModified: now, priority: 0.82, changeFrequency: 'monthly' },
     )
   }
 
