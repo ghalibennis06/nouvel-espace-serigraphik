@@ -255,7 +255,7 @@ export const PRODUCTS: WCProduct[] = [
 
   // ─── BASES AQUEUSES ANTEX ─────────────────────────────────────────────────
   product(100, 'BASE AQUEUSE ANTEX XP10 — Transparent', 'base-aqueuse-antex-xp10', '180', '180', '',
-    img('/2024/10/su-bazli-sedef-pati-22458581c5f88ab0.png', 'Base Aqueuse Antex XP10'),
+    img('/2024/12/product-02.jpg', 'Base Aqueuse Antex XP10'),
     [CAT.conso_seri, CAT.antex],
     'Base aqueuse transparente Antex XP10. Formulation professionnelle pour sérigraphie sur tissu clair.',
     '<p>La <strong>Base Aqueuse Antex XP10</strong> est une encre transparente de haute qualité, idéale pour les impressions sur tissus clairs. Excellente solidité au lavage (60°C).</p><ul><li>Transparent / non couvrant</li><li>Pour textiles clairs</li><li>Lavable à 60°C</li><li>Conditionnement : 1kg</li></ul>',
@@ -263,7 +263,7 @@ export const PRODUCTS: WCProduct[] = [
     [{ id: 1, name: 'Référence', position: 0, visible: true, variation: false, options: ['XP 10 Transparent'] }]
   ),
   product(101, 'BASE AQUEUSE ANTEX XP50 — Blanc Élastique', 'base-aqueuse-antex-xp50', '220', '220', '',
-    img('/2024/10/su-bazli-sedef-pati-22458581c5f88ab0.png', 'Base Aqueuse Antex XP50'),
+    img('/2024/12/product-02.jpg', 'Base Aqueuse Antex XP50'),
     [CAT.conso_seri, CAT.antex],
     'Base aqueuse blanc élastique Antex XP50. Haute opacité, extensible — idéale pour tissus stretch.',
     '<p>La <strong>Base Aqueuse Antex XP50</strong> offre une <strong>opacité maximale</strong> avec une élasticité professionnelle. Parfaite pour les vêtements de sport et les tissus stretch.</p><ul><li>Blanc élastique haute opacité</li><li>Pour textiles stretch</li><li>Sans craquelage à l\'usage</li><li>Conditionnement : 1kg</li></ul>',
@@ -271,7 +271,7 @@ export const PRODUCTS: WCProduct[] = [
     [{ id: 1, name: 'Référence', position: 0, visible: true, variation: false, options: ['XP 50 Blanc Élastique'] }]
   ),
   product(102, 'BASE AQUEUSE ANTEX GS600', 'base-aqueuse-antex-gs600', '195', '195', '',
-    img('/2024/10/su-bazli-sedef-pati-22458581c5f88ab0.png', 'Base Aqueuse Antex GS600'),
+    img('/2024/12/product-02.jpg', 'Base Aqueuse Antex GS600'),
     [CAT.conso_seri, CAT.antex],
     'Base aqueuse Antex GS600 — formulation universelle pour tous supports textiles.',
     '<p>La <strong>Base GS600</strong> est la formule universelle Antex, compatible avec tous les types de textiles. Brillance et tenue exceptionnelles après lavage.</p>',
