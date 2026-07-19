@@ -1,14 +1,12 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import Image from 'next/image'
 import { Archivo } from 'next/font/google'
 import { setRequestLocale } from 'next-intl/server'
 import { whatsappGeneralLink } from '@/lib/utils'
 import { getHomepageControlState } from '@/lib/homepage-settings'
 import { KITS } from '@/lib/data/kits'
-import { GLOSS_COLORS } from '@/lib/data/carlas-gloss'
 import DualDoorHero from '@/components/home/DualDoorHero'
-import { HomeMarquee, CategoryShowcase, KitShowcase } from '@/components/home/HomeShowcase'
+import { HomeMarquee, CategoryShowcase, KitShowcase, WrapColorShowcase } from '@/components/home/HomeShowcase'
 
 const archivo = Archivo({
   subsets: ['latin'],
@@ -43,8 +41,6 @@ const STATS = [
   { value: '24–48h', label: 'livraison partout au Maroc' },
   { value: '123',    label: 'coloris Carlas en stock' },
 ]
-
-const WRAP_STRIP = GLOSS_COLORS.filter((c) => c.img).slice(8, 26)
 
 // ─── Page ──────────────────────────────────────────────────────────────────────
 
@@ -88,13 +84,10 @@ export default async function HomePage({ params }: { params: { locale: string } 
               Les 123 coloris →
             </Link>
           </div>
-          <Link href={`/${locale}/covering`} aria-label="Voir tous les coloris covering" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(64px, 1fr))', gap: 6, textDecoration: 'none' }}>
-            {WRAP_STRIP.map((c) => (
-              <span key={c.name} style={{ position: 'relative', aspectRatio: '1', display: 'block', overflow: 'hidden', borderRadius: 12, border: '1px solid rgba(255,181,154,0.15)' }}>
-                <Image src={c.img as string} alt={`Film covering ${c.name}`} fill sizes="90px" style={{ objectFit: 'cover' }} />
-              </span>
-            ))}
-          </Link>
+          <WrapColorShowcase locale={locale} />
+          <p style={{ fontSize: 13, color: 'rgba(221,227,235,0.55)', marginTop: 16 }}>
+            Et 100+ autres coloris — Crystal, Metallic, Liquid Metal, Diamond, Rainbow.
+          </p>
         </div>
       </section>
 

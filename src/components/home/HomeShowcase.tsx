@@ -1,5 +1,8 @@
 'use client'
 import Link from 'next/link'
+import Image from 'next/image'
+import { CardsSlider } from '@/components/ui/cards-slider'
+import { GLOSS_COLORS } from '@/lib/data/carlas-gloss'
 import { MagicCard } from '@/components/ui/magic-card'
 import { TiltCard } from '@/components/ui/tilt-card'
 import { PerspectiveMarquee } from '@/components/ui/perspective-marquee'
@@ -92,5 +95,37 @@ export function KitShowcase({ locale, kits }: { locale: string; kits: KitLite[] 
         </div>
       </div>
     </section>
+  )
+}
+
+
+const SHOWCASE_NAMES = [
+  'Ferrari Red', 'Liquid Gold', 'Signal Green', 'Azure', 'Sunflower Burst',
+  'McLaren Flame', 'Pure White', 'Caribbean Pearl', 'Signal Yellow', 'Cobalt',
+  'Glowing Rose', 'Nardo Storm', 'Champion Silver', "Dragon's Breath", 'Ocean Sky', 'Malachite Green',
+]
+
+export function WrapColorShowcase({ locale }: { locale: string }) {
+  const colors = SHOWCASE_NAMES
+    .map((n) => GLOSS_COLORS.find((c) => c.name === n))
+    .filter((c): c is NonNullable<typeof c> => Boolean(c?.img))
+  return (
+    <CardsSlider padding={4}>
+      {colors.map((c) => (
+        <Link
+          key={c.name}
+          href={`/${locale}/covering`}
+          style={{ textDecoration: 'none', display: 'block', width: 190, flexShrink: 0, borderRadius: 18, overflow: 'hidden', border: '1px solid rgba(255,181,154,0.18)', background: '#111820' }}
+        >
+          <div style={{ position: 'relative', width: '100%', aspectRatio: '1' }}>
+            <Image src={c.img as string} alt={`Film Carlas ${c.name}`} fill sizes="190px" style={{ objectFit: 'cover' }} />
+          </div>
+          <div style={{ padding: '12px 14px' }}>
+            <div style={{ fontSize: 14, fontWeight: 800, color: '#f6efe8', lineHeight: 1.2 }}>{c.name}</div>
+            <div style={{ fontSize: 11, fontWeight: 700, color: '#ff9f6a', marginTop: 3 }}>{c.code ?? c.family}</div>
+          </div>
+        </Link>
+      ))}
+    </CardsSlider>
   )
 }
