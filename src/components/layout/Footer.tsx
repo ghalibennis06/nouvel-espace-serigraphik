@@ -35,6 +35,7 @@ export default async function Footer({ locale }: { locale: string }) {
     {
       title: 'B2B & Services',
       links: [
+        { label: 'Covering Automobile',     href: `/${locale}/covering` },
         { label: 'Devis Pro & Tarifs Gros', href: `/${locale}/devis-pro` },
         { label: 'Kit Personnalisé',        href: `/${locale}/contact` },
         { label: 'Livraison & retours',     href: `/${locale}/livraison` },

@@ -16,6 +16,7 @@ import VoidCategoryShowcase from '@/components/home/VoidCategoryShowcase'
 import FluidKitShowcase from '@/components/home/FluidKitShowcase'
 import HeroIndustrialPanel from '@/components/home/HeroIndustrialPanel'
 import ClosingDecisionStation from '@/components/home/ClosingDecisionStation'
+import DualActivitySection from '@/components/home/DualActivitySection'
 import { ExpandableGallery } from '@/components/ui/expandable-gallery'
 
 export const revalidate = 3600 // Refresh every hour; WC webhook purges on product changes
@@ -128,6 +129,8 @@ export default async function HomePage({ params }: { params: { locale: string } 
           ))}
         </div>
       </div>
+
+      <DualActivitySection locale={locale} />
 
       <BuyerPathSection locale={locale} />
 

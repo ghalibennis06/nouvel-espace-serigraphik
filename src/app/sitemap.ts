@@ -30,6 +30,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       { url: `${BASE}/${locale}`,                   lastModified: now, priority: 1.0,  changeFrequency: 'weekly'  },
       { url: `${BASE}/${locale}/kits`,              lastModified: now, priority: 0.95, changeFrequency: 'weekly'  },
       { url: `${BASE}/${locale}/categorie-produit`, lastModified: now, priority: 0.92, changeFrequency: 'weekly'  },
+      { url: `${BASE}/${locale}/covering`,          lastModified: now, priority: 0.90, changeFrequency: 'weekly'  },
       { url: `${BASE}/${locale}/devis-pro`,         lastModified: now, priority: 0.85, changeFrequency: 'monthly' },
       { url: `${BASE}/${locale}/academie`,          lastModified: now, priority: 0.80, changeFrequency: 'weekly'  },
       { url: `${BASE}/${locale}/livraison`,         lastModified: now, priority: 0.65, changeFrequency: 'monthly' },

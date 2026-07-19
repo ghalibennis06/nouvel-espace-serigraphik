@@ -40,6 +40,7 @@ export default function Header({ locale }: HeaderProps) {
   const navLinks = [
     { label: 'Kits',       href: `/${locale}/kits` },
     { label: 'Catalogue',  href: `/${locale}/categorie-produit` },
+    { label: 'Covering',   href: `/${locale}/covering` },
     { label: 'Académie',   href: `/${locale}/academie` },
     { label: 'Devis Pro',  href: `/${locale}/devis-pro` },
     { label: 'Contact',    href: `/${locale}/contact` },
