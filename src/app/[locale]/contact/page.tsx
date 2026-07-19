@@ -92,7 +92,7 @@ export default function ContactPage({ params }: { params: { locale: string } }) 
       <section style={{ position: 'relative', overflow: 'hidden', borderBottom: '1px solid rgba(255,181,154,0.12)' }}>
         <div style={{ position: 'absolute', inset: 0 }}>
           <Image
-            src="/api/img?u=https%3A%2F%2Fnouvelespaceserigraphik.ma%2Fwp-content%2Fuploads%2F2024%2F12%2Fpresse-40x50autoopen.jpg"
+            src="/products/2024_12_presse-40x50autoopen2.png"
             alt="Atelier NES"
             fill
             style={{ objectFit: 'cover', opacity: 0.18 }}
