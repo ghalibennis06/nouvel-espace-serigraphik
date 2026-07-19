@@ -93,7 +93,17 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
     url: SITE_URL,
     logo: `${SITE_URL}/logo.png`,
     image: `${SITE_URL}/og-default.jpg`,
-    description: 'Machines, kits et consommables pour sérigraphie, sublimation, DTF, UV et broderie au Maroc.',
+    description: 'Un atelier, deux métiers : machines, kits et consommables d\'impression (sérigraphie, sublimation, DTF) et covering automobile films Carlas posé en atelier.',
+    makesOffer: [
+      {
+        '@type': 'Offer',
+        itemOffered: { '@type': 'Service', name: 'Équipement d\'impression pour ateliers', description: 'Machines, kits complets et consommables : sérigraphie, sublimation, DTF, presses à chaud.', url: `${SITE_URL}/${locale}/categorie-produit` },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: { '@type': 'Service', name: 'Covering automobile', description: 'Pose de films covering Carlas Essential Series Gloss en atelier — 120+ coloris.', url: `${SITE_URL}/${locale}/covering` },
+      },
+    ],
     telephone: PHONE,
     email: EMAIL,
     address: { '@type': 'PostalAddress', streetAddress: ADDRESS, addressLocality: 'Casablanca', postalCode: '20250', addressCountry: 'MA' },

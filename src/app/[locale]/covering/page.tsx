@@ -40,6 +40,15 @@ const ADVANTAGES = [
   { code: 'ADV-04', title: 'Devis rapide', desc: 'Réponse WhatsApp avec prix et délai, sans aller-retour inutile.' },
 ] as const
 
+const FAQ = [
+  { q: 'Combien coûte un covering complet au Maroc ?', a: 'Le prix dépend du véhicule (taille, complexité des surfaces) et du film choisi. Envoyez le modèle et le coloris sur WhatsApp : NES répond avec un devis net incluant film, pose et délai.' },
+  { q: 'Combien de temps dure la pose ?', a: 'Un covering complet se pose en général en 3 à 5 jours ouvrés en atelier, selon le véhicule et la préparation nécessaire.' },
+  { q: 'Le covering abîme-t-il la peinture d\'origine ?', a: 'Non, c\'est l\'inverse : le film protège la peinture des rayures légères et des UV. Il se retire proprement sans laisser de trace sur une peinture d\'origine en bon état.' },
+  { q: 'Quelle est la durée de vie d\'un film Carlas ?', a: 'Les films Carlas Essential Series sont conçus pour un usage extérieur durable pendant plusieurs années avec un entretien normal (lavage main recommandé, pas de rouleaux agressifs).' },
+  { q: 'Peut-on ne couvrir qu\'une partie du véhicule ?', a: 'Oui : toit, capot, rétroviseurs ou accents peuvent être couverts seuls. Précisez la zone dans votre demande de devis.' },
+  { q: 'Quelles séries seront disponibles ensuite ?', a: 'NES démarre avec l\'Essential Series Gloss, puis élargira aux séries Satin & Matte, Chrome & Color Shift, au PPF (protection de peinture) et aux vitres teintées.' },
+] as const
+
 const COMING_SOON = [
   { name: 'Séries Satin & Matte', desc: 'Finitions satinées et mates premium' },
   { name: 'Séries Chrome & Color Shift', desc: 'Finitions chrome et caméléon' },
@@ -51,10 +60,33 @@ export default function CoveringPage({ params }: { params: { locale: string } })
   const { locale } = params
   setRequestLocale(locale)
 
-  const waDevis = whatsappGeneralLink('Bonjour NES, je souhaite un devis covering pour mon véhicule. Modèle : ... / Coloris souhaité : ...')
+  const waDevis = whatsappGeneralLink('[Covering] Bonjour NES, je souhaite un devis covering pour mon véhicule. Modèle : ... / Coloris souhaité : ...')
+
+  const serviceJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Covering automobile — films Carlas',
+    serviceType: 'Vehicle wrapping',
+    provider: { '@id': `${SITE_URL}#organization` },
+    areaServed: { '@type': 'Country', name: 'Morocco' },
+    description: `Pose de films covering Carlas Essential Series Gloss en atelier — ${GLOSS_COLORS.length}+ coloris brillants. Casablanca et partout au Maroc.`,
+    url: `${SITE_URL}/${locale}/covering`,
+  }
+
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: FAQ.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  }
 
   return (
     <div style={{ minHeight: '100vh', background: '#0b1016', color: '#dde3eb' }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       {/* HERO */}
       <section style={{ position: 'relative', overflow: 'hidden', borderBottom: '1px solid rgba(255,181,154,0.12)' }}>
         <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 82% 18%, rgba(242,99,22,0.16) 0%, rgba(242,99,22,0.04) 30%, rgba(0,0,0,0) 58%)' }} />
@@ -156,6 +188,52 @@ export default function CoveringPage({ params }: { params: { locale: string } })
           </p>
         </div>
         <GlossColorGrid />
+      </div>
+
+      {/* RÉALISATIONS */}
+      <div id="realisations" style={{ maxWidth: 1240, margin: '0 auto', padding: '8px 6% 56px', scrollMarginTop: 80 }}>
+        <div style={{ border: '1px solid rgba(171,137,125,0.18)', background: 'rgba(255,255,255,0.03)', padding: 28 }}>
+          <div className="grid grid-cols-1 lg:grid-cols-[1.02fr_0.98fr] gap-8 items-center">
+            <div>
+              <div style={{ fontSize: 10, color: '#ff9f6a', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 8 }}>Réalisations // Atelier en lancement</div>
+              <h2 style={{ fontSize: 'clamp(24px,3.2vw,38px)', fontWeight: 700, color: '#f6efe8', letterSpacing: '-0.03em', lineHeight: 1.08, marginBottom: 10 }}>
+                Les premières poses arrivent ici.
+              </h2>
+              <p style={{ fontSize: 14, color: 'rgba(221,227,235,0.72)', lineHeight: 1.75, maxWidth: 560 }}>
+                NES lance son atelier covering : chaque véhicule posé sera documenté ici en avant/après,
+                coloris par coloris. En attendant, demandez à voir les échantillons de films Carlas en atelier.
+              </p>
+            </div>
+            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+              <a
+                href={whatsappGeneralLink('[Covering] Bonjour NES, je voudrais voir les échantillons de films Carlas et discuter de mon projet.')}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '14px 22px', border: '1px solid rgba(255,181,154,0.2)', background: 'rgba(255,255,255,0.03)', color: '#dde3eb', fontSize: 13, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', textDecoration: 'none' }}
+              >
+                Voir les échantillons en atelier
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* FAQ */}
+      <div id="faq" style={{ maxWidth: 1240, margin: '0 auto', padding: '0 6% 56px', scrollMarginTop: 80 }}>
+        <div style={{ marginBottom: 24 }}>
+          <div style={{ fontSize: 10, color: '#ff9f6a', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 8 }}>FAQ Covering</div>
+          <h2 style={{ fontSize: 'clamp(26px,3.4vw,40px)', fontWeight: 700, color: '#f6efe8', letterSpacing: '-0.03em', lineHeight: 1.08 }}>
+            Les questions qu&apos;on nous pose avant de poser.
+          </h2>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {FAQ.map((item) => (
+            <div key={item.q} style={{ border: '1px solid rgba(171,137,125,0.18)', background: 'rgba(255,255,255,0.03)', padding: 20 }}>
+              <h3 style={{ fontSize: 15, fontWeight: 800, color: '#f6efe8', marginBottom: 8, lineHeight: 1.35 }}>{item.q}</h3>
+              <p style={{ fontSize: 13, color: 'rgba(221,227,235,0.72)', lineHeight: 1.7 }}>{item.a}</p>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* WHY */}

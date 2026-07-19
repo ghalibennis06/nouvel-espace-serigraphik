@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og'
 
 export const runtime = 'edge'
-export const alt = 'Nouvel Espace Sérigraphik — Machines & Kits d\'impression au Maroc'
+export const alt = 'Nouvel Espace Sérigraphik — Impression & Covering Auto au Maroc'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
@@ -22,11 +22,11 @@ export default async function Image() {
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-          <div style={{ fontSize: 64, fontWeight: 800, color: '#0F1622', lineHeight: 1.05, letterSpacing: '-0.025em', maxWidth: 1000 }}>
-            Machines &amp; kits d&apos;impression au Maroc.
+          <div style={{ fontSize: 60, fontWeight: 800, color: '#0F1622', lineHeight: 1.05, letterSpacing: '-0.025em', maxWidth: 1000 }}>
+            Un atelier, deux métiers.
           </div>
           <div style={{ fontSize: 28, color: '#4B5563', lineHeight: 1.4, maxWidth: 980 }}>
-            Sérigraphie · Sublimation · DTF · UV · Broderie — livraison 24–48h partout au Maroc.
+            Impression : sérigraphie · sublimation · DTF — Covering auto : films Carlas posés en atelier.
           </div>
         </div>
 

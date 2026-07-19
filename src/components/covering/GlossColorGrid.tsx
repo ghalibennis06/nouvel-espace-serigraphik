@@ -42,7 +42,7 @@ export default function GlossColorGrid() {
         {shown.map((color) => (
           <a
             key={color.name}
-            href={whatsappGeneralLink(`Bonjour NES, je suis intéressé par le covering "${color.name}"${color.code ? ` (réf. ${color.code})` : ''} — Essential Series Gloss. Pouvez-vous me faire un devis pose ?`)}
+            href={whatsappGeneralLink(`[Covering] Bonjour NES, je suis intéressé par le coloris "${color.name}"${color.code ? ` (réf. ${color.code})` : ''} — Essential Series Gloss. Pouvez-vous me faire un devis pose ?`)}
             target="_blank"
             rel="noopener noreferrer"
             style={{ textDecoration: 'none', border: '1px solid rgba(171,137,125,0.18)', background: 'rgba(255,255,255,0.03)', display: 'block' }}

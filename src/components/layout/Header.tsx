@@ -37,14 +37,24 @@ export default function Header({ locale }: HeaderProps) {
     setSearchQuery('')
   }
 
-  const navLinks = [
-    { label: 'Kits',       href: `/${locale}/kits` },
-    { label: 'Catalogue',  href: `/${locale}/categorie-produit` },
-    { label: 'Covering',   href: `/${locale}/covering` },
-    { label: 'Académie',   href: `/${locale}/academie` },
-    { label: 'Devis Pro',  href: `/${locale}/devis-pro` },
-    { label: 'Contact',    href: `/${locale}/contact` },
-  ]
+  const inCovering = pathname.startsWith(`/${locale}/covering`)
+
+  const navLinks = inCovering
+    ? [
+        { label: 'Coloris',      href: `/${locale}/covering#coloris` },
+        { label: 'Réalisations', href: `/${locale}/covering#realisations` },
+        { label: 'FAQ',          href: `/${locale}/covering#faq` },
+        { label: 'Contact',      href: `/${locale}/contact` },
+        { label: 'Impression',   href: `/${locale}` },
+      ]
+    : [
+        { label: 'Kits',       href: `/${locale}/kits` },
+        { label: 'Catalogue',  href: `/${locale}/categorie-produit` },
+        { label: 'Covering',   href: `/${locale}/covering` },
+        { label: 'Académie',   href: `/${locale}/academie` },
+        { label: 'Devis Pro',  href: `/${locale}/devis-pro` },
+        { label: 'Contact',    href: `/${locale}/contact` },
+      ]
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(href + '/')
 
@@ -97,6 +107,11 @@ export default function Header({ locale }: HeaderProps) {
           <Link href={`/${locale}`} aria-label="NES — accueil" style={{ display: 'flex', alignItems: 'center', gap: 4, textDecoration: 'none', flexShrink: 0 }}>
             <span style={{ fontFamily: 'Inter, sans-serif', fontSize: 22, fontWeight: 700, color: 'var(--text)', letterSpacing: '-0.05em' }}>NES</span>
             <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--orange)', display: 'inline-block', marginTop: 8 }} />
+            {inCovering && (
+              <span style={{ marginLeft: 6, fontSize: 10, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--orange)', border: '1px solid var(--orange)', padding: '3px 7px', borderRadius: 4 }}>
+                Covering
+              </span>
+            )}
           </Link>
 
           <nav className="hidden lg:flex" aria-label="Navigation principale" style={{ alignItems: 'center', gap: 4 }}>
@@ -149,7 +164,7 @@ export default function Header({ locale }: HeaderProps) {
             </button>
 
             <a
-              href={whatsappGeneralLink('Bonjour NES, je souhaite des informations.')}
+              href={whatsappGeneralLink(inCovering ? '[Covering] Bonjour NES, je souhaite un devis covering pour mon véhicule.' : 'Bonjour NES, je souhaite des informations.')}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="WhatsApp"

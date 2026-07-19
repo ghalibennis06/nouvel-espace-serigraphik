@@ -12,13 +12,13 @@ export type HomepageControlState = {
 }
 
 export const DEFAULT_HOMEPAGE_CONTROL: HomepageControlState = {
-  heroTitle: "Machines & kits d'impression pour lancer, équiper et réassortir votre atelier au Maroc.",
+  heroTitle: 'Un atelier, deux métiers : impression & covering auto.',
   heroSubtitle:
-    'NES aide les débutants, ateliers et revendeurs à choisir le bon équipement, sécuriser leur production et avancer vite avec un support terrain.',
-  heroPrimaryCtaLabel: 'Demander un devis WhatsApp',
-  heroPrimaryCtaHref: '/fr/devis-pro',
-  heroSecondaryCtaLabel: 'Voir les kits de démarrage',
-  heroSecondaryCtaHref: '/fr/kits',
+    'NES équipe les ateliers d\'impression du Maroc — machines, kits, consommables — et transforme les véhicules avec les films covering Carlas posés en atelier.',
+  heroPrimaryCtaLabel: 'Équiper mon atelier',
+  heroPrimaryCtaHref: '/fr/categorie-produit',
+  heroSecondaryCtaLabel: 'Découvrir le covering auto',
+  heroSecondaryCtaHref: '/fr/covering',
   spotlightCategorySlugs: ['les-presses-a-chaud', 'les-consommables-de-serigraphie', 'les-produits-sublimables'],
   spotlightProductSlugs: ['pack-n2', 'presse-a-chaud-40-x-50cm-avec-ouverture-automatique', 'base-aqueuse-antex-xp10'],
   spotlightKitIds: ['serigraphie-pro', 'dtf-premium'],
