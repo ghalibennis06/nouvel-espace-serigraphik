@@ -12,12 +12,12 @@ export type HomepageControlState = {
 }
 
 export const DEFAULT_HOMEPAGE_CONTROL: HomepageControlState = {
-  heroTitle: 'Un atelier, deux métiers : impression & covering auto.',
+  heroTitle: 'Vous imprimez. Vous posez. On vous fournit.',
   heroSubtitle:
-    'NES équipe les ateliers d\'impression du Maroc — machines, kits, consommables — et transforme les véhicules avec les films covering Carlas posés en atelier.',
-  heroPrimaryCtaLabel: 'Équiper mon atelier',
+    'NES fournit les pros du Maroc depuis 2018 : machines et consommables pour les ateliers d\'impression, films covering Carlas au rouleau pour les garages et poseurs. Stock Casablanca, livraison 24–48h.',
+  heroPrimaryCtaLabel: 'Catalogue pro impression',
   heroPrimaryCtaHref: '/fr/categorie-produit',
-  heroSecondaryCtaLabel: 'Découvrir le covering auto',
+  heroSecondaryCtaLabel: 'Films Carlas — prix rouleau',
   heroSecondaryCtaHref: '/fr/covering',
   spotlightCategorySlugs: ['les-presses-a-chaud', 'les-consommables-de-serigraphie', 'les-produits-sublimables'],
   spotlightProductSlugs: ['pack-n2', 'presse-a-chaud-40-x-50cm-avec-ouverture-automatique', 'base-aqueuse-antex-xp10'],

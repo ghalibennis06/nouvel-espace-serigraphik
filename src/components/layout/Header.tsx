@@ -42,7 +42,7 @@ export default function Header({ locale }: HeaderProps) {
   const navLinks = inCovering
     ? [
         { label: 'Coloris',      href: `/${locale}/covering#coloris` },
-        { label: 'Réalisations', href: `/${locale}/covering#realisations` },
+        { label: 'Vos poses',    href: `/${locale}/covering#realisations` },
         { label: 'FAQ',          href: `/${locale}/covering#faq` },
         { label: 'Contact',      href: `/${locale}/contact` },
         { label: 'Impression',   href: `/${locale}` },

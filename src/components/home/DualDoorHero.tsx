@@ -24,7 +24,7 @@ export default function DualDoorHero({ locale, title, subtitle }: DualDoorHeroPr
     <section aria-label="Nos deux métiers" style={{ borderBottom: '1px solid var(--border)' }}>
       {/* Bandeau titre */}
       <div style={{ padding: 'clamp(40px,6vw,72px) 5% clamp(28px,4vw,44px)', maxWidth: 1400, margin: '0 auto' }}>
-        <p className="hero-kicker">NES · Casablanca — depuis 2018</p>
+        <p className="hero-kicker">NES · Grossiste pour les pros · Casablanca depuis 2018</p>
         <h1 className="hero-display">{title}</h1>
         <p style={{ fontSize: 'clamp(14px,1.4vw,17px)', color: 'var(--text2)', lineHeight: 1.7, maxWidth: 640, marginTop: 18 }}>
           {subtitle}
@@ -42,13 +42,13 @@ export default function DualDoorHero({ locale, title, subtitle }: DualDoorHeroPr
           onFocus={() => setHovered('print')}
         >
           <div className="door-head">
-            <span className="door-code">Métier 01</span>
-            <span className="door-code">2 000+ ateliers équipés</span>
+            <span className="door-code">Vous imprimez ?</span>
+            <span className="door-code">2 000+ ateliers fournis</span>
           </div>
           <div>
-            <div className="door-name">Impression</div>
+            <div className="door-name">Ateliers d'impression</div>
             <p className="door-desc">
-              Machines, kits complets et consommables pour lancer, équiper et réassortir votre atelier.
+              Machines, consommables et réassort pour ceux qui impriment tous les jours. Prix pro, stock local.
             </p>
             <div className="door-tags">
               {TECHNIQUES.map((t) => (
@@ -56,7 +56,7 @@ export default function DualDoorHero({ locale, title, subtitle }: DualDoorHeroPr
               ))}
             </div>
           </div>
-          <span className="door-cta">Équiper mon atelier →</span>
+          <span className="door-cta">Voir le catalogue pro →</span>
         </Link>
 
         {/* PORTE 02 — COVERING */}
@@ -68,13 +68,13 @@ export default function DualDoorHero({ locale, title, subtitle }: DualDoorHeroPr
           onFocus={() => setHovered('wrap')}
         >
           <div className="door-head">
-            <span className="door-code" style={{ color: '#ff9f6a' }}>Métier 02</span>
+            <span className="door-code" style={{ color: '#ff9f6a' }}>Vous posez ?</span>
             <span className="door-new">Nouveau</span>
           </div>
           <div>
-            <div className="door-name">Covering auto</div>
+            <div className="door-name">Garages &amp; poseurs</div>
             <p className="door-desc" style={{ color: 'rgba(221,227,235,0.75)' }}>
-              Films Carlas posés en atelier — 123 coloris Essential Series Gloss, puis satin, chrome et PPF.
+              Films Carlas au rouleau — 123 coloris Essential Series Gloss en stock à Casablanca, réassort 24–48h.
             </p>
             <div className="door-swatches" aria-hidden>
               {SWATCHES.map((c) => (
@@ -84,7 +84,7 @@ export default function DualDoorHero({ locale, title, subtitle }: DualDoorHeroPr
               ))}
             </div>
           </div>
-          <span className="door-cta" style={{ color: '#ffb59a' }}>Choisir mon coloris →</span>
+          <span className="door-cta" style={{ color: '#ffb59a' }}>Prix rouleau &amp; coloris →</span>
         </Link>
       </div>
     </section>

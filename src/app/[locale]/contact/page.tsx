@@ -110,10 +110,10 @@ export default function ContactPage({ params }: { params: { locale: string } }) 
           <div className="grid grid-cols-1 lg:grid-cols-[1.04fr_0.96fr] gap-10 lg:gap-14 items-start">
             <div>
               <h1 style={{ fontSize: 'clamp(38px,5vw,72px)', lineHeight: 1.03, letterSpacing: '-0.045em', color: '#f6efe8', fontWeight: 700, marginBottom: 18, maxWidth: 760 }}>
-                Entrez par le bon besoin, pas par un message flou.
+                On vous répond en pro, pas en robot.
               </h1>
               <p style={{ fontSize: 16, color: 'rgba(221,227,235,0.76)', lineHeight: 1.78, maxWidth: 660, marginBottom: 24 }}>
-                NES doit comprendre vite si vous cherchez à démarrer, équiper, réassortir ou cadrer une demande professionnelle. On gagne du temps, on qualifie mieux, et la réponse devient vraiment utile.
+                Dites-nous ce que vous préparez — un lancement, une machine, un réassort, une commande en volume — et vous recevez une vraie réponse : prix, dispo, délai. C'est tout.
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3" style={{ marginBottom: 26 }}>

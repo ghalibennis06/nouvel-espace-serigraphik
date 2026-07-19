@@ -86,22 +86,22 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
 
   const orgJsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
+    '@type': ['WholesaleStore', 'LocalBusiness'],
     '@id': `${SITE_URL}#organization`,
     name: 'Nouvel Espace Sérigraphik',
     alternateName: 'NES',
     url: SITE_URL,
     logo: `${SITE_URL}/logo.png`,
     image: `${SITE_URL}/og-default.jpg`,
-    description: 'Un atelier, deux métiers : machines, kits et consommables d\'impression (sérigraphie, sublimation, DTF) et covering automobile films Carlas posé en atelier.',
+    description: 'Grossiste B2B à Casablanca : machines et consommables d\'impression pour ateliers (sérigraphie, sublimation, DTF) et films covering Carlas au rouleau pour garages et poseurs.',
     makesOffer: [
       {
         '@type': 'Offer',
-        itemOffered: { '@type': 'Service', name: 'Équipement d\'impression pour ateliers', description: 'Machines, kits complets et consommables : sérigraphie, sublimation, DTF, presses à chaud.', url: `${SITE_URL}/${locale}/categorie-produit` },
+        itemOffered: { '@type': 'Service', name: 'Fourniture des ateliers d\'impression', description: 'Machines, kits et consommables en gros : sérigraphie, sublimation, DTF, presses à chaud. Prix pro, réassort 24–48h.', url: `${SITE_URL}/${locale}/categorie-produit` },
       },
       {
         '@type': 'Offer',
-        itemOffered: { '@type': 'Service', name: 'Covering automobile', description: 'Pose de films covering Carlas Essential Series Gloss en atelier — 120+ coloris.', url: `${SITE_URL}/${locale}/covering` },
+        itemOffered: { '@type': 'Service', name: 'Distribution de films covering Carlas', description: 'Films Carlas Essential Series Gloss au rouleau pour garages et poseurs — 123 coloris en stock à Casablanca.', url: `${SITE_URL}/${locale}/covering` },
       },
     ],
     telephone: PHONE,

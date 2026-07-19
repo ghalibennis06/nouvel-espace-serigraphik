@@ -6,15 +6,15 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://nouvelespaceserigr
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'Nouvel Espace Sérigraphik — Impression & Covering Auto au Maroc',
+    default: 'NES — Grossiste impression & films covering Carlas au Maroc',
     template: '%s | Nouvel Espace Sérigraphik',
   },
-  description: 'Un atelier, deux métiers : machines, kits et consommables d\'impression (sérigraphie, sublimation, DTF) et covering automobile films Carlas posé en atelier. 2 000+ ateliers équipés, livraison 24–48h, WhatsApp 7j/7.',
+  description: 'NES fournit les pros au Maroc depuis 2018 : machines et consommables d\'impression pour les ateliers (sérigraphie, sublimation, DTF), films covering Carlas au rouleau pour les garages et poseurs. Stock Casablanca, livraison 24–48h.',
   applicationName: 'Nouvel Espace Sérigraphik',
   keywords: [
     'sérigraphie Maroc', 'sublimation Maroc', 'DTF Maroc', 'impression textile',
     'machine sérigraphie', 'presse à chaud', 'kit sublimation', 'kit DTF',
-    'covering auto Maroc', 'wrapping voiture Casablanca', 'film covering Carlas',
+    'grossiste sérigraphie Maroc', 'fournisseur film covering Maroc', 'distributeur Carlas Maroc', 'grossiste DTF Casablanca',
     'broderie machine', 'consommables impression', 'Casablanca', 'NES',
   ],
   authors: [{ name: 'Nouvel Espace Sérigraphik' }],
@@ -29,16 +29,16 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     siteName: 'Nouvel Espace Sérigraphik',
-    title: 'Nouvel Espace Sérigraphik — Impression & Covering Auto au Maroc',
-    description: 'Un atelier, deux métiers : équipement d\'impression pour ateliers et covering automobile films Carlas. Livraison 24–48h.',
+    title: 'NES — Grossiste impression & films covering Carlas au Maroc',
+    description: 'Le fournisseur des ateliers d\'impression et des poseurs de covering au Maroc. Stock Casablanca, livraison 24–48h.',
     url: SITE_URL,
     locale: 'fr_MA',
     alternateLocale: ['ar_MA'],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Nouvel Espace Sérigraphik — Impression & Covering Auto au Maroc',
-    description: 'Un atelier, deux métiers : équipement d\'impression et covering automobile films Carlas au Maroc.',
+    title: 'NES — Grossiste impression & films covering Carlas au Maroc',
+    description: 'Le fournisseur des ateliers d\'impression et des poseurs de covering au Maroc.',
   },
   alternates: {
     canonical: SITE_URL,

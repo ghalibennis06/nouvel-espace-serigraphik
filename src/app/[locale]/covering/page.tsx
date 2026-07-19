@@ -9,11 +9,11 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://nouvelespaceserigr
 
 export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
   const url = `${SITE_URL}/${params.locale}/covering`
-  const title = 'Covering automobile Maroc — Films Carlas Essential Series Gloss, pose pro'
-  const description = `Covering auto au Maroc avec les films Carlas : ${GLOSS_COLORS.length}+ coloris Essential Series Gloss, pose professionnelle en atelier. Devis WhatsApp rapide — Casablanca et partout au Maroc.`
+  const title = 'Films covering Carlas au Maroc — fournisseur des garages & poseurs'
+  const description = `Grossiste films covering Carlas au Maroc : ${GLOSS_COLORS.length}+ coloris Essential Series Gloss au rouleau, en stock à Casablanca. Prix pro pour garages et poseurs, réassort 24–48h partout au Maroc.`
   return {
     title, description,
-    keywords: ['covering auto Maroc', 'wrapping voiture Casablanca', 'film covering Carlas Maroc', 'covering gloss voiture', 'pose covering Casablanca'],
+    keywords: ['fournisseur film covering Maroc', 'grossiste covering Casablanca', 'films Carlas Maroc', 'rouleau covering prix pro', 'distributeur wrap Maroc', 'film covering garage'],
     alternates: { canonical: url, languages: { 'fr-MA': `${SITE_URL}/fr/covering`, 'ar-MA': `${SITE_URL}/ar/covering` } },
     openGraph: { title, description, url, type: 'website' },
     twitter: { card: 'summary_large_image', title, description },
@@ -28,25 +28,25 @@ const WA_SVG = (
 )
 
 const PROCESS_STEPS = [
-  { code: 'STEP-01', title: 'Choix du coloris', text: `Vous parcourez les ${GLOSS_COLORS.length}+ coloris Essential Series Gloss et sélectionnez celui qui correspond à votre véhicule.` },
-  { code: 'STEP-02', title: 'Devis & planification', text: 'NES qualifie le véhicule (modèle, surfaces, état de la carrosserie) et vous envoie un devis net avec délai de pose.' },
-  { code: 'STEP-03', title: 'Pose en atelier', text: 'Pose professionnelle du film Carlas : préparation, application, finitions. Le film protège la peinture d\'origine.' },
+  { code: '01', title: 'Choisissez vos coloris', text: `${GLOSS_COLORS.length}+ références Essential Series Gloss, du Pure White au Liquid Gold. Cliquez, la référence part sur WhatsApp.` },
+  { code: '02', title: 'Recevez le prix rouleau', text: 'Tarif pro selon volume, dispo temps réel du stock Casablanca, conditions réassort. Réponse rapide, sans détour.' },
+  { code: '03', title: 'Livré, vous posez', text: 'Livraison 24–48h partout au Maroc. Vous posez, vos clients roulent, vous recommandez quand vous voulez.' },
 ] as const
 
 const ADVANTAGES = [
-  { code: 'ADV-01', title: 'Films Carlas', desc: 'Films de covering premium, coloris gloss profonds, durabilité extérieure éprouvée.' },
-  { code: 'ADV-02', title: 'Réversible', desc: 'Le covering protège la peinture d\'origine et se retire sans dommage.' },
-  { code: 'ADV-03', title: 'Pose maîtrisée', desc: 'Préparation, application et finitions réalisées en atelier par NES.' },
-  { code: 'ADV-04', title: 'Devis rapide', desc: 'Réponse WhatsApp avec prix et délai, sans aller-retour inutile.' },
+  { title: 'Films Carlas officiels', desc: 'La marque que les poseurs demandent : gloss profond, conformabilité, durabilité extérieure.' },
+  { title: 'Stock local, pas d\'import', desc: 'Le rouleau part de Casablanca, pas d\'attente de conteneur ni de douane à gérer.' },
+  { title: 'Prix pro au volume', desc: 'Tarifs grossiste dès le premier rouleau, dégressifs quand vous montez en cadence.' },
+  { title: 'Réassort 24–48h', desc: 'Un chantier imprévu ? Le coloris manquant arrive avant la fin de la préparation.' },
 ] as const
 
 const FAQ = [
-  { q: 'Combien coûte un covering complet au Maroc ?', a: 'Le prix dépend du véhicule (taille, complexité des surfaces) et du film choisi. Envoyez le modèle et le coloris sur WhatsApp : NES répond avec un devis net incluant film, pose et délai.' },
-  { q: 'Combien de temps dure la pose ?', a: 'Un covering complet se pose en général en 3 à 5 jours ouvrés en atelier, selon le véhicule et la préparation nécessaire.' },
-  { q: 'Le covering abîme-t-il la peinture d\'origine ?', a: 'Non, c\'est l\'inverse : le film protège la peinture des rayures légères et des UV. Il se retire proprement sans laisser de trace sur une peinture d\'origine en bon état.' },
-  { q: 'Quelle est la durée de vie d\'un film Carlas ?', a: 'Les films Carlas Essential Series sont conçus pour un usage extérieur durable pendant plusieurs années avec un entretien normal (lavage main recommandé, pas de rouleaux agressifs).' },
-  { q: 'Peut-on ne couvrir qu\'une partie du véhicule ?', a: 'Oui : toit, capot, rétroviseurs ou accents peuvent être couverts seuls. Précisez la zone dans votre demande de devis.' },
-  { q: 'Quelles séries seront disponibles ensuite ?', a: 'NES démarre avec l\'Essential Series Gloss, puis élargira aux séries Satin & Matte, Chrome & Color Shift, au PPF (protection de peinture) et aux vitres teintées.' },
+  { q: 'Quels prix pour les rouleaux Carlas au Maroc ?', a: 'Tarif pro selon le coloris et le volume commandé, dégressif dès plusieurs rouleaux. Envoyez les références qui vous intéressent sur WhatsApp : vous recevez la grille tarifaire pro directement.' },
+  { q: 'Vous livrez partout au Maroc ?', a: 'Oui — expédition depuis notre stock de Casablanca, livraison en 24–48h sur tout le territoire. Les garages de Casa peuvent aussi retirer sur place.' },
+  { q: 'Quelles séries Carlas sont disponibles ?', a: `On démarre avec l'Essential Series Gloss (${GLOSS_COLORS.length}+ coloris en 7 familles : Crystal, Metallic, Liquid Metal, Diamond…). Les séries Satin & Matte, Chrome, PPF et vitres teintées arrivent ensuite.` },
+  { q: 'Je débute dans la pose, vous accompagnez ?', a: 'Oui. NES fournit 2 000+ pros de l\'impression depuis 2018 avec le même principe : du matériel sérieux et un vrai support technique. On vous oriente sur les films, les outils et les bonnes pratiques.' },
+  { q: 'Il y a un minimum de commande ?', a: 'Non — le prix pro s\'applique dès le premier rouleau. Le dégressif se déclenche sur le volume.' },
+  { q: 'Comment ouvrir un compte pro NES ?', a: 'Un message WhatsApp suffit : nom du garage ou de l\'atelier, ville, et ce que vous posez. On vous enregistre et vous recevez les tarifs et dispos en priorité.' },
 ] as const
 
 const COMING_SOON = [
@@ -56,20 +56,24 @@ const COMING_SOON = [
   { name: 'Vitres teintées', desc: 'Films solaires automobile' },
 ] as const
 
+const card: React.CSSProperties = { border: '1px solid rgba(171,137,125,0.18)', background: 'rgba(255,255,255,0.03)', borderRadius: 20 }
+
 export default function CoveringPage({ params }: { params: { locale: string } }) {
   const { locale } = params
   setRequestLocale(locale)
 
-  const waDevis = whatsappGeneralLink('[Covering] Bonjour NES, je souhaite un devis covering pour mon véhicule. Modèle : ... / Coloris souhaité : ...')
+  const waRouleau = whatsappGeneralLink('[Covering] Bonjour NES, je pose du covering. Envoyez-moi les prix rouleau Carlas. Garage/atelier : ... / Ville : ...')
+  const waComptePro = whatsappGeneralLink('[Covering] Bonjour NES, je veux ouvrir un compte pro covering. Garage/atelier : ... / Ville : ... / Je pose : ...')
 
   const serviceJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Service',
-    name: 'Covering automobile — films Carlas',
-    serviceType: 'Vehicle wrapping',
+    name: 'Distribution de films covering Carlas',
+    serviceType: 'Wholesale vehicle wrap film supply',
     provider: { '@id': `${SITE_URL}#organization` },
     areaServed: { '@type': 'Country', name: 'Morocco' },
-    description: `Pose de films covering Carlas Essential Series Gloss en atelier — ${GLOSS_COLORS.length}+ coloris brillants. Casablanca et partout au Maroc.`,
+    audience: { '@type': 'BusinessAudience', name: 'Garages, ateliers de pose et professionnels du covering' },
+    description: `Fourniture de films covering Carlas Essential Series Gloss au rouleau — ${GLOSS_COLORS.length}+ coloris en stock à Casablanca, livraison 24–48h au Maroc.`,
     url: `${SITE_URL}/${locale}/covering`,
   }
 
@@ -87,73 +91,67 @@ export default function CoveringPage({ params }: { params: { locale: string } })
     <div style={{ minHeight: '100vh', background: '#0b1016', color: '#dde3eb' }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+
       {/* HERO */}
       <section style={{ position: 'relative', overflow: 'hidden', borderBottom: '1px solid rgba(255,181,154,0.12)' }}>
         <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 82% 18%, rgba(242,99,22,0.16) 0%, rgba(242,99,22,0.04) 30%, rgba(0,0,0,0) 58%)' }} />
-        <div style={{ maxWidth: 1240, margin: '0 auto', padding: '72px 6% 62px', position: 'relative', zIndex: 1 }}>
-          <nav style={{ fontSize: 11, color: 'rgba(228,190,177,0.62)', marginBottom: 24, display: 'flex', gap: 6, alignItems: 'center', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-            <Link href={`/${locale}`} style={{ color: 'rgba(228,190,177,0.62)', textDecoration: 'none' }}>Accueil</Link>
-            <span>/</span>
-            <span style={{ color: '#ffb59a' }}>Covering auto</span>
-          </nav>
-
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '8px 12px', border: '1px solid rgba(255,92,0,0.34)', background: 'rgba(255,92,0,0.1)', color: '#ffb59a', fontSize: 11, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 18 }}>
+        <div style={{ maxWidth: 1240, margin: '0 auto', padding: '64px 6% 56px', position: 'relative', zIndex: 1 }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '8px 14px', borderRadius: 999, border: '1px solid rgba(255,92,0,0.34)', background: 'rgba(255,92,0,0.1)', color: '#ffb59a', fontSize: 12, fontWeight: 700, marginBottom: 20 }}>
             <span style={{ width: 7, height: 7, borderRadius: 999, background: '#ff5c00', display: 'inline-block' }} />
-            Nouveau métier NES // Films Carlas
+            Distributeur films Carlas · Stock Casablanca
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-14 items-start">
             <div>
-              <h1 style={{ fontSize: 'clamp(38px,5vw,74px)', lineHeight: 1.03, letterSpacing: '-0.045em', color: '#f6efe8', fontWeight: 700, marginBottom: 18, maxWidth: 760 }}>
-                Covering automobile. Films Carlas, pose atelier.
+              <h1 style={{ fontSize: 'clamp(34px,4.6vw,64px)', lineHeight: 1.06, letterSpacing: '-0.04em', color: '#f6efe8', fontWeight: 800, marginBottom: 18, maxWidth: 700 }}>
+                Vous posez quoi, vous ?
               </h1>
-              <p style={{ fontSize: 16, color: 'rgba(221,227,235,0.76)', lineHeight: 1.78, maxWidth: 660, marginBottom: 28 }}>
-                NES lance son deuxième métier : le covering auto avec les films Carlas.
-                On démarre avec l&apos;Essential Series Gloss — {GLOSS_COLORS.length}+ coloris brillants,
-                du Pure White au Liquid Gold — posés en atelier avec le même niveau d&apos;exigence
-                que notre activité impression. Les autres séries arrivent ensuite.
+              <p style={{ fontSize: 16, color: 'rgba(221,227,235,0.76)', lineHeight: 1.75, maxWidth: 640, marginBottom: 28 }}>
+                NES fournit les garages et poseurs du Maroc en films Carlas.
+                {' '}{GLOSS_COLORS.length}+ coloris Essential Series Gloss au rouleau, prix pro,
+                stock à Casablanca et réassort en 24–48h. Vous posez — on s&apos;occupe du reste.
               </p>
 
               <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 18 }}>
                 <a
-                  href={waDevis}
+                  href={waRouleau}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '14px 22px', background: '#ff5c00', color: '#521800', fontSize: 13, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', textDecoration: 'none' }}
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '14px 24px', borderRadius: 14, background: '#ff5c00', color: '#521800', fontSize: 14, fontWeight: 800, textDecoration: 'none' }}
                 >
-                  {WA_SVG} Devis covering
+                  {WA_SVG} Recevoir les prix rouleau
                 </a>
                 <a
                   href="#coloris"
-                  style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', padding: '14px 20px', border: '1px solid rgba(255,181,154,0.2)', background: 'rgba(255,255,255,0.03)', color: '#dde3eb', fontSize: 13, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', textDecoration: 'none' }}
+                  style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', padding: '14px 22px', borderRadius: 14, border: '1px solid rgba(255,181,154,0.2)', background: 'rgba(255,255,255,0.03)', color: '#dde3eb', fontSize: 14, fontWeight: 700, textDecoration: 'none' }}
                 >
-                  Voir les coloris
+                  Parcourir les coloris
                 </a>
               </div>
 
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px 24px' }}>
-                {['Films Carlas', 'Pose atelier', 'Peinture protégée', 'Devis WhatsApp'].map((item) => (
-                  <span key={item} style={{ fontSize: 12, color: 'rgba(221,227,235,0.72)', fontWeight: 700, letterSpacing: '0.04em' }}>
-                    {item}
+                {['Prix pro dès 1 rouleau', 'Stock Casablanca', 'Réassort 24–48h', 'Support technique'].map((item) => (
+                  <span key={item} style={{ fontSize: 13, color: 'rgba(221,227,235,0.72)', fontWeight: 600 }}>
+                    ✓ {item}
                   </span>
                 ))}
               </div>
             </div>
 
-            <div style={{ border: '1px solid rgba(171,137,125,0.18)', background: 'rgba(255,255,255,0.03)', padding: 20 }}>
-              <div style={{ fontSize: 10, color: '#ff9f6a', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 8 }}>Essential Series Gloss // Dispo maintenant</div>
-              <p style={{ fontSize: 13, color: 'rgba(221,227,235,0.72)', lineHeight: 1.65, marginBottom: 14 }}>
-                La série d&apos;entrée de gamme Carlas : finition brillante profonde,
-                {' '}{GLOSS_COLORS.length}+ coloris répartis en 7 familles (Crystal, Metallic, Liquid Metal, Diamond…).
+            <div style={{ ...card, padding: 24 }}>
+              <div style={{ fontSize: 12, color: '#ff9f6a', fontWeight: 800, marginBottom: 8 }}>Essential Series Gloss — disponible maintenant</div>
+              <p style={{ fontSize: 14, color: 'rgba(221,227,235,0.72)', lineHeight: 1.65, marginBottom: 16 }}>
+                La série d&apos;entrée Carlas : gloss profond, {GLOSS_COLORS.length}+ coloris
+                en 7 familles (Crystal, Metallic, Liquid Metal, Diamond…).
               </p>
-              <div style={{ borderTop: '1px solid rgba(171,137,125,0.14)', paddingTop: 14 }}>
-                <div style={{ fontSize: 10, color: '#ff9f6a', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 10 }}>Ensuite // Le reste du catalogue</div>
+              <div style={{ borderTop: '1px solid rgba(171,137,125,0.14)', paddingTop: 16 }}>
+                <div style={{ fontSize: 12, color: '#ff9f6a', fontWeight: 800, marginBottom: 10 }}>Et ensuite, le reste du catalogue Carlas</div>
                 {COMING_SOON.map((item, i) => (
                   <div key={item.name} style={{ display: 'flex', gap: 10, padding: '9px 0', borderTop: i > 0 ? '1px solid rgba(171,137,125,0.12)' : 'none' }}>
-                    <span style={{ color: '#ffb59a', fontWeight: 800, flexShrink: 0, fontSize: 12 }}>{`0${i + 1}`}</span>
+                    <span style={{ color: '#ffb59a', fontWeight: 800, flexShrink: 0, fontSize: 13 }}>{`0${i + 1}`}</span>
                     <div>
-                      <div style={{ fontSize: 13, fontWeight: 700, color: '#f6efe8' }}>{item.name}</div>
-                      <div style={{ fontSize: 11, color: 'rgba(221,227,235,0.6)' }}>{item.desc}</div>
+                      <div style={{ fontSize: 14, fontWeight: 700, color: '#f6efe8' }}>{item.name}</div>
+                      <div style={{ fontSize: 12, color: 'rgba(221,227,235,0.6)' }}>{item.desc}</div>
                     </div>
                   </div>
                 ))}
@@ -167,10 +165,10 @@ export default function CoveringPage({ params }: { params: { locale: string } })
       <div style={{ maxWidth: 1240, margin: '0 auto', padding: '48px 6% 8px' }}>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {PROCESS_STEPS.map((step) => (
-            <div key={step.code} style={{ border: '1px solid rgba(171,137,125,0.18)', background: 'rgba(255,255,255,0.03)', padding: 20 }}>
-              <div style={{ fontSize: 10, color: '#ff9f6a', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 8 }}>{step.code}</div>
-              <div style={{ fontSize: 18, fontWeight: 800, color: '#f6efe8', lineHeight: 1.15, marginBottom: 8 }}>{step.title}</div>
-              <p style={{ fontSize: 13, color: 'rgba(221,227,235,0.72)', lineHeight: 1.7 }}>{step.text}</p>
+            <div key={step.code} style={{ ...card, padding: 22 }}>
+              <div style={{ fontSize: 13, color: '#ff9f6a', fontWeight: 800, marginBottom: 8 }}>{step.code}</div>
+              <div style={{ fontSize: 18, fontWeight: 800, color: '#f6efe8', lineHeight: 1.2, marginBottom: 8 }}>{step.title}</div>
+              <p style={{ fontSize: 14, color: 'rgba(221,227,235,0.72)', lineHeight: 1.7 }}>{step.text}</p>
             </div>
           ))}
         </div>
@@ -179,39 +177,39 @@ export default function CoveringPage({ params }: { params: { locale: string } })
       {/* COLOR GRID */}
       <div id="coloris" style={{ maxWidth: 1240, margin: '0 auto', padding: '56px 6%', scrollMarginTop: 80 }}>
         <div style={{ marginBottom: 28 }}>
-          <div style={{ fontSize: 10, color: '#ff9f6a', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 8 }}>Essential Series Gloss</div>
-          <h2 style={{ fontSize: 'clamp(28px,3.8vw,46px)', fontWeight: 700, color: '#f6efe8', letterSpacing: '-0.035em', lineHeight: 1.05, marginBottom: 10 }}>
-            {GLOSS_COLORS.length}+ coloris gloss, un seul devis WhatsApp.
+          <div style={{ fontSize: 12, color: '#ff9f6a', fontWeight: 800, marginBottom: 8 }}>Essential Series Gloss</div>
+          <h2 style={{ fontSize: 'clamp(26px,3.4vw,42px)', fontWeight: 800, color: '#f6efe8', letterSpacing: '-0.035em', lineHeight: 1.08, marginBottom: 10 }}>
+            {GLOSS_COLORS.length}+ coloris. Le prix rouleau en un clic.
           </h2>
           <p style={{ fontSize: 15, color: 'rgba(221,227,235,0.7)', lineHeight: 1.75, maxWidth: 720 }}>
-            Cliquez sur un coloris pour demander directement un devis pose avec la référence pré-remplie.
+            Cliquez sur un coloris : la référence part sur WhatsApp et vous recevez le tarif pro et la dispo.
           </p>
         </div>
         <GlossColorGrid />
       </div>
 
-      {/* RÉALISATIONS */}
+      {/* VOS POSES */}
       <div id="realisations" style={{ maxWidth: 1240, margin: '0 auto', padding: '8px 6% 56px', scrollMarginTop: 80 }}>
-        <div style={{ border: '1px solid rgba(171,137,125,0.18)', background: 'rgba(255,255,255,0.03)', padding: 28 }}>
+        <div style={{ ...card, padding: 30 }}>
           <div className="grid grid-cols-1 lg:grid-cols-[1.02fr_0.98fr] gap-8 items-center">
             <div>
-              <div style={{ fontSize: 10, color: '#ff9f6a', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 8 }}>Réalisations // Atelier en lancement</div>
-              <h2 style={{ fontSize: 'clamp(24px,3.2vw,38px)', fontWeight: 700, color: '#f6efe8', letterSpacing: '-0.03em', lineHeight: 1.08, marginBottom: 10 }}>
-                Les premières poses arrivent ici.
+              <div style={{ fontSize: 12, color: '#ff9f6a', fontWeight: 800, marginBottom: 8 }}>Vos poses, notre vitrine</div>
+              <h2 style={{ fontSize: 'clamp(24px,3vw,36px)', fontWeight: 800, color: '#f6efe8', letterSpacing: '-0.03em', lineHeight: 1.1, marginBottom: 10 }}>
+                Vous posez du Carlas ? On vous met en avant.
               </h2>
               <p style={{ fontSize: 14, color: 'rgba(221,227,235,0.72)', lineHeight: 1.75, maxWidth: 560 }}>
-                NES lance son atelier covering : chaque véhicule posé sera documenté ici en avant/après,
-                coloris par coloris. En attendant, demandez à voir les échantillons de films Carlas en atelier.
+                Envoyez les photos de vos poses : les plus belles seront publiées ici avec le nom
+                de votre garage. Vos clients vous trouvent, tout le monde y gagne.
               </p>
             </div>
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
               <a
-                href={whatsappGeneralLink('[Covering] Bonjour NES, je voudrais voir les échantillons de films Carlas et discuter de mon projet.')}
+                href={whatsappGeneralLink('[Covering] Bonjour NES, voici des photos de mes poses en films Carlas. Garage : ... / Ville : ...')}
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '14px 22px', border: '1px solid rgba(255,181,154,0.2)', background: 'rgba(255,255,255,0.03)', color: '#dde3eb', fontSize: 13, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', textDecoration: 'none' }}
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '14px 24px', borderRadius: 14, border: '1px solid rgba(255,181,154,0.2)', background: 'rgba(255,255,255,0.03)', color: '#dde3eb', fontSize: 14, fontWeight: 700, textDecoration: 'none' }}
               >
-                Voir les échantillons en atelier
+                Envoyer mes poses
               </a>
             </div>
           </div>
@@ -221,16 +219,16 @@ export default function CoveringPage({ params }: { params: { locale: string } })
       {/* FAQ */}
       <div id="faq" style={{ maxWidth: 1240, margin: '0 auto', padding: '0 6% 56px', scrollMarginTop: 80 }}>
         <div style={{ marginBottom: 24 }}>
-          <div style={{ fontSize: 10, color: '#ff9f6a', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 8 }}>FAQ Covering</div>
-          <h2 style={{ fontSize: 'clamp(26px,3.4vw,40px)', fontWeight: 700, color: '#f6efe8', letterSpacing: '-0.03em', lineHeight: 1.08 }}>
-            Les questions qu&apos;on nous pose avant de poser.
+          <div style={{ fontSize: 12, color: '#ff9f6a', fontWeight: 800, marginBottom: 8 }}>Questions de poseurs</div>
+          <h2 style={{ fontSize: 'clamp(24px,3.2vw,38px)', fontWeight: 800, color: '#f6efe8', letterSpacing: '-0.03em', lineHeight: 1.1 }}>
+            Ce qu&apos;on nous demande avant le premier rouleau.
           </h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {FAQ.map((item) => (
-            <div key={item.q} style={{ border: '1px solid rgba(171,137,125,0.18)', background: 'rgba(255,255,255,0.03)', padding: 20 }}>
+            <div key={item.q} style={{ ...card, padding: 22 }}>
               <h3 style={{ fontSize: 15, fontWeight: 800, color: '#f6efe8', marginBottom: 8, lineHeight: 1.35 }}>{item.q}</h3>
-              <p style={{ fontSize: 13, color: 'rgba(221,227,235,0.72)', lineHeight: 1.7 }}>{item.a}</p>
+              <p style={{ fontSize: 14, color: 'rgba(221,227,235,0.72)', lineHeight: 1.7 }}>{item.a}</p>
             </div>
           ))}
         </div>
@@ -240,15 +238,14 @@ export default function CoveringPage({ params }: { params: { locale: string } })
       <div style={{ borderTop: '1px solid rgba(255,181,154,0.08)', borderBottom: '1px solid rgba(255,181,154,0.08)', background: '#111820', padding: '56px 6%' }}>
         <div style={{ maxWidth: 1240, margin: '0 auto' }}>
           <div style={{ marginBottom: 24 }}>
-            <div style={{ fontSize: 10, color: '#ff9f6a', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 8 }}>Pourquoi NES</div>
-            <h2 style={{ fontSize: 'clamp(26px,3.4vw,40px)', fontWeight: 700, color: '#f6efe8', letterSpacing: '-0.03em', lineHeight: 1.08 }}>Un covering posé comme un travail d&apos;atelier, pas comme un bricolage.</h2>
+            <div style={{ fontSize: 12, color: '#ff9f6a', fontWeight: 800, marginBottom: 8 }}>Pourquoi les poseurs choisissent NES</div>
+            <h2 style={{ fontSize: 'clamp(24px,3.2vw,38px)', fontWeight: 800, color: '#f6efe8', letterSpacing: '-0.03em', lineHeight: 1.1 }}>Un fournisseur qui comprend le métier.</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {ADVANTAGES.map((advantage) => (
-              <div key={advantage.code} style={{ border: '1px solid rgba(171,137,125,0.18)', background: 'rgba(255,255,255,0.03)', padding: 18 }}>
-                <div style={{ fontSize: 10, color: '#ff9f6a', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 8 }}>{advantage.code}</div>
-                <div style={{ fontSize: 17, fontWeight: 800, color: '#f6efe8', marginBottom: 8 }}>{advantage.title}</div>
-                <p style={{ fontSize: 12, color: 'rgba(221,227,235,0.72)', lineHeight: 1.65 }}>{advantage.desc}</p>
+              <div key={advantage.title} style={{ ...card, padding: 20 }}>
+                <div style={{ fontSize: 16, fontWeight: 800, color: '#f6efe8', marginBottom: 8 }}>{advantage.title}</div>
+                <p style={{ fontSize: 13, color: 'rgba(221,227,235,0.72)', lineHeight: 1.65 }}>{advantage.desc}</p>
               </div>
             ))}
           </div>
@@ -257,29 +254,30 @@ export default function CoveringPage({ params }: { params: { locale: string } })
 
       {/* FINAL CTA */}
       <div style={{ maxWidth: 1240, margin: '0 auto', padding: '56px 6% 72px' }}>
-        <div style={{ border: '1px solid rgba(255,92,0,0.26)', background: 'linear-gradient(180deg, rgba(255,92,0,0.12) 0%, rgba(255,255,255,0.03) 100%)', padding: 28 }}>
-          <div className="grid grid-cols-1 lg:grid-cols-[1.02fr_0.98fr] gap-8 items-start">
+        <div style={{ border: '1px solid rgba(255,92,0,0.26)', borderRadius: 24, background: 'linear-gradient(180deg, rgba(255,92,0,0.12) 0%, rgba(255,255,255,0.03) 100%)', padding: 32 }}>
+          <div className="grid grid-cols-1 lg:grid-cols-[1.02fr_0.98fr] gap-8 items-center">
             <div>
-              <div style={{ fontSize: 10, color: '#ff9f6a', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 8 }}>Lancer le projet</div>
-              <h2 style={{ fontSize: 'clamp(28px,3.8vw,46px)', fontWeight: 700, color: '#f6efe8', letterSpacing: '-0.035em', lineHeight: 1.04, marginBottom: 12 }}>
-                Envoyez le modèle du véhicule et le coloris, NES chiffre la pose.
+              <div style={{ fontSize: 12, color: '#ff9f6a', fontWeight: 800, marginBottom: 8 }}>Compte pro covering</div>
+              <h2 style={{ fontSize: 'clamp(26px,3.4vw,42px)', fontWeight: 800, color: '#f6efe8', letterSpacing: '-0.035em', lineHeight: 1.06, marginBottom: 12 }}>
+                Ouvrez votre compte pro, posez tranquille.
               </h2>
               <p style={{ fontSize: 15, color: 'rgba(221,227,235,0.74)', lineHeight: 1.75, maxWidth: 620 }}>
-                Modèle, coloris souhaité, ville — c&apos;est tout ce qu&apos;il faut pour recevoir un devis net avec délai de pose.
+                Nom du garage, ville, ce que vous posez — c&apos;est tout. Vous recevez la grille
+                tarifaire pro et les dispos stock en priorité.
               </p>
             </div>
-            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'center' }}>
+            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'center' }}>
               <a
-                href={waDevis}
+                href={waComptePro}
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '15px 22px', background: '#ff5c00', color: '#521800', fontSize: 13, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', textDecoration: 'none' }}
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '15px 24px', borderRadius: 14, background: '#ff5c00', color: '#521800', fontSize: 14, fontWeight: 800, textDecoration: 'none' }}
               >
-                {WA_SVG} Devis covering WhatsApp
+                {WA_SVG} Ouvrir mon compte pro
               </a>
               <Link
                 href={`/${locale}/contact`}
-                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '15px 20px', border: '1px solid rgba(255,181,154,0.2)', background: 'rgba(255,255,255,0.03)', color: '#dde3eb', fontSize: 13, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', textDecoration: 'none' }}
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '15px 22px', borderRadius: 14, border: '1px solid rgba(255,181,154,0.2)', background: 'rgba(255,255,255,0.03)', color: '#dde3eb', fontSize: 14, fontWeight: 700, textDecoration: 'none' }}
               >
                 Formulaire contact
               </Link>
